@@ -9,4 +9,5 @@ export default defineNuxtConfig({
     'nuxt-windicss',
     '~/modules/routes'
   ],
+  build: { transpile: ['ui'] },
 })

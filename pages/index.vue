@@ -1,9 +1,6 @@
 <template>
   <div>
-    <v-checkbox>
-      Регистрация
-      <template #help>Какой-то текст</template>
-    </v-checkbox>
+    lorem2000
   </div>
 </template>
 
