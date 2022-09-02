@@ -16,8 +16,9 @@ export default defineNuxtConfig({
     '@/assets/scss/main.scss'
   ],
   modules: [
+    '@pinia/nuxt',
     'nuxt-windicss',
-    '~/modules/routes'
+    '~/modules/routes',
   ],
   build: {
     transpile: ['ui', '@heroicons/vue']

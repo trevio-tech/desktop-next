@@ -1,10 +1,13 @@
 <template>
-  <div class="flex flex-col min-h-full">
+  <div class="flex flex-col min-h-full gap-4">
     <TheHeader />
-    <div class="flex-auto flex flex-col w-full max-w-[960px] mx-auto">
+    <div class="flex-auto flex flex-col w-full max-w-[1000px] mx-auto">
       <div class="flex-auto flex gap-4">
-        <TheNavigation class="flex-shrink-0" />
-        <slot />
+        <TheNavigation class="flex-shrink-0 w-[180px]" />
+        <div class="flex-auto flex flex-col gap-4">
+          <TheBreadcrumbs />
+          <slot />
+        </div>
       </div>
     </div>
     <TheFooter />
@@ -12,6 +15,7 @@
 </template>
 
 <script setup>
+import TheBreadcrumbs from '~/components/layout/breadcrumbs/TheBreadcrumbs'
 import TheHeader from '~/components/layout/TheHeader'
 import TheFooter from '~/components/layout/TheFooter'
 import TheNavigation from '~/components/layout/TheNavigation'

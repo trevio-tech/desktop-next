@@ -1,6 +1,6 @@
 <template>
-  <TheMain heading="Авторизация">
-    Авторизация
+  <TheMain heading="Денис">
+    Какой-то юзер
   </TheMain>
 </template>
 

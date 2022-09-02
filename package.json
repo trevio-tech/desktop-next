@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.10",
+    "@pinia/nuxt": "^0.4.1",
     "ui": "https://github.com/trevio-tech/ui-next"
   }
 }
