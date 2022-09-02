@@ -1,5 +1,10 @@
 @import '@/node_modules/ui/dist/style.css';
 
+body {
+  @apply text-base;
+  font-family: 'Montserrat', sans-serif;
+}
+
 html,
 body,
 #__nuxt {

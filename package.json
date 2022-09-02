@@ -12,6 +12,7 @@
     "sass": "^1.54.5"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.0.10",
     "ui": "https://github.com/trevio-tech/ui-next"
   }
 }
