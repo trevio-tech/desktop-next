@@ -4510,7 +4510,7 @@ ufo@^0.8.3, ufo@^0.8.4, ufo@^0.8.5:
 
 "ui@https://github.com/trevio-tech/ui-next":
   version "0.0.0"
-  resolved "https://github.com/trevio-tech/ui-next#6ff6705ee84c484e6f954f836cf17099d1c91a4c"
+  resolved "https://github.com/trevio-tech/ui-next#4c85defa3b9d14673b35b78cdc552c7e7ec2c280"
   dependencies:
     "@headlessui/vue" "^1.6.7"
     "@heroicons/vue" "^1.0.6"
