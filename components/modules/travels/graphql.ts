@@ -30,3 +30,9 @@ export const TRAVEL = `
     }
   }
 `
+
+export const CREATE_TRAVEL = `
+  mutation ($input: TravelInput!) {
+    travelForm: createTravel(input: $input)
+  }
+`

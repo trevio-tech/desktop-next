@@ -24,22 +24,22 @@ export default defineNuxtConfig({
     '~/modules/routes',
   ],
   build: {
-    transpile: ['ui', '@heroicons/vue']
+    transpile: ['ui', '@heroicons/vue', '@vuepic/vue-datepicker']
   },
   auth: {
     strategies: {
       local: {
         endpoints: {
           login: {
-            url: process.env.API_URL + '/api/users/login',
+            url: process.env.API_URL + '/users/login',
             method: 'post',
           },
           logout: {
-            url: process.env.API_URL + '/api/users/logout',
+            url: process.env.API_URL + '/users/logout',
             method: 'post'
           },
           user: {
-            url: process.env.API_URL + '/api/users/me',
+            url: process.env.API_URL + '/users/me',
             method: 'post',
             propertyName: false
           }

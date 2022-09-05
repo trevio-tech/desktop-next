@@ -16,6 +16,8 @@
     "@nuxtjs-alt/auth": "^2.0.6",
     "@nuxtjs-alt/axios": "^1.0.18",
     "@pinia/nuxt": "^0.4.1",
-    "ui": "https://github.com/trevio-tech/ui-next"
+    "@vuepic/vue-datepicker": "^3.4.7",
+    "ui": "https://github.com/trevio-tech/ui-next",
+    "vee-validate": "^4.6.7"
   }
 }

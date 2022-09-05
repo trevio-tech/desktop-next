@@ -4,9 +4,12 @@
       <NuxtLink to="/">
         <img src="/images/logotype.svg" alt="" class="block h-6">
       </NuxtLink>
-      <ul class="flex space-x-2 ml-auto">
+      <ul v-if="!$auth.loggedIn" class="flex space-x-2 ml-auto">
         <li><NuxtLink to="/login">Войти</NuxtLink></li>
         <li><NuxtLink to="/register">Регистрация</NuxtLink></li>
+      </ul>
+      <ul v-else class="flex space-x-2 ml-auto">
+        <li><NuxtLink to="/travels/create">Создать путешествие</NuxtLink></li>
       </ul>
     </div>
   </header>
