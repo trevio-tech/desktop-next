@@ -10,8 +10,8 @@
 
 <script setup>
 const items = [
-  { name: 'Путешествия', href: '/' },
-  { name: 'Заметки', href: '/' },
+  { name: 'Путешествия', href: '/travels' },
+  { name: 'Заметки', href: '/notes' },
   { name: 'Отзывы', href: '/' },
   { name: 'Фотоальбомы', href: '/' },
   { name: 'Вопросы и ответы', href: '/' },

@@ -1,5 +1,5 @@
 <template>
-  <TheMain heading="Регистрация">
+  <TheLayout heading="Регистрация">
     <NuxtLink to="/users/1">Пользователь 1</NuxtLink>
 
     <form @submit.prevent="" class="space-y-6 w-6/12">
@@ -32,10 +32,10 @@
 
       <v-button type="submit">Зарегистрироваться</v-button>
     </form>
-  </TheMain>
+  </TheLayout>
 </template>
 
 <script setup>
-import TheMain from '~/components/layout/TheMain'
+import TheLayout from '~/components/layout/TheLayout'
 import { VButton, VInput, RadioGroup, RadioGroupLabel, RadioGroupOption } from 'ui';
 </script>

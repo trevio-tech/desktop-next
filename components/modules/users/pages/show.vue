@@ -1,9 +1,9 @@
 <template>
-  <TheMain heading="Денис">
+  <TheLayout heading="Денис">
     Какой-то юзер
-  </TheMain>
+  </TheLayout>
 </template>
 
 <script setup>
-import TheMain from '~/components/layout/TheMain'
+import TheLayout from '~/components/layout/TheLayout'
 </script>

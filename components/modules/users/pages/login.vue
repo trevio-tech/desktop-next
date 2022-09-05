@@ -1,9 +1,9 @@
 <template>
-  <TheMain heading="Авторизация">
+  <TheLayout heading="Авторизация">
     Авторизация
-  </TheMain>
+  </TheLayout>
 </template>
 
 <script setup>
-import TheMain from '~/components/layout/TheMain'
+import TheLayout from '~/components/layout/TheLayout'
 </script>
