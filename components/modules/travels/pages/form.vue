@@ -62,7 +62,7 @@ import { useRoute } from 'nuxt/app'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { CurrencyDollarIcon, CurrencyEuroIcon, CurrencyRupeeIcon } from '@heroicons/vue/24/solid'
-import { useForm  } from 'vee-validate';
+import { useForm } from 'vee-validate';
 const { handleSubmit, errors } = useForm();
 import pick from 'lodash.pick'
 import FormField from '~/components/FormField'

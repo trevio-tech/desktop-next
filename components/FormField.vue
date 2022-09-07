@@ -1,5 +1,5 @@
 <template>
-  <Field :name="name" v-slot="{ field, errors, errorMessage }">
+  <Field :name="name" :rules="rules" v-slot="{ field, errors, errorMessage }">
     <div>
       <label class="font-semibold text-sm">{{ label }}<span v-if="required" class="text-red ml-1">*</span></label>
       <div class="mt-1">
@@ -28,6 +28,9 @@ defineProps({
   },
   help: {
     type: String
+  },
+  rules: {
+    type: [String, Array, Object]
   }
 })
 </script>
