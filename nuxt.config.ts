@@ -26,6 +26,9 @@ export default defineNuxtConfig({
   build: {
     transpile: ['ui', '@heroicons/vue', '@vuepic/vue-datepicker']
   },
+  publicRuntimeConfig: {
+    GRAPHQL_URL: process.env.GRAPHQL_URL
+  },
   auth: {
     strategies: {
       local: {
