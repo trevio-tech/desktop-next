@@ -1,9 +1,9 @@
 <template>
   <div class="overflow-hidden flex items-center justify-center h-[366px] relative border-2 border-gray-300 border-dashed rounded-md appearance-none hover:border-gray-400 focus:outline-none aspect-square">
     <Upload
-      :model-type="modelType"
+      model-type="travels"
       :fields="fields"
-      @uploaded="$emit('uploaded', $event)"
+      @uploaded="onUploaded"
       class="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0"
     />
     <div v-if="! image.url" class="flex flex-col items-center">
@@ -18,20 +18,28 @@
 
 <script setup>
 import Upload from '~/components/Upload'
+import { ref } from 'vue'
 
-defineProps({
-  modelType: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: Object
+const props = defineProps({
+  modelValue: {
+    type: Array,
   }
 })
 
 const emit = defineEmits([
-  'uploaded'
+  'update:modelValue'
 ])
 
 const fields = ['id', 'url']
+
+const image = ref({id: null, url: null})
+
+if (props.modelValue.length === 1) {
+  image.value = props.modelValue[0]
+}
+
+const onUploaded = (images) => {
+  image.value = images[0]
+  emit('update:modelValue', images)
+}
 </script>

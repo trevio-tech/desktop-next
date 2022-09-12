@@ -2,7 +2,7 @@ export const NOTES = `
   notes {
     id
     title
-    text
+    text(words: 10)
     likes_count
     can
     tags {

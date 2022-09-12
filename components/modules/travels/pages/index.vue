@@ -8,14 +8,23 @@
 </template>
 
 <script setup>
-import { useAsyncGql } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
-import { TRAVELS } from '../graphql';
 import Travel from '../components/Travel'
+import { TRAVELS } from '../graphql';
+import { useAsyncGql } from '~/uses'
+import { useRoute, useRouter } from 'nuxt/app'
+import { watch } from 'vue'
 
-const { data: { value: { travels }}} = await useAsyncGql(`
-  query {
+const route = useRoute()
+const router = useRouter()
+
+const { data: { value: { travels }}, refresh } = await useAsyncGql(`
+  query($tag_id: Int) {
     ${TRAVELS}
   }
-`)
+`, {
+  tag_id: parseInt(route.query.tag_id)
+})
+watch(() => route.query.tag_id, refresh)
+
 </script>

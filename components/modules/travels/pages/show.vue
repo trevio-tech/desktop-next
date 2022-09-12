@@ -1,6 +1,8 @@
 <template>
   <TheLayout :heading="travel.title">
-    <template #sidebar>1</template>
+    <template #sidebar>
+      <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>
+    </template>
     <p>{{ travel.text }}</p>
   </TheLayout>
 </template>
