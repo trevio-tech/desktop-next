@@ -24,23 +24,22 @@
           </FormField>
 
           <FormField name="input.date_start" label="Дата начала и завершения" id="date">
-            <Datepicker v-model="form.date" range multiCalendars position="right" :enableTimePicker="false" autoApply>
+            <Datepicker
+              :model-value="[form.date_start, form.date_end]"
+              :enableTimePicker="false"
+              range
+              multiCalendars
+              position="right"
+              autoApply
+              @update:modelValue="onDateChange"
+            >
               <template #trigger>
-                {{ format(form.date) }}
+                ---
+                {{ form.date_start }}
+                {{ form.date_end }}
               </template>
             </Datepicker>
           </FormField>
-          <!--
-
-                <div class="flex items-center gap-4">
-                  <VField label="Дача начала" id="date-start" class="flex-auto">
-                    <Input v-model="form.date_start" type="date" id="date-start" placeholder="Выберите дату начала" />
-                  </VField>
-                  <VField label="Дата завершения" id="date-end" class="flex-auto">
-                    <Input v-model="form.date_end" type="date" id="date-end" placeholder="Выберите дату завершения" />
-                  </VField>
-                </div>
-          -->
 
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-4 flex-auto">
@@ -48,9 +47,7 @@
                 <Input v-model="form.budget" type="number" id="budget" placeholder="Бюджет путешествия" />
               </FormField>
               <div class="flex items-center gap-4 mt-7">
-                <CurrencyDollarIcon @click="form.currency_id = 1" class="w-10 h-10" />
-                <CurrencyEuroIcon @click="form.currency_id = 1" class="w-10 h-10" />
-                <CurrencyRupeeIcon @click="form.currency_id = 1" class="w-10 h-10" />
+                <div v-for="currency in currencies" :class="{'underline': currency.id === form.currency_id}" :key="currency.id" @click="form.currency_id = currency.id">{{ currency.name }}</div>
               </div>
             </div>
           </div>
@@ -87,8 +84,9 @@ const form = ref({
   place_id: null,
   currency_id: null,
   title: '',
-  date: [],
   budget: 0,
+  date_start: '',
+  date_end: '',
   place: {
     id: null,
     name: ''
@@ -99,27 +97,43 @@ const form = ref({
 })
 
 const route = useRoute()
+const { handleSubmit } = useForm()
 const isEdit = route.params.travelId > 0
 const searchBy = ['countries']
 const danger = ref(false)
 const loading = ref(false)
-const { handleSubmit } = useForm();
+const currencies = ref([])
 
 if (isEdit) {
-  const {data: { travel }} = await useGql(`
-  query($id: Int!) {
-    ${TRAVEL_FORM}
-  }
-`, {
+  const { data } = await useGql(`
+    query($id: Int!) {
+      ${TRAVEL_FORM}
+      currencies {
+        id
+        name
+      }
+    }
+  `, {
     id: parseInt(route.params.travelId)
   })
 
-   Object.assign(form.value, travel)
+  currencies.value = data.currencies
+  Object.assign(form.value, data.travel)
+} else {
+  const { data } = await useGql(`
+    query {
+      currencies {
+        id
+        name
+      }
+    }
+  `)
+  currencies.value = data.currencies
 }
 
 // In case of a range picker, you'll receive [Date, Date]
 const format = (dates) => {
-  if (dates.length) {
+  if (dates && dates.length) {
     const day = dates[0].getDate();
     const month = dates[0].getMonth() + 1;
     const year = dates[0].getFullYear();
@@ -127,6 +141,11 @@ const format = (dates) => {
     return `Selected date is ${day}.${month}.${year}`;
   }
   return 'Нажмите, чтобы выбрать даты';
+}
+
+const onDateChange = (dates) => {
+  form.value.date_start = dates[0]
+  form.value.date_end = dates[1]
 }
 
 
@@ -137,7 +156,17 @@ const onSubmit = handleSubmit(async (values, actions) => {
 
   loading.value = true
 
-  const input = pick(form.value, ['title', 'currency_id', 'place_id', 'budget', 'text', 'tags', 'images'])
+  const input = pick(form.value, [
+    'title',
+    'currency_id',
+    'place_id',
+    'budget',
+    'text',
+    'tags',
+    'images',
+    'date_start',
+    'date_end',
+  ])
 
   input.tags = input.tags.map(tag => parseInt(tag.id))
   input.images = input.images.map(image => parseInt(image.id))

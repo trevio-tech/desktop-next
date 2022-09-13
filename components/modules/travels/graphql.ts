@@ -1,46 +1,54 @@
-export const TRAVELS = `
-  travels(tag_id: $tag_id) {
+export const TRAVEL_CARD = `
+  id
+  user_id
+  title
+  text(words: 12)
+  likes_count
+  can
+  rating
+  preview(sizes: "default@resize:fit:256") {
     id
-    title
-    text(words: 12)
-    likes_count
-    can
-    rating
-    cover(sizes: "default@resize:fit:640") {
-      id
-      model_id
-      sizes
-    }
-    tags {
-      id
-      name
-    }
+    model_id
+    url
+    sizes
+  }
+  tags {
+    id
+    name
+  }
+  user {
+    id
+    name
+    avatar
   }
 `
 
 export const TRAVEL = `
-  travel(id: $id) {
+  id
+  place_id
+  title
+  text
+  can
+  rating
+  tags {
     id
-    place_id
-    title
-    text
-    can
-    rating
-    tags {
-      id
-      name
-    }
-    place {
-      id
-      name
-      full_name
-    }
-    images(sizes: "default@resize:fit:256") {
-      id
-      model_id
-      url
-      sizes
-    }
+    name
+  }
+  user {
+    id
+    name
+    avatar
+  }
+  place {
+    id
+    name
+    full_name
+  }
+  preview(sizes: "default@resize:fit:640") {
+    id
+    model_id
+    url
+    sizes
   }
 `
 
@@ -52,6 +60,8 @@ export const TRAVEL_FORM = `
     budget
     title
     text
+    date_start
+    date_end
     tags {
       id
       name

@@ -10,7 +10,7 @@
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
 import Travel from '../components/Travel'
-import { TRAVELS } from '../graphql';
+import { TRAVEL_CARD } from '../graphql';
 import { useAsyncGql } from '~/uses'
 import { useRoute, useRouter } from 'nuxt/app'
 import { watch } from 'vue'
@@ -20,7 +20,9 @@ const router = useRouter()
 
 const { data: { value: { travels }}, refresh } = await useAsyncGql(`
   query($tag_id: Int) {
-    ${TRAVELS}
+    travels(tag_id: $tag_id) {
+      ${TRAVEL_CARD}
+    }
   }
 `, {
   tag_id: parseInt(route.query.tag_id)
