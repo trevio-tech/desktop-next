@@ -1,7 +1,11 @@
 <template>
   <TheLayout :heading="user.name">
-    {{ user }}
-    <div @click="onEdit">modal</div>
+    <div v-if="user.interests.length">
+      <div @click="onEditInterests">Редактировать интересы</div>
+      <ul class="flex flex-wrap space-x-1">
+        <li v-for="interest in user.interests" :key="interest.id">{{ interest.name }}</li>
+      </ul>
+    </div>
   </TheLayout>
 </template>
 
@@ -24,7 +28,7 @@ const { data: { value: { user }}} = await useAsyncGql(`
  id: parseInt(useRoute().params.userId)
 })
 
-const onEdit = () => {
+const onEditInterests = () => {
   $overlay.show(InterestsForm, {
     props: {
       modelValue: user.interests

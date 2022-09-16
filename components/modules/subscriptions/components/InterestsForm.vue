@@ -1,5 +1,5 @@
 <template>
-  <Dialog title="Интересы">
+  <Dialog title="Мои интересы">
     <form @submit.prevent="onSubmit" class="w-[480px] space-y-4">
       <FormField name="interests" label="Поиск интересов">
         <InputTags placeholder="Введите название интереса" :model-value="modelValue" @update:modelValue="onUpdate" />
