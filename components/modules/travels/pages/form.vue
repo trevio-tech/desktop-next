@@ -68,7 +68,7 @@ import TheLayout from '~/components/layout/TheLayout'
 import TravelUpload from '../components/TravelUpload'
 import pick from 'lodash.pick'
 import { CurrencyDollarIcon, CurrencyEuroIcon, CurrencyRupeeIcon } from '@heroicons/vue/24/solid'
-import { FormField, Textarea, Input, VButton, SearchPlace } from 'ui';
+import { FormField, Textarea, Input, VButton, SearchPlace } from '@trevio/ui';
 import {TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL} from '../graphql';
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';

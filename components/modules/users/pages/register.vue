@@ -37,5 +37,5 @@
 
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
-import { VButton, Input, RadioGroup, RadioGroupLabel, RadioGroupOption } from 'ui';
+import { VButton, Input, RadioGroup, RadioGroupLabel, RadioGroupOption } from '@trevio/ui';
 </script>

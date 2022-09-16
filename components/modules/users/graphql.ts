@@ -11,7 +11,23 @@ export const USER = `
   travels_count,
   place {
     id
+    parent_id
     full_name
+    parent {
+      id
+      parent_id
+      name
+      parent {
+        id
+        parent_id
+        name
+        parent {
+          id
+          parent_id
+          name
+        }
+      }
+    }
   }
   interests {
     id
@@ -19,7 +35,23 @@ export const USER = `
   }
   selectedPlaces {
     id
+    parent_id
     full_name
+    parent {
+      id
+      parent_id
+      name
+      parent {
+        id
+        parent_id
+        name
+        parent {
+          id
+          parent_id
+          name
+        }
+      }
+    }
   }
   links {
     id

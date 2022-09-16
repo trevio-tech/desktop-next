@@ -5,7 +5,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "ui": "yarn upgrade ui"
+    "ui": "yarn upgrade @trevio/ui"
   },
   "devDependencies": {
     "nuxt": "^3.0.0-rc.10",
@@ -17,8 +17,8 @@
     "@nuxtjs-alt/auth": "^2.0.6",
     "@nuxtjs-alt/axios": "^1.0.18",
     "@pinia/nuxt": "^0.4.1",
-    "@vuepic/vue-datepicker": "^3.4.7",
-    "ui": "https://github.com/trevio-tech/ui-next",
-    "vee-validate": "^4.6.7"
-  }
+    "@trevio/ui": "https://github.com/trevio-tech/ui-next",
+    "@vuepic/vue-datepicker": "^3.4.7"
+  },
+  "peerDependencies": {}
 }

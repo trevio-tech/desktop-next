@@ -1,4 +1,4 @@
-import { Ripple } from 'ui'
+import { Ripple } from '@trevio/ui'
 import { VOverlayPlugin } from '~/components/dev/Overlay'
 
 export default defineNuxtPlugin((nuxtApp) => {

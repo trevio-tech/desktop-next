@@ -2,6 +2,7 @@
   <TheLayout :heading="user.name">
     <div v-if="user.interests.length">
       <div @click="onEditInterests">Редактировать интересы</div>
+      <div @click="onEditSelectedPlaces">Редактировать направления</div>
       <ul class="flex flex-wrap space-x-1">
         <li v-for="interest in user.interests" :key="interest.id">{{ interest.name }}</li>
       </ul>
@@ -15,6 +16,7 @@ import { useAsyncGql } from '~/uses'
 import { USER } from '../graphql'
 import { useRoute, useNuxtApp } from 'nuxt/app'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
+import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
 
 const { $overlay } = useNuxtApp()
 
@@ -36,6 +38,18 @@ const onEditInterests = () => {
     on: {
       async 'update:modelValue'(interests) {
         user.interests = interests
+      }
+    }
+  })
+}
+const onEditSelectedPlaces = () => {
+  $overlay.show(SelectedPlacesForm, {
+    props: {
+      modelValue: user.selectedPlaces
+    },
+    on: {
+      async 'update:modelValue'(selectedPlaces) {
+        user.selectedPlaces.push(selectedPlaces)
       }
     }
   })

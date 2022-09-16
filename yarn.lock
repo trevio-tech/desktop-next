@@ -702,6 +702,17 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
+"@trevio/ui@https://github.com/trevio-tech/ui-next":
+  version "0.0.0"
+  resolved "https://github.com/trevio-tech/ui-next#e5e09c179991e99b0609b53a6d791baa8aea9076"
+  dependencies:
+    "@headlessui/vue" "^1.6.7"
+    "@heroicons/vue" "^1.0.6"
+    "@nuxt/kit" "^3.0.0-rc.9"
+    axios "^0.27.2"
+    vee-validate "^4.6.7"
+    vue "^3.2.37"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
@@ -4421,17 +4432,6 @@ ufo@^0.8.3, ufo@^0.8.4, ufo@^0.8.5:
   version "0.8.5"
   resolved "https://registry.yarnpkg.com/ufo/-/ufo-0.8.5.tgz#e367b4205ece9d9723f2fa54f887d43ed1bce5d0"
   integrity sha512-e4+UtA5IRO+ha6hYklwj6r7BjiGMxS0O+UaSg9HbaTefg4kMkzj4tXzEBajRR+wkxf+golgAWKzLbytCUDMJAA==
-
-"ui@https://github.com/trevio-tech/ui-next":
-  version "0.0.0"
-  resolved "https://github.com/trevio-tech/ui-next#c69ceb61ea01d6000015151267e6d01f235a470d"
-  dependencies:
-    "@headlessui/vue" "^1.6.7"
-    "@heroicons/vue" "^1.0.6"
-    "@nuxt/kit" "^3.0.0-rc.9"
-    axios "^0.27.2"
-    vee-validate "^4.6.7"
-    vue "^3.2.37"
 
 unctx@^2.0.2:
   version "2.0.2"

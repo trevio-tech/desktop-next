@@ -1,6 +1,6 @@
 <template>
   <Dialog title="Мои интересы">
-    <form @submit.prevent="onSubmit" class="w-[480px] space-y-4">
+    <form @submit="onSubmit" class="w-[480px] space-y-4">
       <FormField name="interests" label="Поиск интересов">
         <InputTags placeholder="Введите название интереса" :model-value="modelValue" @update:modelValue="onUpdate" />
       </FormField>
@@ -11,10 +11,11 @@
 
 <script setup>
 import { Dialog } from '~/components/dev/Overlay'
-import { FormField, VButton } from 'ui';
+import { FormField, VButton } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
-import { useGql } from '~/uses'
 import { ref } from 'vue'
+import { useForm } from 'vee-validate'
+import { useGql } from '~/uses'
 import { useNuxtApp } from 'nuxt/app'
 
 const emit = defineEmits([
@@ -34,15 +35,21 @@ const onUpdate = (value) => {
   emit('update:modelValue', interests.value = value)
 }
 
-const onSubmit = async () => {
-  await useGql(`
-    mutation($interests: [InterestInput]!) {
-      updateInterests(interests: $interests)
-    }
-  `, {
-    interests: interests.value
-  })
+const { handleSubmit } = useForm()
 
-  $overlay.hide()
-}
+const onSubmit = handleSubmit(async (values, errors) => {
+  try {
+    await useGql(`
+      mutation($interests: [InterestInput]!) {
+        updateInterests(interests: $interests)
+      }
+    `, {
+      interests: interests.value
+    })
+
+    $overlay.hide()
+  } catch (error) {
+    errors.setErrors(error[0]['extensions']['validation'])
+  }
+})
 </script>
