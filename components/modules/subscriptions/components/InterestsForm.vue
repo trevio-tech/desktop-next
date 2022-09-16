@@ -4,7 +4,7 @@
       <FormField name="interests" label="Поиск интересов">
         <InputTags placeholder="Введите название интереса" :model-value="modelValue" @update:modelValue="onUpdate" />
       </FormField>
-      <VButton type="submit">Сохранить</VButton>
+      <VButton :loading="loading" type="submit">Сохранить</VButton>
     </form>
   </Dialog>
 </template>
@@ -31,6 +31,8 @@ const { $overlay } = useNuxtApp()
 
 const interests = ref(props.modelValue)
 
+const loading = ref(false)
+
 const onUpdate = (value) => {
   emit('update:modelValue', interests.value = value)
 }
@@ -38,18 +40,27 @@ const onUpdate = (value) => {
 const { handleSubmit } = useForm()
 
 const onSubmit = handleSubmit(async (values, errors) => {
+  if (loading.value) {
+    return
+  }
+
+  loading.value = true
+
   try {
     await useGql(`
-      mutation($interests: [InterestInput]!) {
-        updateInterests(interests: $interests)
+      mutation($type: String!, $items: [Int]!) {
+        updateSubscriptions(type: $type, items: $items)
       }
     `, {
-      interests: interests.value
+      type: 'tags',
+      items: interests.value.map(interest => parseInt(interest.id)),
     })
 
     $overlay.hide()
   } catch (error) {
     errors.setErrors(error[0]['extensions']['validation'])
+  } finally {
+    loading.value = false
   }
 })
 </script>

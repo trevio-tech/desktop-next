@@ -1,12 +1,30 @@
 <template>
-  <TheLayout :heading="user.name">
+  <TheLayout heading="Пользователь">
+    <template #top>
+      <div class="bg-gradient-to-r from-blue-50 to-blue-200 flex items-center h-40 px-10 rounded-lg">
+        <div>
+          <h1 class="text-4xl font-semibold">{{ user.name }}</h1>
+          <p class="max-w-[480px] text-sm mt-2">{{ user.description }}</p>
+        </div>
+      </div>
+    </template>
+    <template #sidebar>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto deleniti quaerat qui vel. Delectus eos est fuga harum, id impedit laborum magnam nihil pariatur placeat ratione repellat velit voluptate voluptates.
+    </template>
     <div v-if="user.interests.length">
-      <div @click="onEditInterests">Редактировать интересы</div>
-      <div @click="onEditSelectedPlaces">Редактировать направления</div>
+      <div @click="onEditInterests" class="underline">Редактировать интересы</div>
       <ul class="flex flex-wrap space-x-1">
         <li v-for="interest in user.interests" :key="interest.id">{{ interest.name }}</li>
       </ul>
     </div>
+
+    <hr>
+    <div @click="onEditSelectedPlaces" class="underline">Редактировать направления</div>
+    <ul class="flex flex-wrap space-x-1">
+      <li v-for="(place, index) in user.selectedPlaces" :key="place.id">
+        <span>{{ place.full_name }}</span>
+      </li>
+    </ul>
   </TheLayout>
 </template>
 

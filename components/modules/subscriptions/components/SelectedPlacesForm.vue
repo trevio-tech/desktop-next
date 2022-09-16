@@ -6,12 +6,15 @@
       </FormField>
 
       <div v-if="modelValue.length">
-        <ul class="text-sm space-y-1">
-          <li v-for="(place, index) in modelValue" :key="place.id">{{ place.full_name }}</li>
+        <ul class="text-sm">
+          <li v-for="(place, index) in modelValue" :key="place.id" class="w-full flex items-center p-1 hover:bg-gray-100 rounded-lg">
+            <span class="truncate mr-4">{{ place.full_name }}</span>
+            <XMarkIcon @click="modelValue.splice(index, 1)" class="cursor-pointer flex-shrink-0 w-5 h-5 text-red-500 ml-auto" />
+          </li>
         </ul>
       </div>
 
-      <VButton type="submit">Сохранить</VButton>
+      <VButton :loading="loading" type="submit">Сохранить</VButton>
     </form>
   </Dialog>
 </template>
@@ -23,6 +26,7 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useGql } from '~/uses'
 import { useNuxtApp } from 'nuxt/app'
+import { XMarkIcon } from '@heroicons/vue/20/solid'
 
 const emit = defineEmits([
   'update:modelValue'
@@ -36,6 +40,7 @@ const props = defineProps({
 const { $overlay } = useNuxtApp()
 
 const places = ref(props.modelValue)
+const loading = ref(false)
 
 const { handleSubmit } = useForm()
 
@@ -69,18 +74,27 @@ const onChange = async (query) => {
 }
 
 const onSubmit = handleSubmit(async (values, errors) => {
+  if (loading.value) {
+    return
+  }
+
+  loading.value = true
+
   try {
-    /*await useGql(`
-      mutation($interests: [InterestInput]!) {
-        updateInterests(interests: $interests)
+    await useGql(`
+      mutation($type: String!, $items: [Int]!) {
+        updateSubscriptions(type: $type, items: $items)
       }
     `, {
-      interests: interests.value
-    })*/
+      type: 'places',
+      items: places.value.map(place => parseInt(place.id)),
+    })
 
     $overlay.hide()
   } catch (error) {
     errors.setErrors(error[0]['extensions']['validation'])
+  } finally {
+    loading.value = false
   }
 })
 </script>
