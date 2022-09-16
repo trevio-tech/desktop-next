@@ -10,6 +10,7 @@
       </ul>
       <ul v-else class="flex space-x-2 ml-auto">
         <li><NuxtLink to="/travels/create">Создать путешествие</NuxtLink></li>
+        <li><NuxtLink :to="`/users/${$auth.user.id}`">Профиль</NuxtLink></li>
       </ul>
     </div>
   </header>

@@ -1,6 +1,13 @@
 import { Ripple } from 'ui'
-import { useNuxtApp } from '#app';
+import { VOverlayPlugin } from '~/components/dev/Overlay'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('ripple', Ripple)
+  nuxtApp.vueApp.use(VOverlayPlugin)
+
+  return {
+    provide: {
+      overlay: nuxtApp.vueApp.config.globalProperties.$overlay
+    }
+  }
 })

@@ -1,5 +1,5 @@
 <template>
-  <InputTags :model-value="tags" @update:modelValue="$emit('update:modelValue', $event)"  :change-callback="onChange" :select-callback="onSelect" />
+  <InputTags :placeholder="placeholder" :model-value="tags" @update:modelValue="$emit('update:modelValue', $event)" :change-callback="onChange" :select-callback="onSelect" />
 </template>
 
 <script setup>
@@ -13,6 +13,9 @@ const props = defineProps({
   modelValue: {
     type: Array,
     default: () => []
+  },
+  placeholder: {
+    type: String,
   }
 })
 
