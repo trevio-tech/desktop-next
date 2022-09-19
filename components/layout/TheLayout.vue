@@ -5,10 +5,10 @@
       <slot name="top"></slot>
     </div>
     <div class="flex-auto flex gap-4" :class="{'flex-row-reverse': reverse}">
-      <div class="flex-shrink-0 min-w-[600px]" :class="[!!$slots.sidebar ? 'w-[600px]' : 'w-full']">
+      <div class="flex-shrink-0 min-w-[560px]" :class="[!!$slots.sidebar ? 'w-[560px]' : 'w-full']">
         <slot></slot>
       </div>
-      <div v-if="!!$slots.sidebar" class="flex-shrink-0 flex-1">
+      <div v-if="!!$slots.sidebar" class="flex-shrink-0 flex-auto" style="width: calc(1000px - 560px - 180px - 2rem)">
         <slot name="sidebar"></slot>
       </div>
     </div>

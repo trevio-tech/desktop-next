@@ -36,7 +36,9 @@ export const USER = `
   selectedPlaces {
     id
     parent_id
+    name
     full_name
+    parent_names
     parent {
       id
       parent_id
@@ -52,6 +54,11 @@ export const USER = `
         }
       }
     }
+  }
+  friends {
+    id
+    name
+    avatar
   }
   links {
     id

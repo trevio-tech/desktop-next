@@ -9,22 +9,55 @@
       </div>
     </template>
     <template #sidebar>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto deleniti quaerat qui vel. Delectus eos est fuga harum, id impedit laborum magnam nihil pariatur placeat ratione repellat velit voluptate voluptates.
-    </template>
-    <div v-if="user.interests.length">
-      <div @click="onEditInterests" class="underline">Редактировать интересы</div>
-      <ul class="flex flex-wrap space-x-1">
-        <li v-for="interest in user.interests" :key="interest.id">{{ interest.name }}</li>
-      </ul>
-    </div>
+      <div>
+        <h3 class="font-semibold mb-2 flex items-center space-x-1">
+          <span>Подписки</span>
+          <Cog6ToothIcon @click="onEditFriends" class="w-5 h-5 text-gray-800 cursor-pointer" />
+        </h3>
+        <ul v-if="user.friends.length" class="space-y-2">
+          <li v-for="friend in user.friends" :key="friend.id">
+            <NuxtLink :to="{name: 'users.show', params: {userId: friend.id}}" class="flex items-center space-x-2">
+              <img :src="friend.avatar" class="w-5 h-5 rounded-full block" alt="">
+              <span class="text-sm font-medium">{{ friend.name }}</span>
+            </NuxtLink>
+          </li>
+        </ul>
+        <div v-else class="text-sm">Пользователь не на кого не подписан</div>
+      </div>
 
-    <hr>
-    <div @click="onEditSelectedPlaces" class="underline">Редактировать направления</div>
-    <ul class="flex flex-wrap space-x-1">
-      <li v-for="(place, index) in user.selectedPlaces" :key="place.id">
-        <span>{{ place.full_name }}</span>
-      </li>
-    </ul>
+      <div class="mt-4">
+        <h3 class="font-semibold mb-2 flex items-center space-x-1">
+          <span>Интересы</span>
+          <Cog6ToothIcon @click="onEditInterests" class="w-5 h-5 text-gray-800 cursor-pointer" />
+        </h3>
+        <ul v-if="user.friends.length">
+          <li v-for="interest in user.interests" :key="interest.id">
+            <NuxtLink :to="{name: 'users.show', params: {userId: interest.id}}" class="text-sm font-medium">
+              {{ interest.name }}
+            </NuxtLink>
+          </li>
+        </ul>
+        <div v-else class="text-sm">Пользователь ничем не интересуется</div>
+      </div>
+
+      <div class="mt-4">
+        <h3 class="font-semibold mb-2 flex items-center space-x-1">
+          <span>Направления</span>
+          <Cog6ToothIcon @click="onEditSelectedPlaces" class="w-5 h-5 text-gray-800 cursor-pointer" />
+        </h3>
+        <ul v-if="user.friends.length" class="space-y-1">
+          <li v-for="place in user.selectedPlaces" :key="place.id" class="truncate">
+            <NuxtLink :to="{name: 'users.show', params: {userId: place.id}}">
+              <div  class="text-sm font-medium">{{ place.name }}</div>
+              <div class="text-xs text-gray-500 truncate">{{ place.parent_names }}</div>
+            </NuxtLink>
+          </li>
+        </ul>
+        <div v-else class="text-sm">У пользователя нет избранных направлений</div>
+      </div>
+    </template>
+
+    <ContentList :user-id="user.id "/>
   </TheLayout>
 </template>
 
@@ -33,8 +66,11 @@ import TheLayout from '~/components/layout/TheLayout'
 import { useAsyncGql } from '~/uses'
 import { USER } from '../graphql'
 import { useRoute, useNuxtApp } from 'nuxt/app'
+import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
+import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
 import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
+import ContentList from '~/components/ContentList'
 
 const { $overlay } = useNuxtApp()
 
@@ -45,7 +81,7 @@ const { data: { value: { user }}} = await useAsyncGql(`
     }
   }
 `, {
- id: parseInt(useRoute().params.userId)
+ id: parseInt(useRoute().params.userId),
 })
 
 const onEditInterests = () => {
@@ -56,6 +92,18 @@ const onEditInterests = () => {
     on: {
       async 'update:modelValue'(interests) {
         user.interests = interests
+      }
+    }
+  })
+}
+const onEditFriends = () => {
+  $overlay.show(FriendsForm, {
+    props: {
+      modelValue: user.friends,
+    },
+    on: {
+      async 'update:modelValue'(friends) {
+        user.friends = friends
       }
     }
   })

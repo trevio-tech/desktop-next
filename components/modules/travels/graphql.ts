@@ -1,7 +1,7 @@
 export const TRAVEL_CARD = `
   id
   user_id
-  title
+  title(words: 6)
   text(words: 12)
   likes_count
   can
