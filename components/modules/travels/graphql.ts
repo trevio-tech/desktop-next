@@ -6,7 +6,7 @@ export const TRAVEL_CARD = `
   likes_count
   can
   rating
-  preview(sizes: "default@resize:fit:256") {
+  preview(sizes: "default@resize:fill:256:256") {
     id
     model_id
     url

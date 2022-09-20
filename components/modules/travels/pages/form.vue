@@ -7,8 +7,8 @@
         </FormField>
 
         <div class="space-y-6">
-          <FormField name="input.title" label="Заголовок путешествия" required  v-slot="{ hasError }">
-            <Input v-model="form.title" placeholder="Введите заголовок путешествия" />
+          <FormField name="input.title" label="Заголовок required" v-slot="{ hasError }">
+            <Input v-model="form.title" placeholder="Введите заголовок" />
           </FormField>
 
           <FormField name="input.place_id" label="Страна" required  v-slot="{ hasError }">
@@ -16,7 +16,7 @@
           </FormField>
 
           <FormField name="input.text" label="Анонс">
-            <Textarea v-model="form.text" rows="3" placeholder="Краткое описание путешествия" />
+            <Textarea v-model="form.text" rows="3" placeholder="Краткое описание" />
           </FormField>
 
           <FormField name="input.tags" label="Теги" id="tags">

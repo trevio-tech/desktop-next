@@ -1,7 +1,7 @@
 <template>
   <article class="flex bg-white h-[256px] overflow-hidden rounded-md shadow ring-1 ring-slate-200">
     <NuxtLink class="flex-shrink-0 w-[256px] h-[256px] bg-gray-300/50" :to="{name: 'travels.show', params: {travelId: entry.id}}">
-      <img v-if="entry.preview.length" :src="entry.preview[0].sizes.default" class="object-cover block w-full h-full" alt="">
+      <img v-if="entry.preview.length" :src="entry.preview[0].sizes.default" class="block w-full h-full" alt="">
     </NuxtLink>
     <div class="p-4 flex flex-col justify-between overflow-hidden">
       <div>
