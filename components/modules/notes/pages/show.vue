@@ -1,7 +1,9 @@
 <template>
   <TheLayout :heading="note.title">
-    <template #sidebar>1</template>
-    <p>{{ note.text }}</p>
+    <template #sidebar>
+      <NuxtLink :to="`/notes/${note.id}/edit`">Редактировать</NuxtLink>
+    </template>
+    <div v-html="note.text" class="prose prose-sm"></div>
   </TheLayout>
 </template>
 

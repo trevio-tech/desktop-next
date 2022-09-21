@@ -8,7 +8,7 @@
     "ui": "yarn upgrade @trevio/ui"
   },
   "devDependencies": {
-    "nuxt": "^3.0.0-rc.10",
+    "nuxt": "^3.0.0-rc.11",
     "nuxt-windicss": "^2.5.0",
     "sass": "^1.54.5"
   },
@@ -17,8 +17,10 @@
     "@nuxtjs-alt/auth": "^2.0.6",
     "@nuxtjs-alt/axios": "^1.0.18",
     "@pinia/nuxt": "^0.4.1",
+    "@trevio/tiptap": "https://github.com/trevio-tech/tiptap",
     "@trevio/ui": "https://github.com/trevio-tech/ui-next",
-    "@vuepic/vue-datepicker": "^3.4.7"
+    "@vuepic/vue-datepicker": "^3.4.7",
+    "vee-validate": "^4.5.8"
   },
   "peerDependencies": {}
 }

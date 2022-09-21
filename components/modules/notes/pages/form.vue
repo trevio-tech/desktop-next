@@ -1,41 +1,54 @@
 <template>
   <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} заметки`">
+    <template #sidebar>
+      123
+    </template>
     <form @submit.prevent="onSubmit" class="bg-white p-6 rounded-md shadow ring-1 ring-slate-200">
         <div class="space-y-6">
           <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
-            <Input v-model="form.title" placeholder="Введите заголовок путешествия" />
+            <Input v-model="form.title" placeholder="Введите заголовок" />
           </FormField>
 
-          <FormField name="input.text" label="Анонс">
-            <Textarea v-model="form.text" rows="3" placeholder="Краткое описание" />
+          <FormField name="input.text" label="Текст">
+            <TipTap content-type="notes" v-model="form.text" />
           </FormField>
 
-          <FormField name="input.place_id" label="Место" required  v-slot="{ hasError }">
+          <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
             <SearchPlace v-model="form.place" @update:modelValue="form.place_id = $event.id" />
           </FormField>
 
           <FormField name="input.tags" label="Теги" id="tags">
             <InputTags v-model="form.tags" />
           </FormField>
+
+          <FormField name="input.travel_id" label="Путешествие" id="travel">
+            <ListBox
+              key-name="title"
+              :items="data.travels"
+              @update:modelValue="form.place_id = $event.id"
+            />
+          </FormField>
         </div>
 
       <div class="mt-10">
-        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }} путешествие</VButton>
+        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }} заметку</VButton>
       </div>
     </form>
   </TheLayout>
 </template>
 
 <script setup>
+import '@/node_modules/@trevio/tiptap/dist/style.css'
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
-import { FormField, Textarea, Input, VButton, SearchPlace } from '@trevio/ui';
-import {TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL} from '../../travels/graphql';
+import { CREATE_NOTE, UPDATE_NOTE, NOTE_FORM } from '../graphql'
+import { FormField, Input, VButton, SearchPlace, ListBox } from '@trevio/ui';
+import { InputTags } from '~/components/wrappers'
+import { TipTap } from '@trevio/tiptap'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useGql } from '~/uses'
-import { useRoute, useRouter } from 'nuxt/app'
-import { InputTags } from '~/components/wrappers'
+import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
 
 definePageMeta({
   middleware: 'auth'
@@ -43,11 +56,7 @@ definePageMeta({
 
 const form = ref({
   place_id: null,
-  currency_id: null,
   title: '',
-  budget: 0,
-  date_start: '',
-  date_end: '',
   place: {
     id: null,
     name: ''
@@ -58,40 +67,32 @@ const form = ref({
 })
 
 const route = useRoute()
-const { handleSubmit } = useForm()
-const isEdit = route.params.noteId > 0
+const { handleSubmit, setErrors } = useForm()
+const noteId = parseInt(route.params.noteId)
+const isEdit = noteId > 0
 const danger = ref(false)
 const loading = ref(false)
-const currencies = ref([])
 
-if (isEdit) {
-  const { data } = await useGql(`
-    query($id: Int!) {
-      ${TRAVEL_FORM}
-      currencies {
+const app = useNuxtApp()
+
+const { data } = await useGql(`
+    query($id: Int!, $userId: ID) {
+      ${isEdit ? `note(id: $id) { ${NOTE_FORM} }` : ''}
+      travels(userId: $userId) {
         id
-        name
+        title
       }
     }
   `, {
-    id: parseInt(route.params.travelId)
-  })
+  id: noteId,
+  userId: app.$auth.user.id
+})
 
-  currencies.value = data.currencies
-  Object.assign(form.value, data.travel)
-} else {
-  const { data } = await useGql(`
-    query {
-      currencies {
-        id
-        name
-      }
-    }
-  `)
-  currencies.value = data.currencies
+if (isEdit) {
+  Object.assign(form.value, data.note)
 }
 
-const onSubmit = handleSubmit(async (values, actions) => {
+const onSubmit = handleSubmit(async () => {
   if (loading.value) {
     return
   }
@@ -100,30 +101,24 @@ const onSubmit = handleSubmit(async (values, actions) => {
 
   const input = pick(form.value, [
     'title',
-    'currency_id',
     'place_id',
-    'budget',
     'text',
     'tags',
-    'images',
-    'date_start',
-    'date_end',
   ])
 
   input.tags = input.tags.map(tag => parseInt(tag.id))
-  input.images = input.images.map(image => parseInt(image.id))
 
   try {
-    const {data: { travelForm }} = await useGql(isEdit ? UPDATE_TRAVEL : CREATE_TRAVEL, {
+    const { data: { noteForm }} = await useGql(isEdit ? UPDATE_NOTE : CREATE_NOTE, {
       input,
-      id: parseInt(route.params.travelId)
+      id: noteId
     })
 
-    if (travelForm > 0) {
-      await useRouter().push({name: 'travels.show', params: {travelId: travelForm}})
+    if (noteForm > 0) {
+      await useRouter().push({name: 'notes.show', params: {noteId: noteForm}})
     }
   } catch (error) {
-    actions.setErrors(error[0]['extensions']['validation']);
+    setErrors(error[0]['extensions']['validation'])
   } finally {
     loading.value = false
   }

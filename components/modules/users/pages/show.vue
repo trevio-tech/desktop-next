@@ -2,6 +2,9 @@
   <TheLayout heading="Пользователь">
     <template #top>
       <div class="bg-gradient-to-r from-blue-50 to-blue-200 flex items-center h-40 px-10 rounded-lg">
+        <div class="mr-4">
+          <img :src="user.avatar" class="w-30 h-30 rounded-full" alt="">
+        </div>
         <div>
           <h1 class="text-4xl font-semibold">{{ user.name }}</h1>
           <p class="max-w-[480px] text-sm mt-2">{{ user.description }}</p>
