@@ -22,11 +22,9 @@
           </FormField>
 
           <FormField name="input.travel_id" label="Путешествие" id="travel">
-            <ListBox
-              key-name="title"
-              :items="data.travels"
-              @update:modelValue="form.place_id = $event.id"
-            />
+            <select v-model="form.travel_id" class="w-full">
+              <option v-for="travel in data.travels" :key="travel.id" :value="travel.id">{{ travel.title }}</option>
+            </select>
           </FormField>
         </div>
 
@@ -42,7 +40,7 @@ import '@/node_modules/@trevio/tiptap/dist/style.css'
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_NOTE, UPDATE_NOTE, NOTE_FORM } from '../graphql'
-import { FormField, Input, VButton, SearchPlace, ListBox } from '@trevio/ui';
+import { FormField, Input, VButton, SearchPlace } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
 import { TipTap } from '@trevio/tiptap'
 import { ref } from 'vue'
@@ -56,6 +54,7 @@ definePageMeta({
 
 const form = ref({
   place_id: null,
+  travel_id: null,
   title: '',
   place: {
     id: null,
@@ -80,7 +79,7 @@ const { data } = await useGql(`
       ${isEdit ? `note(id: $id) { ${NOTE_FORM} }` : ''}
       travels(userId: $userId) {
         id
-        title
+        title(words: 6)
       }
     }
   `, {
@@ -100,8 +99,9 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   const input = pick(form.value, [
-    'title',
     'place_id',
+    'travel_id',
+    'title',
     'text',
     'tags',
   ])

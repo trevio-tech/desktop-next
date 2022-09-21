@@ -7,28 +7,16 @@ export const TIMELINE = `
         ${NOTE_CARD}
         system_name
         created_at
-        whoShared {
-          id
-          name
-        }
       }
       ... on Review {
         ${REVIEW_CARD}
         system_name
         created_at
-        whoShared {
-          id
-          name
-        }
       }
       ... on Travel {
         ${TRAVEL_CARD}
         system_name
         created_at
-        whoShared {
-          id
-          name
-        }
       }
 `
 

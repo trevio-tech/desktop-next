@@ -2,9 +2,19 @@ export const NOTE_CARD = `
   id
   title
   place_id
+  travel_id
   text(words: 10)
   likes_count
   can
+  travel {
+    id
+    place_id
+    title
+    place {
+      id
+      name
+    }
+  }
   tags {
     id
     name
@@ -30,6 +40,7 @@ export const NOTE = `
 export const NOTE_FORM = `
   id
   place_id
+  travel_id
   title
   text
   tags {

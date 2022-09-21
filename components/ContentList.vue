@@ -2,9 +2,6 @@
   <div class="space-y-4">
     <div v-for="item in items" :key="item.id">
       <Component :is="cards[item.system_name]" :entry="item" />
-      <div v-if="item.whoShared.length">
-        {{ item.whoShared }}
-      </div>
     </div>
     <div v-if="! isEnd" @click="onMore" class="text-center bg-gray-300/50">Еще</div>
   </div>
