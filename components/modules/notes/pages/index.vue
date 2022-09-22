@@ -8,10 +8,10 @@
 </template>
 
 <script setup>
-import { useAsyncGql } from '~/uses'
+import Note from '../components/Note'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTES } from '../graphql';
-import Note from '../components/Note'
+import { useAsyncGql } from '~/uses'
 
 const { data: { value: { notes }}} = await useAsyncGql(`
   query {

@@ -1,13 +1,13 @@
 <template>
   <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} путешествия`">
-    <form @submit.prevent="onSubmit" class="bg-white p-6 rounded-md shadow ring-1 ring-slate-200">
+    <form @submit.prevent="onSubmit" class="bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
       <div class="grid grid-cols-2 gap-6">
         <FormField name="input.images" label="Обложка">
           <TravelUpload v-model="form.images" />
         </FormField>
 
         <div class="space-y-6">
-          <FormField name="input.title" label="Заголовок required" v-slot="{ hasError }">
+          <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
             <Input v-model="form.title" placeholder="Введите заголовок" />
           </FormField>
 
@@ -54,8 +54,11 @@
         </div>
       </div>
 
-      <div class="mt-10">
-        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }} путешествие</VButton>
+      <hr class="mt-8 mb-4 -mx-4 border-gray-200">
+
+      <div class="flex space-x-2">
+        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</VButton>
+        <VButton @click="form.is_draft = true" type="submit" variant="secondary">Сохранить в черновик</VButton>
       </div>
     </form>
   </TheLayout>
@@ -87,6 +90,7 @@ const form = ref({
   budget: 0,
   date_start: '',
   date_end: '',
+  is_draft: false,
   place: {
     id: null,
     name: ''

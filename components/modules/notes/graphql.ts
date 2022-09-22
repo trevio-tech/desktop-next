@@ -34,6 +34,10 @@ export const NOTE = `
     title
     text
     can
+    images {
+        id
+        url
+    }
   }
 `
 
@@ -43,6 +47,7 @@ export const NOTE_FORM = `
   travel_id
   title
   text
+  is_draft
   tags {
     id
     name

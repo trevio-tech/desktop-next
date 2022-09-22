@@ -3,8 +3,8 @@
     <template #sidebar>
       123
     </template>
-    <form @submit.prevent="onSubmit" class="bg-white p-6 rounded-md shadow ring-1 ring-slate-200">
-        <div class="space-y-6">
+    <form @submit.prevent="onSubmit" class="bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
+        <div class="space-y-4">
           <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
             <Input v-model="form.title" placeholder="Введите заголовок" />
           </FormField>
@@ -22,14 +22,17 @@
           </FormField>
 
           <FormField name="input.travel_id" label="Путешествие" id="travel">
-            <select v-model="form.travel_id" class="w-full">
+            <select v-model="form.travel_id" class="input input-default">
               <option v-for="travel in data.travels" :key="travel.id" :value="travel.id">{{ travel.title }}</option>
             </select>
           </FormField>
         </div>
 
-      <div class="mt-10">
-        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }} заметку</VButton>
+      <hr class="mt-8 mb-4 -mx-4 border-gray-200">
+
+      <div class="flex space-x-2">
+        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</VButton>
+        <VButton @click="form.is_draft = true" type="submit" variant="secondary">Сохранить в черновик</VButton>
       </div>
     </form>
   </TheLayout>
@@ -60,6 +63,7 @@ const form = ref({
     id: null,
     name: ''
   },
+  is_draft: false,
   text: '',
   tags: [],
   images: []
@@ -75,7 +79,7 @@ const loading = ref(false)
 const app = useNuxtApp()
 
 const { data } = await useGql(`
-    query($id: Int!, $userId: ID) {
+    query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
       ${isEdit ? `note(id: $id) { ${NOTE_FORM} }` : ''}
       travels(userId: $userId) {
         id

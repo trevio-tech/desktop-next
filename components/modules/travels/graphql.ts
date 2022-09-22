@@ -62,6 +62,7 @@ export const TRAVEL_FORM = `
     text
     date_start
     date_end
+    is_draft
     tags {
       id
       name

@@ -15,20 +15,17 @@
         </div>
       </RadioGroup>
 
-      <div>
-        <label for="email" class="text-sm mb-1 block text-gray-600">Адрес электронной почты</label>
-        <v-input type="email" id="email" />
-      </div>
+      <FormField name="email" label="Электронная почта" required>
+        <Input v-model="form.email" type="email" id="email" />
+      </FormField>
 
-      <div>
-        <label for="password" class="text-sm mb-1 block text-gray-600">Пароль</label>
-        <v-input type="password" id="password" />
-      </div>
+      <FormField name="password" label="Пароль" required>
+        <Input v-model="form.password" type="password" id="password" />
+      </FormField>
 
-      <div>
-        <label for="password" class="text-sm mb-1 block text-gray-600">Повторите пароль</label>
-        <v-input type="password" id="password" />
-      </div>
+      <FormField name="password" label="Повторите пароль" required>
+        <Input v-model="form.password_confirmation" type="password" id="password-confirmation" />
+      </FormField>
 
       <v-button type="submit">Зарегистрироваться</v-button>
     </form>
@@ -36,6 +33,13 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import TheLayout from '~/components/layout/TheLayout'
-import { VButton, Input, RadioGroup, RadioGroupLabel, RadioGroupOption } from '@trevio/ui';
+import { VButton, FormField, Input, RadioGroup, RadioGroupLabel, RadioGroupOption } from '@trevio/ui'
+
+const form = ref({
+  email: null,
+  password: null,
+  password_confirmation: null
+})
 </script>

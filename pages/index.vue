@@ -6,6 +6,9 @@
     <template #sidebar>
       <div class="bg-green-300/50 w-full h-full"></div>
     </template>
+    <template #top-after>
+      <ContentListFilter />
+    </template>
 
     <div class="space-y-4">
       <div v-for="item in items" :key="item.id">
@@ -27,6 +30,7 @@ import { useAsyncGql } from '~/uses'
 import Travel from '~/components/modules/travels/components/Travel'
 import Note from '~/components/modules/notes/components/Note'
 import Review from '~/components/modules/reviews/components/Review'
+import ContentListFilter from '~/components/ContentListFilter.vue'
 
 const items = ref([])
 const isEnd = ref(false)

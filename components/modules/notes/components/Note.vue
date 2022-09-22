@@ -17,8 +17,8 @@
     </p>
 
     <div v-if="entry.travel_id > 0" class="mt-4 text-sm font-medium truncate p-2 rounded-lg border border-gray-100">
-      {{ entry.travel.title }}
-      <div class="text-gray-500 text-xs">{{ entry.travel.place.name }}</div>
+      {{ entry.travel?.title }}
+      <div class="text-gray-500 text-xs">{{ entry.travel?.place?.name }}</div>
     </div>
 
     <footer class="text-sm mt-4">

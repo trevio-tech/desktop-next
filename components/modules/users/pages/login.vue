@@ -10,20 +10,13 @@
         Пользователь заблокирован
       </div>
 
-      <div :class="{'is-invalid': errors.has('email')}">
-        <label for="email" class="label">Электронная почта: <span class="asterisk"></span></label>
-        <input v-model="form.email" class="input" type="email" id="email">
-        <div v-if="errors.has('email')" class="help mt-1">{{ errors.first('email') }}</div>
-      </div>
+      <FormField name="email" label="Электронная почта" required>
+        <Input v-model="form.email" type="email" id="email" />
+      </FormField>
 
-      <div class="mt-2" :class="{'is-invalid': errors.has('password')}">
-        <div class="flex justify-between">
-          <label for="password" class="label">Пароль: <span class="asterisk"></span></label>
-          <!--          <nuxt-link :to="{name: 'users.password.email'}">Забыли пароль?</nuxt-link>-->
-        </div>
-        <input v-model="form.password" class="input" type="password" id="password">
-        <div v-if="errors.has('password')" class="help mt-1">{{ errors.first('password') }}</div>
-      </div>
+      <FormField name="password" label="Пароль" required>
+        <Input v-model="form.password" type="password" id="password" />
+      </FormField>
 
       <div class="mt-4">
         Авторизуясь, вы соглашаетесь с <nuxt-link to="/terms" class="underline">правилами пользования сайтом</nuxt-link> и даете согласие на <nuxt-link class="underline" to="/privacy">обработку персональных данных</nuxt-link>.
@@ -36,12 +29,10 @@
   </TheLayout>
 </template>
 
-<script setup>
-import TheLayout from '~/components/layout/TheLayout'
-</script>
-
 <script>
 import Validation from '~/utils/validation';
+import TheLayout from '~/components/layout/TheLayout'
+import { FormField, Input } from '@trevio/ui'
 
 const formInitialState = {
   email: '',
@@ -51,6 +42,12 @@ const formInitialState = {
 export default {
   middleware: 'auth',
   auth: 'guest',
+
+  components: {
+    TheLayout,
+    FormField,
+    Input
+  },
 
   data() {
     return {
