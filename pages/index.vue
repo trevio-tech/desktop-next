@@ -76,18 +76,26 @@ const fetchFeed = async (offset = 0) => {
 await fetchFeed()
 
 watch(contentTypes, async (newValue) => {
-  await router.push({
-    path: '/',
-    query: Object.assign(route.query, {
+  await router.replace({
+    query: {
       contentTypes: newValue.join(',')
-    })
+    }
   })
 
   await fetchFeed()
 })
 
 const onMore = async () => {
-  await fetchFeed(items.value.length)
+  const offset = items.value.length
+
+  await router.replace({
+    query: {
+      ...route.query,
+      offset,
+    }
+  })
+
+  await fetchFeed(offset)
 }
 
 const cards = {
