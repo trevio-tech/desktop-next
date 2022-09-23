@@ -3,7 +3,7 @@ export const NOTE_CARD = `
   title
   place_id
   travel_id
-  text(words: 10)
+  text(words: 20)
   likes_count
   can
   travel {

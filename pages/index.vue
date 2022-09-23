@@ -7,7 +7,8 @@
       <div class="bg-green-300/50 w-full h-full"></div>
     </template>
     <template #top-after>
-      <ContentListFilter />
+      <ContentListFilter v-model="contentTypes" />
+      {{ contentTypes }}
     </template>
 
     <div class="space-y-4">
@@ -23,7 +24,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'nuxt/app'
 import TheLayout from '~/components/layout/TheLayout'
 import { FEED } from '~/components/modules/activity/graphql'
 import { useAsyncGql } from '~/uses'
@@ -32,24 +34,36 @@ import Note from '~/components/modules/notes/components/Note'
 import Review from '~/components/modules/reviews/components/Review'
 import ContentListFilter from '~/components/ContentListFilter.vue'
 
+const route = useRoute()
+const router = useRouter()
 const items = ref([])
 const isEnd = ref(false)
 const nextPage = ref(0)
 
+const contentTypes = ref(
+    route.query?.contentTypes
+        ? route.query.contentTypes.split(',')
+        : []
+)
+
+
 const fetchFeed = async (offset = 0) => {
   const { data: { value: { feed }} } = await useAsyncGql(`
-    query($offset: Int, $page: Int) {
-      feed(offset: $offset, page: $page) {
+    query($offset: Int, $page: Int, $contentTypes: [String]) {
+      feed(offset: $offset, page: $page, contentTypes: $contentTypes) {
         ${FEED}
       }
     }
   `, {
     offset,
-    page: nextPage.value
+    page: nextPage.value,
+    contentTypes: contentTypes.value
   })
 
-  if (feed.items.length) {
+  if (offset && feed.items.length) {
     feed.items.forEach(item => items.value.push(item))
+  } else {
+    items.value = feed.items
   }
 
   if (feed.items.length < 5) {
@@ -60,6 +74,17 @@ const fetchFeed = async (offset = 0) => {
 }
 
 await fetchFeed()
+
+watch(contentTypes, async (newValue) => {
+  await router.push({
+    path: '/',
+    query: Object.assign(route.query, {
+      contentTypes: newValue.join(',')
+    })
+  })
+
+  await fetchFeed()
+})
 
 const onMore = async () => {
   await fetchFeed(items.value.length)

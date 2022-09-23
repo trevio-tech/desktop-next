@@ -1,17 +1,27 @@
 <template>
-  <div>
-    <div class="flex items-center space-x-2">
-      <VCheckbox v-for="(item, key) in list" :key="key" :value="key" v-model="content">{{ item }}</VCheckbox>
-    </div>
-    {{ content }}
-  </div>
+  <Dropdown>
+    <VButton>Фильтр</VButton>
+    <template #popper>
+      <DropdownItem v-for="(item, key) in list" :key="key" :value="key" :as="Checkbox" v-model="content" @update:modelValue="$emit('update:modelValue', $event)">
+        {{ item }}
+      </DropdownItem>
+    </template>
+  </Dropdown>
 </template>
 
 <script setup>
-import { VCheckbox } from '@trevio/ui'
+import { Checkbox, Dropdown, DropdownItem, VButton } from '@trevio/ui'
 import { ref } from 'vue'
 
-const content = ref([])
+defineEmits(['update:modelValue'])
+const props = defineProps({
+  modelValue: {
+    type: Array,
+    default: () => []
+  }
+})
+
+const content = ref(props.modelValue)
 
 const list = {
   travels:    'Путешествия',
