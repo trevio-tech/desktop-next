@@ -49,14 +49,13 @@ const contentTypes = ref(
 
 const fetchFeed = async (offset = 0) => {
   const { data: { value: { feed }} } = await useAsyncGql(`
-    query($offset: Int, $page: Int, $contentTypes: [String]) {
-      feed(offset: $offset, page: $page, contentTypes: $contentTypes) {
+    query($offset: Int, $contentTypes: [String]) {
+      feed(offset: $offset, contentTypes: $contentTypes) {
         ${FEED}
       }
     }
   `, {
     offset,
-    page: nextPage.value,
     contentTypes: contentTypes.value
   })
 

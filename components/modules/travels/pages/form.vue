@@ -46,9 +46,19 @@
               <FormField name="input.budget" label="Бюджет путешествия" id="budget" class="flex-auto">
                 <Input v-model="form.budget" type="number" id="budget" placeholder="Бюджет путешествия" />
               </FormField>
-              <div class="flex items-center gap-4 mt-7">
-                <div v-for="currency in currencies" :class="{'underline': currency.id === form.currency_id}" :key="currency.id" @click="form.currency_id = currency.id">{{ currency.name }}</div>
-              </div>
+              <Dropdown class="mt-6">
+                <VButton>
+                  Валюта
+                  <template #append>
+                    <ChevronDownIcon class="w-5 h-5 text-white" />
+                  </template>
+                </VButton>
+                <template v-slot:popper="{ hide }">
+                  <DropdownItem v-for="currency in currencies" :key="currency.id" :value="currency.id" v-model="content" @click="form.currency_id = currency.id; hide()">
+                    {{ currency.name }}
+                  </DropdownItem>
+                </template>
+              </Dropdown>
             </div>
           </div>
         </div>
@@ -69,9 +79,9 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import Datepicker from '@vuepic/vue-datepicker';
 import TheLayout from '~/components/layout/TheLayout'
 import TravelUpload from '../components/TravelUpload'
+import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import pick from 'lodash.pick'
-import { CurrencyDollarIcon, CurrencyEuroIcon, CurrencyRupeeIcon } from '@heroicons/vue/24/solid'
-import { FormField, Textarea, Input, VButton, SearchPlace } from '@trevio/ui';
+import { FormField, Textarea, Input, VButton, SearchPlace, Dropdown, DropdownItem } from '@trevio/ui';
 import {TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL} from '../graphql';
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
