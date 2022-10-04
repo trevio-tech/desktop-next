@@ -43,10 +43,10 @@
 
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-4 flex-auto">
-              <FormField name="input.budget" label="Бюджет путешествия" id="budget" class="flex-auto">
+              <FormField name="input.budget" label="Бюджет путешествия" :help="getCurrency" id="budget" class="flex-auto">
                 <Input v-model="form.budget" type="number" id="budget" placeholder="Бюджет путешествия" />
               </FormField>
-              <Dropdown class="mt-6">
+              <Dropdown class="mt-1">
                 <VButton>
                   Валюта
                   <template #append>
@@ -83,7 +83,7 @@ import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import pick from 'lodash.pick'
 import { FormField, Textarea, Input, VButton, SearchPlace, Dropdown, DropdownItem } from '@trevio/ui';
 import {TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL} from '../graphql';
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
 import { useGql } from '~/uses'
 import { useRoute, useRouter } from 'nuxt/app'
@@ -199,5 +199,13 @@ const onSubmit = handleSubmit(async (values, actions) => {
   } finally {
     loading.value = false
   }
+})
+
+const getCurrency = computed(() => {
+  if (form.value.currency_id > 0) {
+    return currencies.value.filter((currency) => currency.id === form.value.currency_id)[0].name
+  }
+
+  return currencies.value[0].name
 })
 </script>
