@@ -1,7 +1,7 @@
 <template>
   <div tabindex="-1" aria-hidden="true" class="absolute left-0 top-0 w-full h-full overflow-y-auto">
     <div class="flex items-center justify-start flex-col p-10 min-h-full">
-      <div class="relative min-w-[320px] max-w-2xl bg-white rounded-lg shadow">
+      <div class="relative min-w-[320px] flex flex-col max-w-2xl bg-white rounded-lg shadow" :class="{'flex-auto': fullHeight}">
         <!-- Modal header -->
         <header class="p-4 flex justify-between items-center p-4 rounded-t border-b border-gray-200">
           <h3 class="text-xl font-semibold text-gray-900 leading-none">
@@ -12,7 +12,7 @@
             <span class="sr-only">Закрыть</span>
           </button>
         </header>
-        <div class="p-4">
+        <div class="p-4 flex-auto">
           <slot></slot>
         </div>
       </div>
@@ -24,6 +24,9 @@
 defineProps({
   title: {
     type: String
+  },
+  fullHeight: {
+    type: Boolean
   }
 })
 </script>

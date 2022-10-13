@@ -23,11 +23,18 @@
 
     <footer class="text-sm mt-4">
       лайки: {{ entry.likes_count }}
+      <div @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
+        props: {
+          chatId: `notes-${entry.id}`
+        }
+      })">chat</div>
     </footer>
   </article>
 </template>]
 
 <script setup>
+import { defineAsyncComponent } from 'vue'
+
 defineProps({
   entry: {
     type: Object,
