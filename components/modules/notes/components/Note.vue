@@ -25,7 +25,8 @@
       лайки: {{ entry.likes_count }}
       <div @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
         props: {
-          chatId: `notes-${entry.id}`
+          chatId: `notes-${entry.id}`,
+          title: entry.title
         }
       })">chat</div>
     </footer>
