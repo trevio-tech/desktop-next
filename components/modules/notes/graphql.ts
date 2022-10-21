@@ -3,9 +3,13 @@ export const NOTE_CARD = `
   title
   place_id
   travel_id
+  cover_id
   text(words: 20)
   likes_count
   can
+  cover {
+    url
+  }
   travel {
     id
     place_id

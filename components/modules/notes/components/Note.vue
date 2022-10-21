@@ -1,8 +1,12 @@
 <template>
   <article class="bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
-    <h2 class="text-lg font-semibold">
+    <h2 class="text-lg font-semibold mb-4">
       <NuxtLink :to="{name: 'notes.show', params: {noteId: entry.id}}">{{ entry.title }}</NuxtLink>
     </h2>
+
+    <NuxtLink :to="{name: 'notes.show', params: {noteId: entry.id}}" class="block -mx-4">
+      <img :src="entry.cover?.url" :alt="entry.title">
+    </NuxtLink>
 
     <div v-if="entry.tags.length" class="space-x-2 mt-2 text-slate-400 text-sm">
       <NuxtLink

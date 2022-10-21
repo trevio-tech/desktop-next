@@ -14,7 +14,7 @@
           </FormField>
 
           <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
-            <SearchPlace v-model="form.place" @update:modelValue="form.place_id = $event.id" />
+            <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
           </FormField>
 
           <FormField name="input.tags" label="Теги" id="tags">
