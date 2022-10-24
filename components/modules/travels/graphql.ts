@@ -1,12 +1,12 @@
 export const TRAVEL_CARD = `
   id
   user_id
-  title(words: 6)
+  title
   text(words: 12)
   likes_count
   can
   rating
-  preview(sizes: "default@resize:fill:256:256") {
+  cover(sizes: "default@resize:fill:640:320") {
     id
     model_id
     url

@@ -1,4 +1,4 @@
-import { useFetch, useNuxtApp, useRoute } from 'nuxt/app'
+import { useFetch, useNuxtApp } from 'nuxt/app'
 
 export default async (query, variables) => await useFetch(
   'http://api.localhost/graphql',
@@ -14,9 +14,8 @@ export default async (query, variables) => await useFetch(
       Authorization: useNuxtApp().$auth.strategy.token.get()
     },
     initialCache: false,
-    transform: data => data.data,
+    transform: (data) => data.data,
     method: 'POST',
-    key: useRoute().fullPath,
     async onResponse({ response}) {
       if (response?._data?.errors) {
         return new Promise((resolve, reject) => reject(response._data.errors))

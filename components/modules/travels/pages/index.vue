@@ -27,6 +27,11 @@ const { data: { value: { travels }}, refresh } = await useAsyncGql(`
 `, {
   tag_id: parseInt(route.query.tag_id)
 })
-watch(() => route.query.tag_id, refresh)
+
+console.log(route.query)
+
+watch(() => route.query.tag_id, (n) => {
+  refresh()
+})
 
 </script>
