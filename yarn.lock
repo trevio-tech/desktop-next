@@ -315,17 +315,12 @@
   dependencies:
     "@floating-ui/core" "^1.0.1"
 
-"@headlessui/vue@^1.6.7":
+"@headlessui/vue@^1.7.3":
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.7.3.tgz#116d13391552436ea1e9e88c69f0e9d7d2585c45"
   integrity sha512-Is4iakKts9u9E0+jEZNzoJpBjwq2SamwEIoEl2RlyYSu6Zco536GsPXaQEfg/o7Eyc1GUUlcL+dJd4Rt7qyf7A==
 
-"@heroicons/vue@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@heroicons/vue/-/vue-1.0.6.tgz#d8b90734b436eb5a87f40cc300b64a0fb0031f7f"
-  integrity sha512-ng2YcCQrdoQWEFpw+ipFl2rZo8mZ56v0T5+MyfQQvNqfKChwgP6DMloZLW+rl17GEcHkE3H82UTAMKBKZr4+WA==
-
-"@heroicons/vue@^2.0.10":
+"@heroicons/vue@^2.0.10", "@heroicons/vue@^2.0.12":
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/@heroicons/vue/-/vue-2.0.12.tgz#45b97946731721269dd4141035af338a1ef88f35"
   integrity sha512-ypuQl/Wei7BoShO65AdRVikXDaSt6hJBRuKs2pVd/6HvxfEz18oXraH+J5G/QPIwObMEVhMb6nkOs9l3WZv/gA==
@@ -861,11 +856,11 @@
 
 "@trevio/ui@https://github.com/trevio-tech/ui-next":
   version "0.0.0"
-  resolved "https://github.com/trevio-tech/ui-next#881f32efa957196e5eb393451f4437f73e102348"
+  resolved "https://github.com/trevio-tech/ui-next#3563df2d11c918204bd14e0c825cffa6c5bce91a"
   dependencies:
     "@floating-ui/dom" "^1.0.2"
-    "@headlessui/vue" "^1.6.7"
-    "@heroicons/vue" "^1.0.6"
+    "@headlessui/vue" "^1.7.3"
+    "@heroicons/vue" "^2.0.12"
     "@nuxt/kit" "^3.0.0-rc.9"
     "@vueuse/core" "^9.2.0"
     axios "^0.27.2"
@@ -4897,10 +4892,17 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
 
-vee-validate@^4.5.8, vee-validate@^4.6.7:
+vee-validate@^4.5.8:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.7.0.tgz#442c0a9b8dad28790ea10b37b6855f25f3e4f5a8"
   integrity sha512-7HW2RE8mWaT57Jn+JU7jwczFqtlc1rIAwSbp8kD1L2sO0plhT9YeDNKW5iaI9baosc4h+iyb6itMlXtqAAqAfw==
+  dependencies:
+    "@vue/devtools-api" "^6.1.4"
+
+vee-validate@^4.6.7:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.7.1.tgz#cbf8607402d5c6da192d5a25ee9b60678aa3d91a"
+  integrity sha512-ekSy7msvCVdyXdIcLz+kpD+5BFmPi4o88wtPZX6xISr9MP6uiilwkRZbTOkafq0uYuWMqw+OpQBtnpaFzqI86A==
   dependencies:
     "@vue/devtools-api" "^6.1.4"
 

@@ -12,9 +12,9 @@
 const items = [
   { name: 'Путешествия', href: '/travels' },
   { name: 'Заметки', href: '/notes' },
-  { name: 'Отзывы', href: '/' },
-  { name: 'Фотоальбомы', href: '/' },
-  { name: 'Вопросы и ответы', href: '/' },
-  { name: 'Блоги компаний', href: '/' }
+  { name: 'Отзывы', href: '/reviews' },
+  { name: 'Фотоальбомы', href: '/albums' },
+  { name: 'Вопросы и ответы', href: '/questions' },
+  { name: 'Блоги компаний', href: '/posts' }
 ]
 </script>

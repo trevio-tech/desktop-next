@@ -195,7 +195,9 @@ const onSubmit = handleSubmit(async (values, actions) => {
       await useRouter().push({name: 'travels.show', params: {travelId: travelForm}})
     }
   } catch (error) {
-    actions.setErrors(error[0]['extensions']['validation']);
+    if (error[0]['message'] === 'validation') {
+      actions.setErrors(error[0]['extensions']['validation'])
+    }
   } finally {
     loading.value = false
   }

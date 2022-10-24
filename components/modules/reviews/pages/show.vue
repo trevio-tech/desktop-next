@@ -1,7 +1,7 @@
 <template>
   <TheLayout :heading="review.title">
     <template #sidebar>1</template>
-    <p>{{ review.text }}</p>
+    <div class="prose-sm" v-html="review.text"></div>
   </TheLayout>
 </template>
 

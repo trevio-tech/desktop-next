@@ -29,22 +29,22 @@ const items = [
   {
     name: 'Отзыв',
     text: 'Не держите в себе! Поделитесь мнением с читателем',
-    href: '/'
+    href: '/reviews/create'
   },
   {
     name: 'Фотоальбом',
     text: 'Яркие моменты, собранные в ваш фотоальбом',
-    href: '/'
+    href: '/albums/create'
   },
   {
     name: 'Вопрос',
     text: 'Задайте вопрос, на который не смогли найти ответ',
-    href: '/'
+    href: '/questions/create'
   },
   {
     name: 'Шот',
     text: 'Эмоции и истории здесь и сейчас',
-    href: '/'
+    href: '/shots/create'
   }
 ]
 </script>

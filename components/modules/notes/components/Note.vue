@@ -4,8 +4,8 @@
       <NuxtLink :to="{name: 'notes.show', params: {noteId: entry.id}}">{{ entry.title }}</NuxtLink>
     </h2>
 
-    <NuxtLink :to="{name: 'notes.show', params: {noteId: entry.id}}" class="block -mx-4">
-      <img :src="entry.cover?.url" :alt="entry.title">
+    <NuxtLink v-if="entry.cover" :to="{name: 'notes.show', params: {noteId: entry.id}}" class="block -mx-4">
+      <img :src="entry.cover.url" :alt="entry.title">
     </NuxtLink>
 
     <div v-if="entry.tags.length" class="space-x-2 mt-2 text-slate-400 text-sm">
