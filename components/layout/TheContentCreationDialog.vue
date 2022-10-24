@@ -2,8 +2,8 @@
   <Dialog title="Что хотите создать?">
     <ul class="w-[640px] grid grid-cols-2 gap-4">
       <li v-ripple v-for="(item, index) in items" :key="index"
-          class="flex items-center cursor-pointer bg-white rounded-lg p-4 hover:bg-blue-50 hover:border-blue-200 border border-gray-100">
-        <NuxtLink :to="item.href" @click="$overlay.hide" class="block">
+          class="flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-gray-100">
+        <NuxtLink :to="item.href" @click="$overlay.hide" class="block p-4">
           <div class="font-medium">{{ item.name }}</div>
           <div class="text-xs text-gray-400">{{ item.text }}</div>
         </NuxtLink>

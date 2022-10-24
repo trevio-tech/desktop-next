@@ -43,7 +43,6 @@
 </template>
 
 <script setup>
-import '@/node_modules/@trevio/tiptap/dist/style.css'
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_REVIEW, UPDATE_REVIEW, REVIEW_FORM } from '../graphql'
@@ -129,7 +128,9 @@ const onSubmit = handleSubmit(async () => {
       await useRouter().push({name: 'reviews.show', params: {reviewId: reviewForm}})
     }
   } catch (error) {
-    setErrors(error[0]['extensions']['validation'])
+    if (error[0]['message'] === 'validation') {
+      setErrors(error[0]['extensions']['validation'])
+    }
   } finally {
     loading.value = false
   }
