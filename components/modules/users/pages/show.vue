@@ -33,7 +33,7 @@
           <span>Интересы</span>
           <Cog6ToothIcon @click="onEditInterests" class="w-5 h-5 text-gray-800 cursor-pointer" />
         </h3>
-        <ul v-if="user.friends.length">
+        <ul v-if="user.interests.length">
           <li v-for="interest in user.interests" :key="interest.id">
             <NuxtLink :to="{name: 'users.show', params: {userId: interest.id}}" class="text-sm font-medium">
               {{ interest.name }}
@@ -48,7 +48,7 @@
           <span>Направления</span>
           <Cog6ToothIcon @click="onEditSelectedPlaces" class="w-5 h-5 text-gray-800 cursor-pointer" />
         </h3>
-        <ul v-if="user.friends.length" class="space-y-1">
+        <ul v-if="user.selectedPlaces.length" class="space-y-1">
           <li v-for="place in user.selectedPlaces" :key="place.id" class="truncate">
             <NuxtLink :to="{name: 'users.show', params: {userId: place.id}}">
               <div  class="text-sm font-medium">{{ place.name }}</div>

@@ -1,7 +1,7 @@
 import { useFetch, useNuxtApp } from 'nuxt/app'
 
 export default async (query, variables) => await useFetch(
-  'http://api.localhost/graphql',
+  'http://127.0.0.1:9000/graphql',
   {
     body: {
       query: query
