@@ -1,7 +1,4 @@
-import { defineNuxtConfig } from 'nuxt'
-
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
-export default defineNuxtConfig({
+export default {
   app: {
     head: {
       meta: [
@@ -61,4 +58,4 @@ export default defineNuxtConfig({
       home: false,
     }
   },
-})
+}

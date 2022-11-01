@@ -2,6 +2,7 @@
   <TheLayout heading="Путешествия">
     <template #sidebar>1</template>
     <div class="space-y-4">
+      <TravelFilter />
       <Travel v-for="travel in travels" :entry="travel" :key="travel.id" />
     </div>
   </TheLayout>
@@ -10,6 +11,7 @@
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
 import Travel from '../components/Travel'
+import TravelFilter from '../components/TravelFilter'
 import { TRAVEL_CARD } from '../graphql';
 import { useAsyncGql } from '~/uses'
 import { useRoute, useRouter } from 'nuxt/app'
@@ -19,19 +21,20 @@ const route = useRoute()
 const router = useRouter()
 
 const { data: { value: { travels }}, refresh } = await useAsyncGql(`
-  query($tag_id: Int) {
-    travels(tag_id: $tag_id) {
+  query($filter_by: String, $tag_id: Int) {
+    travels(filter_by: $filter_by, tag_id: $tag_id) {
       ${TRAVEL_CARD}
     }
   }
 `, {
-  tag_id: parseInt(route.query.tag_id)
+  tag_id: parseInt(route.query.tag_id),
+  filter_by: !!route.query.timeline ? undefined : 'subscriptions'
 })
 
-console.log(route.query)
-
-watch(() => route.query.tag_id, (n) => {
+watch(() => route.query.tag_id, () => {
   refresh()
 })
-
+watch(() => route.query.timeline, () => {
+  refresh()
+})
 </script>

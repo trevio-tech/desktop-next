@@ -47,10 +47,6 @@ defineProps({
   entry: {
     type: Object,
     required: true
-  },
-  to: {
-    type: Object,
-    required: true
   }
 })
 </script>
