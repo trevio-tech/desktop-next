@@ -3,7 +3,7 @@
     <template #sidebar>1</template>
     <div class="space-y-4">
       <div v-for="album in albums.data" :key="album.id">
-        <NuxtLink :to="{name: 'albums.edit', params: {albumId: album.id}}">{{ album.title }}</NuxtLink>
+        <NuxtLink :to="{name: 'albums.show', params: {albumId: album.id}}">{{ album.title }}</NuxtLink>
       </div>
     </div>
   </TheLayout>

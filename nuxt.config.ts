@@ -19,12 +19,20 @@ export default {
     '@pinia/nuxt',
     'nuxt-windicss',
     '~/modules/routes',
+    '@nuxtjs/apollo'
   ],
   build: {
     transpile: ['ui', '@heroicons/vue', '@vuepic/vue-datepicker']
   },
   publicRuntimeConfig: {
     GRAPHQL_URL: process.env.GRAPHQL_URL
+  },
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: process.env.GRAPHQL_URL
+      }
+    },
   },
   auth: {
     strategies: {

@@ -9,7 +9,12 @@
             <Input v-model="form.title" placeholder="Введите заголовок" />
           </FormField>
 
-          <FormField name="input.text" label="Изображения" help="Первое изображение будет использовано для обложки">
+          <FormField
+            help="Изображения можно сортировать. Первое изображение будет использовано в качестве обложки."
+            label="Изображения"
+            name="input.text"
+            required
+          >
             <FormGallery v-if="form.images" v-model="form.images" />
             <Upload :fields="['id', 'url']" model-type="albums" @uploaded="onUploaded" />
           </FormField>

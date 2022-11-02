@@ -25,6 +25,56 @@ export const ALBUM_CARD = `
   }
 `
 
+export const ALBUM = `
+  id
+  place_id
+  travel_id
+  title
+  text
+  is_draft
+  image_order
+  travel {
+    id
+    title
+  }
+  images(sizes: "default@resize:fill:126:126") {
+    id
+    url
+    sizes
+  }
+  tags {
+    id
+    name
+  }
+  user {
+    id
+    name
+    avatar
+    description
+  }
+  place {
+    id
+    parent_id
+    name
+    full_name
+    parent {
+        id
+        parent_id
+        name
+        parent {
+            id
+            parent_id
+            name
+            parent {
+                id
+                parent_id
+                name
+            }
+        }
+    }
+  }
+`
+
 export const ALBUM_FORM = `
   id
   place_id

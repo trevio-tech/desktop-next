@@ -8,6 +8,7 @@
     "ui": "yarn upgrade @trevio/ui"
   },
   "devDependencies": {
+    "@nuxtjs/apollo": "^5.0.0-alpha.3",
     "nuxt": "^3.0.0-rc.11",
     "nuxt-windicss": "^2.5.0",
     "sass": "^1.54.5"
