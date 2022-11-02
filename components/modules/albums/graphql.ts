@@ -25,26 +25,6 @@ export const ALBUM_CARD = `
   }
 `
 
-export const ALBUMS = `
-  notes {
-    ${ALBUM_CARD}
-  }
-`
-
-export const ALBUM = `
-  note(id: $id) {
-    id
-    place_id
-    title
-    text
-    can
-    images {
-        id
-        url
-    }
-  }
-`
-
 export const ALBUM_FORM = `
   id
   place_id
@@ -52,6 +32,12 @@ export const ALBUM_FORM = `
   title
   text
   is_draft
+  image_order
+  images(sizes: "default@resize:fill:126:126") {
+    id
+    url
+    sizes
+  }
   tags {
     id
     name
@@ -80,19 +66,19 @@ export const ALBUM_FORM = `
 `
 
 export const CREATE_ALBUM = `
-  mutation ($input: NoteInput!) {
-    noteForm: createNote(input: $input)
+  mutation ($input: AlbumInput!) {
+    albumForm: createAlbum(input: $input)
   }
 `
 
 export const UPDATE_ALBUM = `
-  mutation ($id: Int!, $input: NoteInput!) {
-    noteForm: updateNote(id: $id, input: $input)
+  mutation ($id: Int!, $input: AlbumInput!) {
+    albumForm: updateAlbum(id: $id, input: $input)
   }
 `
 
 export const DELETE_ALBUM = `
   mutation ($id: Int!) {
-    deleteContent: deleteNote(id: $id)
+    deleteContent: deleteAlbum(id: $id)
   }
 `

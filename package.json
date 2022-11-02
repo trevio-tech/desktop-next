@@ -20,7 +20,8 @@
     "@trevio/tiptap": "https://github.com/trevio-tech/tiptap",
     "@trevio/ui": "https://github.com/trevio-tech/ui-next",
     "@vuepic/vue-datepicker": "^3.4.7",
-    "vee-validate": "^4.5.8"
+    "vee-validate": "^4.5.8",
+    "vuedraggable": "^4.1.0"
   },
   "peerDependencies": {}
 }

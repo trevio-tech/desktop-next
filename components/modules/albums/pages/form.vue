@@ -9,9 +9,9 @@
             <Input v-model="form.title" placeholder="Введите заголовок" />
           </FormField>
 
-          <FormField name="input.text" label="Изображения">
-            <Upload :fields="['id', 'url']" model-type="albums" @uploaded="onUploaded" />
+          <FormField name="input.text" label="Изображения" help="Первое изображение будет использовано для обложки">
             <FormGallery v-if="form.images" v-model="form.images" />
+            <Upload :fields="['id', 'url']" model-type="albums" @uploaded="onUploaded" />
           </FormField>
 
           <FormField name="input.text" label="Текст">
@@ -27,7 +27,7 @@
           </FormField>
 
           <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
-            <Select v-model="form.travel_id" :items="data.travels" key-name="title" />
+            <Select :model-value="form.travel_id" @update:modelValue="form.travel_id = $event.id" :items="data.travels" key-name="title" />
           </FormField>
         </div>
 
@@ -74,8 +74,8 @@ const form = ref({
 
 const route = useRoute()
 const { handleSubmit, setErrors } = useForm()
-const noteId = parseInt(route.params.noteId)
-const isEdit = noteId > 0
+const albumId = parseInt(route.params.albumId)
+const isEdit = albumId > 0
 const danger = ref(false)
 const loading = ref(false)
 
@@ -83,19 +83,19 @@ const app = useNuxtApp()
 
 const { data } = await useGql(`
     query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
-      ${isEdit ? `note(id: $id) { ${ALBUM_FORM} }` : ''}
+      ${isEdit ? `album(id: $id) { ${ALBUM_FORM} }` : ''}
       travels(userId: $userId) {
         id
         title(words: 6)
       }
     }
   `, {
-  id: noteId,
+  id: albumId,
   userId: app.$auth.user.id
 })
 
 if (isEdit) {
-  Object.assign(form.value, data.note)
+  Object.assign(form.value, data.album)
 }
 
 const onSubmit = handleSubmit(async () => {
@@ -111,18 +111,20 @@ const onSubmit = handleSubmit(async () => {
     'title',
     'text',
     'tags',
+    'images',
   ])
 
   input.tags = input.tags.map(tag => parseInt(tag.id))
+  input.images = input.images.map(image => parseInt(image.id))
 
   try {
-    const { data: { noteForm }} = await useGql(isEdit ? UPDATE_ALBUM : CREATE_ALBUM, {
+    const { data: { albumForm }} = await useGql(isEdit ? UPDATE_ALBUM : CREATE_ALBUM, {
       input,
-      id: noteId
+      id: albumId
     })
 
-    if (noteForm > 0) {
-      await useRouter().push({name: 'notes.show', params: {noteId: noteForm}})
+    if (albumForm > 0) {
+      await useRouter().push({name: 'albums.show', params: {albumId: albumForm}})
     }
   } catch (error) {
     if (error[0]['message'] === 'validation') {
