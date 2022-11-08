@@ -25,10 +25,8 @@
             <InputTags v-model="form.tags" />
           </FormField>
 
-          <FormField name="input.travel_id" label="Путешествие" id="travel">
-            <select v-model="form.travel_id" class="input input-default">
-              <option v-for="travel in data.travels" :key="travel.id" :value="travel.id">{{ travel.title }}</option>
-            </select>
+          <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
+            <Select :model-value="form.travel_id" @update:modelValue="form.travel_id = $event.id" :items="data.travels" key-name="title" />
           </FormField>
         </div>
 
@@ -46,7 +44,7 @@
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_REVIEW, UPDATE_REVIEW, REVIEW_FORM } from '../graphql'
-import { FormField, Rating, Input, VButton, SearchPlace } from '@trevio/ui';
+import { FormField, Rating, Select, Input, VButton, SearchPlace } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
 import { TipTap } from '@trevio/tiptap'
 import { ref } from 'vue'
