@@ -6,10 +6,6 @@
     <template #sidebar>
       <div class="bg-green-300/50 w-full h-full"></div>
     </template>
-    <template #top-after>
-      <ContentListFilter v-model="contentTypes" />
-      {{ contentTypes }}
-    </template>
 
     <div class="space-y-4">
       <div v-for="item in items" :key="item.id">
@@ -24,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useRoute, useRouter } from 'nuxt/app'
 import TheLayout from '~/components/layout/TheLayout'
 import { FEED } from '~/components/modules/activity/graphql'
@@ -32,34 +28,26 @@ import { useAsyncGql } from '~/uses'
 import Travel from '~/components/modules/travels/components/Travel'
 import Note from '~/components/modules/notes/components/Note'
 import Review from '~/components/modules/reviews/components/Review'
-import ContentListFilter from '~/components/ContentListFilter.vue'
 
 const route = useRoute()
 const router = useRouter()
 const items = ref([])
 const isEnd = ref(false)
 const nextPage = ref(0)
+const page = ref(route.query.page || 0)
 
-const contentTypes = ref(
-    route.query?.contentTypes
-        ? route.query.contentTypes.split(',')
-        : []
-)
-
-
-const fetchFeed = async (offset = 0) => {
+const fetchFeed = async (page = 0) => {
   const { data: { value: { feed }} } = await useAsyncGql(`
-    query($offset: Int, $contentTypes: [String]) {
-      feed(offset: $offset, contentTypes: $contentTypes) {
+    query($page: Int) {
+      feed(page: $page) {
         ${FEED}
       }
     }
   `, {
-    offset,
-    contentTypes: contentTypes.value
+    page
   })
 
-  if (offset && feed.items.length) {
+  if (page && feed.items.length) {
     feed.items.forEach(item => items.value.push(item))
   } else {
     items.value = feed.items
@@ -74,27 +62,17 @@ const fetchFeed = async (offset = 0) => {
 
 await fetchFeed()
 
-watch(contentTypes, async (newValue) => {
-  await router.replace({
-    query: {
-      contentTypes: newValue.join(',')
-    }
-  })
-
-  await fetchFeed()
-})
-
 const onMore = async () => {
-  const offset = items.value.length
+  page.value++
 
   await router.replace({
     query: {
       ...route.query,
-      offset,
+      page: page.value,
     }
   })
 
-  await fetchFeed(offset)
+  await fetchFeed(page.value)
 }
 
 const cards = {

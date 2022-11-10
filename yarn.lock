@@ -876,7 +876,7 @@
 
 "@trevio/ui@https://github.com/trevio-tech/ui-next":
   version "0.0.0"
-  resolved "https://github.com/trevio-tech/ui-next#724a2e9a5ff6f779a8888e6a2168b0f09ced85cd"
+  resolved "https://github.com/trevio-tech/ui-next#2bee78b3a44904251a5918339e282cda70b6d1c7"
   dependencies:
     "@floating-ui/dom" "^1.0.2"
     "@headlessui/vue" "^1.7.3"
