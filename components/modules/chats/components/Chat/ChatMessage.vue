@@ -35,6 +35,6 @@ const isSelected = computed(
 )
 
 const onEdit = () => {
-  store.onReply(props.message)
+  store.selectMessage(props.message, 'reply')
 }
 </script>
