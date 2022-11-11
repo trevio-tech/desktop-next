@@ -572,12 +572,12 @@
     vue-bundle-renderer "^0.5.0"
 
 "@nuxtjs-alt/auth@^2.0.6":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs-alt/auth/-/auth-2.1.0.tgz#b88c4eb03938d0c75f2cade6028d87a11bcca7dc"
-  integrity sha512-FzCZE16Lw/Mm09BjOzcHhKhU25aBXU7DC1dxIl92sHUB+nYs2Hg3qDLD/niMqpg9mqW/KgBHn1s1ufDH72GN/w==
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@nuxtjs-alt/auth/-/auth-2.1.2.tgz#b9af0c1d69d0ee28ac1c7c87bdfbf904bca00aa1"
+  integrity sha512-5bdJKhADfpVESE2/mv8MzAZNK0uSjbYeHUW5GKb5IqiLd2JsiFr6oFqYT9MRnn+DOGTXu5O6+ZxrdU5cTO7Ecw==
   dependencies:
     "@nuxt/kit" "^3.0.0-rc.13"
-    "@nuxtjs-alt/http" "^1.4.4"
+    "@nuxtjs-alt/http" "^1.4.5"
     "@pinia/nuxt" "^0.4.3"
     body-parser "1.20.1"
     cookie-es "^0.5.0"
@@ -597,22 +597,22 @@
     axios-retry "^3.3.1"
     defu "^6.1.0"
 
-"@nuxtjs-alt/http@^1.4.4":
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/@nuxtjs-alt/http/-/http-1.4.4.tgz#ad33960e6fd04d87360b103a305e9a8190135be3"
-  integrity sha512-jirwLb+0wJNlpuq32uGSXZAuKEu255skL5RrgiFeBp0dc/4SnA6qyaJdV7Dqpk2NHRTsmFW84nAHLF8EaB7bpg==
+"@nuxtjs-alt/http@^1.4.5":
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/@nuxtjs-alt/http/-/http-1.4.5.tgz#644d52dcd30f4a6d23f3a5a3aa0d36e06a5dc381"
+  integrity sha512-efywXlgFURdSoM8NZzGu0iT3WeW87/TPRfFUhbLIHXLNb9hARxN9Aj8s2rBRaiRQ0e6saLsnX4Xdm+DVmus4pw==
   dependencies:
     "@nuxt/kit" "^3.0.0-rc.13"
-    "@refactorjs/ofetch" "^0.2.0"
+    "@refactorjs/ofetch" "^0.2.1"
     defu "^6.1.0"
     ohash "^0.1.5"
     pathe "^0.3.9"
     ufo "^0.8.6"
 
 "@nuxtjs/apollo@^5.0.0-alpha.3":
-  version "5.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/apollo/-/apollo-5.0.0-alpha.3.tgz#5a49aba254922ec1aa508855208e1e714c2cf4d0"
-  integrity sha512-06Ph7B7NJJEze3jxJ2hlOTejV2t/BCz8l/n73D+HQP3aaBBrnGrN0oURn/O+JCKIsHm3CfBbzW3hdXEuMSSjEw==
+  version "5.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/apollo/-/apollo-5.0.0-alpha.4.tgz#96afeab14215623f54dfbd62f9ffca1bdd2184ca"
+  integrity sha512-gdUX0Tzri0vBp2DcHbO7NE9fDKC7JGXexlpNgrfl5ObBqZqYOapl8UkX5RITdvPdVvnBmTQRmztIY1MAwii/Vw==
   dependencies:
     "@apollo/client" "^3.6.9"
     "@nuxt/kit" "^3.0.0-rc.11"
@@ -645,10 +645,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@refactorjs/ofetch@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@refactorjs/ofetch/-/ofetch-0.2.0.tgz#7a624da94ce797ed174201886584a01d948f891c"
-  integrity sha512-X24cF5U2lwDGYBv+w0g95hkEAqMkbyE3a1WBgJ44xtyGc1HGbRpfCQgGSJlk4Chdbsuc5A5LaWnsJLhMngzO/Q==
+"@refactorjs/ofetch@^0.2.1":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@refactorjs/ofetch/-/ofetch-0.2.2.tgz#b6af3b529f8d0b598b6361949cc9a4da3b1bff1e"
+  integrity sha512-6VNHCQt2dmt4Kq7CG2OfdUiOOBF+V1H6VnpSwEGcBis/pmJiPv2YJ0xgriGVWnvXUG0FJUARmYLaQCkb2xyS1g==
   dependencies:
     cookie-es "^0.5.0"
     defu "^6.1.0"
@@ -1126,13 +1126,6 @@
     magic-string "^0.26.2"
     micromatch "^4.0.5"
     windicss "^3.5.6"
-
-"@wry/context@^0.6.0":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@wry/context/-/context-0.6.1.tgz#c3c29c0ad622adb00f6a53303c4f965ee06ebeb2"
-  integrity sha512-LOmVnY1iTU2D8tv4Xf6MVMZZ+juIJ87Kt/plMijjN20NMAXGmH4u8bS1t0uT74cZ5gwpocYueV58YwyI8y+GKw==
-  dependencies:
-    tslib "^2.3.0"
 
 "@wry/context@^0.7.0":
   version "0.7.0"
@@ -3190,9 +3183,9 @@ listhen@^0.3.4, listhen@^0.3.5:
     ufo "^0.8.6"
 
 loader-utils@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.3.tgz#d4b15b8504c63d1fc3f2ade52d41bc8459d6ede1"
-  integrity sha512-THWqIsn8QRnvLl0shHYVBN9syumU8pYWEHPTmkiVGd+7K5eFNVSY6AJhRvgGF70gg1Dz+l/k8WicvFCxdEs60A==
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.4.tgz#8b5cb38b5c34a9a018ee1fc0e6a066d1dfcc528c"
+  integrity sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==
   dependencies:
     big.js "^5.2.2"
     emojis-list "^3.0.0"
@@ -3607,9 +3600,9 @@ node-fetch@^2.6.7:
     whatwg-url "^5.0.0"
 
 node-fetch@^3.2.10:
-  version "3.2.10"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.2.10.tgz#e8347f94b54ae18b57c9c049ef641cef398a85c8"
-  integrity sha512-MhuzNwdURnZ1Cp4XTazr69K0BTizsBroX7Zx3UgDSVcZYKF/6p0CBe4EUb/hLqmzVhl0UpYfgRljQ4yxE+iCxA==
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.3.0.tgz#37e71db4ecc257057af828d523a7243d651d91e4"
+  integrity sha512-BKwRP/O0UvoMKp7GNdwPlObhYGB5DQqwhEDQlNKuoqwVYSxkSZCSbHjnFFmUEtwSKRPU4kNK8PbDYYitwaE3QA==
   dependencies:
     data-uri-to-buffer "^4.0.0"
     fetch-blob "^3.1.4"
@@ -3815,11 +3808,11 @@ open@^8.4.0:
     is-wsl "^2.2.0"
 
 optimism@^0.16.1:
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/optimism/-/optimism-0.16.1.tgz#7c8efc1f3179f18307b887e18c15c5b7133f6e7d"
-  integrity sha512-64i+Uw3otrndfq5kaoGNoY7pvOhSsjFEN4bdEFh80MWVk/dbgJfMv7VFDeCT8LxNAlEVhQmdVEbfE7X2nWNIIg==
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/optimism/-/optimism-0.16.2.tgz#519b0c78b3b30954baed0defe5143de7776bf081"
+  integrity sha512-zWNbgWj+3vLEjZNIh/okkY2EUfX+vB9TJopzIZwT1xxaMqC5hRLLraePod4c5n4He08xuXNH+zhKFFCu390wiQ==
   dependencies:
-    "@wry/context" "^0.6.0"
+    "@wry/context" "^0.7.0"
     "@wry/trie" "^0.3.0"
 
 ora@^6.1.2:
@@ -4193,9 +4186,9 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.2.0:
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
 postcss@^8.1.10, postcss@^8.4.18:
-  version "8.4.18"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.18.tgz#6d50046ea7d3d66a85e0e782074e7203bc7fbca2"
-  integrity sha512-Wi8mWhncLJm11GATDaQKobXSNEYGUHeQLiQqDFG1qQ5UTDPTEvKw0Xt5NsTpktGTwLps3ByrWsBrG0rB8YQ9oA==
+  version "8.4.19"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.19.tgz#61178e2add236b17351897c8bcc0b4c8ecab56fc"
+  integrity sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==
   dependencies:
     nanoid "^3.3.4"
     picocolors "^1.0.0"
