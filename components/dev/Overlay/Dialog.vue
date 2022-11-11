@@ -12,8 +12,10 @@
             <span class="sr-only">Закрыть</span>
           </button>
         </header>
-        <div class="p-4 flex-auto">
-          <slot></slot>
+        <div class="overflow-x-hidden overflow-y-auto h-full flex-auto">
+          <div class="p-4">
+            <slot></slot>
+          </div>
         </div>
       </div>
     </div>
