@@ -29,7 +29,7 @@
           </div>
 
           <div class="p-4 bg-white border-t border-gray-200">
-            <ChatForm />
+            <ChatForm :chat-id="chatId" />
           </div>
         </div>
 
@@ -64,6 +64,7 @@ onBeforeMount(async () => {
       chatMessages(modelType: $modelType, modelId: $modelId) {
         id
         chat_id
+        parent_id
         text
         stack
         stack_name

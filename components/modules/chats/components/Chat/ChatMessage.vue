@@ -1,5 +1,5 @@
 <template>
-  <div class="flex space-x-2">
+  <div class="flex space-x-2" :class="{'bg-blue-100': isSelected}" @click="onEdit">
     <div class="flex-shrink-0">
       <NuxtLink :to="{name: 'users.show', params: {userId: message.user.id}}">
         <img :src="message.user.avatar" :alt="message.user.name" class="w-8 h-8 rounded-full block" />
@@ -12,15 +12,29 @@
         </NuxtLink>
       </div>
       <div>{{ message.text }}</div>
+      {{ store.totalSelected }}
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+import { useChatStore } from '~/components/modules/chats/stores/chat'
+
+const props = defineProps({
   message: {
-    type: Object,
+    type:     Object,
     required: true,
   }
 })
+
+const store = useChatStore()
+
+const isSelected = computed(
+    () => Object.hasOwn(store.selectedMessages, props.message.id)
+)
+
+const onEdit = () => {
+  store.onReply(props.message)
+}
 </script>

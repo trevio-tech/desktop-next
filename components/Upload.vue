@@ -79,7 +79,6 @@ const onChange = async (event) => {
 
     emit('uploaded', upload)
   } catch (error) {
-    console.log(error)
   } finally {
     event.target.value = ''
   }
