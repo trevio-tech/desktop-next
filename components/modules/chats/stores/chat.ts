@@ -11,10 +11,17 @@ export const useChatStore = defineStore('chat', {
     selectMessage(message: object, mode = null) {
       this.mode = mode
 
-      if (mode === 'edit' || mode === 'reply') {
-        this.selectedMessages = {}
+      // В режиме редактирования или ответа,
+      // удаляем из выбранных сообщений все кроме текущего.
+      if (this.mode === 'edit' || this.mode === 'reply') {
+        for (let selectedMessageId in this.selectedMessages) {
+          if (parseInt(selectedMessageId) !== parseInt(message.id)) {
+            delete this.selectedMessages[selectedMessageId]
+          }
+        }
       }
 
+      // При повтором клике, сообщение будет удаленно из выбранных.
       if (Object.hasOwn(this.selectedMessages, message.id)) {
         delete this.selectedMessages[message.id]
       } else {
@@ -23,6 +30,6 @@ export const useChatStore = defineStore('chat', {
     },
   },
   getters: {
-    totalSelected: (state) =>  Object.keys(state.selectedMessages).length,
+    totalSelected: (state) => Object.keys(state.selectedMessages).length,
   },
 })

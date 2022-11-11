@@ -1,5 +1,5 @@
 <template>
-  <div class="flex space-x-2" :class="{'bg-blue-100': isSelected}" @click="onEdit">
+  <div class="flex space-x-2 p-4" :class="{'bg-yellow-100': isSelected}" @click="onEdit">
     <div class="flex-shrink-0">
       <NuxtLink :to="{name: 'users.show', params: {userId: message.user.id}}">
         <img :src="message.user.avatar" :alt="message.user.name" class="w-8 h-8 rounded-full block" />
@@ -12,7 +12,6 @@
         </NuxtLink>
       </div>
       <div>{{ message.text }}</div>
-      {{ store.totalSelected }}
     </div>
   </div>
 </template>
@@ -31,10 +30,10 @@ const props = defineProps({
 const store = useChatStore()
 
 const isSelected = computed(
-    () => Object.hasOwn(store.selectedMessages, props.message.id)
+    () => store.selectedMessages[props.message.id]?.id > 0
 )
 
 const onEdit = () => {
-  store.selectMessage(props.message, 'reply')
+  store.selectMessage(props.message)
 }
 </script>
