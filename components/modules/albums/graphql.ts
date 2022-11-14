@@ -1,3 +1,5 @@
+import { PLACE_WITH_PARENTS_FIELDS } from '~/components/modules/places/graphql'
+
 export const ALBUM_CARD = `
   id
   title
@@ -53,25 +55,7 @@ export const ALBUM = `
     description
   }
   place {
-    id
-    parent_id
-    name
-    full_name
-    parent {
-        id
-        parent_id
-        name
-        parent {
-            id
-            parent_id
-            name
-            parent {
-                id
-                parent_id
-                name
-            }
-        }
-    }
+    ${PLACE_WITH_PARENTS_FIELDS}
   }
 `
 
@@ -93,25 +77,7 @@ export const ALBUM_FORM = `
     name
   }
   place {
-    id
-    parent_id
-    name
-    full_name
-    parent {
-        id
-        parent_id
-        name
-        parent {
-            id
-            parent_id
-            name
-            parent {
-                id
-                parent_id
-                name
-            }
-        }
-    }
+    ${PLACE_WITH_PARENTS_FIELDS}
   }
 `
 

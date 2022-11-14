@@ -2,17 +2,17 @@
   <div tabindex="-1" aria-hidden="true" class="absolute left-0 top-0 w-full h-full">
     <div class="flex items-center justify-start flex-col p-10 h-full">
       <div class="flex h-full rounded-lg overflow-hidden">
-        <ChatList />
+        <ChatList :items="chats" @select="onLoad($event)" />
 
         <div class="relative w-[640px] flex flex-col max-w-2xl bg-white shadow">
           <!-- Modal header -->
           <header class="border-b border-gray-200 rounded-t">
             <div class="m-4 flex justify-between items-center">
-              <h3 class="text-xl font-semibold text-gray-900 leading-none">
-                {{ title }}
-              </h3>
-              <button @click="$overlay.hide" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="defaultModal">
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <h3 class="text-xl font-semibold text-gray-900 leading-none truncate mr-2">{{ title }}</h3>
+              <button @click="$overlay.hide" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
                 <span class="sr-only">Закрыть</span>
               </button>
             </div>
@@ -23,14 +23,7 @@
           </header>
 
           <div class="flex flex-col justify-between w-full h-full overflow-hidden">
-            <div class="overflow-y-auto" v-if="Object.keys(stacks).length">
-              <div v-for="(messages, date) in stacks" :key="date">
-                <div class="text-center py-4 sticky top-0">
-                  <span class="inline-block font-medium text-xs py-1 px-2 bg-gray-100 rounded-full">{{ date }}</span>
-                </div>
-                <ChatMessage v-for="message in messages" :key="message.id" :message="message" />
-              </div>
-            </div>
+            <MessageList  v-if="Object.keys(stacks).length" :stacks="stacks" />
             <div v-else class="flex-auto flex justify-center items-center">
               Нет сообщений
             </div>
@@ -46,7 +39,7 @@
 </template>
 
 <script setup>
-import { ChatForm, ChatList, ChatMessage } from './Chat'
+import { ChatForm, ChatList, MessageList } from './Chat'
 import { VButton as Button } from '@trevio/ui'
 import { onBeforeMount, ref } from 'vue'
 import { useGql } from '~/uses'
@@ -64,14 +57,25 @@ const props = defineProps({
 })
 
 const stacks = ref([])
+const chats = ref([])
 
 const store = useChatStore()
 
-onBeforeMount(async () => {
-  const [modelType, modelId] = props.chatId.split('-')
+const onLoad = async (chatId = null) => {
+  if (! chatId) {
+    chatId = props.chatId
+  }
 
-  const { data: { chatMessages }} = await useGql(`
+  const [modelType, modelId] = chatId.split('-')
+
+  const { data: { chatMessages, myChats }} = await useGql(`
     query($modelType: String, $modelId: Int) {
+      myChats {
+        id
+        name
+        model_type
+        model_id
+      }
       chatMessages(modelType: $modelType, modelId: $modelId) {
         id
         chat_id
@@ -92,8 +96,14 @@ onBeforeMount(async () => {
     modelId: parseInt(modelId)
   })
 
+  if (myChats) {
+    chats.value = myChats
+  }
+
   if (chatMessages) {
     stacks.value = groupBy(chatMessages, 'stack')
   }
-})
+}
+
+onBeforeMount(async () => await onLoad())
 </script>

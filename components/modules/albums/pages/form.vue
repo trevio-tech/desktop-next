@@ -3,46 +3,37 @@
     <template #sidebar>
       123
     </template>
-    <form @submit.prevent="onSubmit" class="bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
-        <div class="space-y-4">
-          <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
-            <Input v-model="form.title" placeholder="Введите заголовок" />
-          </FormField>
+    <TheForm @submit="onSubmit" @draft="form.is_draft = true">
+        <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
+          <Input v-model="form.title" placeholder="Введите заголовок" />
+        </FormField>
 
-          <FormField
-            help="Изображения можно сортировать. Первое изображение будет использовано в качестве обложки."
-            label="Изображения"
-            name="input.text"
-            required
-          >
-            <FormGallery v-if="form.images" v-model="form.images" />
-            <Upload :fields="['id', 'url']" model-type="albums" @uploaded="onUploaded" />
-          </FormField>
+        <FormField
+          help="Изображения можно сортировать. Первое изображение будет использовано в качестве обложки."
+          label="Изображения"
+          name="input.text"
+          required
+        >
+          <FormGallery v-if="form.images" v-model="form.images" />
+          <Upload :fields="['id', 'url']" model-type="albums" @uploaded="onUploaded" />
+        </FormField>
 
-          <FormField name="input.text" label="Текст">
-            <Textarea placeholder="Краткое описание" rows="2" v-model="form.text" />
-          </FormField>
+        <FormField name="input.text" label="Текст">
+          <Textarea placeholder="Краткое описание" rows="2" v-model="form.text" />
+        </FormField>
 
-          <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
-            <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
-          </FormField>
+        <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
+          <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
+        </FormField>
 
-          <FormField name="input.tags" label="Теги" id="tags">
-            <InputTags v-model="form.tags" />
-          </FormField>
+        <FormField name="input.tags" label="Теги" id="tags">
+          <InputTags v-model="form.tags" />
+        </FormField>
 
-          <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
-            <Select :model-value="form.travel_id" @update:modelValue="form.travel_id = $event.id" :items="data.travels" key-name="title" />
-          </FormField>
-        </div>
-
-      <hr class="mt-8 mb-4 -mx-4 border-gray-200">
-
-      <div class="flex space-x-2">
-        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</VButton>
-        <VButton @click="form.is_draft = true" type="submit" variant="secondary">Сохранить в черновик</VButton>
-      </div>
-    </form>
+        <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
+          <Select :model-value="form.travel_id" @update:modelValue="form.travel_id = $event.id" :items="data.travels" key-name="title" />
+        </FormField>
+    </TheForm>
   </TheLayout>
 </template>
 
@@ -51,6 +42,7 @@ import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_ALBUM, UPDATE_ALBUM, ALBUM_FORM } from '../graphql'
 import { FormField, Select, Input, Textarea, VButton, SearchPlace } from '@trevio/ui';
+import TheForm from '~/components/TheForm'
 import { InputTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';

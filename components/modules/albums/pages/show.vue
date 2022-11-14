@@ -15,7 +15,7 @@
   </TheLayout>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import TheLayout from '~/components/layout/TheLayout'
 import { ALBUM } from '~/components/modules/albums/graphql'
 import { gql, useAsyncQuery } from '#imports'

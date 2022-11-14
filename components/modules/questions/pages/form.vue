@@ -3,47 +3,37 @@
     <template #sidebar>
       123
     </template>
-    <form @submit.prevent="onSubmit" class="min-h-full flex flex-col justify-between bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
-      <div class="flex flex-col space-y-4">
-        <FormField name="input.title" label="Вопрос" required  v-slot="{ hasError }">
-          <Input v-model="form.title" placeholder="Введите вопрос" />
-        </FormField>
+    <TheForm @submit="onSubmit" @draft="form.is_draft = true">
+      <FormField name="input.title" label="Вопрос" required  v-slot="{ hasError }">
+        <Input v-model="form.title" placeholder="Введите вопрос" />
+      </FormField>
 
-        <FormField name="input.text" label="Детали вопроса">
-          <TipTap content-type="questions" v-model="form.text" />
-        </FormField>
+      <FormField name="input.text" label="Детали вопроса">
+        <TipTap content-type="questions" v-model="form.text" />
+      </FormField>
 
-        <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
-          <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
-        </FormField>
+      <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
+        <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
+      </FormField>
 
-        <FormField name="input.tags" label="Теги" id="tags">
-          <InputTags v-model="form.tags" />
-        </FormField>
+      <FormField name="input.tags" label="Теги" id="tags">
+        <InputTags v-model="form.tags" />
+      </FormField>
 
-        <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
-          <Select :model-value="form.travel_id" @update:modelValue="form.travel_id = $event.id" :items="data.travels" key-name="title" />
-        </FormField>
-      </div>
-
-      <footer class="mt-8">
-        <hr class="mb-4 -mx-4 border-gray-200">
-
-        <div class="flex space-x-2">
-          <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</VButton>
-          <VButton @click="form.is_draft = true" type="submit" variant="secondary">Сохранить в черновик</VButton>
-        </div>
-      </footer>
-    </form>
+      <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
+        <Select :model-value="form.travel_id" @update:modelValue="form.travel_id = $event.id" :items="data.travels" key-name="title" />
+      </FormField>
+    </TheForm>
   </TheLayout>
 </template>
 
 <script setup>
 import '@/node_modules/@trevio/tiptap/dist/style.css'
 import TheLayout from '~/components/layout/TheLayout'
+import TheForm from '~/components/TheForm'
 import pick from 'lodash.pick'
 import { CREATE_QUESTION, UPDATE_QUESTION, QUESTION_FORM } from '../graphql'
-import { FormField, Input, Select, VButton, SearchPlace } from '@trevio/ui';
+import { FormField, Input, Select, SearchPlace } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
 import { TipTap } from '@trevio/tiptap'
 import { ref } from 'vue'

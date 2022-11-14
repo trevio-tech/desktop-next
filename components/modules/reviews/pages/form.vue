@@ -3,8 +3,7 @@
     <template #sidebar>
       123
     </template>
-    <form @submit.prevent="onSubmit" class="bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
-        <div class="space-y-4">
+    <TheForm @submit="onSubmit" @draft="form.is_draft = true">
           <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
             <Input v-model="form.title" placeholder="Введите заголовок" />
           </FormField>
@@ -28,15 +27,7 @@
           <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
             <Select :model-value="form.travel_id" @update:modelValue="form.travel_id = $event.id" :items="data.travels" key-name="title" />
           </FormField>
-        </div>
-
-      <hr class="mt-8 mb-4 -mx-4 border-gray-200">
-
-      <div class="flex space-x-2">
-        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</VButton>
-        <VButton @click="form.is_draft = true" type="submit" variant="secondary">Сохранить в черновик</VButton>
-      </div>
-    </form>
+    </TheForm>
   </TheLayout>
 </template>
 
@@ -44,7 +35,8 @@
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_REVIEW, UPDATE_REVIEW, REVIEW_FORM } from '../graphql'
-import { FormField, Rating, Select, Input, VButton, SearchPlace } from '@trevio/ui';
+import { FormField, Rating, Select, Input, SearchPlace } from '@trevio/ui';
+import TheForm from '~/components/TheForm'
 import { InputTags } from '~/components/wrappers'
 import { TipTap } from '@trevio/tiptap'
 import { ref } from 'vue'

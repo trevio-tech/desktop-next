@@ -1,6 +1,6 @@
 <template>
   <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} путешествия`">
-    <form @submit.prevent="onSubmit" class="bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
+    <TheForm @submit="onSubmit" @draft="form.is_draft = true">
       <div class="grid grid-cols-2 gap-6">
         <FormField name="input.images" label="Обложка">
           <TravelUpload v-model="form.images" />
@@ -63,14 +63,7 @@
           </div>
         </div>
       </div>
-
-      <hr class="mt-8 mb-4 -mx-4 border-gray-200">
-
-      <div class="flex space-x-2">
-        <VButton type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</VButton>
-        <VButton @click="form.is_draft = true" type="submit" variant="secondary">Сохранить в черновик</VButton>
-      </div>
-    </form>
+    </TheForm>
   </TheLayout>
 </template>
 
@@ -82,6 +75,7 @@ import TravelUpload from '../components/TravelUpload'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import pick from 'lodash.pick'
 import { FormField, Textarea, Input, VButton, SearchPlace, Dropdown, DropdownItem } from '@trevio/ui';
+import TheForm from '~/components/TheForm'
 import {TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL} from '../graphql';
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
