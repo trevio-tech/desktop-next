@@ -41,7 +41,7 @@
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_ALBUM, UPDATE_ALBUM, ALBUM_FORM } from '../graphql'
-import { FormField, Select, Input, Textarea, VButton, SearchPlace } from '@trevio/ui';
+import { FormField, Select, Input, Textarea, Button, SearchPlace } from '@trevio/ui';
 import TheForm from '~/components/TheForm'
 import { InputTags } from '~/components/wrappers'
 import { ref } from 'vue'

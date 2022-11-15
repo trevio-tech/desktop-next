@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { VButton as Button } from '@trevio/ui';
+import { Button } from '@trevio/ui';
 
 defineEmits(['submit', 'draft'])
 

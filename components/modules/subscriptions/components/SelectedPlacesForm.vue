@@ -14,14 +14,14 @@
         </ul>
       </div>
 
-      <VButton :loading="loading" type="submit">Сохранить</VButton>
+      <Button :loading="loading" type="submit">Сохранить</Button>
     </form>
   </Dialog>
 </template>
 
 <script setup>
 import { Dialog } from '~/components/dev/Overlay'
-import { FormField, VButton, SearchPlace } from '@trevio/ui'
+import { FormField, Button, SearchPlace } from '@trevio/ui'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useGql } from '~/uses'

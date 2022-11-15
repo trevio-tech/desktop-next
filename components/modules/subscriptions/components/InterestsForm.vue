@@ -4,14 +4,14 @@
       <FormField name="interests" label="Поиск интересов">
         <InputTags placeholder="Введите название интереса" :model-value="modelValue" @update:modelValue="onUpdate" />
       </FormField>
-      <VButton :loading="loading" type="submit">Сохранить</VButton>
+      <Button :loading="loading" type="submit">Сохранить</Button>
     </form>
   </Dialog>
 </template>
 
 <script setup>
 import { Dialog } from '~/components/dev/Overlay'
-import { FormField, VButton } from '@trevio/ui';
+import { FormField, Button } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'

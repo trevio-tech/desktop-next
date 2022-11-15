@@ -47,12 +47,12 @@
                 <Input v-model="form.budget" type="number" id="budget" placeholder="Бюджет путешествия" />
               </FormField>
               <Dropdown class="mt-1">
-                <VButton>
+                <Button>
                   Валюта
                   <template #append>
                     <ChevronDownIcon class="w-5 h-5 text-white" />
                   </template>
-                </VButton>
+                </Button>
                 <template v-slot:popper="{ hide }">
                   <DropdownItem v-for="currency in currencies" :key="currency.id" :value="currency.id" v-model="content" @click="form.currency_id = currency.id; hide()">
                     {{ currency.name }}
@@ -74,7 +74,7 @@ import TheLayout from '~/components/layout/TheLayout'
 import TravelUpload from '../components/TravelUpload'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import pick from 'lodash.pick'
-import { FormField, Textarea, Input, VButton, SearchPlace, Dropdown, DropdownItem } from '@trevio/ui';
+import { FormField, Textarea, Input, Button, SearchPlace, Dropdown, DropdownItem } from '@trevio/ui';
 import TheForm from '~/components/TheForm'
 import {TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL} from '../graphql';
 import { ref, computed } from 'vue'

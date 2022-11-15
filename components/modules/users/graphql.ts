@@ -72,3 +72,10 @@ export const USER = `
     color
   }
 `
+
+
+export const UPDATE_USER = `
+  mutation updateUser ($id: Int!, $input: UserInput!) {
+    updateUser(id: $id, input: $input)
+  }
+`

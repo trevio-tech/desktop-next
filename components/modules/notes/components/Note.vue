@@ -25,8 +25,9 @@
       <div class="text-gray-500 text-xs">{{ entry.travel?.place?.name }}</div>
     </div>
 
-    <footer class="text-sm mt-4">
-      лайки: {{ entry.likes_count }}
+    <footer class="flex items-center space-x-4 mt-4">
+      <Like model-type="notes" :model-id="entry.id" />
+
       <div @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
         props: {
           chatId: `notes-${entry.id}`,
@@ -39,6 +40,7 @@
 
 <script setup>
 import { defineAsyncComponent } from 'vue'
+import Like from '~/components/Like'
 
 defineProps({
   entry: {

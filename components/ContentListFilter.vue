@@ -1,6 +1,6 @@
 <template>
   <Dropdown>
-    <VButton>Фильтр</VButton>
+    <Button>Фильтр</Button>
     <template #popper>
       <DropdownItem v-for="(item, key) in list" :key="key" :value="key" :as="Checkbox" v-model="content" @update:modelValue="$emit('update:modelValue', $event)">
         {{ item }}
@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { Checkbox, Dropdown, DropdownItem, VButton } from '@trevio/ui'
+import { Checkbox, Dropdown, DropdownItem, Button } from '@trevio/ui'
 import { ref } from 'vue'
 
 defineEmits(['update:modelValue'])

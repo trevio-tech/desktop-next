@@ -17,7 +17,7 @@
 import { ref, watch } from 'vue'
 import { CREATE_CHAT_MESSAGE } from '../../graphql'
 import { PaperClipIcon } from '@heroicons/vue/24/solid'
-import { Textarea, VButton as Button } from '@trevio/ui'
+import { Textarea, Button } from '@trevio/ui'
 import { gql, useAsyncQuery } from '#imports'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 
