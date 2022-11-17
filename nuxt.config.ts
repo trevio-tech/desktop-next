@@ -1,4 +1,11 @@
 export default {
+  vite: {
+    server: {
+      fs: {
+        allow: ['..']
+      }
+    }
+  },
   app: {
     head: {
       meta: [
@@ -20,13 +27,12 @@ export default {
     '@/assets/scss/main.scss'
   ],
   modules: [
-    '@nuxtjs-alt/auth',
-    '@nuxtjs-alt/axios',
-    '@nuxtjs-alt/http',
-    '@pinia/nuxt',
-    'nuxt-windicss',
     '~/modules/routes',
-    '@nuxtjs/apollo'
+    '@nuxtjs-alt/auth',
+    '@nuxtjs-alt/http',
+    '@nuxtjs/apollo',
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
   ],
   build: {
     transpile: ['ui', '@heroicons/vue', '@vuepic/vue-datepicker']

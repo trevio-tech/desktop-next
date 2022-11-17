@@ -1,6 +1,6 @@
 <template>
   <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} путешествия`">
-    <TheForm @submit="onSubmit" @draft="form.is_draft = true">
+    <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
       <div class="grid grid-cols-2 gap-6">
         <FormField name="input.images" label="Обложка">
           <TravelUpload v-model="form.images" />

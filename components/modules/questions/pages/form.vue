@@ -3,7 +3,7 @@
     <template #sidebar>
       123
     </template>
-    <TheForm @submit="onSubmit" @draft="form.is_draft = true">
+    <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
       <FormField name="input.title" label="Вопрос" required  v-slot="{ hasError }">
         <Input v-model="form.title" placeholder="Введите вопрос" />
       </FormField>
@@ -21,7 +21,7 @@
       </FormField>
 
       <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
-        <Select :model-value="form.travel_id" @update:modelValue="form.travel_id = $event.id" :items="data.travels" key-name="title" />
+        <Select v-model="form.travel_id" :items="data.travels" key-name="title" />
       </FormField>
     </TheForm>
   </TheLayout>

@@ -50,7 +50,7 @@ export const NOTE_FORM = `
   place_id
   travel_id
   title
-  text
+  text(raw: true)
   is_draft
   tags {
     id

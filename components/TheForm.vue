@@ -8,7 +8,7 @@
 
       <div class="flex space-x-2">
         <Button type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</Button>
-        <Button @click="$emit('draft', true)" type="submit" variant="secondary">Сохранить в черновик</Button>
+        <Button @click="$emit('draft', true)" type="submit" variant="secondary">{{ isEdit ? 'Сохранить' : 'Создать' }} черновик</Button>
       </div>
     </footer>
   </form>
