@@ -1,7 +1,7 @@
 <template>
   <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} заметки`">
     <template #sidebar>
-      123
+      1
     </template>
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
       <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
