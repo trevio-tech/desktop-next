@@ -1,5 +1,5 @@
 <template>
-  <TheLayout heading="Заметки">
+  <TheLayout heading="Отзывы">
     <template #sidebar>1</template>
     <div class="space-y-4">
       <Review v-for="review in reviews" :entry="review" :key="review.id" />

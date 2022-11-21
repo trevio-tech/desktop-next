@@ -1,3 +1,9 @@
+const description = `
+  Любите путешествовать? Вливайтесь в сообщество Тревио.
+  Здесь вы найдете полезную информацию о всех уголках земного шара.
+  Откройте для себя новый мир, полный незабываемых эмоций!
+`;
+
 export default {
   vite: {
     server: {
@@ -8,10 +14,12 @@ export default {
   },
   app: {
     head: {
+      titleTemplate: title => (title ? `${title} — ` : '') + 'Trevio.ru - о путешествиях',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'msapplication-TileColor', content: '#da532c' },
-        { name: 'theme-color', content: '#ffffff' }
+        { name: 'theme-color', content: '#ffffff' },
+        { hid: 'description', name: 'description', content: description },
       ],
       link: [
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png' },

@@ -25,12 +25,6 @@ export const NOTE_CARD = `
   }
 `
 
-export const NOTES = `
-  notes {
-    ${NOTE_CARD}
-  }
-`
-
 export const NOTE = `
   note(id: $id) {
     id

@@ -13,7 +13,7 @@
           class="hover:text-slate-600"
           v-for="tag in entry.tags"
           :key="tag.id"
-          :to="{name: 'notes.show', params: {noteId: entry.id}}">#{{ tag.name }}</NuxtLink>
+          :to="{name: 'notes', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
     </div>
 
     <p v-if="entry.text" class="text-sm mt-2">
