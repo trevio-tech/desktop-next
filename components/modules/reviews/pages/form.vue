@@ -4,11 +4,11 @@
       123
     </template>
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
-          <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
+          <FormField name="input.title" label="Заголовок" required>
             <Input v-model="form.title" placeholder="Введите заголовок" />
           </FormField>
 
-          <FormField name="input.place_id" label="Место" required v-slot="{ hasError }">
+          <FormField name="input.place_id" label="Место" required>
             <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
           </FormField>
 

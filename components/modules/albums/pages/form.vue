@@ -4,35 +4,35 @@
       123
     </template>
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
-        <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
-          <Input v-model="form.title" placeholder="Введите заголовок" />
-        </FormField>
+      <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
+        <Input v-model="form.title" placeholder="Введите заголовок" />
+      </FormField>
 
-        <FormField
-          help="Изображения можно сортировать. Первое изображение будет использовано в качестве обложки."
-          label="Изображения"
-          name="input.text"
-          required
-        >
-          <FormGallery v-if="form.images" v-model="form.images" />
-          <Upload :fields="['id', 'url']" model-type="albums" @uploaded="onUploaded" />
-        </FormField>
+      <FormField
+        help="Изображения можно сортировать. Первое изображение будет использовано в качестве обложки."
+        label="Изображения"
+        name="input.images"
+        required
+      >
+        <FormGallery v-if="form.images" v-model="form.images" />
+        <Upload :fields="['id', 'url']" model-type="albums" @uploaded="onUploaded" />
+      </FormField>
 
-        <FormField name="input.text" label="Текст">
-          <Textarea placeholder="Краткое описание" rows="2" v-model="form.text" />
-        </FormField>
+      <FormField name="input.text" label="Текст">
+        <Textarea placeholder="Краткое описание" rows="2" v-model="form.text" />
+      </FormField>
 
-        <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
-          <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
-        </FormField>
+      <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
+        <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
+      </FormField>
 
-        <FormField name="input.tags" label="Теги" id="tags">
-          <InputTags v-model="form.tags" />
-        </FormField>
+      <FormField name="input.tags" label="Теги" id="tags">
+        <InputTags v-model="form.tags" />
+      </FormField>
 
-        <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
-          <Select v-model="form.travel_id" :items="data.travels" key-name="title" />
-        </FormField>
+      <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
+        <Select v-model="form.travel_id" :items="data.travels" key-name="title" />
+      </FormField>
     </TheForm>
   </TheLayout>
 </template>

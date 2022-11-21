@@ -8,8 +8,8 @@
         <Input v-model="form.title" placeholder="Введите заголовок" />
       </FormField>
 
-      <FormField name="input.text" label="Текст">
-        <TipTap content-type="notes" v-model="form.text" />
+      <FormField name="input.text" label="Текст" required>
+        <TipTap v-model="form.text" content-type="notes" />
       </FormField>
 
       <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
