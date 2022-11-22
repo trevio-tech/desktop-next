@@ -43,10 +43,12 @@ export default {
     '@pinia/nuxt',
   ],
   build: {
-    transpile: ['ui', '@heroicons/vue', '@vuepic/vue-datepicker']
+    transpile: ['@vuepic/vue-datepicker']
   },
-  publicRuntimeConfig: {
-    GRAPHQL_URL: process.env.GRAPHQL_URL
+  runtimeConfig: {
+    public: {
+      GRAPHQL_URL: process.env.GRAPHQL_URL
+    }
   },
   apollo: {
     clients: {

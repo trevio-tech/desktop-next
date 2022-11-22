@@ -20,6 +20,10 @@ const props = defineProps({
   fields: {
     type: Array,
     required: true,
+  },
+  presets: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -34,6 +38,12 @@ const onChange = async (event) => {
 
   for (let image of images) {
     formData.append('images[]', image)
+  }
+
+  if (props.presets.length) {
+    const presets = props.presets.join('|')
+
+    props.fields.push(`presets(dimensions: "${presets}")`)
   }
 
   formData.set('operations', JSON.stringify({

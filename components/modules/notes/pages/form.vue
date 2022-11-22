@@ -35,12 +35,13 @@ import pick from 'lodash.pick'
 import { CREATE_NOTE, UPDATE_NOTE, NOTE_FORM } from '../graphql'
 import { FormField, Input, Select, SearchPlace } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
-// import { TipTap } from '@trevio/tiptap'
-import TipTap from '../../../../../tiptap/src/TipTap.vue'
+import { TipTap } from '@trevio/tiptap'
+// import TipTap from '../../../../../tiptap/src/TipTap.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useGql } from '~/uses'
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
+import graphqlErrorHandling from '~/utils/graphql-error-handling'
 
 definePageMeta({
   middleware: 'auth'
@@ -114,7 +115,11 @@ const onSubmit = handleSubmit(async () => {
       await useRouter().push({name: 'notes.show', params: {noteId: noteForm}})
     }
   } catch (error) {
-    setErrors(error[0]['extensions']['validation'])
+    if (error[0].message === 'validation') {
+      setErrors(error[0]['extensions']['validation'])
+    } else {
+      // graphqlErrorHandling(error)
+    }
   } finally {
     loading.value = false
   }

@@ -1,5 +1,5 @@
 <template>
-  <header class="flex items-center sticky top-0 h-14 shadow-md bg-white">
+  <header class="flex items-center sticky top-0 h-14 shadow-md bg-white z-10">
     <div class="flex items-center w-full h-full max-w-[1000px] mx-auto">
       <NuxtLink to="/">
         <img src="/images/logotype.svg" alt="" class="block h-6">

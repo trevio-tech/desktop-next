@@ -67,10 +67,10 @@ export const ALBUM_FORM = `
   text
   is_draft
   image_order
-  images(sizes: "default@resize:fill:126:126") {
+  images(presets: "default@resize:fill:126:126") {
     id
     url
-    sizes
+    presets
   }
   tags {
     id

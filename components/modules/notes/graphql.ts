@@ -8,6 +8,7 @@ export const NOTE_CARD = `
   likes_count
   can
   cover {
+    id
     url
   }
   travel {

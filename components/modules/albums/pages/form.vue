@@ -15,7 +15,7 @@
         required
       >
         <FormGallery v-if="form.images" v-model="form.images" />
-        <Upload :fields="['id', 'url']" model-type="albums" @uploaded="onUploaded" />
+        <Upload :fields="['id', 'url']" :presets="['default@width:640,height:480']" model-type="albums" @uploaded="onUploaded" />
       </FormField>
 
       <FormField name="input.text" label="Текст">
