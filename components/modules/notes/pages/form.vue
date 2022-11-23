@@ -4,12 +4,12 @@
       1
     </template>
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
-      <FormField name="input.title" label="Заголовок" required  v-slot="{ hasError }">
+      <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
         <Input v-model="form.title" placeholder="Введите заголовок" />
       </FormField>
 
       <FormField name="input.text" label="Текст" required>
-        <TipTap v-model="form.text" content-type="notes" />
+        <TipTap v-model="form.text" model-type="notes" />
       </FormField>
 
       <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
@@ -28,20 +28,16 @@
 </template>
 
 <script setup>
-import '@/node_modules/@trevio/tiptap/dist/style.css'
 import TheLayout from '~/components/layout/TheLayout'
 import TheForm from '~/components/TheForm'
 import pick from 'lodash.pick'
 import { CREATE_NOTE, UPDATE_NOTE, NOTE_FORM } from '../graphql'
-import { FormField, Input, Select, SearchPlace } from '@trevio/ui';
+import { FormField, Input, Select, SearchPlace, TipTap } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
-import { TipTap } from '@trevio/tiptap'
-// import TipTap from '../../../../../tiptap/src/TipTap.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useGql } from '~/uses'
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
-import graphqlErrorHandling from '~/utils/graphql-error-handling'
 
 definePageMeta({
   middleware: 'auth'

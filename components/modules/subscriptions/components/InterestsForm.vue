@@ -1,8 +1,13 @@
 <template>
   <Dialog title="Мои интересы">
     <form @submit="onSubmit" class="w-[480px] space-y-4">
-      <FormField name="interests" label="Поиск интересов">
-        <InputTags placeholder="Введите название интереса" :model-value="modelValue" @update:modelValue="onUpdate" />
+      <FormField name="name" label="Поиск интересов">
+        <InputTags
+          placeholder="Введите название интереса"
+          :model-value="modelValue"
+          :set-errors="setErrors"
+          @update:modelValue="onUpdate"
+        />
       </FormField>
       <Button :loading="loading" type="submit">Сохранить</Button>
     </form>
@@ -37,9 +42,9 @@ const onUpdate = (value) => {
   emit('update:modelValue', interests.value = value)
 }
 
-const { handleSubmit } = useForm()
+const { handleSubmit, setErrors } = useForm()
 
-const onSubmit = handleSubmit(async (values, errors) => {
+const onSubmit = handleSubmit(async () => {
   if (loading.value) {
     return
   }
@@ -57,8 +62,10 @@ const onSubmit = handleSubmit(async (values, errors) => {
     })
 
     $overlay.hide()
-  } catch (error) {
-    errors.setErrors(error[0]['extensions']['validation'])
+  } catch (errors) {
+    if (errors[0].message === 'validation') {
+      setErrors(errors[0]['extensions']['validation'])
+    }
   } finally {
     loading.value = false
   }

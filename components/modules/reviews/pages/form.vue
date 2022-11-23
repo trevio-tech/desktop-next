@@ -35,10 +35,9 @@
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_REVIEW, UPDATE_REVIEW, REVIEW_FORM } from '../graphql'
-import { FormField, Rating, Select, Input, SearchPlace } from '@trevio/ui';
+import { FormField, Rating, Select, Input, SearchPlace, TipTap } from '@trevio/ui';
 import TheForm from '~/components/TheForm'
 import { InputTags } from '~/components/wrappers'
-import { TipTap } from '@trevio/tiptap'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useGql } from '~/uses'

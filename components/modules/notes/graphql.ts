@@ -1,6 +1,7 @@
 export const NOTE_CARD = `
   id
   title
+  user_id
   place_id
   travel_id
   cover_id
@@ -19,6 +20,11 @@ export const NOTE_CARD = `
       id
       name
     }
+  }
+  user {
+    id
+    name
+    avatar
   }
   tags {
     id

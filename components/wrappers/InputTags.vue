@@ -1,5 +1,5 @@
 <template>
-  <InputTags :key-name="keyName" :placeholder="placeholder" :model-value="tags" @update:modelValue="$emit('update:modelValue', $event)" :change-callback="onChange" :select-callback="onSelect" />
+  <InputTags :key-name="keyName" :placeholder="placeholder" :model-value="tags" @update:modelValue="$emit('update:modelValue', $event)" :select-callback="onSelect" />
 </template>
 
 <script setup>
@@ -23,21 +23,6 @@ const props = defineProps({
 })
 
 const tags = ref(props.modelValue)
-
-const onChange = async (query) => {
-  const { data: { searchTags }} = await useGql(`
-    query($query: String!) {
-      searchTags(query: $query) {
-        id
-        name
-      }
-    }
-  `, {
-    query
-  })
-
-  return searchTags
-}
 
 const onSelect = async ({ name }) => {
   const { data: { createTag }} = await useGql(`

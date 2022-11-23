@@ -15,7 +15,7 @@
         required
       >
         <FormGallery v-if="form.images" v-model="form.images" />
-        <Upload :fields="['id', 'url']" :presets="['default@width:640,height:480']" model-type="albums" @uploaded="onUploaded" />
+        <Upload :fields="['id', 'url']" :presets="['default@width:640,height:480']" model-type="albums" v-model="form.images" />
       </FormField>
 
       <FormField name="input.text" label="Текст">
@@ -41,14 +41,13 @@
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_ALBUM, UPDATE_ALBUM, ALBUM_FORM } from '../graphql'
-import { FormField, Select, Input, Textarea, Button, SearchPlace } from '@trevio/ui';
+import { FormField, Select, Input, Textarea, Upload, SearchPlace } from '@trevio/ui';
 import TheForm from '~/components/TheForm'
 import { InputTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useGql } from '~/uses'
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
-import Upload from '~/components/Upload.vue'
 import FormGallery from '~/components/modules/albums/components/FormGallery.vue'
 
 definePageMeta({
@@ -131,8 +130,4 @@ const onSubmit = handleSubmit(async () => {
     loading.value = false
   }
 })
-
-const onUploaded = (images) => {
-  images.forEach((image) => form.value.images.push(image))
-}
 </script>

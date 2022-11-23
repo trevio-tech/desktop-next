@@ -28,14 +28,12 @@
 </template>
 
 <script setup>
-import '@/node_modules/@trevio/tiptap/dist/style.css'
 import TheLayout from '~/components/layout/TheLayout'
 import TheForm from '~/components/TheForm'
 import pick from 'lodash.pick'
 import { CREATE_QUESTION, UPDATE_QUESTION, QUESTION_FORM } from '../graphql'
-import { FormField, Input, Select, SearchPlace } from '@trevio/ui';
+import { FormField, Input, Select, SearchPlace, TipTap } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
-import { TipTap } from '@trevio/tiptap'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useGql } from '~/uses'

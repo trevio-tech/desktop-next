@@ -28,6 +28,10 @@
       </div>
     </div>
 
+    <div class="m-4">
+      <Profile :user="entry.user" />
+    </div>
+
     <h2 class="text-xl font-semibold m-4">
       <NuxtLink :to="{name: 'notes.show', params: {noteId: entry.id}}">{{ entry.title }}</NuxtLink>
     </h2>
@@ -60,6 +64,7 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 import Like from '~/components/Like'
+import Profile from '~/components/modules/users/components/Profile'
 
 defineProps({
   entry: {

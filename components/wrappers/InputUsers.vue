@@ -1,5 +1,5 @@
 <template>
-  <InputTags :key-name="keyName" :placeholder="placeholder" :model-value="users" @update:modelValue="$emit('update:modelValue', $event)" :change-callback="onChange" :select-callback="onSelect" skip-creation>
+  <InputTags :key-name="keyName" :search-mutation="searchMutation" search-mutation-name="searchUsers" :placeholder="placeholder" :model-value="users" @update:modelValue="$emit('update:modelValue', $event)" :select-callback="onSelect" skip-creation>
     <template v-slot:selected="{ item, onDelete, index }">
       <div class="flex items-center bg-gray-100 rounded-full h-5 text-xs font-medium space-x-1">
         <img :src="item.avatar" class="w-5 h-5 rounded-full" alt="">
@@ -39,21 +39,15 @@ const props = defineProps({
 
 const users = ref(props.modelValue)
 
-const onChange = async (query) => {
-  const { data: { searchUsers }} = await useGql(`
-    query($query: String!) {
-      searchUsers(query: $query) {
-        id
-        name
-        avatar
-      }
+const searchMutation = `
+  query($query: String!) {
+    searchUsers(query: $query) {
+      id
+      name
+      avatar
     }
-  `, {
-    query
-  })
-
-  return searchUsers
-}
+  }
+`
 
 const onSelect = (user) => {
   return user
