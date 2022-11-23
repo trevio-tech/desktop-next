@@ -9,7 +9,7 @@
       </FormField>
 
       <FormField name="input.text" label="Текст" required>
-        <TipTap v-model="form.text" model-type="notes" />
+        <TipTap v-model="form.text" model-type="notes" @error="onEror" />
       </FormField>
 
       <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
@@ -17,7 +17,7 @@
       </FormField>
 
       <FormField name="input.tags" label="Теги" id="tags">
-        <InputTags v-model="form.tags" />
+        <InputTags v-model="form.tags" :set-errors="setErrors" />
       </FormField>
 
       <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
@@ -54,7 +54,6 @@ const form = ref({
   is_draft: false,
   text: '',
   tags: [],
-  images: []
 })
 
 const route = useRoute()
@@ -82,6 +81,8 @@ const { data } = await useGql(`
 if (isEdit) {
   Object.assign(form.value, data.note)
 }
+
+const onEror = (e) => setErrors(e)
 
 const onSubmit = handleSubmit(async () => {
   if (loading.value) {
