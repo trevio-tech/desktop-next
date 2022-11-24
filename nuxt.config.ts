@@ -35,19 +35,19 @@ export default {
     '@/assets/scss/main.scss'
   ],
   modules: [
-    '~/modules/routes',
+    '@pinia/nuxt',
     '@nuxtjs-alt/auth',
     '@nuxtjs-alt/http',
     '@nuxtjs/apollo',
     '@nuxtjs/tailwindcss',
-    '@pinia/nuxt',
+    '~/modules/routes',
   ],
   build: {
     transpile: ['@vuepic/vue-datepicker']
   },
   runtimeConfig: {
     public: {
-      GRAPHQL_URL: process.env.GRAPHQL_URL
+      GRAPHQL_URL: process.env.GRAPHQL_URL,
     }
   },
   apollo: {
@@ -84,8 +84,7 @@ export default {
           maxAge: 60 * 60
         },
         user: {
-          property: false,
-          autoFetch: true
+          property: '',
         },
       }
     },

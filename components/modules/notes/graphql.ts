@@ -30,6 +30,9 @@ export const NOTE_CARD = `
     id
     name
   }
+  like {
+    is_liked
+  }
 `
 
 export const NOTE = `

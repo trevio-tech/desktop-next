@@ -49,8 +49,13 @@
     </div>
 
     <footer class="flex items-center space-x-4 m-4">
-      <Like model-type="notes" :model-id="entry.id" />
-
+      <Like
+        model-type="notes"
+        :model-id="entry.id"
+        :is-liked="entry.like?.is_liked"
+        :count="entry.likes_count"
+      />
+{{ entry.like }}
       <div @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
         props: {
           chatId: `notes-${entry.id}`,
@@ -63,7 +68,7 @@
 
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import Like from '~/components/Like'
+import { Like } from '@trevio/ui'
 import Profile from '~/components/modules/users/components/Profile'
 
 defineProps({

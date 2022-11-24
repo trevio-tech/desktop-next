@@ -8,14 +8,16 @@
         <p>{{ travel.text }}</p>
         <p v-if="travel.place_id">Страна: {{ travel.country?.name }}</p>
       </div>
+      <Loader v-else />
     </div>
   </Dialog>
 </template>
 
 <script setup>
-import { gql, useAsyncQuery } from '#imports'
-import { ref } from 'vue'
+import { useAsyncQuery } from '~/uses'
+import { ref, onMounted } from 'vue'
 import { Dialog } from '../../../dev/Overlay'
+import { Loader } from '@trevio/ui'
 
 const travel = ref(null)
 
@@ -26,24 +28,29 @@ const props = defineProps({
   }
 })
 
-try {
-  const { data } = await useAsyncQuery(gql`
-    query ($id: Int!) {
-      travel(id: $id) {
-        id
-        place_id
-        title
-        text
-        country {
+onMounted(async () => {
+  try {
+    const { data } = await useAsyncQuery({
+      query: `
+      query ($id: Int!) {
+        travel(id: $id) {
           id
-          name
+          place_id
+          title
+          text
+          country {
+            id
+            name
+          }
         }
       }
-    }
-  `, {
-    id: props.id
-  })
+    `,
+      variables: {
+        id: props.id
+      }
+    })
 
-  travel.value = data.value.travel
-} catch (error) {}
+    travel.value = data.travel
+  } catch (error) {}
+})
 </script>

@@ -11,18 +11,29 @@
 
 <script setup>
 import { useRoute } from 'nuxt/app'
-import { useAsyncGql } from '~/uses'
+import { useAsyncQuery } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE } from '../graphql'
 import { Text } from '@trevio/ui'
+import { ref } from 'vue'
 
 const route = useRoute()
+const note = ref()
 
-const { data: { value: { note }}} = await useAsyncGql(`
-  query($id: Int!) {
-    ${NOTE}
-  }
-`, {
-  id: parseInt(route.params.noteId)
-})
+try {
+  const { data } = await useAsyncQuery({
+    query: `
+      query($id: Int!) {
+        ${NOTE}
+      }
+    `,
+    variables: {
+      id: parseInt(route.params.noteId)
+    }
+  })
+
+  note.value = data.note
+} catch (error) {
+  console.log(error)
+}
 </script>

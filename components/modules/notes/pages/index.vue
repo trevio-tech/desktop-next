@@ -11,9 +11,9 @@
 import Note from '../components/Note'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE_CARD } from '../graphql'
-import { gql, useAsyncQuery } from '#imports'
 import { useRoute, useHead } from 'nuxt/app'
 import { ref, watch, computed } from 'vue'
+import { useAsyncQuery } from '~/uses'
 
 const route = useRoute()
 
@@ -41,22 +41,25 @@ const getNotes = async (tagId) => {
       name
     }` : ''
 
-  const { data } = await useAsyncQuery(gql`
-    query getNotes ($tag_id: Int${tagId > 0 ? `, $tag_tag_id: Int!` : ''}) {
-      notes(tag_id: $tag_id) {
-        ${NOTE_CARD}
+  const { data } = await useAsyncQuery({
+    query: `
+      query getNotes ($tag_id: Int${tagId > 0 ? `, $tag_tag_id: Int!` : ''}) {
+        notes(tag_id: $tag_id) {
+          ${NOTE_CARD}
+        }
+        ${tagQuery}
       }
-      ${tagQuery}
-    }
-  `, {
-    tag_id: tagId || undefined,
-    tag_tag_id: tagId || undefined,
+    `,
+    variables: {
+      tag_id: tagId || undefined,
+      tag_tag_id: tagId || undefined,
+    },
   })
 
-  notes.value = data.value.notes
+  notes.value = data.notes
 
-  if (data.value.tag) {
-    tag.value = data.value.tag
+  if (data.tag) {
+    tag.value = data.tag
   } else {
     tag.value = null
   }
