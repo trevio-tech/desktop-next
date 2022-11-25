@@ -16,14 +16,14 @@
           <FormField name="password" label="Новый пароль" required>
             <Input v-model="form.password" id="password" type="password" />
           </FormField>
-          <FormField name="confirmation_password" label="Повторите новый пароль" required>
-            <Input v-model="form.confirmation_password" id="confirmation-password" type="password" />
+          <FormField name="password_confirmation" label="Повторите новый пароль" required>
+            <Input v-model="form.password_confirmation" id="password-confirmation" type="password" />
           </FormField>
         </div>
 
         <hr class="my-6 -mx-4 h-px bg-gray-200 border-0">
 
-        <Button>Сохранить</Button>
+        <Button type="submit">Сохранить</Button>
       </form>
     </Card>
   </TheLayout>
@@ -31,57 +31,41 @@
 
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
-import { FormField, Textarea, Input, Button, Select } from '@trevio/ui'
-import { gql, useAsyncQuery, useMutation } from '#imports'
+import { FormField, Input, Button } from '@trevio/ui'
 import { ref } from 'vue'
 import { useRoute } from 'nuxt/app'
-import { UPDATE_USER } from '../graphql'
+import { UPDATE_USER_PASSWORD } from '../graphql'
 import Card from '~/components/Card'
 import { useForm } from 'vee-validate'
+import { useFetch } from '~/composables'
 
 const form = ref({
-  name: '',
-  description: '',
-  birthday: null,
+  password_old: '',
+  password: '',
+  password_confirmation: '',
 })
 
 const userId = parseInt(useRoute().params.userId)
 
-try {
-  const { data } = await useAsyncQuery(gql`
-    query($id: Int!) {
-      user(id: $id) {
-        id
-        name
-        description
-        birthday
-        gender
-      }
-    }
-  `, {
-    id: userId
-  })
+const { handleSubmit, setErrors } = useForm()
 
-  form.value = data.value.user
-} catch (error) {}
-
-const onSubmit = async () => {
+const onSubmit = handleSubmit(async () => {
   try {
-    const input = form.value
-
-    delete input.id
-    delete input.__typename
-
-    const { mutate } = await useMutation(gql`
-      ${UPDATE_USER}
-    `, {
+    const { data } = await useFetch({
+      query: UPDATE_USER_PASSWORD,
       variables: {
         id: userId,
-        input
+        ...form.value
       }
     })
 
-    mutate()
-  } catch (error) {}
-}
+    if (data.updateUserPassword) {
+      alert('Пароль обновлен')
+    }
+  } catch (error) {
+    if (error[0].message === 'validation') {
+      setErrors(error[0]['extensions']['validation'])
+    }
+  }
+})
 </script>

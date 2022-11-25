@@ -34,9 +34,9 @@ const router = useRouter()
 const items = ref([])
 const isEnd = ref(false)
 const nextPage = ref(0)
-const page = ref(route.query.page || 0)
+const page = ref(0)
 
-const fetchFeed = async (page = 0) => {
+const fetchFeed = async () => {
   const { data: { value: { feed }} } = await useAsyncGql(`
     query($page: Int) {
       feed(page: $page) {
@@ -58,21 +58,14 @@ const fetchFeed = async (page = 0) => {
   }
 
   nextPage.value = feed.page
+
+  page.value++
 }
 
 await fetchFeed()
 
 const onMore = async () => {
-  page.value++
-
-  await router.replace({
-    query: {
-      ...route.query,
-      page: page.value,
-    }
-  })
-
-  await fetchFeed(page.value)
+  await fetchFeed()
 }
 
 const cards = {
