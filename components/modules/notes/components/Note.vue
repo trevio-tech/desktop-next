@@ -55,7 +55,6 @@
         :is-liked="entry.like?.is_liked"
         :count="entry.likes_count"
       />
-{{ entry.like }}
       <div @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
         props: {
           chatId: `notes-${entry.id}`,

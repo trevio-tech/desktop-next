@@ -2,9 +2,9 @@
   <TheLayout heading="Смена пароля">
     <template #sidebar>
       <ul>
-        <li><NuxtLink :to="{name: 'users.edit', params: {userId}}">Основные настройки</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.password', params: {userId}}">Смена пароля</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.contacts', params: {userId}}">Контакты</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit', params: {userId: $route.params.userId}}">Основные настройки</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.password', params: {userId: $route.params.userId}}">Смена пароля</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.contacts', params: {userId: $route.params.userId}}">Контакты</NuxtLink></li>
       </ul>
     </template>
     <Card>
@@ -30,22 +30,21 @@
 </template>
 
 <script setup>
+import Card from '~/components/Card'
 import TheLayout from '~/components/layout/TheLayout'
 import { FormField, Input, Button } from '@trevio/ui'
-import { ref } from 'vue'
-import { useRoute } from 'nuxt/app'
 import { UPDATE_USER_PASSWORD } from '../graphql'
-import Card from '~/components/Card'
-import { useForm } from 'vee-validate'
+import { ref } from 'vue'
 import { useFetch } from '~/composables'
+import { useForm } from 'vee-validate'
 
-const form = ref({
+const formInitialState = {
   password_old: '',
   password: '',
   password_confirmation: '',
-})
+}
 
-const userId = parseInt(useRoute().params.userId)
+const form = ref({...formInitialState})
 
 const { handleSubmit, setErrors } = useForm()
 
@@ -53,14 +52,11 @@ const onSubmit = handleSubmit(async () => {
   try {
     const { data } = await useFetch({
       query: UPDATE_USER_PASSWORD,
-      variables: {
-        id: userId,
-        ...form.value
-      }
+      variables: form.value
     })
 
     if (data.updateUserPassword) {
-      alert('Пароль обновлен')
+      form.value = {...formInitialState}
     }
   } catch (error) {
     if (error[0].message === 'validation') {

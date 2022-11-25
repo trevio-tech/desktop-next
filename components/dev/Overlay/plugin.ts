@@ -7,7 +7,7 @@ export default {
 
     const show = (component, attributes = {on: {}, props: {}}) => {
       if (! attributes?.on) {
-        attributes.on = {};
+        attributes.on = {}
       }
 
       const overlay = {
@@ -38,7 +38,7 @@ export default {
 
     const hideAll = () => stack.length = 0;
 
-    const onKeydown = (event) => {
+    const onEscape = (event) => {
       if (stack.length && event.key === 'Escape') {
         hide()
       }
@@ -46,10 +46,10 @@ export default {
 
     watch(stack, (newValue) => {
       if (newValue.length === 0) {
-        document.removeEventListener('keydown', onKeydown)
+        document.removeEventListener('keydown', onEscape)
         eventListenerAdded = false
       } else if (! eventListenerAdded) {
-        document.addEventListener('keydown', onKeydown)
+        document.addEventListener('keydown', onEscape)
         eventListenerAdded = true
       }
     })

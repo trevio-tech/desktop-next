@@ -1,27 +1,27 @@
-<script setup lang="ts">
-import { getCurrentInstance, computed } from 'vue'
-const { $overlay } = getCurrentInstance()?.appContext.config.globalProperties;
-const count = computed(() => $overlay.stack.length)
-</script>
-
 <template>
   <div v-if="count" class="overlay">
     <div class="overlay-backdrop" :style="{
       zIndex: count
     }"></div>
-    <component
+    <Component
+      v-for="(overlay, index) in $overlay.stack"
       :is="overlay.component"
       :key="overlay.key"
       :style="{
         zIndex: index + 1
       }"
       v-bind="overlay.props"
-      v-for="(overlay, index) in $overlay.stack"
       v-on="overlay.on"
       role="dialog"
-    ></component>
+    ></Component>
   </div>
 </template>
+
+<script setup>
+import { getCurrentInstance, computed } from 'vue'
+const { $overlay } = getCurrentInstance().appContext.config.globalProperties
+const count = computed(() => $overlay.stack.length)
+</script>
 
 <style>
 .overlay {
