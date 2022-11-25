@@ -1,16 +1,18 @@
 <template>
-  <TheLayout :heading="data.album.title">
+  <TheLayout :heading="album.title">
     <template #sidebar>
-      <NuxtLink :to="`/albums/${data.album.id}/edit`">edit</NuxtLink>
+      <NuxtLink :to="`/albums/${album.id}/edit`">edit</NuxtLink>
     </template>
     <article class="space-y-4">
-      <div v-if="data.album.text" class="prose-sm">{{ data.album.text }}</div>
+      <div v-if="album.text" class="prose-sm">{{ album.text }}</div>
 
-      <div class="grid grid-cols-4 gap-2">
-        <div v-for="image in data.album.images" :key="image.id" class="aspect-square">
-          <img :src="image.sizes.default" alt="" class="w-full h-full object-cover rounded-lg block">
+      <ImageViewer>
+        <div class="grid grid-cols-4 gap-2">
+          <div v-for="image in album.images" :key="image.id" class="aspect-square">
+            <img :src="image.sizes.default" :data-src="image.url" :data-id="image.id" alt="" class="w-full h-full object-cover rounded-lg block">
+          </div>
         </div>
-      </div>
+      </ImageViewer>
     </article>
   </TheLayout>
 </template>
@@ -18,17 +20,27 @@
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
 import { ALBUM } from '~/components/modules/albums/graphql'
-import { gql, useAsyncQuery } from '#imports'
+import { ImageViewer } from '@trevio/ui'
+import { ref } from 'vue'
+import { useFetch } from '~/composables'
 import { useRoute } from 'nuxt/app'
 
-const query = gql`
-  query getAlbum($id: Int!) {
-    album(id: $id) {
-      ${ALBUM}
-    }
-  }
-`
-const variables = { id: parseInt(useRoute().params.albumId) }
+const album = ref()
 
-const { data } = await useAsyncQuery(query, variables)
+try {
+  const { data } = await useFetch({
+    query: `
+      query getAlbum($id: Int!) {
+        album(id: $id) {
+          ${ALBUM}
+        }
+      }
+    `,
+    variables: {
+      id: parseInt(useRoute().params.albumId)
+    }
+  })
+
+  album.value = data.album
+} catch (error) {}
 </script>

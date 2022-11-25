@@ -4,7 +4,9 @@
       <NuxtLink :to="`/notes/${note.id}/edit`">Редактировать</NuxtLink>
     </template>
     <article class="bg-white p-4 overflow-hidden rounded-md shadow ring-1 ring-slate-200">
-      <Text :text="note.text" />
+      <ImageViewer>
+        <div v-html="note.text" class="prose-sm"></div>
+      </ImageViewer>
     </article>
   </TheLayout>
 </template>
@@ -14,7 +16,7 @@ import { useRoute } from 'nuxt/app'
 import { useAsyncQuery } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE } from '../graphql'
-import { Text } from '@trevio/ui'
+import { ImageViewer } from '@trevio/ui'
 import { ref } from 'vue'
 
 const route = useRoute()
