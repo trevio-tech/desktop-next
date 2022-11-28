@@ -11,3 +11,9 @@ body,
 #__nuxt {
   height: 100%;
 }
+
+.prose-sm {
+  img {
+    cursor: pointer;
+  }
+}

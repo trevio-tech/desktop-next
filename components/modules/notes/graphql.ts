@@ -46,6 +46,10 @@ export const NOTE = `
         id
         url
     }
+    tags {
+      id
+      name
+    }
   }
 `
 
