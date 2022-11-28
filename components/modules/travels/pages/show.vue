@@ -15,6 +15,7 @@
             :to="{name: 'travels', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
       </div>
     </article>
+    <TravelContentList />
   </TheLayout>
 </template>
 
@@ -23,6 +24,7 @@ import { useRoute } from 'nuxt/app'
 import { useGql } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import { TRAVEL } from '../graphql';
+import TravelContentList from '../components/TravelContentList'
 
 const route = useRoute()
 

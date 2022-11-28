@@ -1,8 +1,24 @@
 <template>
   <TheLayout :heading="note.title">
     <template #sidebar>
-      <NuxtLink :to="`/notes/${note.id}/edit`">Редактировать</NuxtLink>
+      <Menu>
+        <MenuList>
+          <MenuListItem>
+            <template #icon>
+              <Pencil class="w-5 h-5" />
+            </template>
+            <NuxtLink :to="`/notes/${note.id}/edit`">Редактировать</NuxtLink>
+          </MenuListItem>
+          <MenuListItem variant="negative">
+            <template #icon>
+              <Trash class="w-5 h-5" />
+            </template>
+            <NuxtLink :to="`/notes/${note.id}/edit`">Удалить</NuxtLink>
+          </MenuListItem>
+        </MenuList>
+      </Menu>
     </template>
+
     <article class="bg-white p-4 overflow-hidden rounded-md shadow ring-1 ring-slate-200">
       <ImageViewer>
         <div v-html="note.text" class="prose-sm"></div>
@@ -28,6 +44,11 @@ import { NOTE } from '../graphql'
 import { ImageViewer } from '@trevio/ui'
 import { ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
+
+import Menu from '../../../../../ui/src/components/Menu/Menu.vue'
+import MenuList from '../../../../../ui/src/components/Menu/MenuList.vue'
+import MenuListItem from '../../../../../ui/src/components/Menu/MenuListItem.vue'
+import { Pencil, Trash } from 'lucide-vue-next'
 
 const route = useRoute()
 const note = ref()
