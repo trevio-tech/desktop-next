@@ -36,7 +36,6 @@ import { FormField, Input, Select, SearchPlace, TipTap } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { useFetch } from '~/composables'
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
 
 definePageMeta({
@@ -65,7 +64,7 @@ const loading = ref(false)
 
 const app = useNuxtApp()
 
-const { data } = await useFetch({
+const { data } = await useQuery({
   query: `
     query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
       ${isEdit ? `note(id: $id) { ${NOTE_FORM} }` : ''}
@@ -106,7 +105,7 @@ const onSubmit = handleSubmit(async () => {
   input.tags = input.tags.map(tag => parseInt(tag.id))
 
   try {
-    const { data } = await useFetch({
+    const { data } = await useQuery({
       query: isEdit ? UPDATE_NOTE : CREATE_NOTE,
       variables: {
         input,

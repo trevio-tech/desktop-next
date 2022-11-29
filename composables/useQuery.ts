@@ -1,6 +1,6 @@
 import { useNuxtApp, useFetch } from 'nuxt/app'
 
-export default async ({ query, variables }, options = {}) => {
+export const useQuery = async ({ query, variables }, options = {}) => {
   const { $auth, $config } = useNuxtApp()
 
   const { data, refresh, pending } = await useFetch($config.public.GRAPHQL_URL, {
@@ -11,8 +11,8 @@ export default async ({ query, variables }, options = {}) => {
     },
     body: {
       query: query
-          .trim()
-          .replaceAll(/\s+/ig, ' '),
+        .trim()
+        .replaceAll(/\s+/ig, ' '),
       variables
     }, ...options
   })

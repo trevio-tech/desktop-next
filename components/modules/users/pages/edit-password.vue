@@ -35,7 +35,6 @@ import TheLayout from '~/components/layout/TheLayout'
 import { FormField, Input, Button } from '@trevio/ui'
 import { UPDATE_USER_PASSWORD } from '../graphql'
 import { ref } from 'vue'
-import { useFetch } from '~/composables'
 import { useForm } from 'vee-validate'
 
 const formInitialState = {
@@ -50,7 +49,7 @@ const { handleSubmit, setErrors } = useForm()
 
 const onSubmit = handleSubmit(async () => {
   try {
-    const { data } = await useFetch({
+    const { data } = await useQuery({
       query: UPDATE_USER_PASSWORD,
       variables: form.value
     })

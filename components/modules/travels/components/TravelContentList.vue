@@ -1,29 +1,32 @@
 <template>
-  <div class="space-y-4 relative">
-    <Loader v-if="loading" />
+  <div class="space-y-4">
     <ul>
-      <li @click="myFilter.orderByDate = 'new'">Сначала новые</li>
-      <li @click="myFilter.orderByDate = 'old'">Сначала старые</li>
+      <li @click="setFilter({orderByDate: 'new'})">Сначала новые</li>
+      <li @click="setFilter({orderByDate: 'old'})">Сначала старые</li>
     </ul>
-    <article v-for="item in items" :key="item.id" class="flex overflow-hidden rounded-md shadow ring-1 ring-slate-200">
-      <NuxtLink :to="`/${item.system_name}/${item.id}`" class="w-40 h-40 bg-stone-200 flex-shrink-0">
-        <img :src="item.cover?.sizes?.default" :alt="item.title">
-      </NuxtLink>
-      <div class="flex-auto p-4 bg-white">
-        <h3 class="text-lg font-medium mb-4">
-          <NuxtLink :to="`/${item.system_name}/${item.id}`">{{ item.title }}</NuxtLink>
-        </h3>
-        {{ item.text }}
+    <div class="relative">
+      <Loader v-if="loading" />
+      <div v-show="items.length" class="space-y-4">
+        <article v-for="item in items" :key="item.id" class="flex overflow-hidden rounded-md shadow ring-1 ring-slate-200">
+          <NuxtLink :to="`/${item.system_name}/${item.id}`" class="w-40 h-40 bg-stone-200 flex-shrink-0">
+            <img :src="item.cover?.sizes?.default" :alt="item.title">
+          </NuxtLink>
+          <div class="flex-auto p-4 bg-white">
+            <h3 class="text-lg font-medium mb-4">
+              <NuxtLink :to="`/${item.system_name}/${item.id}`">{{ item.title }}</NuxtLink>
+            </h3>
+            {{ item.text }}
+          </div>
+        </article>
+        <Button :loading="loading" v-if="!noMore" @click="onMore" class="w-full">Показать еще</Button>
       </div>
-    </article>
-    <Button v-if="!noMore && items.length" @click="onMore" class="w-full">Показать еще</Button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { useFetch } from '~/composables'
 import { useRoute } from 'nuxt/app'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { Button, Loader } from '@trevio/ui'
 
 const query = `
@@ -82,22 +85,20 @@ const myFilter = ref({
 })
 
 const getData = async () => {
-  if (loading.value) {
-    return
-  }
-
-  loading.value = true
-
   try {
-    const { data: { travelContentList } } = await useFetch({
+    if (loading.value) {
+      return
+    }
+
+    loading.value = true
+
+    const { data: { travelContentList } } = await useQuery({
       query,
       variables: {
         travelId: parseInt(useRoute().params.travelId),
         offset: offset.value,
-        filter: myFilter.value
+        filter: {...myFilter.value}
       }
-    }, {
-      lazy: true
     })
 
     if (travelContentList.items.length) {
@@ -116,12 +117,13 @@ const onMore = async () => {
   await getData()
 }
 
-watch(() => myFilter, async (l) => {
+const setFilter = async (filter) => {
+  Object.assign(myFilter.value, filter)
   offset.value = ''
   items.value = []
-
+  noMore.value = false
   await getData()
-})
+}
 
 await getData()
 </script>

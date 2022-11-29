@@ -22,13 +22,12 @@ import TheLayout from '~/components/layout/TheLayout'
 import { ALBUM } from '~/components/modules/albums/graphql'
 import { ImageViewer } from '@trevio/ui'
 import { ref } from 'vue'
-import { useFetch } from '~/composables'
 import { useRoute } from 'nuxt/app'
 
 const album = ref()
 
 try {
-  const { data } = await useFetch({
+  const { data } = await useQuery({
     query: `
       query getAlbum($id: Int!) {
         album(id: $id) {

@@ -38,7 +38,6 @@
 <script setup>
 import { useRoute } from 'nuxt/app'
 import { useAsyncQuery } from '~/uses'
-import { useFetch } from '~/composables'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE } from '../graphql'
 import { ImageViewer } from '@trevio/ui'
@@ -84,7 +83,7 @@ const { stop } = useIntersectionObserver(
 )
 
 const getSimilar = async (tags) => {
-  const { data } = await useFetch({
+  const { data } = await useQuery({
     query: `
       query getSimilarNotes ($tags: [Int], $notIn: [Int], $limit: Int){
         notes (tags: $tags, notIn: $notIn, limit: $limit) {
