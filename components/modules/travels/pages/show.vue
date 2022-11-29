@@ -15,7 +15,7 @@
             :to="{name: 'travels', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
       </div>
     </article>
-    <TravelContentList />
+    <TravelContentList class="mt-4" />
   </TheLayout>
 </template>
 
