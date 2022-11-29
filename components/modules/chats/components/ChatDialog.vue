@@ -53,7 +53,6 @@
 import { ChatForm, ChatList, MessageList } from './Chat'
 import { Button } from '@trevio/ui'
 import { onBeforeMount, ref } from 'vue'
-import { useGql } from '~/uses'
 import { groupBy } from 'lodash'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
@@ -80,32 +79,34 @@ const onLoad = async (chatId = null) => {
 
   const [modelType, modelId] = chatId.split('-')
 
-  const { data: { chatMessages, myChats }} = await useGql(`
-    query($modelType: String, $modelId: Int) {
-      myChats {
-        id
-        name
-        model_type
-        model_id
-      }
-      chatMessages(modelType: $modelType, modelId: $modelId) {
-        id
-        chat_id
-        parent_id
-        text
-        stack
-        stack_name
-        time
-        user {
+  const { data: { chatMessages, myChats }} = await useQuery({
+    query: `
+      query($modelType: String, $modelId: Int) {
+        myChats {
           id
           name
-          avatar
+          model_type
+          model_id
+        }
+        chatMessages(modelType: $modelType, modelId: $modelId) {
+          id
+          chat_id
+          parent_id
+          text
+          stack
+          stack_name
+          time
+          user {
+            id
+            name
+            avatar
+          }
         }
       }
+    `, variables: {
+      modelType,
+      modelId: parseInt(modelId)
     }
-  `, {
-    modelType,
-    modelId: parseInt(modelId)
   })
 
   if (myChats) {

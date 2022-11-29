@@ -18,7 +18,6 @@ import { ref, watch } from 'vue'
 import { CREATE_CHAT_MESSAGE } from '../../graphql'
 import { PaperClipIcon } from '@heroicons/vue/24/solid'
 import { Textarea, Button } from '@trevio/ui'
-import { gql, useAsyncQuery } from '#imports'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 
 const { chatId } = defineProps({
@@ -52,12 +51,15 @@ watch(() => store.selectedMessages, (newValue) => {
 
 const onSubmit = async () => {
   try {
-    await useAsyncQuery(gql`${CREATE_CHAT_MESSAGE}`, {
-      chat_id: chatId,
-      input: {
-        parent_id: parseInt(form.value.parent_id),
-        link_id:   parseInt(form.value.link_id),
-        text:      form.value.text,
+    await useQuery({
+      query: CREATE_CHAT_MESSAGE,
+      variables: {
+        chat_id: chatId,
+        input: {
+          parent_id: parseInt(form.value.parent_id),
+          link_id:   parseInt(form.value.link_id),
+          text:      form.value.text,
+        }
       }
     })
   } catch (error) {}
