@@ -1,5 +1,7 @@
 <template>
-  <TheLayout heading="Чаты">
-    {{ $route.params }}
-  </TheLayout>
+  <Chat :chat-id="`${$route.params.chatType}-${$route.params.chatId}`" />
 </template>
+
+<script setup>
+import Chat from '../components/Chat/Chat'
+</script>

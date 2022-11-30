@@ -9,7 +9,7 @@
       </FormField>
 
       <FormField name="input.text" label="Текст" required>
-        <TipTap v-model="form.text" model-type="notes" @error="onEror" />
+        <TipTap v-model="form.text" model-type="notes" @error="onEror" v-model:cover-id="form.cover_id" />
       </FormField>
 
       <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
@@ -32,11 +32,12 @@ import TheLayout from '~/components/layout/TheLayout'
 import TheForm from '~/components/TheForm'
 import pick from 'lodash.pick'
 import { CREATE_NOTE, UPDATE_NOTE, NOTE_FORM } from '../graphql'
-import { FormField, Input, Select, SearchPlace, TipTap } from '@trevio/ui';
+import { FormField, Input, Select, SearchPlace } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
+import TipTap from '../../../../../ui/src/components/form/TipTap/TipTap.vue'
 
 definePageMeta({
   middleware: 'auth'
@@ -45,6 +46,7 @@ definePageMeta({
 const form = ref({
   place_id: null,
   travel_id: null,
+  cover_id: null,
   title: '',
   place: {
     id: null,
@@ -96,6 +98,7 @@ const onSubmit = handleSubmit(async () => {
   const input = pick(form.value, [
     'place_id',
     'travel_id',
+    'cover_id',
     'title',
     'text',
     'tags',

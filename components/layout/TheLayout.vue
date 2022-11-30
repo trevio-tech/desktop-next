@@ -1,5 +1,5 @@
 <template>
-  <main class="flex-auto flex flex-col gap-4">
+  <main class="flex-auto flex flex-col" :class="{'gap-4': noGap === false}">
     <h1 v-if="heading" class="text-2xl font-semibold">{{ heading }}</h1>
     <div v-if="!!$slots.top">
       <slot name="top"></slot>
@@ -7,7 +7,7 @@
     <div v-if="!!$slots['top-after']">
       <slot name="top-after"></slot>
     </div>
-    <div class="flex-auto flex gap-4" :class="{'flex-row-reverse': reverse}">
+    <div class="flex-auto flex" :class="{'flex-row-reverse': reverse, 'gap-4': noGap === false}">
       <div class="flex-shrink-0 min-w-[560px]" :class="[!!$slots.sidebar ? 'w-[560px]' : 'w-full']">
         <slot></slot>
       </div>
@@ -29,6 +29,9 @@ const props = defineProps({
   },
   heading: {
     type: String
+  },
+  noGap: {
+    type: Boolean
   }
 })
 
