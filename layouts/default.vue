@@ -4,7 +4,7 @@
     <div class="flex-auto flex flex-col w-full max-w-[1000px] mx-auto">
       <div class="flex-auto flex gap-4">
         <TheNavigation class="flex-shrink-0 w-[180px]" />
-        <div class="flex-auto flex flex-col gap-4">
+        <div class="flex-auto flex flex-col">
 <!--          <TheBreadcrumbs />-->
           <slot />
         </div>

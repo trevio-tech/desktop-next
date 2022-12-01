@@ -1,14 +1,15 @@
 <template>
-  <div class="flex w-full h-full rounded-lg">
+  <div class="w-full overflow-hidden border border-slate-200 rounded-lg h-full relative flex-auto flex bg-white">
     <ChatList class="flex-shrink-0 flex-auto w-full max-w-[260px] border-r border-r-slate-200" :items="chats" @select="onLoad($event)"/>
 
-    <div class="relative flex-auto flex flex-col bg-white">
-      <!-- Modal header -->
+    <div class="flex flex-col flex-auto overflow-hidden">
       <header class="border-b border-gray-200 rounded-t">
         <div class="m-4 flex justify-between items-center">
-          <h3 class="text-lg font-semibold text-gray-900 leading-none truncate mr-2 flex-1">{{
-              store.activeChat.name
-            }}</h3>
+
+          <h3 :title="store.activeChat.name" class="text-lg font-semibold leading-none truncate mr-2 flex-1">
+            {{ store.activeChat.name }}
+          </h3>
+
           <button title="Настройки" type="button"
                   class="text-gray-500 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
             <MoreHorizontal class="w-6 h-6" />
@@ -31,16 +32,12 @@
         </div>
       </header>
 
-      <div class="flex flex-col justify-between w-full h-full overflow-hidden">
-        <MessageList v-if="Object.keys(stacks).length" :stacks="stacks"/>
-        <div v-else class="flex-auto flex justify-center items-center">
-          Нет сообщений
-        </div>
-
-        <div class="p-4 bg-white border-t border-gray-200">
-          <ChatForm :chat-id="chatId"/>
-        </div>
+      <MessageList class="flex-auto overflow-y-auto h-full" v-if="Object.keys(stacks).length" :stacks="stacks" />
+      <div v-else class="flex justify-center items-center h-full">
+        Нет сообщений
       </div>
+
+      <ChatForm class="flex-auto flex-shrink-0 p-4 bg-white border-t border-gray-200" :chat-id="chatId"/>
     </div>
   </div>
 </template>
@@ -78,6 +75,13 @@ const onLoad = async (chatId = null) => {
           name
           model_type
           model_id
+          last_message_id
+          last_message_at
+          lastMessage {
+            id
+            chat_id
+            text(length: 5)
+          }
         }
         chatMessages(modelType: $modelType, modelId: $modelId) {
           id
@@ -87,6 +91,10 @@ const onLoad = async (chatId = null) => {
           stack
           stack_name
           time
+          chat {
+            id
+            name
+          }
           user {
             id
             name
@@ -104,8 +112,11 @@ const onLoad = async (chatId = null) => {
     chats.value = myChats
   }
 
-  if (chatMessages) {
+  if (chatMessages.length) {
     stacks.value = groupBy(chatMessages, 'stack')
+    store.$patch({
+      activeChat: chatMessages[0].chat
+    })
   }
 }
 

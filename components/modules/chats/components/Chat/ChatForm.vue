@@ -6,7 +6,7 @@
     <Textarea v-model="form.text" placeholder="Текст сообщения" class="flex-auto" />
     <footer class="flex space-x-2 justify-end mt-2">
       <Button variant="secondary">
-        <PaperClipIcon class="w-5 h-5" />
+        <ImagePlus class="w-5 h-5" />
       </Button>
       <Button type="submit">Отправить</Button>
     </footer>
@@ -16,7 +16,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { CREATE_CHAT_MESSAGE } from '../../graphql'
-import { PaperClipIcon } from '@heroicons/vue/24/solid'
+import { ImagePlus } from 'lucide-vue-next'
 import { Textarea, Button } from '@trevio/ui'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 

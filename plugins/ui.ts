@@ -16,7 +16,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   return {
     provide: {
-      overlay: nuxtApp.vueApp.config.globalProperties.$overlay
+      overlay: nuxtApp.vueApp.config.globalProperties.$overlay,
     }
   }
 })

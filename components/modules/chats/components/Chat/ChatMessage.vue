@@ -1,5 +1,5 @@
 <template>
-  <div class="flex space-x-2 p-4" :class="{'bg-yellow-100': isSelected}" @click="onEdit">
+  <div :id="`message-${message.id}`" class="flex space-x-2 p-4" :class="{'bg-yellow-100': isSelected}" @click="onEdit">
     <div class="flex-shrink-0">
       <NuxtLink :to="{name: 'users.show', params: {userId: message.user.id}}">
         <img :src="message.user.avatar" :alt="message.user.name" class="w-8 h-8 rounded-full block" />

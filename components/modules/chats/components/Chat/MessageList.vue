@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-y-auto" id="stacks">
+  <div id="stacks">
     <div v-for="(messages, date) in stacks" :key="date">
       <div class="text-center py-4 sticky top-0">
         <span class="inline-block font-medium text-xs py-1 px-2 bg-gray-100 rounded-full">{{ date }}</span>
@@ -27,9 +27,7 @@ const scrollBottom = () => {
   stacks.scrollTop = stacks.scrollHeight
 }
 
-onMounted(() => {
-  scrollBottom()
-})
+onMounted(scrollBottom)
 
 watch(() => props.stacks, async () => {
   await nextTick()
