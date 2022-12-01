@@ -4,29 +4,31 @@ import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { useQuery } from '~/composables/useQuery'
 import { watch } from 'vue'
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(async (nuxtApp) => {
   const initialState = async () => {
     try {
       const query = `
-        query {
+        query myChats {
           ${MY_CHATS}
         }
       `
 
       const { data } = await useQuery({
         query
+      }, {
+        key: 'initial-state'
       })
 
       useChatsStore().$patch({
         chats: data.myChats
       })
 
-      console.log('Initial State')
+      console.log('Initial state')
     } catch (error) {}
   }
 
   nuxtApp.hook('app:created', () => {
-    watch(() => nuxtApp.$auth.loggedIn, async () => await initialState(), {
+    watch(() => nuxtApp.$auth.loggedIn, initialState, {
       immediate: true
     })
   })

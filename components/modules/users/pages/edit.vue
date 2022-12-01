@@ -48,7 +48,6 @@
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
 import { FormField, Textarea, Input, Button, Select } from '@trevio/ui'
-import { gql, useAsyncQuery, useMutation } from '#imports'
 import { ref } from 'vue'
 import { useRoute } from 'nuxt/app'
 import { UPDATE_USER } from '../graphql'
@@ -62,21 +61,24 @@ const form = ref({
 const userId = parseInt(useRoute().params.userId)
 
 try {
-  const { data } = await useAsyncQuery(gql`
-    query($id: Int!) {
-      user(id: $id) {
-        id
-        name
-        description
-        birthday
-        gender
+  const { data: { user } } = await useQuery({
+    query: `
+      query($id: Int!) {
+        user(id: $id) {
+          id
+          name
+          description
+          birthday
+          gender
+        }
       }
+    `,
+    variables: {
+      id: userId
     }
-  `, {
-    id: userId
   })
 
-  form.value = data.value.user
+  form.value = user
 } catch (error) {}
 
 const onSubmit = async () => {
@@ -86,16 +88,17 @@ const onSubmit = async () => {
     delete input.id
     delete input.__typename
 
-    const { mutate } = await useMutation(gql`
-      ${UPDATE_USER}
-    `, {
+    const { data: { updateUser } } = await useQuery({
+      query: `
+        ${UPDATE_USER}
+      `,
       variables: {
         id: userId,
         input
       }
     })
 
-    mutate()
+    console.log(updateUser)
   } catch (error) {}
 }
 </script>

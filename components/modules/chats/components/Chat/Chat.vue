@@ -1,6 +1,6 @@
 <template>
   <div class="w-full overflow-hidden border border-slate-200 rounded-lg h-full relative flex-auto flex bg-white">
-    <ChatList class="flex-shrink-0 flex-auto w-full max-w-[260px] border-r border-r-slate-200" :items="chats" @select="onLoad($event)"/>
+    <ChatList class="flex-shrink-0 flex-auto w-full max-w-[260px] border-r border-r-slate-200" @select="onLoad($event)"/>
 
     <div class="flex flex-col flex-auto overflow-hidden">
       <header class="border-b border-gray-200 rounded-t">
@@ -47,7 +47,6 @@ import { ChatForm, ChatList, MessageList } from './'
 import { Button } from '@trevio/ui'
 import { groupBy } from 'lodash'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
-import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { X, MoreHorizontal } from 'lucide-vue-next'
 
 const props = defineProps({
@@ -59,7 +58,6 @@ const props = defineProps({
 const stacks = ref([])
 
 const store = useChatStore()
-const chats = ref(useChatsStore().chats)
 
 const onLoad = async (chatId = null) => {
   if (! chatId) {
