@@ -2,9 +2,13 @@
   <div class="bg-white overflow-hidden">
     <ul>
       <li v-for="chat in items" :key="chat.id" @click="onSelect(chat)" :class="{'bg-blue-100': parseInt(store.activeChat.id) === parseInt(chat.id)}"
-          class="p-2 space-x-2 cursor-pointer">
+          class="p-2 cursor-pointer">
         <div class="text-sm font-medium truncate">{{ chat.name }}</div>
-        <div class="text-sm">{{ chat.lastMessage?.text }}</div>
+        <div v-if="chat.lastMessage" class="text-sm truncate flex items-center space-x-1">
+          <img :src="chat.lastMessage.user.avatar" :alt="chat.lastMessage.user.name" width="16" height="16"
+               class="flex-shrink-0 rounded-full">
+          <div class="text-sm">{{ chat.lastMessage?.text }} - {{ chat.last_message_at }}</div>
+        </div>
       </li>
     </ul>
   </div>

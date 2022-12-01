@@ -59,14 +59,14 @@ export default {
   },
 
   methods: {
-    onSubmit() {
+    async onSubmit() {
       if (this.loading) {
         return;
       }
 
       this.loading = true;
 
-      this.$auth.loginWith('local', {body: this.form})
+      await this.$auth.loginWith('local', {body: this.form})
           .then(response => {
             console.log(response)
           })

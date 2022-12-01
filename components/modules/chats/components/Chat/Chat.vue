@@ -47,6 +47,7 @@ import { ChatForm, ChatList, MessageList } from './'
 import { Button } from '@trevio/ui'
 import { groupBy } from 'lodash'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
+import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { X, MoreHorizontal } from 'lucide-vue-next'
 
 const props = defineProps({
@@ -56,9 +57,9 @@ const props = defineProps({
 })
 
 const stacks = ref([])
-const chats = ref([])
 
 const store = useChatStore()
+const chats = ref(useChatsStore().chats)
 
 const onLoad = async (chatId = null) => {
   if (! chatId) {
@@ -67,22 +68,9 @@ const onLoad = async (chatId = null) => {
 
   const [modelType, modelId] = chatId.split('-')
 
-  const { data: { chatMessages, myChats }} = await useQuery({
+  const { data: { chatMessages }} = await useQuery({
     query: `
       query($modelType: String, $modelId: Int) {
-        myChats {
-          id
-          name
-          model_type
-          model_id
-          last_message_id
-          last_message_at
-          lastMessage {
-            id
-            chat_id
-            text(length: 5)
-          }
-        }
         chatMessages(modelType: $modelType, modelId: $modelId) {
           id
           chat_id
@@ -107,10 +95,6 @@ const onLoad = async (chatId = null) => {
       modelId: parseInt(modelId)
     }
   })
-
-  if (myChats) {
-    chats.value = myChats
-  }
 
   if (chatMessages.length) {
     stacks.value = groupBy(chatMessages, 'stack')
