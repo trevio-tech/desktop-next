@@ -3,14 +3,13 @@
     <template #sidebar>1</template>
     <div class="space-y-4">
       <TravelFilter />
-      <Travel v-for="travel in travels" :entry="travel" :key="travel.id" />
+      <ContentCard v-for="travel in travels" :entry="travel" :key="travel.id" />
     </div>
   </TheLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
-import Travel from '../components/Travel'
+import ContentCard from '~/components/ContentCard'
 import TravelFilter from '../components/TravelFilter'
 import { TRAVEL_CARD } from '../graphql';
 import { useAsyncGql } from '~/uses'

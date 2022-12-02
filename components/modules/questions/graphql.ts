@@ -1,13 +1,16 @@
 export const QUESTION_CARD = `
   id
   title
+  user_id
   place_id
   travel_id
   cover_id
   text(words: 20)
   likes_count
+  system_name
   can
   cover {
+    id
     url
   }
   travel {
@@ -19,9 +22,17 @@ export const QUESTION_CARD = `
       name
     }
   }
+  user {
+    id
+    name
+    avatar
+  }
   tags {
     id
     name
+  }
+  like {
+    is_liked
   }
 `
 

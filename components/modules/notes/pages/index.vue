@@ -2,13 +2,13 @@
   <TheLayout :heading="title">
     <template #sidebar>1</template>
     <div class="space-y-4">
-      <Note v-for="note in notes" :entry="note" :key="note.id"/>
+      <ContentCard v-for="note in notes" :entry="note" :key="note.id"/>
     </div>
   </TheLayout>
 </template>
 
 <script setup>
-import Note from '../components/Note'
+import ContentCard from '~/components/ContentCard'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE_CARD } from '../graphql'
 import { useRoute, useHead } from 'nuxt/app'

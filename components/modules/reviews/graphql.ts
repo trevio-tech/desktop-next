@@ -1,12 +1,25 @@
 export const REVIEW_CARD = `
   id
+  user_id
   title
-  text(words: 10)
+  text(words: 12)
   likes_count
   can
+  system_name
+  cover(sizes: "default@resize:fill:640:320") {
+    id
+    model_id
+    url
+    sizes
+  }
   tags {
     id
     name
+  }
+  user {
+    id
+    name
+    avatar
   }
 `
 

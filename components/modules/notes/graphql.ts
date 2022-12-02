@@ -7,6 +7,7 @@ export const NOTE_CARD = `
   cover_id
   text(words: 20)
   likes_count
+  system_name
   can
   cover {
     id

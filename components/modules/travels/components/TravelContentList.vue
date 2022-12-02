@@ -58,6 +58,18 @@ const query = `
           }
           system_name
         }
+        ...on Question {
+          id
+          title
+          cover_id
+          cover(sizes: "default@resize:fill:200:200") {
+            id
+            model_id
+            url
+            sizes
+          }
+          system_name
+        }
         ...on Album {
           id
           title

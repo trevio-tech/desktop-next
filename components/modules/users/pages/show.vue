@@ -66,7 +66,7 @@
 
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
-import { useAsyncGql } from '~/uses'
+import { useQuery } from '#imports'
 import { USER } from '../graphql'
 import { useRoute, useNuxtApp } from 'nuxt/app'
 import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
@@ -77,14 +77,17 @@ import ContentList from '~/components/ContentList'
 
 const { $overlay } = useNuxtApp()
 
-const { data: { value: { user }}} = await useAsyncGql(`
-  query($id: Int!) {
-    user(id: $id) {
-      ${USER}
+const { data: { user }} = await useQuery({
+  query: `
+    query($id: Int!) {
+      user(id: $id) {
+        ${USER}
+      }
     }
+  `,
+  variables: {
+    id: parseInt(useRoute().params.userId),
   }
-`, {
- id: parseInt(useRoute().params.userId),
 })
 
 const onEditInterests = () => {

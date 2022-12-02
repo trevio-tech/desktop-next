@@ -1,13 +1,13 @@
 <template>
-  <article class="bg-white overflow-hidden shadow ring-1 ring-slate-200 rounded-lg">
+  <article class="bg-white overflow-hidden ring-1 ring-slate-200 rounded-lg">
     <div class="relative overflow-hidden">
       <NuxtLink
-          :to="{name: 'notes.show', params: {noteId: entry.id}}"
+          :to="to"
           class="h-80 block"
           style="background-image: url('/images/no-image.png')"
       >
         <div class="absolute top-0 left-0 p-2">
-          <div class="bg-black/20 py-1 px-3 text-white font-medium text-sm rounded-lg">Заметка</div>
+          <div class="bg-slate-500/40 py-1 px-3 text-white font-medium text-sm rounded-lg">{{ label[entry.system_name] }}</div>
         </div>
         <img v-if="entry.cover" :src="entry.cover.url" :alt="entry.title" class="object-cover w-full h-full">
       </NuxtLink>
@@ -32,13 +32,13 @@
       <Profile :user="entry.user" />
     </div>
 
-    <h2 class="text-xl font-semibold m-4">
-      <NuxtLink :to="{name: 'notes.show', params: {noteId: entry.id}}">{{ entry.title }}</NuxtLink>
-    </h2>
+    <div class="m-4">
+      <h2 class="text-xl font-semibold mb-2">
+        <NuxtLink :to="to">{{ entry.title }}</NuxtLink>
+      </h2>
 
-    <p v-if="entry.text" class="m-4">
-      <NuxtLink :to="{name: 'notes.show', params: {noteId: entry.id}}">{{ entry.text }}</NuxtLink>
-    </p>
+      <NuxtLink v-if="entry.text" :to="to">{{ entry.text }}</NuxtLink>
+    </div>
 
     <div v-if="entry.tags.length" class="space-x-2 m-4 text-slate-400 text-sm">
       <NuxtLink
@@ -48,32 +48,60 @@
           :to="{name: 'notes', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
     </div>
 
-    <footer class="flex items-center space-x-4 m-4">
+    <footer class="flex items-center space-x-4 p-4 bg-stone-50 border-t border-t-stone-100">
       <Like
-        model-type="notes"
-        :model-id="entry.id"
-        :is-liked="entry.like?.is_liked"
-        :count="entry.likes_count"
+          model-type="notes"
+          :model-id="entry.id"
+          :is-liked="entry.like?.is_liked"
+          :count="entry.likes_count"
       />
-      <div @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
+      <button
+          v-if="hasChat"
+          @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
         props: {
-          chatId: `notes-${entry.id}`,
+          chatId: `${entry.system_name}-${entry.id}`,
           title: entry.title
         }
-      })">chat</div>
+      })">
+        <MessageSquare class="w-5 h-5" />
+      </button>
     </footer>
   </article>
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, computed } from 'vue'
 import { Like } from '@trevio/ui'
 import Profile from '~/components/modules/users/components/Profile'
+import { MessageSquare } from 'lucide-vue-next'
 
-defineProps({
+const props = defineProps({
   entry: {
     type: Object,
     required: true
+  },
+  hasChat: {
+    type: Boolean,
+    default: true
   }
 })
+
+const to = computed(() => {
+  const systemName = props.entry.system_name
+  const id = props.entry.id
+
+  if (systemName === 'notes') {
+    return {name: 'notes.show', params: {noteId: id}}
+  } else if (systemName === 'travels') {
+    return {name: 'travels.show', params: {travelId: id}}
+  }
+})
+
+const label = {
+  notes: 'Заметка',
+  posts: 'Блог компании',
+  questions: 'Вопрос',
+  reviews: 'Отзыв',
+  travels: 'Путешествие',
+}
 </script>

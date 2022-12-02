@@ -6,6 +6,7 @@ export const TRAVEL_CARD = `
   likes_count
   can
   rating
+  system_name
   cover(sizes: "default@resize:fill:640:320") {
     id
     model_id

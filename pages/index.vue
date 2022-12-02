@@ -6,7 +6,7 @@
 
     <div class="space-y-4">
       <div v-for="item in items" :key="item.id">
-        <Component :is="cards[item.system_name]" :entry="item" />
+        <ContentCard :entry="item" />
         <div v-if="item.whoShared.length">
           {{ item.whoShared }}
         </div>
@@ -17,14 +17,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRoute, useRouter } from 'nuxt/app'
-import TheLayout from '~/components/layout/TheLayout'
+import ContentCard from '~/components/ContentCard'
 import { FEED } from '~/components/modules/activity/graphql'
-import { useAsyncGql } from '~/uses'
-import Travel from '~/components/modules/travels/components/Travel'
-import Note from '~/components/modules/notes/components/Note'
-import Review from '~/components/modules/reviews/components/Review'
+import { ref } from 'vue'
+import { useQuery } from '#imports'
+import { useRoute, useRouter } from 'nuxt/app'
 
 const route = useRoute()
 const router = useRouter()
@@ -34,14 +31,17 @@ const nextPage = ref(0)
 const page = ref(0)
 
 const fetchFeed = async () => {
-  const { data: { value: { feed }} } = await useAsyncGql(`
-    query($page: Int) {
-      feed(page: $page) {
-        ${FEED}
+  const { data: { feed }} = await useQuery({
+    query: `
+      query($page: Int) {
+        feed(page: $page) {
+          ${FEED}
+        }
       }
+    `,
+    variables: {
+      page: page.value
     }
-  `, {
-    page
   })
 
   if (page && feed.items.length) {
@@ -63,11 +63,5 @@ await fetchFeed()
 
 const onMore = async () => {
   await fetchFeed()
-}
-
-const cards = {
-  notes:    Note,
-  reviews:  Review,
-  travels:  Travel,
 }
 </script>

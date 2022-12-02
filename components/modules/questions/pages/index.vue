@@ -2,23 +2,32 @@
   <TheLayout heading="Вопросы">
     <template #sidebar>1</template>
     <div class="space-y-4">
-      <div v-for="question in questions" :key="question.id">
-        <NuxtLink :to="`/questions/${question.id}`">{{ question.title }}</NuxtLink>
-      </div>
+      <ContentCard v-for="question in questions" :key="question.id" :entry="question "/>
     </div>
   </TheLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
-import { QUESTION_FIELDS } from '../graphql';
-import { useAsyncGql } from '~/uses'
+import { QUESTION_CARD } from '../graphql';
+import { useQuery } from '#imports'
+import { shallowRef } from 'vue'
+import ContentCard from '~/components/ContentCard'
 
-const { data: { value: { questions }}} = await useAsyncGql(`
-  query {
-    questions {
-      ${QUESTION_FIELDS}
-    }
-  }
-`)
+const questions = shallowRef([])
+
+try {
+  const { data } = await useQuery({
+    query: `
+      query {
+        questions {
+          ${QUESTION_CARD}
+        }
+      }
+    `
+  })
+
+  questions.value = data.questions
+} catch (error) {
+  console.log(error)
+}
 </script>

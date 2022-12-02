@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <div v-for="item in items" :key="item.id">
-      <Component :is="cards[item.system_name]" :entry="item" />
+      <ContentCard :entry="item" />
     </div>
     <div v-if="! isEnd" @click="onMore" class="text-center bg-gray-300/50">Еще</div>
   </div>
@@ -10,9 +10,7 @@
 <script setup>
 import { TIMELINE } from '~/components/modules/activity/graphql'
 import { useGql } from '~/uses'
-import Travel from '~/components/modules/travels/components/Travel'
-import Note from '~/components/modules/notes/components/Note'
-import Review from '~/components/modules/reviews/components/Review'
+import ContentCard from '~/components/ContentCard'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -52,11 +50,5 @@ await fetchFeed()
 
 const onMore = async () => {
   await fetchFeed(items.value.length)
-}
-
-const cards = {
-  notes:    Note,
-  reviews:  Review,
-  travels:  Travel,
 }
 </script>
