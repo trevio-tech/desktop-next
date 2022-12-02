@@ -8,6 +8,7 @@ export const QUESTION_CARD = `
   text(words: 20)
   likes_count
   system_name
+  created_at
   can
   cover {
     id

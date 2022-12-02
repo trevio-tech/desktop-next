@@ -7,6 +7,7 @@ export const TRAVEL_CARD = `
   can
   rating
   system_name
+  created_at
   cover(sizes: "default@resize:fill:640:320") {
     id
     model_id

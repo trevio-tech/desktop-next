@@ -8,6 +8,7 @@ export const NOTE_CARD = `
   text(words: 20)
   likes_count
   system_name
+  messages_count
   can
   cover {
     id

@@ -29,7 +29,11 @@
     </div>
 
     <div class="m-4">
-      <Profile :user="entry.user" />
+      <Profile :user="entry.user">
+        <template #footer>
+          {{ entry.created_at }}
+        </template>
+      </Profile>
     </div>
 
     <div class="m-4">
@@ -48,32 +52,29 @@
           :to="{name: 'notes', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
     </div>
 
-    <footer class="flex items-center space-x-4 p-4 bg-stone-50 border-t border-t-stone-100">
-      <Like
+    <footer class="flex items-center space-x-2 p-4 bg-stone-50 border-t border-t-stone-100">
+      <LikeButton
           model-type="notes"
           :model-id="entry.id"
           :is-liked="entry.like?.is_liked"
           :count="entry.likes_count"
       />
-      <button
+      <ChatButton
           v-if="hasChat"
           @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
         props: {
           chatId: `${entry.system_name}-${entry.id}`,
           title: entry.title
         }
-      })">
-        <MessageSquare class="w-5 h-5" />
-      </button>
+      })" :messages-count="entry.messages_count" />
     </footer>
   </article>
 </template>
 
 <script setup>
 import { defineAsyncComponent, computed } from 'vue'
-import { Like } from '@trevio/ui'
+import { ChatButton, LikeButton } from '@trevio/ui'
 import Profile from '~/components/modules/users/components/Profile'
-import { MessageSquare } from 'lucide-vue-next'
 
 const props = defineProps({
   entry: {

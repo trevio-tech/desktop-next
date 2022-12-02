@@ -41,9 +41,6 @@ export default {
     '@nuxtjs/tailwindcss',
     '~/modules/routes',
   ],
-  build: {
-    transpile: ['@vuepic/vue-datepicker']
-  },
   runtimeConfig: {
     public: {
       GRAPHQL_URL: process.env.GRAPHQL_URL,

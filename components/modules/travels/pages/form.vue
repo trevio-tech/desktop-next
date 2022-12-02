@@ -70,18 +70,18 @@
 <script setup>
 import '@vuepic/vue-datepicker/dist/main.css'
 import Datepicker from '@vuepic/vue-datepicker';
+import TheForm from '~/components/TheForm'
 import TheLayout from '~/components/layout/TheLayout'
 import TravelUpload from '../components/TravelUpload'
-import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import pick from 'lodash.pick'
+import { ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { FormField, Textarea, Input, Button, SearchPlace, Dropdown, DropdownItem } from '@trevio/ui';
-import TheForm from '~/components/TheForm'
-import {TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL} from '../graphql';
+import { InputTags } from '~/components/wrappers'
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
-import { useGql } from '~/uses'
+import { useQuery } from '#imports'
 import { useRoute, useRouter } from 'nuxt/app'
-import { InputTags } from '~/components/wrappers'
+import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
 
 definePageMeta({
   middleware: 'auth'
@@ -113,29 +113,34 @@ const loading = ref(false)
 const currencies = ref([])
 
 if (isEdit) {
-  const { data } = await useGql(`
-    query($id: Int!) {
-      ${TRAVEL_FORM}
-      currencies {
-        id
-        name
+  const { data } = await useQuery({
+    query: `
+      query($id: Int!) {
+        ${TRAVEL_FORM}
+        currencies {
+          id
+          name
+        }
       }
+    `,
+    variables: {
+      id: parseInt(route.params.travelId)
     }
-  `, {
-    id: parseInt(route.params.travelId)
   })
 
   currencies.value = data.currencies
   Object.assign(form.value, data.travel)
 } else {
-  const { data } = await useGql(`
-    query {
-      currencies {
-        id
-        name
+  const { data } = await useQuery({
+    query: `
+      query {
+        currencies {
+          id
+          name
+        }
       }
-    }
-  `)
+    `
+  })
   currencies.value = data.currencies
 }
 
@@ -180,9 +185,12 @@ const onSubmit = handleSubmit(async (values, actions) => {
   input.images = input.images.map(image => parseInt(image.id))
 
   try {
-    const {data: { travelForm }} = await useGql(isEdit ? UPDATE_TRAVEL : CREATE_TRAVEL, {
-      input,
-      id: parseInt(route.params.travelId)
+    const {data: { travelForm }} = await useQuery({
+      query: isEdit ? UPDATE_TRAVEL : CREATE_TRAVEL,
+      variables: {
+        input,
+        id: parseInt(route.params.travelId)
+      }
     })
 
     if (travelForm > 0) {

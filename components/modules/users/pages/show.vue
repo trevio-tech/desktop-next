@@ -25,7 +25,7 @@
             </NuxtLink>
           </li>
         </ul>
-        <div v-else class="text-sm">Пользователь не на кого не подписан</div>
+        <div v-else class="text-sm text-slate-400">Пользователь не на кого не подписан</div>
       </div>
 
       <div class="mt-4">
@@ -40,7 +40,7 @@
             </NuxtLink>
           </li>
         </ul>
-        <div v-else class="text-sm">Пользователь ничем не интересуется</div>
+        <div v-else class="text-sm text-slate-400">Пользователь ничем не интересуется</div>
       </div>
 
       <div class="mt-4">
@@ -56,7 +56,7 @@
             </NuxtLink>
           </li>
         </ul>
-        <div v-else class="text-sm">У пользователя нет избранных направлений</div>
+        <div v-else class="text-sm text-slate-400">У пользователя нет избранных направлений</div>
       </div>
     </template>
 

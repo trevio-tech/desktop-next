@@ -834,7 +834,7 @@
 
 "@trevio/ui@https://github.com/trevio-tech/ui-next":
   version "0.0.0"
-  resolved "https://github.com/trevio-tech/ui-next#e266b05b3c5bfa9a21b3f621b162f02518f96475"
+  resolved "https://github.com/trevio-tech/ui-next#d0ce42ea74866d6d32f54d1908db264b507cf7c3"
   dependencies:
     "@apollo/client" "^3.7.1"
     "@floating-ui/dom" "^1.0.2"

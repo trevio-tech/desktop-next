@@ -116,7 +116,7 @@ const getData = async () => {
     if (travelContentList.items.length) {
       offset.value = travelContentList.offset
       items.value = [...items.value, ...travelContentList.items]
-    } else {
+    } else if (travelContentList.items.length < 4) {
       noMore.value = true
     }
   } catch (error) {}
