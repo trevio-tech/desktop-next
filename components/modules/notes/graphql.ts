@@ -37,6 +37,26 @@ export const NOTE_CARD = `
   }
 `
 
+export const NOTE_CARD_RECTANGLE = `
+  id
+  user_id
+  title
+  text(words: 12)
+  system_name
+  created_at
+  cover(sizes: "default@resize:fill:640:320") {
+    id
+    model_id
+    url
+    sizes
+  }
+  user {
+    id
+    name
+    avatar
+  }
+`
+
 export const NOTE = `
   note(id: $id) {
     id

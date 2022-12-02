@@ -21,6 +21,9 @@
           <DropdownItem as="div" @click="hide">
             <NuxtLink :to="{name: 'users.edit', params: {userId: $auth.user.id}}">Настройки</NuxtLink>
           </DropdownItem>
+          <DropdownItem as="div" @click="hide">
+            <NuxtLink :to="{name: 'users.bookmarks', params: {userId: $auth.user.id}}">Закладки</NuxtLink>
+          </DropdownItem>
           <DropdownItem as="div" @click="$auth.logout()">Выход</DropdownItem>
         </template>
       </Dropdown>
