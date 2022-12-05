@@ -3,9 +3,9 @@
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <VOverlay />
+  <Overlay />
 </template>
 
 <script setup>
-import { VOverlay } from '~/components/dev/Overlay'
+import { Overlay } from '@trevio/ui'
 </script>

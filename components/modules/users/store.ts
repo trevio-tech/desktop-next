@@ -6,9 +6,29 @@ export const useUsersStore = defineStore('users', {
       bookmarksCategories: []
     }
   },
+  actions: {
+    incrementBookmarksCount(categoryId) {
+      this.bookmarksCategories.forEach((bookmarkCategory) => {
+        if (parseInt(bookmarkCategory.id) === parseInt(categoryId)) {
+          bookmarkCategory.content_count++
+        }
+      })
+    },
+    decrementBookmarksCount(categoryId) {
+      this.bookmarksCategories.forEach((bookmarkCategory) => {
+        if (parseInt(bookmarkCategory.id) === parseInt(categoryId)) {
+          bookmarkCategory.content_count--
+        }
+      })
+    },
+  },
   getters: {
-    sumOfEntriesFromAllCategories: (state) => state.bookmarksCategories.reduce((a, b) => {
-      return (a.content_count || 0) + (b.content_count || 0)
-    }, 0),
+    sumOfEntriesFromAllCategories: (state) => {
+      let result = 0
+
+      state.bookmarksCategories.forEach((category) => result += category.content_count)
+
+      return result
+    }
   },
 })

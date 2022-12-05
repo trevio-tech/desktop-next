@@ -52,12 +52,13 @@
           :to="{name: 'notes', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
     </div>
 
-    <footer class="flex items-center space-x-2 p-4 bg-stone-50 border-t border-t-stone-100">
+    <footer class="flex items-center p-4 bg-stone-50 border-t border-t-stone-100">
       <LikeButton
           model-type="notes"
           :model-id="entry.id"
           :is-liked="entry.like?.is_liked"
           :count="entry.likes_count"
+          class="mr-2"
       />
       <ChatButton
           v-if="hasChat"
@@ -67,6 +68,7 @@
           title: entry.title
         }
       })" :messages-count="entry.messages_count" />
+      <BookmarkButton class="ml-auto" :model-type="entry.system_name" :model-id="entry.id" />
     </footer>
   </article>
 </template>
@@ -74,6 +76,7 @@
 <script setup>
 import { defineAsyncComponent, computed } from 'vue'
 import { ChatButton, LikeButton } from '@trevio/ui'
+import BookmarkButton from '~/components/modules/users/components/BookmarkButton'
 import Profile from '~/components/modules/users/components/Profile'
 
 const props = defineProps({
