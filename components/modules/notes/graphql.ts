@@ -35,6 +35,9 @@ export const NOTE_CARD = `
   like {
     is_liked
   }
+  bookmarks {
+    category_id
+  }
 `
 
 export const NOTE_CARD_RECTANGLE = `
@@ -55,6 +58,9 @@ export const NOTE_CARD_RECTANGLE = `
     name
     avatar
   }
+  bookmarks {
+    category_id
+  }
 `
 
 export const NOTE = `
@@ -71,6 +77,12 @@ export const NOTE = `
     tags {
       id
       name
+    }
+    bookmarks {
+      user_id
+      model_id
+      model_type
+      category_id
     }
   }
 `

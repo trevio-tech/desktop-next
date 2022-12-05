@@ -68,13 +68,18 @@
           title: entry.title
         }
       })" :messages-count="entry.messages_count" />
-      <BookmarkButton class="ml-auto" :model-type="entry.system_name" :model-id="entry.id" />
+
+      <BookmarkButton
+        class="ml-auto"
+        v-model="bookmarks"
+        :model-type="entry.system_name"
+        :model-id="entry.id" />
     </footer>
   </article>
 </template>
 
 <script setup>
-import { defineAsyncComponent, computed } from 'vue'
+import { defineAsyncComponent, computed, ref } from 'vue'
 import { ChatButton, LikeButton } from '@trevio/ui'
 import BookmarkButton from '~/components/modules/users/components/BookmarkButton'
 import Profile from '~/components/modules/users/components/Profile'
@@ -100,6 +105,8 @@ const to = computed(() => {
     return {name: 'travels.show', params: {travelId: id}}
   }
 })
+
+const bookmarks = ref(props.entry.bookmarks?.map((bookmark) => bookmark.category_id))
 
 const label = {
   notes: 'Заметка',

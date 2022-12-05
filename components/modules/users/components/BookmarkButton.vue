@@ -1,14 +1,15 @@
 <template>
   <button type="button" @click="onClick">
-    <Bookmark class="w-5 h-5" />
+    <Bookmark class="w-5 h-5" :class="{'text-red-500': active}" />
   </button>
 </template>
 
 <script setup>
 import { Bookmark } from 'lucide-vue-next'
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 import { useNuxtApp } from 'nuxt/app'
 
+const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelType: {
     type: String,
@@ -17,14 +18,27 @@ const props = defineProps({
   modelId: {
     type: Number,
     required: true,
+  },
+  modelValue: {
+    type: Array,
+    default: () => []
   }
 })
 
 const { $overlay } = useNuxtApp()
 
+const active = ref(props.modelValue?.length > 0)
+
 const onClick = async () => {
   $overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/BookmarkDialog.vue')), {
-    props
+    props,
+    on: {
+      change: (categories) => {
+        active.value = categories.length > 0
+        emit('update:modelValue', categories)
+        $overlay.hide()
+      }
+    }
   })
 }
 </script>

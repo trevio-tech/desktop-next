@@ -1,13 +1,20 @@
 <template>
-  <Dialog title="Закладки">
-    <div v-for="category in store.bookmarksCategories" :key="category.id">
-      <label :for="`category-${category.id}`">
-        <input type="checkbox" :id="`category-${category.id}`" :value="category.id" v-model="categories" />
-        <span>{{ category.name }}</span>
-      </label>
+  <Dialog title="Категории закладок">
+    <div class="w-[480px]">
+      <div v-if="store.bookmarksCategories.length" class="space-y-1">
+        <div v-for="category in store.bookmarksCategories" :key="category.id">
+          <label :for="`category-${category.id}`" class="space-x-1">
+            <input type="checkbox" :id="`category-${category.id}`" :value="category.id" v-model="categories" />
+            <span>{{ category.name }}</span>
+          </label>
+        </div>
+      </div>
+      <div v-else>У вас нет категорий для закладок</div>
+      <footer class="flex items-center space-x-2 mt-4">
+        <Button @click="onSubmit">Сохранить</Button>
+        <Button variant="secondary">Создать категорию</Button>
+      </footer>
     </div>
-    <Button @click="onSubmit">Сохранить</Button>
-    {{ categories }}
   </Dialog>
 </template>
 
@@ -18,6 +25,9 @@ import { useUsersStore } from '../store'
 import { Dialog } from '~/components/dev/Overlay'
 import { Button } from '@trevio/ui'
 
+const emit = defineEmits([
+    'change'
+])
 const props = defineProps({
   modelType: {
     type: String,
@@ -26,12 +36,16 @@ const props = defineProps({
   modelId: {
     type: Number,
     required: true,
+  },
+  modelValue: {
+    type: Array,
+    required: true,
   }
 })
 
 const store = useUsersStore()
 const loading = ref(false)
-const categories = ref([])
+const categories = ref(props.modelValue)
 
 const onSubmit = async () => {
   if (loading.value) {
@@ -57,11 +71,15 @@ const onSubmit = async () => {
       }
     })
 
-    if (data.createDeleteBookmark === 'created') {
-      store.incrementBookmarksCount(3)
-    } else if (data.createDeleteBookmark === 'deleted') {
-      store.decrementBookmarksCount(3)
+    if (data.createDeleteBookmark.insert.length > 0) {
+      store.incrementBookmarksCount(data.createDeleteBookmark.insert)
     }
+
+    if (data.createDeleteBookmark.delete.length > 0) {
+      store.decrementBookmarksCount(data.createDeleteBookmark.delete)
+    }
+
+    emit('change', categories.value)
   } catch (error) {}
   finally {
     loading.value = false

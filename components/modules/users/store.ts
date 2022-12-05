@@ -7,18 +7,22 @@ export const useUsersStore = defineStore('users', {
     }
   },
   actions: {
-    incrementBookmarksCount(categoryId) {
-      this.bookmarksCategories.forEach((bookmarkCategory) => {
-        if (parseInt(bookmarkCategory.id) === parseInt(categoryId)) {
-          bookmarkCategory.content_count++
-        }
+    incrementBookmarksCount(categories: number[]) {
+      categories.forEach((category) => {
+        this.bookmarksCategories.forEach((bookmarkCategory) => {
+          if (parseInt(bookmarkCategory.id) === category) {
+            bookmarkCategory.content_count++
+          }
+        })
       })
     },
-    decrementBookmarksCount(categoryId) {
-      this.bookmarksCategories.forEach((bookmarkCategory) => {
-        if (parseInt(bookmarkCategory.id) === parseInt(categoryId)) {
-          bookmarkCategory.content_count--
-        }
+    decrementBookmarksCount(categories: number[]) {
+      categories.forEach((category) => {
+        this.bookmarksCategories.forEach((bookmarkCategory) => {
+          if (parseInt(bookmarkCategory.id) === category) {
+            bookmarkCategory.content_count--
+          }
+        })
       })
     },
   },
