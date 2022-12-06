@@ -18,7 +18,7 @@ export const useQuery = async ({ query, variables = {} }, options = {}) => {
   })
 
   if (Object.hasOwn(data.value, 'errors')) {
-    throw data.value.errors
+    throw data.value.errors[0]
   }
 
   return {

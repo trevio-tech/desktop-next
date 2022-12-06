@@ -12,16 +12,17 @@
       <div v-else>У вас нет категорий для закладок</div>
       <footer class="flex items-center space-x-2 mt-4">
         <Button @click="onSubmit">Сохранить</Button>
-        <Button variant="secondary">Создать категорию</Button>
+        <Button variant="secondary" @click="$overlay.show(BookmarksCategoryForm)">Создать категорию</Button>
       </footer>
     </div>
   </Dialog>
 </template>
 
 <script setup>
+import BookmarksCategoryForm from './BookmarkCategoryFormDialog'
 import { ref } from 'vue'
 import { useQuery } from '#imports'
-import { useUsersStore } from '../store'
+import { useUsersStore } from '~/components/modules/users/store'
 import { Dialog } from '~/components/dev/Overlay'
 import { Button } from '@trevio/ui'
 

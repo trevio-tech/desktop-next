@@ -30,7 +30,7 @@ const { $overlay } = useNuxtApp()
 const active = ref(props.modelValue?.length > 0)
 
 const onClick = async () => {
-  $overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/BookmarkDialog.vue')), {
+  $overlay.show(defineAsyncComponent(() => import('~/components/modules/bookmarks/components/BookmarkDialog.vue')), {
     props,
     on: {
       change: (categories) => {

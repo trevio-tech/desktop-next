@@ -11,7 +11,7 @@
 
 <script setup>
 import { useRoute } from 'nuxt/app'
-import { useUsersStore } from '../store'
+import { useUsersStore } from '~/components/modules/users/store'
 
 const store = useUsersStore()
 const params = useRoute().params

@@ -7,6 +7,9 @@ export const useUsersStore = defineStore('users', {
     }
   },
   actions: {
+    addCategory(category) {
+      this.bookmarksCategories.push(category)
+    },
     incrementBookmarksCount(categories: number[]) {
       categories.forEach((category) => {
         this.bookmarksCategories.forEach((bookmarkCategory) => {

@@ -81,7 +81,7 @@
 <script setup>
 import { defineAsyncComponent, computed, ref } from 'vue'
 import { ChatButton, LikeButton } from '@trevio/ui'
-import BookmarkButton from '~/components/modules/users/components/BookmarkButton'
+import BookmarkButton from '~/components/modules/bookmarks/components/BookmarkButton'
 import Profile from '~/components/modules/users/components/Profile'
 
 const props = defineProps({

@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import BookmarkCategoriesList from '../../components/BookmarkCategoriesList'
+import BookmarkCategoriesList from '~/components/modules/bookmarks/components/BookmarkCategoriesList'
 import { ContentCardRectangle } from '~/components'
 import { NOTE_CARD_RECTANGLE } from '~/components/modules/notes/graphql'
 import { TRAVEL_CARD_RECTANGLE } from '~/components/modules/travels/graphql'
