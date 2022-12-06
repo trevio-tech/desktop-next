@@ -23,6 +23,9 @@ export const TRAVEL_CARD = `
     name
     avatar
   }
+  bookmarks {
+    category_id
+  }
 `
 
 export const TRAVEL_CARD_RECTANGLE = `

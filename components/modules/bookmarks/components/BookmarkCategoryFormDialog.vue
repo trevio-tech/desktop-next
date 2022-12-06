@@ -1,6 +1,6 @@
 <template>
   <Dialog title="Создание категории закладок">
-    <form @submit.prevent="onSubmit" class="w-[480px]">
+    <form @submit.prevent="onSubmit">
       <FormField name="name" for="name" label="Название категории" required>
         <Input v-model="form.name" id="name" placeholder="Введите название категории" />
       </FormField>
@@ -23,11 +23,11 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useNuxtApp } from 'nuxt/app'
 import { useQuery } from '#imports'
-import { useUsersStore } from '~/components/modules/users/store'
+import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 
 const { handleSubmit, setErrors} = useForm()
 const { $overlay } = useNuxtApp()
-const store = useUsersStore()
+const store = useBookmarksStore()
 const form = ref({
   name: '',
   is_private: false,

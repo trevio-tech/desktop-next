@@ -43,11 +43,12 @@ export const NOTE_CARD = `
 export const NOTE_CARD_RECTANGLE = `
   id
   user_id
+  cover_id
   title
   text(words: 12)
   system_name
   created_at
-  cover(sizes: "default@resize:fill:640:320") {
+  cover(sizes: "default@resize:fill:160:160") {
     id
     model_id
     url

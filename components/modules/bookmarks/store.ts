@@ -1,18 +1,18 @@
 import { defineStore } from 'pinia'
 
-export const useUsersStore = defineStore('users', {
+export const useBookmarksStore = defineStore('bookmarks', {
   state: () => {
     return {
-      bookmarksCategories: []
+      categories: []
     }
   },
   actions: {
     addCategory(category) {
-      this.bookmarksCategories.push(category)
+      this.categories.push(category)
     },
     incrementBookmarksCount(categories: number[]) {
       categories.forEach((category) => {
-        this.bookmarksCategories.forEach((bookmarkCategory) => {
+        this.categories.forEach((bookmarkCategory) => {
           if (parseInt(bookmarkCategory.id) === category) {
             bookmarkCategory.content_count++
           }
@@ -21,7 +21,7 @@ export const useUsersStore = defineStore('users', {
     },
     decrementBookmarksCount(categories: number[]) {
       categories.forEach((category) => {
-        this.bookmarksCategories.forEach((bookmarkCategory) => {
+        this.categories.forEach((bookmarkCategory) => {
           if (parseInt(bookmarkCategory.id) === category) {
             bookmarkCategory.content_count--
           }
@@ -33,7 +33,7 @@ export const useUsersStore = defineStore('users', {
     sumOfEntriesFromAllCategories: (state) => {
       let result = 0
 
-      state.bookmarksCategories.forEach((category) => result += category.content_count)
+      state.categories.forEach((category) => result += category.content_count)
 
       return result
     }

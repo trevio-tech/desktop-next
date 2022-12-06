@@ -1,6 +1,6 @@
 import { MY_CHATS } from '~/components/modules/chats/graphql'
 import { defineNuxtPlugin } from 'nuxt/app'
-import { useUsersStore } from '~/components/modules/users/store'
+import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { useQuery } from '~/composables/useQuery'
 import { watch } from 'vue'
@@ -42,8 +42,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         await useChatsStore().$patch({
           chats: data.myChats
         })
-        await useUsersStore().$patch({
-          bookmarksCategories: data.bookmarksCategories
+        await useBookmarksStore().$patch({
+          categories: data.bookmarksCategories
         })
       }
 

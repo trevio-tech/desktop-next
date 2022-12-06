@@ -1,8 +1,8 @@
 <template>
   <Dialog title="Категории закладок">
     <div class="w-[480px]">
-      <div v-if="store.bookmarksCategories.length" class="space-y-1">
-        <div v-for="category in store.bookmarksCategories" :key="category.id">
+      <div v-if="store.categories.length" class="space-y-1">
+        <div v-for="category in store.categories" :key="category.id">
           <label :for="`category-${category.id}`" class="space-x-1">
             <input type="checkbox" :id="`category-${category.id}`" :value="category.id" v-model="categories" />
             <span>{{ category.name }}</span>
@@ -22,7 +22,7 @@
 import BookmarksCategoryForm from './BookmarkCategoryFormDialog'
 import { ref } from 'vue'
 import { useQuery } from '#imports'
-import { useUsersStore } from '~/components/modules/users/store'
+import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { Dialog } from '~/components/dev/Overlay'
 import { Button } from '@trevio/ui'
 
@@ -44,7 +44,7 @@ const props = defineProps({
   }
 })
 
-const store = useUsersStore()
+const store = useBookmarksStore()
 const loading = ref(false)
 const categories = ref(props.modelValue)
 
