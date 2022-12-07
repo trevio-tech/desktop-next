@@ -21,6 +21,11 @@
           <Textarea v-model="form.description" rows="3" placeholder="Пара слов о себе" />
         </FormField>
 
+
+        <FormField name="input.place_id" label="Откуда вы?">
+          <SearchPlace v-model="form.place" @update:modelValue="form.place_id = $event.id" />
+        </FormField>
+
         <FormField name="input.gender" label="Пол">
           <Select v-model="form.gender"
                   is-primitive
@@ -47,12 +52,14 @@
 
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
-import { FormField, Textarea, Input, Button, Select } from '@trevio/ui'
+import { FormField, Textarea, Input, Button, Select, SearchPlace } from '@trevio/ui'
 import { ref } from 'vue'
 import { useRoute } from 'nuxt/app'
 import { UPDATE_USER } from '../graphql'
+import { useQuery } from '#imports'
 
 const form = ref({
+  place_id: null,
   name: '',
   description: '',
   birthday: null,
