@@ -2,7 +2,7 @@
   <TheLayout heading="Фотоальбома">
     <template #sidebar>1</template>
     <div class="space-y-4">
-      <div v-for="album in albums.data" :key="album.id">
+      <div v-for="album in albums" :key="album.id">
         <NuxtLink :to="{name: 'albums.show', params: {albumId: album.id}}">{{ album.title }}</NuxtLink>
       </div>
     </div>
@@ -11,16 +11,16 @@
 
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
-import { useAsyncGql } from '~/uses'
+import { useQuery } from '#imports'
 
-const { data: { value: { albums }}} = await useAsyncGql(`
-  query {
-    albums {
-      data {
+const { data: { albums }} = await useQuery({
+  query: `
+    query {
+      albums {
         id
         title
       }
     }
-  }
-`)
+  `
+})
 </script>

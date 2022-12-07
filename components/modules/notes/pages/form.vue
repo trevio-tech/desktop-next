@@ -32,12 +32,12 @@ import TheLayout from '~/components/layout/TheLayout'
 import TheForm from '~/components/TheForm'
 import pick from 'lodash.pick'
 import { CREATE_NOTE, UPDATE_NOTE, NOTE_FORM } from '../graphql'
-import { FormField, Input, Select, SearchPlace } from '@trevio/ui';
+import { FormField, Input, Select, SearchPlace, TipTap } from '@trevio/ui';
 import { InputTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
-import TipTap from '../../../../../ui/src/components/form/TipTap/TipTap.vue'
+// import TipTap from '../../../../../ui/src/components/form/TipTap/TipTap.vue'
 
 definePageMeta({
   middleware: 'auth'

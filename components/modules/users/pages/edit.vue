@@ -56,6 +56,7 @@ import { FormField, Textarea, Input, Button, Select, SearchPlace } from '@trevio
 import { ref } from 'vue'
 import { useRoute } from 'nuxt/app'
 import { UPDATE_USER } from '../graphql'
+import { PLACE_WITH_PARENTS_FIELDS } from '~/components/modules/places/graphql'
 import { useQuery } from '#imports'
 
 const form = ref({
@@ -77,6 +78,9 @@ try {
           description
           birthday
           gender
+          place {
+            ${PLACE_WITH_PARENTS_FIELDS}
+          }
         }
       }
     `,
@@ -94,6 +98,7 @@ const onSubmit = async () => {
 
     delete input.id
     delete input.__typename
+    delete input.place
 
     const { data: { updateUser } } = await useQuery({
       query: `

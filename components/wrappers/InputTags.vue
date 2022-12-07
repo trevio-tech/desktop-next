@@ -25,7 +25,7 @@ const props = defineProps({
 const tags = ref(props.modelValue)
 
 const onSelect = async ({ name }) => {
-  const { data: { createTag }} = await useGql(`
+  const { createTag } = await useGql(`
     mutation($name: String) {
       createTag(name: $name) {
         id
