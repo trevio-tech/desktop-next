@@ -12,12 +12,13 @@
 
 <script setup>
 import BookmarkCategoriesList from '~/components/modules/bookmarks/components/BookmarkCategoriesList'
+import { ALBUM_CARD_RECTANGLE } from '~/components/modules/albums/graphql'
 import { ContentCardRectangle } from '~/components'
 import { NOTE_CARD_RECTANGLE } from '~/components/modules/notes/graphql'
 import { TRAVEL_CARD_RECTANGLE } from '~/components/modules/travels/graphql'
+import { useBookmarksStore } from '../store'
 import { useQuery } from '#imports'
 import { useRoute } from 'nuxt/app'
-import { useBookmarksStore } from '../store'
 
 const params = useRoute().params
 const store = useBookmarksStore()
@@ -42,6 +43,9 @@ const query = `
       }
       ...on Note {
         ${NOTE_CARD_RECTANGLE}
+      }
+      ...on Album {
+        ${ALBUM_CARD_RECTANGLE}
       }
     }
   }

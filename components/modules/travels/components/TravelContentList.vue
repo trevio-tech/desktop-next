@@ -5,7 +5,6 @@
       <li @click="setFilter({orderByDate: 'old'})">Сначала старые</li>
     </ul>
     <div class="relative">
-      <Loader v-if="loading" />
       <div v-show="items.length" class="space-y-4">
         <article v-for="item in items" :key="item.id" class="flex overflow-hidden rounded-md shadow ring-1 ring-slate-200">
           <NuxtLink :to="`/${item.system_name}/${item.id}`" class="w-40 h-40 bg-stone-200 flex-shrink-0">
@@ -27,7 +26,7 @@
 <script setup>
 import { useRoute } from 'nuxt/app'
 import { ref } from 'vue'
-import { Button, Loader } from '@trevio/ui'
+import { Button } from '@trevio/ui'
 
 const query = `
   query getTravelContentList ($travelId: Int!, $offset: String!, $filter: TravelContentListFilterInput) {

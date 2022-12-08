@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import useContentCard from '~/components/ContentCard/useContentCard'
 
 const props = defineProps({
   entry: {
@@ -22,26 +22,5 @@ const props = defineProps({
   },
 })
 
-const to = computed(() => {
-  const systemName = props.entry.system_name
-  const id = props.entry.id
-
-  if (systemName === 'notes') {
-    return {name: 'notes.show', params: {noteId: id}}
-  } else if (systemName === 'travels') {
-    return {name: 'travels.show', params: {travelId: id}}
-  } else if (systemName === 'albums') {
-    return {name: 'albums.show', params: {albumId: id}}
-  }
-})
-
-const bookmarks = ref(props.entry.bookmarks?.map((bookmark) => bookmark.category_id))
-
-const label = {
-  notes: 'Заметка',
-  posts: 'Блог компании',
-  questions: 'Вопрос',
-  reviews: 'Отзыв',
-  travels: 'Путешествие',
-}
+const { to } = useContentCard(props)
 </script>

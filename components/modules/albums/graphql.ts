@@ -8,7 +8,11 @@ export const ALBUM_CARD = `
   cover_id
   text(words: 20)
   likes_count
+  system_name
   can
+  bookmarks {
+    category_id
+  }
   cover {
     url
   }
@@ -24,6 +28,35 @@ export const ALBUM_CARD = `
   tags {
     id
     name
+  }
+  user {
+    id
+    name
+    avatar
+  }
+`
+
+export const ALBUM_CARD_RECTANGLE = `
+  id
+  user_id
+  cover_id
+  title
+  text(words: 12)
+  system_name
+  created_at
+  cover(sizes: "default@resize:fill:160:160") {
+    id
+    model_id
+    url
+    sizes
+  }
+  user {
+    id
+    name
+    avatar
+  }
+  bookmarks {
+    category_id
   }
 `
 
