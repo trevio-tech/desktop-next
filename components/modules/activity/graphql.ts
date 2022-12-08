@@ -1,6 +1,7 @@
 import {NOTE_CARD} from '~/components/modules/notes/graphql'
 import {REVIEW_CARD} from '~/components/modules/reviews/graphql'
 import {TRAVEL_CARD} from '~/components/modules/travels/graphql'
+import { ALBUM_CARD } from '~/components/modules/albums/graphql'
 
 export const TIMELINE = `
     ... on Note {
@@ -21,9 +22,7 @@ export const TIMELINE = `
 `
 
 export const FEED = `
-    page
-    items {
-      ... on Note {
+      ...on Note {
         ${NOTE_CARD}
         system_name
         created_at
@@ -32,7 +31,7 @@ export const FEED = `
           name
         }
       }
-      ... on Review {
+      ...on Review {
         ${REVIEW_CARD}
         system_name
         created_at
@@ -41,7 +40,7 @@ export const FEED = `
           name
         }
       }
-      ... on Travel {
+      ...on Travel {
         ${TRAVEL_CARD}
         system_name
         created_at
@@ -50,5 +49,13 @@ export const FEED = `
           name
         }
       }
-    }
+      ...on Album {
+        ${ALBUM_CARD}
+        system_name
+        created_at
+        whoShared {
+          id
+          name
+        }
+      }
 `

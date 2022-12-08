@@ -31,12 +31,10 @@
                   is-primitive
                   :items="[{id: null, name: 'Другой'}, {id: 'male', name: 'Мужской'}, {id: 'female', name: 'Женский'}]">
           </Select>
-          {{ form.gender }}
         </FormField>
 
         <FormField name="input.birthday" label="День рождения">
           <Input v-model="form.birthday" type="date" />
-          {{ form.birthday }}
         </FormField>
       </div>
       <footer class="mt-8">

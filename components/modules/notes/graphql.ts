@@ -9,6 +9,7 @@ export const NOTE_CARD = `
   likes_count
   system_name
   messages_count
+  published_at
   can
   cover {
     id

@@ -4,16 +4,19 @@ export const ALBUM_CARD = `
   id
   title
   place_id
+  user_id
   travel_id
   cover_id
   text(words: 20)
   likes_count
   system_name
   can
+  published_at
   bookmarks {
     category_id
   }
   cover {
+    id
     url
   }
   travel {

@@ -10,6 +10,8 @@ export default (props) => {
       return {name: 'travels.show', params: {travelId: id}}
     } else if (system_name === 'albums') {
       return {name: 'albums.show', params: {albumId: id}}
+    } else if (system_name === 'reviews') {
+      return {name: 'reviews.show', params: {reviewId: id}}
     }
   })
 

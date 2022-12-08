@@ -5,7 +5,7 @@
         <img src="/images/logotype.svg" alt="" class="block h-6">
       </NuxtLink>
       <div class="flex min-w-[560px] w-[560px] ml-24">
-        <Input placeholder="Поиск" />
+        <Input placeholder="Поиск" class="w-[280px]" />
         <Button class="ml-auto" v-if="$auth.loggedIn" @click="$overlay.show(TheContentCreationDialog)">Создать</Button>
       </div>
       <ul v-if="!$auth.loggedIn" class="flex space-x-2 ml-auto">

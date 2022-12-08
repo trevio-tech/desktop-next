@@ -9,7 +9,7 @@
         <div class="absolute top-0 left-0 p-2">
           <div class="bg-slate-500/40 py-1 px-3 text-white font-medium text-sm rounded-lg">{{ label[entry.system_name] }}</div>
         </div>
-        <img v-if="entry.cover" :src="entry.cover.url" :alt="entry.title" class="object-cover w-full h-full">
+        <img v-if="entry.cover" :src="entry.cover.url" :alt="entry.title" class="object-cover w-full h-full" loading="lazy">
       </NuxtLink>
       <div v-if="entry.travel_id > 0"
            @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/travels/components/TravelAboutDialog.vue')), {
@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent, shallowRef } from 'vue'
 import { ChatButton, LikeButton } from '@trevio/ui'
 import BookmarkButton from '~/components/modules/bookmarks/components/BookmarkButton'
 import Profile from '~/components/modules/users/components/Profile'
@@ -98,5 +98,8 @@ const props = defineProps({
 
 const { to, label } = useContentCard(props)
 
-const bookmarks = ref(props.entry.bookmarks?.map((bookmark) => bookmark.category_id))
+// Если в ленте добавить в закладки, потом перейти на другую страницу и снова вернуться в ленту,
+// то лента не будет отображать что карточка в закладках, потому что BookmarkButton обновляет локальную модель,
+// состояние карточки в сторе остаеться старое.
+const bookmarks = shallowRef(props.entry.bookmarks?.map((bookmark) => bookmark.category_id))
 </script>
