@@ -5,15 +5,17 @@ export const useActivityStore = defineStore('activity', {
     return {
       items: [],
       page: 1,
+      isTimeline: false
     }
   },
   actions: {
-    async incrementPage() {
-      this.page++
-    },
     async addItems(newItems) {
       newItems.forEach((item) => this.items.push(item))
       this.page++
     },
+    resetItems() {
+      this.page = 1;
+      this.items = []
+    }
   },
 })
