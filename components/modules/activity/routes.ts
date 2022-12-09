@@ -1,4 +1,5 @@
 export default [
-  { path: '/reviews', name: 'reviews', file: 'index' },
-  { path: '/reviews/:reviewId(\\d+)', name: 'reviews.show', file: 'show'},
+  { path: '/', name: 'activity', file: 'index' },
+  { path: '/new', name: 'activity.new', file: 'index'},
+  { path: '/top', name: 'activity.top', file: 'index'},
 ]

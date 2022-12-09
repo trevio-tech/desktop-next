@@ -2,9 +2,9 @@
   <article class="bg-white overflow-hidden ring-1 ring-slate-200 rounded-lg">
     <div class="relative overflow-hidden">
       <NuxtLink
-          :to="to"
-          class="h-80 block"
-          style="background-image: url('/images/no-image.png')"
+        :to="to"
+        class="h-80 block"
+        style="background-image: url('/images/no-image.png')"
       >
         <div class="absolute top-0 left-0 p-2">
           <div class="bg-slate-500/40 py-1 px-3 text-white font-medium text-sm rounded-lg">{{ label[entry.system_name] }}</div>

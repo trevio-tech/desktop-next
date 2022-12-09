@@ -25,6 +25,7 @@ export const FEED = `
       ...on Note {
         ${NOTE_CARD}
         system_name
+        rating1
         created_at
         whoShared {
           id
@@ -53,6 +54,7 @@ export const FEED = `
         ${ALBUM_CARD}
         system_name
         created_at
+        rating1
         whoShared {
           id
           name
