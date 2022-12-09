@@ -5,7 +5,8 @@ export const useActivityStore = defineStore('activity', {
     return {
       items: [],
       page: 1,
-      previousRouteName: null
+      previousRouteName: null,
+      loadedBelts: {}
     }
   },
   actions: {
@@ -20,6 +21,14 @@ export const useActivityStore = defineStore('activity', {
     },
     async incrementPage() {
       this.page++;
-    }
+    },
+    addBelt(index, data) {
+      this.loadedBelts[index] = data
+    },
+  },
+  getters: {
+    getBelt: (state) => {
+      return (index) => state.loadedBelts[index] || []
+    },
   },
 })

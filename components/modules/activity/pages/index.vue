@@ -5,8 +5,13 @@
     </template>
 
     <div class="space-y-4">
-      <div v-for="item in store.items" :key="item.id">
+      <div v-for="(item, index) in store.items" :key="item.id">
         <ContentCard :entry="item" />
+        <UsersBelt
+          v-if="index === 1"
+          :items="store.getBelt(index)"
+          @loaded="store.addBelt(index, $event)"
+          class="mt-4" />
       </div>
     </div>
 
@@ -16,6 +21,7 @@
 
 <script setup>
 import ContentCard from '~/components/ContentCard'
+import UsersBelt from '~/components/modules/users/components/UsersBelt.vue'
 import { FEED } from '~/components/modules/activity/graphql'
 import { ref } from 'vue'
 import { useActivityStore } from '~/components/modules/activity/store'

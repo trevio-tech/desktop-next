@@ -23,14 +23,14 @@
 
     <ul class="main-nav font-medium text-sm space-y-px">
       <li v-for="(item, index) in items" :key="index">
-        <NuxtLink :to="item.href" class="px-3 py-2 hover:bg-slate-100 rounded-lg flex items-center space-x-3">{{ item.name }}</NuxtLink>
+        <NuxtLink :to="item.href" class="px-3 py-2 hover:bg-slate-100 rounded-lg block">{{ item.name }}</NuxtLink>
       </li>
     </ul>
   </nav>
 </template>
 
 <script setup>
-import { Clock2, Users, Flame } from 'lucide-vue-next'
+import { Clock2, Users, Flame, Circle } from 'lucide-vue-next'
 
 const items = [
   { name: 'Путешествия', href: '/travels' },
