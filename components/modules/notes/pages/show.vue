@@ -15,6 +15,16 @@
             </template>
             <NuxtLink :to="`/notes/${note.id}/edit`">Удалить</NuxtLink>
           </MenuListItem>
+          <MenuListItem variant="negative">
+            <template #icon>
+              <Trash class="w-5 h-5" />
+            </template>
+            <div @click="$overlay.show(PromoDialog, {
+              props: {
+                entry: note
+              }
+            })">Продвинуть</div>
+          </MenuListItem>
         </MenuList>
       </Menu>
     </template>
@@ -30,13 +40,13 @@
 </template>
 
 <script setup>
-
 import { useRoute } from 'nuxt/app'
 import { useAsyncQuery } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE } from '../graphql'
 import { ImageViewer } from '@trevio/ui'
 import { ref } from 'vue'
+import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
 
 import Menu from '../../../../../ui/src/components/Menu/Menu.vue'
 import MenuList from '../../../../../ui/src/components/Menu/MenuList.vue'

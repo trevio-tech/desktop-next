@@ -72,6 +72,7 @@ export const NOTE = `
     title
     text
     can
+    system_name
     images {
         id
         url

@@ -70,6 +70,7 @@ export default {
         },
         user: {
           property: '',
+          autoFetch: true
         },
       }
     },

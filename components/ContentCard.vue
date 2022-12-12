@@ -53,13 +53,15 @@
     </div>
 
     <footer class="flex items-center p-4 bg-stone-50 border-t border-t-stone-100">
-      <LikeButton
-          model-type="notes"
-          :model-id="entry.id"
-          :is-liked="entry.like?.is_liked"
-          :count="entry.likes_count"
-          class="mr-2"
-      />
+      <AuthOnly>
+        <LikeButton
+            model-type="notes"
+            :model-id="entry.id"
+            :is-liked="entry.like?.is_liked"
+            :count="entry.likes_count"
+            class="mr-2"
+        />
+      </AuthOnly>
       <ChatButton
           v-if="hasChat"
           @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
@@ -84,6 +86,7 @@ import { ChatButton, LikeButton } from '@trevio/ui'
 import BookmarkButton from '~/components/modules/bookmarks/components/BookmarkButton'
 import Profile from '~/components/modules/users/components/Profile'
 import useContentCard from '~/components/ContentCard/useContentCard'
+import AuthOnly from '~/components/AuthOnly.vue'
 
 const props = defineProps({
   entry: {
@@ -95,6 +98,10 @@ const props = defineProps({
     default: true
   }
 })
+
+const testClick = () => {
+  console.log('testClick')
+}
 
 const { to, label } = useContentCard(props)
 
