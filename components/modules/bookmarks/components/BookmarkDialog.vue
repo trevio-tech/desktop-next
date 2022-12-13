@@ -23,9 +23,7 @@ import BookmarksCategoryForm from './BookmarkCategoryFormDialog'
 import { ref } from 'vue'
 import { useQuery } from '#imports'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
-import { Dialog } from '~/components/dev/Overlay'
-import { Button } from '@trevio/ui'
-
+import Dialog from '~/components/base/Dialog.vue'
 const emit = defineEmits([
     'change'
 ])

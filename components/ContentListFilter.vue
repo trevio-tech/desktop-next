@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-import { Checkbox, Dropdown, DropdownItem, Button } from '@trevio/ui'
 import { ref } from 'vue'
 
 defineEmits(['update:modelValue'])

@@ -15,9 +15,8 @@
 </template>
 
 <script setup>
-import { Dialog } from '~/components/dev/Overlay'
-import { FormField, Button } from '@trevio/ui';
-import { InputTags } from '~/components/wrappers'
+import Dialog from '~/components/base/Dialog.vue'
+import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useGql } from '~/uses'

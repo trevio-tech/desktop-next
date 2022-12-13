@@ -1,7 +1,9 @@
 <template>
   <div class="space-y-4">
-    <div v-for="item in items" :key="item.id">
-      <ContentCard :entry="item" />
+    <div v-for="(item, index) in items" :key="item.id">
+      <slot :entry="item" :index="index">
+        <ContentCard :entry="item" />
+      </slot>
     </div>
     <div v-if="! isEnd" @click="onMore" class="text-center bg-gray-300/50">Еще</div>
   </div>
@@ -23,27 +25,29 @@ const props = defineProps({
 const items = ref([])
 const isEnd = ref(false)
 const nextPage = ref(0)
+const page = ref(1)
 
-const fetchFeed = async (offset = 0) => {
-  const { data: { timeline }} = await useGql(`
-    query($user_id: Int) {
-      timeline(user_id: $user_id) {
+const fetchFeed = async () => {
+  const { data: { feed }} = await useGql(`
+    query($user_id: Int, $page: Int) {
+      feed(user_id: $user_id, page: $page) {
         ${TIMELINE}
       }
     }
   `, {
-    user_id: props.userId
+    user_id: props.userId,
+    page: page.value++
   })
 
-  if (timeline.length) {
-    timeline.forEach(item => items.value.push(item))
+  if (feed.length) {
+    feed.forEach(item => items.value.push(item))
   }
 
-  if (timeline.length < 2) {
+  if (feed.length < 2) {
     isEnd.value = true
   }
 
-  nextPage.value = Math.round(timeline.length / 2)
+  nextPage.value = Math.round(feed.length / 2)
 }
 
 await fetchFeed()

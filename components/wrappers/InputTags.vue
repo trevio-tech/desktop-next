@@ -1,39 +1,42 @@
 <template>
-  <InputTags :key-name="keyName" :placeholder="placeholder" :model-value="tags" @update:modelValue="$emit('update:modelValue', $event)" :select-callback="onSelect" />
+  <InputTags :key-name="keyName" :placeholder="placeholder" :model-value="tags"
+             @update:modelValue="$emit('update:modelValue', $event)" :select-callback="onSelect"/>
 </template>
 
 <script setup>
-import { InputTags } from '@trevio/ui'
 import { ref } from 'vue'
-import { useGql } from '~/uses'
+import { useQuery } from '#imports'
 
 defineEmits(['update:modelValue'])
 
 const props = defineProps({
   modelValue: {
     type: Array,
-    default: () => []
+    default: () => [],
   },
   placeholder: {
     type: String,
   },
   keyName: {
-    type: String
-  }
+    type: String,
+  },
 })
 
 const tags = ref(props.modelValue)
 
 const onSelect = async ({ name }) => {
-  const { createTag } = await useGql(`
-    mutation($name: String) {
-      createTag(name: $name) {
-        id
-        name
+  const { createTag } = await useQuery({
+    query: `
+      mutation($name: String) {
+        createTag(name: $name) {
+          id
+          name
+        }
       }
-    }
-  `, {
-    name
+    `,
+    variables: {
+      name,
+    },
   })
 
   return createTag

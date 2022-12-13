@@ -27,7 +27,7 @@
       </FormField>
 
       <FormField name="input.tags" label="Теги" id="tags">
-        <InputTags v-model="form.tags" />
+        <InputCustomTags v-model="form.tags" />
       </FormField>
 
       <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
@@ -41,14 +41,14 @@
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_ALBUM, UPDATE_ALBUM, ALBUM_FORM } from '../graphql'
-import { FormField, Select, Input, Textarea, Upload, SearchPlace } from '@trevio/ui';
 import TheForm from '~/components/TheForm'
-import { InputTags } from '~/components/wrappers'
+import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useGql } from '~/uses'
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
 import FormGallery from '~/components/modules/albums/components/FormGallery.vue'
+import { definePageMeta } from '#imports'
 
 definePageMeta({
   middleware: 'auth'

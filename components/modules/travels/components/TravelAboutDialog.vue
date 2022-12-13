@@ -16,8 +16,7 @@
 <script setup>
 import { useAsyncQuery } from '~/uses'
 import { ref, onMounted } from 'vue'
-import { Dialog } from '../../../dev/Overlay'
-import { Loader } from '@trevio/ui'
+import Dialog from '~/components/base/Dialog'
 
 const travel = ref(null)
 

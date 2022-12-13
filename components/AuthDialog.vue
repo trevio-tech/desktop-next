@@ -26,7 +26,6 @@
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
-import { FormField, Input, Button } from '@trevio/ui'
 import { useNuxtApp } from '#app'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'

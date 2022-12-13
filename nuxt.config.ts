@@ -1,35 +1,14 @@
-const description = `
-  Любите путешествовать? Вливайтесь в сообщество Тревио.
-  Здесь вы найдете полезную информацию о всех уголках земного шара.
-  Откройте для себя новый мир, полный незабываемых эмоций!
-`;
-
 export default {
+  extends: [
+    '../nuxt-base-layer',
+    // 'github:trevio-tech/nuxt-base-layer#master'
+  ],
   vite: {
     server: {
       fs: {
         allow: ['..']
       }
     }
-  },
-  app: {
-    head: {
-      titleTemplate: title => (title ? `${title} — ` : '') + 'Trevio.ru - о путешествиях',
-      meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'msapplication-TileColor', content: '#da532c' },
-        { name: 'theme-color', content: '#ffffff' },
-        { hid: 'description', name: 'description', content: description },
-      ],
-      link: [
-        { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png' },
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
-        { rel: 'manifest', href: '/favicon/site.webmanifest' },
-        { rel: 'mask-icon', href: '/favicon/safari-pinned-tab.svg', color: "#5bbad5" },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap' }
-      ],
-    },
   },
   css: [
     '@/assets/scss/main.scss'
@@ -41,6 +20,9 @@ export default {
     '@nuxtjs/tailwindcss',
     '~/modules/routes',
   ],
+  build: {
+    transpile: ['@headlessui/vue']
+  },
   runtimeConfig: {
     public: {
       GRAPHQL_URL: process.env.GRAPHQL_URL,

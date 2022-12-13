@@ -20,7 +20,7 @@
           </FormField>
 
           <FormField name="input.tags" label="Теги" id="tags">
-            <InputTags v-model="form.tags" />
+            <InputCustomTags v-model="form.tags" />
           </FormField>
 
           <FormField name="input.date_start" label="Дата начала и завершения" id="date">
@@ -54,7 +54,7 @@
                   </template>
                 </Button>
                 <template v-slot:popper="{ hide }">
-                  <DropdownItem v-for="currency in currencies" :key="currency.id" :value="currency.id" v-model="content" @click="form.currency_id = currency.id; hide()">
+                  <DropdownItem v-for="currency in currencies" :key="currency.id" :value="currency.id" @click="form.currency_id = currency.id; hide()">
                     {{ currency.name }}
                   </DropdownItem>
                 </template>
@@ -71,17 +71,15 @@
 import '@vuepic/vue-datepicker/dist/main.css'
 import Datepicker from '@vuepic/vue-datepicker';
 import TheForm from '~/components/TheForm'
-import TheLayout from '~/components/layout/TheLayout'
 import TravelUpload from '../components/TravelUpload'
 import pick from 'lodash.pick'
 import { ChevronDownIcon } from '@heroicons/vue/24/outline'
-import { FormField, Textarea, Input, Button, SearchPlace, Dropdown, DropdownItem } from '@trevio/ui';
-import { InputTags } from '~/components/wrappers'
+import { InputCustomTags } from '~/components/wrappers'
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
-import { useQuery } from '#imports'
 import { useRoute, useRouter } from 'nuxt/app'
 import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
+import { definePageMeta, useQuery } from '#imports'
 
 definePageMeta({
   middleware: 'auth'

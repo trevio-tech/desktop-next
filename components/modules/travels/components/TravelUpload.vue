@@ -3,7 +3,7 @@
     <Upload
       model-type="travels"
       :fields="fields"
-      @uploaded="onUploaded"
+      @update:modelValue="onUploaded"
       class="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0"
     />
     <div v-if="! image.url" class="flex flex-col items-center">
@@ -17,7 +17,6 @@
 </template>
 
 <script setup>
-import Upload from '~/components/Upload'
 import { ref } from 'vue'
 
 const props = defineProps({

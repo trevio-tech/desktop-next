@@ -20,8 +20,7 @@
 </template>
 
 <script setup>
-import { Dialog } from '~/components/dev/Overlay'
-import { FormField, Button, SearchPlace } from '@trevio/ui'
+import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useGql } from '~/uses'

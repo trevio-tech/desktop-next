@@ -50,7 +50,6 @@
 
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
-import { FormField, Textarea, Input, Button, Select, SearchPlace } from '@trevio/ui'
 import { ref } from 'vue'
 import { useRoute } from 'nuxt/app'
 import { UPDATE_USER } from '../graphql'

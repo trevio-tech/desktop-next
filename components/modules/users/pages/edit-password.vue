@@ -32,7 +32,6 @@
 <script setup>
 import Card from '~/components/Card'
 import TheLayout from '~/components/layout/TheLayout'
-import { FormField, Input, Button } from '@trevio/ui'
 import { UPDATE_USER_PASSWORD } from '../graphql'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'

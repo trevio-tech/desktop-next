@@ -32,7 +32,6 @@
 <script>
 import Validation from '~/utils/validation';
 import TheLayout from '~/components/layout/TheLayout'
-import { FormField, Input } from '@trevio/ui'
 
 const formInitialState = {
   email: '',

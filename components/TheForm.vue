@@ -15,8 +15,6 @@
 </template>
 
 <script setup>
-import { Button } from '@trevio/ui';
-
 defineEmits(['submit', 'draft'])
 
 defineProps({

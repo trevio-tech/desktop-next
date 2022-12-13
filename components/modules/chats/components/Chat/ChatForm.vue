@@ -17,7 +17,6 @@
 import { ref, watch } from 'vue'
 import { CREATE_CHAT_MESSAGE } from '../../graphql'
 import { ImagePlus } from 'lucide-vue-next'
-import { Textarea, Button } from '@trevio/ui'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 
 const { chatId } = defineProps({

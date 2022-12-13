@@ -20,9 +20,9 @@
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
 import { ALBUM } from '~/components/modules/albums/graphql'
-import { ImageViewer } from '@trevio/ui'
 import { ref } from 'vue'
 import { useRoute } from 'nuxt/app'
+import { useQuery } from '#imports'
 
 const album = ref()
 

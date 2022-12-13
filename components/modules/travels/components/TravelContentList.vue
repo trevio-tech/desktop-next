@@ -26,7 +26,6 @@
 <script setup>
 import { useRoute } from 'nuxt/app'
 import { ref } from 'vue'
-import { Button } from '@trevio/ui'
 
 const query = `
   query getTravelContentList ($travelId: Int!, $offset: String!, $filter: TravelContentListFilterInput) {

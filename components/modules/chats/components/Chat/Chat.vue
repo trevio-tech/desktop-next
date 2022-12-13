@@ -44,7 +44,6 @@
 
 <script setup>
 import { ChatForm, ChatList, MessageList } from './'
-import { Button } from '@trevio/ui'
 import { groupBy } from 'lodash'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 import { X, MoreHorizontal } from 'lucide-vue-next'

@@ -2,7 +2,7 @@
   <Dialog title="Что хотите создать?">
     <ul class="w-[640px] grid grid-cols-2 gap-4">
       <li v-ripple v-for="(item, index) in items" :key="index"
-          class="flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-gray-100">
+          class="flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-slate-100">
         <NuxtLink :to="item.href" @click="$overlay.hide" class="block p-4">
           <div class="font-medium">{{ item.name }}</div>
           <div class="text-xs text-gray-400">{{ item.text }}</div>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { Dialog } from '~/components/dev/Overlay'
+import Dialog from '~/components/base/Dialog.vue'
 
 const items = [
   {

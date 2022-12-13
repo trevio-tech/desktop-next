@@ -2,7 +2,7 @@ import { MY_CHATS } from '~/components/modules/chats/graphql'
 import { defineNuxtPlugin } from 'nuxt/app'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
-import { useQuery } from '~/composables/useQuery'
+import { useQuery } from '#imports'
 import { watch } from 'vue'
 
 export default defineNuxtPlugin(async (nuxtApp) => {

@@ -17,9 +17,7 @@
 </template>
 
 <script setup>
-import { InputTags } from '@trevio/ui'
 import { ref } from 'vue'
-import { useGql } from '~/uses'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 
 defineEmits(['update:modelValue'])

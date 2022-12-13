@@ -17,8 +17,7 @@
 </template>
 
 <script setup>
-import { Button, FormField, Input } from '@trevio/ui'
-import { Dialog } from '~/components/dev/Overlay'
+import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useNuxtApp } from 'nuxt/app'

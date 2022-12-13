@@ -1,7 +1,7 @@
 <template>
   <TheLayout>
     <template #sidebar>
-      <div class="bg-green-300/50 w-full h-full"></div>
+      <div class="bg-emerald-100 w-full h-full"></div>
     </template>
 
     <div class="space-y-4">

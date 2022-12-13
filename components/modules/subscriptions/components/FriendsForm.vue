@@ -5,9 +5,9 @@
         <InputUsers placeholder="Введите ник пользователя" :model-value="modelValue" @update:modelValue="onUpdate" />
       </FormField>
 
-      <form-field v-if="recommendations.length" name="recommendations" label="Рекоммедации">
+      <FormField v-if="recommendations.length" name="recommendations" label="Рекоммедации">
         {{ recommendations }}
-      </form-field>
+      </FormField>
 
       <Button :loading="loading" type="submit">Сохранить</Button>
     </form>
@@ -15,8 +15,7 @@
 </template>
 
 <script setup>
-import { Dialog } from '~/components/dev/Overlay'
-import { FormField, Button } from '@trevio/ui';
+import Dialog from '~/components/base/Dialog.vue'
 import { InputUsers } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'

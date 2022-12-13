@@ -44,13 +44,9 @@ import { useRoute } from 'nuxt/app'
 import { useAsyncQuery } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE } from '../graphql'
-import { ImageViewer } from '@trevio/ui'
 import { ref } from 'vue'
 import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
 
-import Menu from '../../../../../ui/src/components/Menu/Menu.vue'
-import MenuList from '../../../../../ui/src/components/Menu/MenuList.vue'
-import MenuListItem from '../../../../../ui/src/components/Menu/MenuListItem.vue'
 import { Pencil, Trash } from 'lucide-vue-next'
 import ContentCardSlider from '~/components/ContentCardSlider.vue'
 

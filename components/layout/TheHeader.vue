@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-import { Button, Input, Dropdown, DropdownItem } from '@trevio/ui'
 import { useNuxtApp } from 'nuxt/app'
 import TheContentCreationDialog from './TheContentCreationDialog'
 

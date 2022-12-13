@@ -35,7 +35,6 @@
 <script setup>
 import { ref } from 'vue'
 import TheLayout from '~/components/layout/TheLayout'
-import { Button, FormField, Input, RadioGroup, RadioGroupLabel, RadioGroupOption } from '@trevio/ui'
 
 const form = ref({
   email: null,
