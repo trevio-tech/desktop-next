@@ -30,9 +30,6 @@
 </template>
 
 <script>
-import Validation from '~/utils/validation';
-import TheLayout from '~/components/layout/TheLayout'
-
 const formInitialState = {
   email: '',
   password: '',
@@ -42,18 +39,11 @@ export default {
   middleware: 'auth',
   auth: 'guest',
 
-  components: {
-    TheLayout,
-    FormField,
-    Input
-  },
-
   data() {
     return {
       form: {...formInitialState},
       loading: false,
       isBanned: false,
-      errors: new Validation,
     }
   },
 

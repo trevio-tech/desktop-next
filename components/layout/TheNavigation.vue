@@ -4,19 +4,19 @@
       <li>
         <NuxtLink to="/" class="px-3 py-2 hover:bg-slate-100 rounded-lg flex items-center space-x-3">
           <Users class="w-5 h-5 text-slate-500" />
-          <span class="font-medium text-sm">Моя лента</span>
+          <span class="font-medium">Моя лента</span>
         </NuxtLink>
       </li>
       <li>
         <NuxtLink to="/new" class="px-3 py-2 hover:bg-slate-100 rounded-lg flex items-center space-x-3">
           <Clock2 class="w-5 h-5 text-slate-500" />
-          <span class="font-medium text-sm">Свежее</span>
+          <span class="font-medium">Свежее</span>
         </NuxtLink>
       </li>
       <li>
         <NuxtLink to="/top" class="px-3 py-2 hover:bg-slate-100 rounded-lg flex items-center space-x-3">
           <Flame class="w-5 h-5 text-orange-500" />
-          <span class="font-medium text-sm">Топ</span>
+          <span class="font-medium">Топ</span>
         </NuxtLink>
       </li>
     </ul>

@@ -5,6 +5,7 @@
         <ContentCard :entry="item" />
       </slot>
     </div>
+    <div v-show="items.length === 0">Ничего не найдено</div>
     <div v-if="! isEnd" @click="onMore" class="text-center bg-gray-300/50">Еще</div>
   </div>
 </template>
@@ -19,6 +20,9 @@ const props = defineProps({
   userId: {
     type: Number,
     required: true
+  },
+  systemName: {
+    type: String
   }
 })
 
@@ -29,14 +33,15 @@ const page = ref(1)
 
 const fetchFeed = async () => {
   const { data: { feed }} = await useGql(`
-    query($user_id: Int, $page: Int) {
-      feed(user_id: $user_id, page: $page) {
+    query($user_id: Int, $page: Int, $system_name: String) {
+      feed(user_id: $user_id, page: $page, system_name: $system_name) {
         ${TIMELINE}
       }
     }
   `, {
     user_id: props.userId,
-    page: page.value++
+    page: page.value++,
+    system_name: props.systemName
   })
 
   if (feed.length) {

@@ -1,7 +1,7 @@
 <template>
   <Dialog title="Выбор продвигаемых записей">
     <div class="w-[640px]">
-      <ContentList :user-id="$auth.user?.id">
+      <ContentList :user-id="$auth.user?.id" :system-name="systemName">
         <template v-slot="{ entry, index }">
           <PromoItem
               @select="onSelect"
@@ -10,7 +10,7 @@
               :selected="selectedKeys[`${entry.system_name}_${entry.id}`] === true" />
         </template>
       </ContentList>
-      <Button @click="emit('select', selected)">Сохранить</Button>
+      <Button @click="emit('select', selected)">Продолжить</Button>
     </div>
   </Dialog>
 </template>
@@ -25,6 +25,11 @@ const emit = defineEmits(['select'])
 
 const selected = ref([])
 const selectedKeys = ref({})
+const props = defineProps({
+  systemName: {
+    type: String
+  }
+})
 
 const onSelect = (entry) => {
   selected.value.push(entry)

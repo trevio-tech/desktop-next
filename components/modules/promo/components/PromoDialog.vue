@@ -2,27 +2,38 @@
   <Dialog title="Продвижение">
     <div class="grid grid-cols-3 w-[640px] divide-x divide-gray-200">
       <div class="col-span-2 pr-4">
-        <div @click="onClickMore" class="underline mb-4 text-sm text-blue-500">Нажмите, чтобы добавить в продвижение другие записи</div>
-        <h3 class="font-medium mb-1">Выбрано для продвижения:</h3>
-        <ul class="space-y-1">
-          <li v-for="(ent, key) in selectedEntries" :key="key" class="truncate text-sm">
-            {{ ent.title }}
-            <X @click="onDelete(key)" class="w-5 h-5" />
+        <ul class="divide-y">
+          <li v-for="(section, key) in store.selectedItems" :key="key" class="space-y-1 py-4">
+            <div class="font-semibold">{{ section.name }}</div>
+            <div v-for="(item, index) in section.items" :key="item.id" class="flex items-center text-sm">
+              <div class="truncate font-medium flex-auto text-slate-500 mr-2">{{ item.title }}</div>
+              <button @click="onDelete(item, index)" :title="item.title" type="button">
+                <X class="w-5 h-5" />
+              </button>
+            </div>
+            <div @click="onClickMore(key)" class="cursor-pointer underline mb-4 text-sm text-blue-400">Добавить {{ section.name.toLowerCase() }}</div>
           </li>
         </ul>
       </div>
       <div class="col-span-1 pl-4">
-        <ul class="space-y-px sticky top-0">
-          <li
-            v-for="tariff in tariffs"
-            :key="tariff.id"
-            @click="selectedTariff = tariff.id"
-            :class="{'bg-blue-100': selectedTariff === tariff.id}"
-            class="p-4 rounded cursor-pointer hover:bg-blue-50">
-            {{ tariff.periodValue }} {{ tariff.periodText }}
-            <div>{{ tariff.totalPrice }} монет</div>
-          </li>
-        </ul>
+        <div class="sticky top-0 divide-y">
+          <ul class="space-y-px pb-4">
+            <li
+                v-for="tariff in tariffs"
+                :key="tariff.id"
+                @click="store.selectedTariff = tariff"
+                :class="{'bg-blue-100': store.selectedTariff?.id === tariff.id}"
+                class="p-2 rounded cursor-pointer hover:bg-blue-50">
+              {{ tariff.periodValue }} {{ tariff.periodText }}
+              <div>{{ tariff.totalPrice }} монет</div>
+            </li>
+          </ul>
+          <div class="pt-4">
+            <div v-if="store.readyToPromotion"
+                 class="mb-2">Цена: {{ store.totalPrice }}</div>
+            <Button :disabled="! store.readyToPromotion" @click="onSubmit" class="w-full">Продвинуть</Button>
+          </div>
+        </div>
       </div>
     </div>
   </Dialog>
@@ -35,6 +46,7 @@ import { ref } from 'vue'
 import { useNuxtApp } from '#app'
 import { useQuery } from '#imports'
 import { X } from 'lucide-vue-next'
+import { usePromoStore } from '~/components/modules/promo/store'
 
 const props = defineProps({
   entry: {
@@ -43,13 +55,12 @@ const props = defineProps({
 })
 
 const { $overlay } = useNuxtApp()
+const store = usePromoStore()
 
-const selectedEntries = ref({})
 const tariffs = ref([])
-const selectedTariff = ref(null)
 
-if (typeof props.entry === 'object') {
-  selectedEntries.value[`${props.entry.system_name}_${props.entry.id}`] = props.entry
+if (props.entry?.system_name) {
+  store.selectedItems[props.entry.system_name].items.unshift(props.entry)
 }
 
 try {
@@ -71,18 +82,59 @@ try {
   tariffs.value = promoTariffs
 } catch (error) {}
 
-const onClickMore = () => {
+const onClickMore = (systemName) => {
   $overlay.show(PromoFindContentDialog, {
+    props: {
+      systemName
+    },
     on: {
-      select(entries) {
-        entries.forEach((entry) => {
-          selectedEntries.value[`${entry.system_name}_${entry.id}`] = entry
+      select(items) {
+        items.forEach((item) => {
+          const selectedItemsIds = store.selectedItems[item.system_name].items
+            .map((selectedItem) => parseInt(selectedItem.id))
+
+          if (selectedItemsIds.indexOf(parseInt(item.id)) === -1) {
+            store.selectedItems[item.system_name].items.unshift(item)
+          }
         })
+
         $overlay.hide()
       }
     }
   })
 }
 
-const onDelete = (key) => delete selectedEntries.value[key]
+const onDelete = ({ system_name }, index) => {
+  store.delete(system_name, index)
+}
+
+const onSubmit = async () => {
+  const variables = {
+    tariff_id: store.selectedTariff.id,
+    input: {},
+  }
+
+  for (let systemName in store.selectedItems) {
+    if (! Object.hasOwn(variables.input, systemName)) {
+      variables.input[systemName] = []
+    }
+
+    variables.input[systemName] = store.selectedItems[systemName]
+      .items
+      .map((selectedItem) => selectedItem.id)
+  }
+
+  const { data: { createPromo }} = await useQuery({
+    query: `
+      mutation ($tariff_id: Int!, $input: PromoInput!) {
+        createPromo(tariff_id: $tariff_id, input: $input)
+      }
+    `,
+    variables
+  })
+
+  if (createPromo) {
+    store.$reset()
+  }
+}
 </script>
