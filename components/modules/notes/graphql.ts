@@ -94,6 +94,7 @@ export const NOTE_FORM = `
   id
   place_id
   travel_id
+  cover_id
   title
   text(raw: true)
   is_draft

@@ -1,7 +1,9 @@
 <template>
   <TheLayout :heading="review.title">
     <template #sidebar>1</template>
-    <div class="prose-sm" v-html="review.text"></div>
+    <ImageViewer>
+      <div class="prose-sm" v-html="review.text"></div>
+    </ImageViewer>
   </TheLayout>
 </template>
 
