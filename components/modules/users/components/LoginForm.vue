@@ -1,14 +1,16 @@
 <template>
   <form @submit.prevent="onSubmit" autocomplete="off" :class="{loading}">
     <fieldset class="space-y-2">
-      <FormField name="email">
-        <Input v-model="form.email" autocomplete="none" type="email" id="email" placeholder="Электронная почта" />
+      <FormField name="email" v-slot="{ hasError }">
+        <Input v-model="form.email" :variant="hasError ? 'danger' : undefined" autocomplete="none" type="email" id="email" placeholder="Электронная почта" />
       </FormField>
 
-      <FormField name="password">
-        <Input v-model="form.password" autocomplete="none" type="password" id="password" placeholder="Пароль" />
+      <FormField name="password" v-slot="{ hasError }">
+        <Input v-model="form.password"
+               :variant="hasError ? 'danger' : undefined"
+               autocomplete="none" type="password" id="password" placeholder="Пароль" />
       </FormField>
-      <div class="mt-1 text-sm underline cursor-pointer">Восстановить пароль</div>
+      <div class="text-sm text-gray-500 underline cursor-pointer">Восстановить пароль</div>
     </fieldset>
 
     <Button class="w-full mt-4" type="submit" :loading="loading">Войти</Button>

@@ -1,26 +1,37 @@
 <template>
   <form @submit.prevent="onSubmit" autocomplete="off">
     <fieldset class="space-y-2">
-      <FormField name="name">
-        <Input v-model="form.name" type="text" id="name" placeholder="Имя пользователя" />
+      <FormField name="name" v-slot="{ hasError }">
+        <Input v-model="form.name" :variant="hasError ? 'danger' : undefined" type="text" id="name" placeholder="Имя пользователя" />
       </FormField>
 
-      <FormField name="email">
-        <Input v-model="form.email" autocomplete="off" type="email" id="email" placeholder="Электронная почта" />
+      <FormField name="email" v-slot="{ hasError }">
+        <Input v-model="form.email" :variant="hasError ? 'danger' : undefined" autocomplete="off" type="email" id="email" placeholder="Электронная почта" />
       </FormField>
 
-      <FormField name="password">
-        <Input v-model="form.password" autocomplete="off" type="password" id="password" placeholder="Пароль" />
+      <FormField name="password" v-slot="{ hasError }">
+        <Input v-model="form.password" :variant="hasError ? 'danger' : undefined" autocomplete="off" type="password" id="password" placeholder="Пароль" />
       </FormField>
 
-      <FormField name="password_confirmation">
-        <Input v-model="form.password_confirmation" autocomplete="off" type="password" id="password-confirmation" placeholder="Повторите пароль" />
+      <FormField name="password_confirmation" v-slot="{ hasError }">
+        <Input v-model="form.password_confirmation" :variant="hasError ? 'danger' : undefined" autocomplete="off" type="password" id="password-confirmation" placeholder="Повторите пароль" />
       </FormField>
     </fieldset>
 
-    <Button type="submit" class="w-full mt-4">Зарегистрироваться</Button>
+    <FormField name="is_company" class="mt-4">
+      <div class="flex items-center space-x-2">
+        <Checkbox v-model="form.is_company" :value="true" id="is-company">
+          Бизнес-аккаунт
+        </Checkbox>
+        <HelpCircle
+            @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/AboutBusinessAccountDialog.vue')))"
+            class="w-4 h-4 text-gray-400 hover:text-blue-500 cursor-pointer" />
+      </div>
+    </FormField>
 
-    <div class="mt-4 text-xs">
+    <Button :loading="loading" type="submit" class="w-full mt-4">Зарегистрироваться</Button>
+
+    <div class="mt-4 text-xs font-medium">
       Регистрируясь, вы соглашаетесь с <NuxtLink to="/terms" class="underline">правилами пользования сайтом</NuxtLink> и даете согласие на <NuxtLink class="underline" to="/privacy">обработку персональных данных</NuxtLink>.
     </div>
 
@@ -29,10 +40,12 @@
 </template>
 
 <script setup>
-import { useNuxtApp } from '#app'
+import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'
+import { HelpCircle } from 'lucide-vue-next'
+import { defineAsyncComponent } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'
+import { useNuxtApp } from '#app'
 
 const emit = defineEmits(['login'])
 const { $auth } = useNuxtApp()

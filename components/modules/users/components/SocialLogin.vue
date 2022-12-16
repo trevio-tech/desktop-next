@@ -8,13 +8,13 @@
 
     <div class="flex items-center space-x-2 mt-1">
       <div class="border flex-auto rounded-lg cursor-pointer">
-        <img src="/images/icons/social/vk.svg" alt="" @click="onSocial('vkontakte')" class="mx-auto">
+        <img src="/images/icons/social/vk.svg" alt="" @click="onSocial('vkontakte')" class="mx-auto" height="40">
       </div>
       <div class="border flex-auto rounded-lg cursor-pointer">
-        <img src="/images/icons/social/yandex.svg" alt="" @click="onSocial('yandex')" class="mx-auto">
+        <img src="/images/icons/social/yandex.svg" alt="" @click="onSocial('yandex')" class="mx-auto" height="40">
       </div>
       <div class="border flex-auto rounded-lg cursor-pointer">
-        <img src="/images/icons/social/google.svg" alt="" @click="onSocial('google')" class="mx-auto">
+        <img src="/images/icons/social/google.svg" alt="" @click="onSocial('google')" class="mx-auto" height="40">
       </div>
     </div>
   </div>
@@ -22,11 +22,12 @@
 
 <script setup>
 import { useNuxtApp } from '#app'
-const { $auth } = useNuxtApp()
+const { $auth, $overlay } = useNuxtApp()
 import { usePopup } from '#imports'
 
 window.setToken = async (token) => {
   await $auth.setUserToken(token)
+  $overlay.hide()
 }
 
 const onSocial = async (provider) => {
