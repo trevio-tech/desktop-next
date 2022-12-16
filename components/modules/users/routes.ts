@@ -6,4 +6,5 @@ export default [
   { path: '/users/:userId(\\d+)/edit', name: 'users.edit', file: 'edit'},
   { path: '/users/:userId(\\d+)/edit/password', name: 'users.edit.password', file: 'edit-password'},
   { path: '/users/:userId(\\d+)/edit/contacts', name: 'users.edit.contacts', file: 'edit-contacts'},
+  { path: '/oauth/:provider/callback', name: 'users.callback', file: 'callback' },
 ]

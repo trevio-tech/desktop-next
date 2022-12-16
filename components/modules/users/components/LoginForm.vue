@@ -1,20 +1,19 @@
 <template>
   <form @submit.prevent="onSubmit" autocomplete="off" :class="{loading}">
-    <FormField name="email" label="Электронная почта" required>
-      <Input v-model="form.email" type="email" id="email" />
-    </FormField>
+    <fieldset class="space-y-2">
+      <FormField name="email">
+        <Input v-model="form.email" autocomplete="none" type="email" id="email" placeholder="Электронная почта" />
+      </FormField>
 
-    <FormField name="password" label="Пароль" required>
-      <Input v-model="form.password" type="password" id="password" />
-    </FormField>
+      <FormField name="password">
+        <Input v-model="form.password" autocomplete="none" type="password" id="password" placeholder="Пароль" />
+      </FormField>
+      <div class="mt-1 text-sm underline cursor-pointer">Восстановить пароль</div>
+    </fieldset>
 
-    <div class="mt-4">
-      Авторизуясь, вы соглашаетесь с <NuxtLink to="/terms" class="underline">правилами пользования сайтом</NuxtLink> и даете согласие на <NuxtLink class="underline" to="/privacy">обработку персональных данных</NuxtLink>.
-    </div>
+    <Button class="w-full mt-4" type="submit" :loading="loading">Войти</Button>
 
-    <div class="mt-4">
-      <Button type="submit" :loading="loading">Войти</Button>
-    </div>
+    <SocialLogin />
   </form>
 </template>
 
@@ -22,8 +21,9 @@
 import { useNuxtApp } from '#app'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
+import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'
 
-const emit = defineEmits(['login'])
+const emit = defineEmits(['login', 'register'])
 const { $auth } = useNuxtApp()
 const { handleSubmit, setErrors } = useForm()
 const loading = ref(false)
