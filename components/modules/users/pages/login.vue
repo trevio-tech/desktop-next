@@ -1,5 +1,8 @@
 <template>
   <TheLayout heading="Авторизация">
+    <template #sidebar>
+      Сайдбар
+    </template>
     <LoginForm @login="navigateTo('/')" />
   </TheLayout>
 </template>

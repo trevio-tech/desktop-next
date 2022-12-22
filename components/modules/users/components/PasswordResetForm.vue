@@ -10,12 +10,15 @@
                :variant="hasError ? 'danger' : undefined"
                autocomplete="none" type="password" id="password" placeholder="Пароль" />
       </FormField>
-      <div @click="$overlay.show(PasswordSendResetLinkDialog)" class="text-sm text-gray-500 underline cursor-pointer">Восстановить пароль</div>
+
+      <FormField name="password" v-slot="{ hasError }">
+        <Input v-model="form.password_confirmation"
+               :variant="hasError ? 'danger' : undefined"
+               autocomplete="none" type="password" id="password-confirmation" placeholder="Повторите пароль" />
+      </FormField>
     </fieldset>
 
-    <Button class="w-full mt-4" type="submit" :loading="loading">Войти</Button>
-
-    <SocialLogin />
+    <Button class="w-full mt-4" type="submit" :loading="loading">Восстановить</Button>
   </form>
 </template>
 
@@ -23,8 +26,6 @@
 import { useNuxtApp } from '#app'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'
-import PasswordSendResetLinkDialog from '~/components/modules/users/components/PasswordSendResetLinkDialog.vue'
 
 const emit = defineEmits(['login', 'register'])
 const { $auth } = useNuxtApp()
@@ -34,6 +35,7 @@ const loading = ref(false)
 const form = ref({
   email: '',
   password: '',
+  password_confirmation: '',
 })
 
 const onSubmit = handleSubmit(async () => {

@@ -55,7 +55,7 @@
     <footer class="flex items-center p-4 bg-stone-50 border-t border-t-stone-100">
       <IsLoggedIn>
         <BaseLikeButton
-            model-type="notes"
+            :model-type="entry.system_name"
             :model-id="entry.id"
             :is-liked="entry.like?.is_liked"
             :count="entry.likes_count"

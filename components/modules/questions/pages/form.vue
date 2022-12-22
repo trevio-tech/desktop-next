@@ -5,7 +5,7 @@
     </template>
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
       <FormField name="input.title" label="Вопрос" required  v-slot="{ hasError }">
-        <Input v-model="form.title" placeholder="Введите вопрос" />
+        <Input v-model="form.title" placeholder="Введите вопрос" :variant="hasError ? 'danger' : undefined" />
       </FormField>
 
       <FormField name="input.text" label="Детали вопроса">

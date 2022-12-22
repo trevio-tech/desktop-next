@@ -5,11 +5,11 @@
     </template>
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
       <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
-        <Input v-model="form.title" placeholder="Введите заголовок" />
+        <Input v-model="form.title" placeholder="Введите заголовок" :variant="hasError ? 'danger' : undefined" />
       </FormField>
 
-      <FormField name="input.text" label="Текст" required>
-        <TipTap v-model="form.text" model-type="notes" @error="onEror" v-model:cover-id="form.cover_id" />
+      <FormField name="input.text" label="Текст" required v-slot="{ hasError }">
+        <TipTap v-model="form.text" :variant="hasError ? 'danger' : undefined" model-type="notes" @error="onEror" v-model:cover-id="form.cover_id" />
       </FormField>
 
       <FormField name="input.place_id" label="Место" v-slot="{ hasError }">

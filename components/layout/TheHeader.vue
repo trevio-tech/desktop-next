@@ -9,8 +9,9 @@
         <Button class="ml-auto" v-if="$auth.loggedIn" @click="$overlay.show(TheContentCreationDialog)">Создать</Button>
       </div>
       <ul v-if="!$auth.loggedIn" class="flex space-x-2 ml-auto">
-        <li><NuxtLink to="/login">Войти</NuxtLink></li>
-        <li><NuxtLink to="/register">Регистрация</NuxtLink></li>
+        <li @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/LoginRegisterDialog.vue')))">
+          <Button>Войти</Button>
+        </li>
       </ul>
       <Dropdown placement="bottom-end" v-else class="ml-auto h-full flex items-center">
         <img :src="$auth.user.avatar" :alt="$auth.user.name" class="w-10 h-10 rounded-full block" />
@@ -24,6 +25,9 @@
           <DropdownItem as="div" @click="hide">
             <NuxtLink :to="{name: 'bookmarks', params: {userId: $auth.user.id}}">Закладки</NuxtLink>
           </DropdownItem>
+          <DropdownItem as="div" @click="hide">
+            <NuxtLink :to="{name: 'promo'}">Продвижение</NuxtLink>
+          </DropdownItem>
           <DropdownItem as="div" @click="$auth.logout()">Выход</DropdownItem>
         </template>
       </Dropdown>
@@ -34,6 +38,4 @@
 <script setup>
 import { useNuxtApp } from 'nuxt/app'
 import TheContentCreationDialog from './TheContentCreationDialog'
-
-const { $overlay } = useNuxtApp()
 </script>

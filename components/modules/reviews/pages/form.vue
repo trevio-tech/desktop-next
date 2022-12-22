@@ -4,8 +4,8 @@
       123
     </template>
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
-          <FormField name="input.title" label="Заголовок" required>
-            <Input v-model="form.title" placeholder="Введите заголовок" />
+          <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
+            <Input v-model="form.title" placeholder="Введите заголовок" :variant="hasError ? 'danger' : undefined" />
           </FormField>
 
           <FormField name="input.place_id" label="Место" required>
