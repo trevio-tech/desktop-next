@@ -36,6 +36,5 @@
 </template>
 
 <script setup>
-import { useNuxtApp } from 'nuxt/app'
 import TheContentCreationDialog from './TheContentCreationDialog'
 </script>
