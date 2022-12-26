@@ -59,6 +59,8 @@ export const TRAVEL = `
   text
   can
   rating
+  date_start
+  date_end
   tags {
     id
     name

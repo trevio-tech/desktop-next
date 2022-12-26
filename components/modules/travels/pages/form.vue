@@ -8,49 +8,48 @@
 
         <div class="space-y-6">
           <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
-            <Input v-model="form.title" placeholder="Введите заголовок" />
+            <Input v-model="form.title" placeholder="Введите заголовок" :has-error="hasError" />
           </FormField>
 
-          <FormField name="input.place_id" label="Страна" required  v-slot="{ hasError }">
+          <FormField name="input.place_id" label="Страна" required v-slot="{ hasError }">
             <SearchPlace v-model="form.place" :search-by="searchBy" @update:modelValue="form.place_id = $event.id" />
           </FormField>
 
-          <FormField name="input.text" label="Анонс">
-            <Textarea v-model="form.text" rows="3" placeholder="Краткое описание" />
+          <FormField name="input.text" label="Анонс" v-slot="{ hasError }">
+            <Textarea v-model="form.text" rows="3" placeholder="Краткое описание" :has-error="hasError" />
           </FormField>
 
-          <FormField name="input.tags" label="Теги" id="tags">
+          <FormField name="input.tags" label="Теги" id="tags" v-slot="{ hasError }">
             <InputCustomTags v-model="form.tags" />
           </FormField>
 
-          <FormField name="input.date_start" label="Дата начала и завершения" id="date">
+          <FormField name="input.date_start" label="Дата начала и завершения" id="date" v-slot="{ hasError }">
             <Datepicker
               :model-value="[form.date_start, form.date_end]"
-              :enableTimePicker="false"
+              :enable-time-picker="false"
               range
-              multiCalendars
+              multi-calendars
+              multi-calendars-solo
               position="right"
-              autoApply
+              auto-apply
               @update:modelValue="onDateChange"
             >
               <template #trigger>
-                ---
-                {{ form.date_start }}
-                {{ form.date_end }}
+                <Input :model-value="readableDateStartDateEnd" placeholder="Дата начала и завершения" :has-error="hasError" />
               </template>
             </Datepicker>
           </FormField>
 
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-4 flex-auto">
-              <FormField name="input.budget" label="Бюджет путешествия" :help="getCurrency" id="budget" class="flex-auto">
+              <FormField name="input.budget" label="Бюджет путешествия" id="budget" class="flex-auto">
                 <Input v-model="form.budget" type="number" id="budget" placeholder="Бюджет путешествия" />
               </FormField>
-              <Dropdown class="mt-1">
+              <Dropdown class="mt-6">
                 <Button>
-                  Валюта
+                  <div class="truncate w-[100px]">{{ getCurrency }}</div>
                   <template #append>
-                    <ChevronDownIcon class="w-5 h-5 text-white" />
+                    <ChevronDown class="w-5 h-5 text-white" />
                   </template>
                 </Button>
                 <template v-slot:popper="{ hide }">
@@ -73,13 +72,14 @@ import Datepicker from '@vuepic/vue-datepicker';
 import TheForm from '~/components/TheForm'
 import TravelUpload from '../components/TravelUpload'
 import pick from 'lodash.pick'
-import { ChevronDownIcon } from '@heroicons/vue/24/outline'
+import { ChevronDown } from 'lucide-vue-next'
 import { InputCustomTags } from '~/components/wrappers'
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter } from 'nuxt/app'
 import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
 import { definePageMeta, useQuery } from '#imports'
+import { format, parseISO } from 'date-fns'
 
 definePageMeta({
   middleware: 'auth'
@@ -128,6 +128,9 @@ if (isEdit) {
 
   currencies.value = data.currencies
   Object.assign(form.value, data.travel)
+  form.value.date_start = parseISO(form.value.date_start)
+  form.value.date_end = parseISO(form.value.date_end)
+  console.log(form.value.date_end)
 } else {
   const { data } = await useQuery({
     query: `
@@ -140,18 +143,6 @@ if (isEdit) {
     `
   })
   currencies.value = data.currencies
-}
-
-// In case of a range picker, you'll receive [Date, Date]
-const format = (dates) => {
-  if (dates && dates.length) {
-    const day = dates[0].getDate();
-    const month = dates[0].getMonth() + 1;
-    const year = dates[0].getFullYear();
-
-    return `Selected date is ${day}.${month}.${year}`;
-  }
-  return 'Нажмите, чтобы выбрать даты';
 }
 
 const onDateChange = (dates) => {
@@ -195,8 +186,8 @@ const onSubmit = handleSubmit(async (values, actions) => {
       await useRouter().push({name: 'travels.show', params: {travelId: travelForm}})
     }
   } catch (error) {
-    if (error[0]['message'] === 'validation') {
-      actions.setErrors(error[0]['extensions']['validation'])
+    if (error['message'] === 'validation') {
+      actions.setErrors(error['extensions']['validation'])
     }
   } finally {
     loading.value = false
@@ -209,5 +200,19 @@ const getCurrency = computed(() => {
   }
 
   return currencies.value[0].name
+})
+
+const readableDateStartDateEnd = computed(() => {
+  let date = ''
+
+  if (form.value.date_start) {
+    date += format(form.value.date_start, 'd.L.Y')
+  }
+
+  if (form.value.date_end) {
+    date += ' - ' +  format(form.value.date_end, 'd.L.Y')
+  }
+
+  return date
 })
 </script>
