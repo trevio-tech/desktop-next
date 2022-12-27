@@ -18,17 +18,8 @@
       </div>
     </article>
 
-    <div v-if="otherTravels.length" class="mt-4 flex items-center space-x-4">
-      <div>
-        <div class="mb-2 font-semibold">Предыдущие путешествие</div>
-        <NuxtLink :to="{name: 'travels.show', params: {travelId: otherTravels[0].id}}">{{ otherTravels[0].title }}</NuxtLink>
-      </div>
-      <div v-if="otherTravels[1]">
-        <div class="mb-2 font-semibold">Следующие путешествие</div>
-        <NuxtLink :to="{name: 'travels.show', params: {travelId: otherTravels[1].id}}">{{ otherTravels[1].title }}</NuxtLink>
-      </div>
-    </div>
-
+    <TravelSiblings v-if="otherTravels.length" class="mt-4" :items="otherTravels" />
+    <hr class="my-4">
     <TravelContentList class="mt-4" />
   </TheLayout>
 </template>
@@ -37,8 +28,9 @@
 import { useRoute } from 'nuxt/app'
 import { useGql } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
-import { TRAVEL } from '../graphql';
+import { TRAVEL, TRAVEL_CARD_SQUARE } from '../graphql'
 import TravelContentList from '../components/TravelContentList'
+import TravelSiblings from '../components/TravelSiblings.vue'
 import { ref } from 'vue'
 
 const route = useRoute()
@@ -56,17 +48,15 @@ const { data: { travel }} = await useGql(`
 
 const otherTravelsFromUser = async (travel) => {
   const { data: { travels }} = await useGql(`
-    query($limit: Int, $user_id: ID, $previous: ID, $next: ID) {
-      travels(limit: $limit, user_id: $user_id, previous: $previous, next: $next) {
-        id
-        title
+    query($user_id: ID, $previous: ID, $next: ID) {
+      travels(user_id: $user_id, previous: $previous, next: $next) {
+        ${TRAVEL_CARD_SQUARE}
       }
     }
     `, {
       user_id:  travel.user_id,
       previous: travel.id,
-      next:     travel.id,
-      limit:    2
+      next:     travel.id
     })
 
   otherTravels.value = travels.sort(function(a, b) {

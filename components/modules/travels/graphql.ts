@@ -32,11 +32,33 @@ export const TRAVEL_CARD = `
 export const TRAVEL_CARD_RECTANGLE = `
   id
   user_id
-  title
+  title(words: 6)
   text(words: 12)
   system_name
   created_at
   cover(sizes: "default@resize:fill:640:320") {
+    id
+    model_id
+    url
+    sizes
+  }
+  user {
+    id
+    name
+    avatar
+  }
+  bookmarks {
+    category_id
+  }
+`
+
+export const TRAVEL_CARD_SQUARE = `
+  id
+  user_id
+  title(words: 10)
+  system_name
+  created_at
+  cover(sizes: "default@resize:fill:320:200") {
     id
     model_id
     url
