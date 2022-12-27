@@ -55,6 +55,7 @@ export const TRAVEL_CARD_RECTANGLE = `
 export const TRAVEL = `
   id
   place_id
+  user_id
   title
   text
   can

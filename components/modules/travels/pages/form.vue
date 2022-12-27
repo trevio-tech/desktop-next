@@ -79,7 +79,7 @@ import { useForm } from 'vee-validate';
 import { useRoute, useRouter } from 'nuxt/app'
 import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
 import { definePageMeta, useQuery } from '#imports'
-import { format, parseISO } from 'date-fns'
+import { format, parseISO, isValid } from 'date-fns'
 
 definePageMeta({
   middleware: 'auth'
@@ -127,10 +127,20 @@ if (isEdit) {
   })
 
   currencies.value = data.currencies
+
   Object.assign(form.value, data.travel)
-  form.value.date_start = parseISO(form.value.date_start)
-  form.value.date_end = parseISO(form.value.date_end)
-  console.log(form.value.date_end)
+
+  if (isValid(form.value.date_start)) {
+    form.value.date_start = parseISO(form.value.date_start)
+  } else {
+    form.value.date_start = ''
+  }
+
+  if (isValid(form.value.date_end)) {
+    form.value.date_end = parseISO(form.value.date_end)
+  } else {
+    form.value.date_end = ''
+  }
 } else {
   const { data } = await useQuery({
     query: `

@@ -17,6 +17,18 @@
             :to="{name: 'travels', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
       </div>
     </article>
+
+    <div v-if="otherTravels.length" class="mt-4 flex items-center space-x-4">
+      <div>
+        <div class="mb-2 font-semibold">Предыдущие путешествие</div>
+        <NuxtLink :to="{name: 'travels.show', params: {travelId: otherTravels[0].id}}">{{ otherTravels[0].title }}</NuxtLink>
+      </div>
+      <div v-if="otherTravels[1]">
+        <div class="mb-2 font-semibold">Следующие путешествие</div>
+        <NuxtLink :to="{name: 'travels.show', params: {travelId: otherTravels[1].id}}">{{ otherTravels[1].title }}</NuxtLink>
+      </div>
+    </div>
+
     <TravelContentList class="mt-4" />
   </TheLayout>
 </template>
@@ -27,8 +39,10 @@ import { useGql } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import { TRAVEL } from '../graphql';
 import TravelContentList from '../components/TravelContentList'
+import { ref } from 'vue'
 
 const route = useRoute()
+const otherTravels = ref([])
 
 const { data: { travel }} = await useGql(`
   query($id: Int!) {
@@ -39,4 +53,26 @@ const { data: { travel }} = await useGql(`
 `, {
   id: parseInt(route.params.travelId)
 })
+
+const otherTravelsFromUser = async (travel) => {
+  const { data: { travels }} = await useGql(`
+    query($limit: Int, $user_id: ID, $previous: ID, $next: ID) {
+      travels(limit: $limit, user_id: $user_id, previous: $previous, next: $next) {
+        id
+        title
+      }
+    }
+    `, {
+      user_id:  travel.user_id,
+      previous: travel.id,
+      next:     travel.id,
+      limit:    2
+    })
+
+  otherTravels.value = travels.sort(function(a, b) {
+    return a.id - b.id;
+  })
+}
+
+await otherTravelsFromUser(travel)
 </script>
