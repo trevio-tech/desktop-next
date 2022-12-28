@@ -84,6 +84,7 @@ export const TRAVEL = `
   rating
   date_start
   date_end
+  has_nested_entries
   tags {
     id
     name

@@ -20,7 +20,7 @@
 
     <TravelSiblings v-if="otherTravels.length" class="mt-4" :items="otherTravels" />
     <hr class="my-4">
-    <TravelContentList class="mt-4" />
+    <TravelContentList v-if="travel.has_nested_entries" class="mt-4" />
   </TheLayout>
 </template>
 
