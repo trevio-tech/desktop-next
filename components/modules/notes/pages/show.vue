@@ -31,7 +31,7 @@
 
     <article>
       <ImageViewer>
-        <div v-html="note.text" class="prose-sm"></div>
+        <div v-html="note.text" class="prose"></div>
       </ImageViewer>
     </article>
 

@@ -26,6 +26,7 @@
 <script setup>
 import { useRoute } from 'nuxt/app'
 import { ref } from 'vue'
+import { NESTED_CONTENT_LIST } from '~/components/modules/travels/graphql'
 
 const props = defineProps({
   nestedEntriesCount: {
@@ -33,65 +34,6 @@ const props = defineProps({
     default: 0,
   }
 })
-
-const query = `
-  query getTravelContentList ($travelId: Int!, $offset: String!, $filter: TravelContentListFilterInput) {
-    travelContentList(travelId: $travelId, offset: $offset, filter: $filter) {
-      items {
-        ...on Note {
-          id
-          cover_id
-          title(words: 7)
-          text(words: 10)
-          cover(sizes: "default@resize:fill:200:200") {
-            id
-            model_id
-            url
-            sizes
-          }
-          system_name
-        }
-        ...on Review {
-          id
-          title
-          cover_id
-          cover(sizes: "default@resize:fill:200:200") {
-            id
-            model_id
-            url
-            sizes
-          }
-          system_name
-        }
-        ...on Question {
-          id
-          title
-          cover_id
-          cover(sizes: "default@resize:fill:200:200") {
-            id
-            model_id
-            url
-            sizes
-          }
-          system_name
-        }
-        ...on Album {
-          id
-          title
-          cover_id
-          cover(sizes: "default@resize:fill:200:200") {
-            id
-            model_id
-            url
-            sizes
-          }
-          system_name
-        }
-      }
-      offset
-    }
-  }
-`
 
 const items = ref([])
 const offset = ref('')
@@ -109,7 +51,7 @@ const getData = async () => {
     loading.value = true
 
     const { data: { travelContentList } } = await useQuery({
-      query,
+      query: NESTED_CONTENT_LIST,
       variables: {
         travelId: parseInt(useRoute().params.travelId),
         offset: offset.value,

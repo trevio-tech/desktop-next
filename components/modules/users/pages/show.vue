@@ -81,8 +81,10 @@ import InterestsForm from '~/components/modules/subscriptions/components/Interes
 import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
 import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
 import ContentList from '~/components/ContentList'
+import { useActivityStore } from '~/components/modules/activity/store'
 
 const { $overlay } = useNuxtApp()
+const activityStore = useActivityStore()
 
 const { data: { user }} = await useQuery({
   query: `
@@ -117,6 +119,8 @@ const onEditFriends = () => {
     on: {
       async 'update:modelValue'(friends) {
         user.friends = friends
+        // Сбрасываем ленту, если лента пустая она будет загружена снова.
+        await activityStore.refreshMyFeed()
       }
     }
   })

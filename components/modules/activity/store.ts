@@ -25,6 +25,9 @@ export const useActivityStore = defineStore('activity', {
     addBelt(index, data) {
       this.loadedBelts[index] = data
     },
+    refreshMyFeed() {
+      this.items = []
+    }
   },
   getters: {
     getBelt: (state) => {
