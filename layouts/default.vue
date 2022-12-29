@@ -19,4 +19,8 @@ import TheBreadcrumbs from '~/components/layout/breadcrumbs/TheBreadcrumbs'
 import TheHeader from '~/components/layout/TheHeader'
 import TheFooter from '~/components/layout/TheFooter'
 import TheNavigation from '~/components/layout/TheNavigation'
+
+useHead({
+  titleTemplate: '%s — Trevio.ru - о путешествиях',
+})
 </script>

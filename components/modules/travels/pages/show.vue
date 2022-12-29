@@ -1,5 +1,12 @@
 <template>
   <TheLayout :heading="travel.title">
+    <Html>
+      <Head>
+        <Title>{{ travel.title }} - Путешествия</Title>
+        <Meta name="description" :content="travel.text" />
+      </Head>
+    </Html>
+
     <template #sidebar>
       <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>
     </template>
@@ -20,7 +27,10 @@
 
     <TravelSiblings v-if="otherTravels.length" class="mt-4" :items="otherTravels" />
     <hr class="my-4">
-    <TravelContentList v-if="travel.has_nested_entries" class="mt-4" />
+    <TravelContentList
+      v-if="travel.nested_entries_count"
+      :nested-entries-count="travel.nested_entries_count"
+      class="mt-4" />
   </TheLayout>
 </template>
 

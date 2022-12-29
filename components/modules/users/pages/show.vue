@@ -1,9 +1,16 @@
 <template>
   <TheLayout heading="Пользователь">
+    <Html>
+      <Head>
+        <Title>{{ user.name }} - Пользователи</Title>
+        <Meta name="description" :content="user.description" />
+      </Head>
+    </Html>
+
     <template #top>
       <div class="bg-gradient-to-r from-blue-50 to-blue-200 flex items-center h-40 px-10 rounded-lg">
         <div class="mr-4">
-          <img :src="user.avatar" class="w-30 h-30 rounded-full" alt="">
+          <img :src="user.avatar" class="w-24 h-24 rounded-full" alt="">
         </div>
         <div>
           <h1 class="text-4xl font-semibold">{{ user.name }}</h1>
@@ -60,7 +67,7 @@
       </div>
     </template>
 
-    <ContentList :user-id="user.id "/>
+    <ContentList :user-id="user.id" />
   </TheLayout>
 </template>
 

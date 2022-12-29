@@ -29,7 +29,7 @@
       </Menu>
     </template>
 
-    <article class="bg-white p-4 overflow-hidden rounded-md shadow ring-1 ring-slate-200">
+    <article>
       <ImageViewer>
         <div v-html="note.text" class="prose-sm"></div>
       </ImageViewer>

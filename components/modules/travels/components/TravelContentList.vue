@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-4">
-    <ul>
-      <li @click="setFilter({orderByDate: 'new'})">Сначала новые</li>
-      <li @click="setFilter({orderByDate: 'old'})">Сначала старые</li>
+    <ul v-if="nestedEntriesCount > items.length" class="flex items-center text-sm font-medium">
+      <li @click="setFilter({orderByDate: 'new'})" class="cursor-pointer py-1 px-2 rounded-full" :class="{'bg-gray-200': myFilter.orderByDate === 'new'}">Сначала новые</li>
+      <li @click="setFilter({orderByDate: 'old'})" class="cursor-pointer py-1 px-2 rounded-full" :class="{'bg-gray-200': myFilter.orderByDate === 'old'}">Сначала старые</li>
     </ul>
     <div class="relative">
       <div v-show="items.length" class="space-y-4">
@@ -17,7 +17,7 @@
             {{ item.text }}
           </div>
         </article>
-        <Button :loading="loading" v-if="!noMore" @click="onMore" class="w-full">Показать еще</Button>
+        <Button :loading="loading" v-if="nestedEntriesCount > items.length" @click="onMore" variant="secondary" class="w-full">Показать еще</Button>
       </div>
     </div>
   </div>
@@ -26,6 +26,13 @@
 <script setup>
 import { useRoute } from 'nuxt/app'
 import { ref } from 'vue'
+
+const props = defineProps({
+  nestedEntriesCount: {
+    type: Number,
+    default: 0,
+  }
+})
 
 const query = `
   query getTravelContentList ($travelId: Int!, $offset: String!, $filter: TravelContentListFilterInput) {
@@ -88,7 +95,6 @@ const query = `
 
 const items = ref([])
 const offset = ref('')
-const noMore = ref(false)
 const loading = ref(false)
 const myFilter = ref({
   orderByDate: 'new'
@@ -114,8 +120,6 @@ const getData = async () => {
     if (travelContentList.items.length) {
       offset.value = travelContentList.offset
       items.value = [...items.value, ...travelContentList.items]
-    } else if (travelContentList.items.length < 4) {
-      noMore.value = true
     }
   } catch (error) {}
   finally {
@@ -131,7 +135,6 @@ const setFilter = async (filter) => {
   Object.assign(myFilter.value, filter)
   offset.value = ''
   items.value = []
-  noMore.value = false
   await getData()
 }
 
