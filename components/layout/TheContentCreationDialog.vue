@@ -8,12 +8,27 @@
           <div class="text-xs text-gray-400">{{ item.text }}</div>
         </NuxtLink>
       </li>
+      <li @click="onClickShot" class="flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-slate-100">
+        <div class="block p-4">
+          <div class="font-medium">Шот</div>
+          <div class="text-xs text-gray-400">Эмоции и истории здесь и сейчас</div>
+        </div>
+      </li>
     </ul>
   </Dialog>
 </template>
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
+import ShotFormDialog from '~/components/modules/shots/components/ShotFormDialog.vue'
+import { useNuxtApp } from '#app'
+
+const { $overlay } = useNuxtApp()
+
+const onClickShot = () => {
+  $overlay.hide()
+  $overlay.show(ShotFormDialog)
+}
 
 const items = [
   {
@@ -40,11 +55,6 @@ const items = [
     name: 'Вопрос',
     text: 'Задайте вопрос, на который не смогли найти ответ',
     href: '/questions/create'
-  },
-  {
-    name: 'Шот',
-    text: 'Эмоции и истории здесь и сейчас',
-    href: '/shots/create'
   }
 ]
 </script>

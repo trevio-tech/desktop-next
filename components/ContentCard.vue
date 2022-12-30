@@ -52,7 +52,7 @@
           :to="{name: 'notes', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
     </div>
 
-    <footer class="flex items-center p-4 bg-stone-50 border-t border-t-stone-100">
+    <footer class="flex items-center p-4 border-t border-t-stone-100">
       <IsLoggedIn>
         <BaseLikeButton
             :model-type="entry.system_name"
