@@ -12,7 +12,7 @@
           </FormField>
 
           <FormField name="input.place_id" label="Страна" required v-slot="{ hasError }">
-            <SearchPlace v-model="form.place" :search-by="searchBy" @update:modelValue="form.place_id = $event.id" />
+            <SearchPlace v-model="form.place" :search-by="searchBy" :has-error="hasError" @update:modelValue="form.place_id = $event.id" />
           </FormField>
 
           <FormField name="input.text" label="Анонс" v-slot="{ hasError }">
