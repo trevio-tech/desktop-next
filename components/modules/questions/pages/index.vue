@@ -2,7 +2,7 @@
   <TheLayout heading="Вопросы">
     <template #sidebar>1</template>
     <div class="space-y-4">
-      <ContentCard v-for="question in questions" :key="question.id" :entry="question "/>
+      <QuestionCard v-for="question in questions" :key="question.id" :entry="question "/>
     </div>
   </TheLayout>
 </template>
@@ -11,7 +11,7 @@
 import { QUESTION_CARD } from '../graphql';
 import { useQuery } from '#imports'
 import { shallowRef } from 'vue'
-import ContentCard from '~/components/ContentCard'
+import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 
 const questions = shallowRef([])
 

@@ -6,6 +6,7 @@ export const QUESTION_CARD = `
   travel_id
   cover_id
   text(words: 20)
+  published_at(format: "d.m.Y")
   likes_count
   system_name
   created_at

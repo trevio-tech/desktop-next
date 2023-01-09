@@ -9,7 +9,7 @@
       </FormField>
 
       <FormField name="input.text" label="Детали вопроса">
-        <TipTap content-type="questions" v-model="form.text" />
+        <TipTap model-type="questions" v-model="form.text" />
       </FormField>
 
       <FormField name="input.place_id" label="Место" v-slot="{ hasError }">
@@ -35,7 +35,6 @@ import { CREATE_QUESTION, UPDATE_QUESTION, QUESTION_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { useGql } from '~/uses'
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
 import { definePageMeta } from '#imports'
 
@@ -66,7 +65,8 @@ const loading = ref(false)
 
 const app = useNuxtApp()
 
-const { data } = await useGql(`
+const { data } = await useQuery({
+  query: `
     query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
       ${isEdit ? `question(id: $id) { ${QUESTION_FORM} }` : ''}
       travels(userId: $userId) {
@@ -74,9 +74,11 @@ const { data } = await useGql(`
         title(words: 6)
       }
     }
-  `, {
-  id: questionId,
-  userId: app.$auth.user.id
+  `,
+  variables: {
+    id: questionId,
+    userId: app.$auth.user.id
+  }
 })
 
 if (isEdit) {
@@ -101,16 +103,19 @@ const onSubmit = handleSubmit(async () => {
   input.tags = input.tags.map(tag => parseInt(tag.id))
 
   try {
-    const { data: { questionForm }} = await useGql(isEdit ? UPDATE_QUESTION : CREATE_QUESTION, {
-      input,
-      id: questionId
+    const { data: { questionForm }} = await useQuery({
+      query: isEdit ? UPDATE_QUESTION : CREATE_QUESTION,
+      variables: {
+        input,
+        id: questionId
+      }
     })
 
     if (questionForm > 0) {
       await useRouter().push({name: 'questions.show', params: {questionId: questionForm}})
     }
   } catch (error) {
-    setErrors(error[0]['extensions']['validation'])
+    setErrors(error['extensions']['validation'])
   } finally {
     loading.value = false
   }

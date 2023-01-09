@@ -7,7 +7,7 @@
         style="background-image: url('/images/no-image.png')"
       >
         <div class="absolute top-0 left-0 p-2">
-          <div class="bg-slate-500/40 py-1 px-3 text-white font-medium text-sm rounded-lg">{{ label[entry.system_name] }}</div>
+          <div class="bg-slate-500/40 py-1 px-3 text-white font-medium text-sm rounded-lg">{{ label }}</div>
         </div>
         <img v-if="entry.cover" :src="entry.cover.url" :alt="entry.title" class="object-cover w-full h-full" loading="lazy">
       </NuxtLink>
@@ -54,12 +54,12 @@
 
     <footer class="flex items-center p-4 border-t border-t-stone-100">
       <IsLoggedIn>
-        <BaseLikeButton
-            :model-type="entry.system_name"
-            :model-id="entry.id"
-            :is-liked="entry.like?.is_liked"
-            :count="entry.likes_count"
-            class="mr-2"
+        <Like
+          :model-type="entry.system_name"
+          :model-id="entry.id"
+          :is-liked="entry.like?.is_liked"
+          :count="entry.likes_count"
+          class="mr-2"
         />
       </IsLoggedIn>
       <ChatButton

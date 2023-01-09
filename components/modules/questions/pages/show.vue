@@ -3,7 +3,11 @@
     <template #sidebar>
       <NuxtLink :to="`/questions/${question.id}/edit`">Редактировать</NuxtLink>
     </template>
-    {{ question }}
+    <article>
+      <ImageViewer>
+        <div v-html="question.text" class="prose"></div>
+      </ImageViewer>
+    </article>
   </TheLayout>
 </template>
 

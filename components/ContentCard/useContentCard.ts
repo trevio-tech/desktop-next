@@ -1,9 +1,9 @@
 import { computed } from 'vue'
 
 export default (props) => {
-  const to = computed(() => {
-    const { id, system_name } = props.entry
+  const { id, system_name } = props.entry
 
+  const to = computed(() => {
     if (system_name === 'notes') {
       return {name: 'notes.show', params: {noteId: id}}
     } else if (system_name === 'travels') {
@@ -12,6 +12,8 @@ export default (props) => {
       return {name: 'albums.show', params: {albumId: id}}
     } else if (system_name === 'reviews') {
       return {name: 'reviews.show', params: {reviewId: id}}
+    } else if (system_name === 'questions') {
+      return {name: 'questions.show', params: {questionId: id}}
     }
   })
 
@@ -25,7 +27,7 @@ export default (props) => {
   }
 
   return {
-    label,
+    label: label[system_name],
     to
   }
 }

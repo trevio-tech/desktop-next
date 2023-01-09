@@ -6,7 +6,7 @@
 
     <div class="space-y-4">
       <div v-for="(item, index) in store.items" :key="item.id">
-        <ContentCard :entry="item" />
+        <Component :is="item.system_name === 'questions' ? QuestionCard : ContentCard" :entry="item" />
         <UsersBelt
           v-if="index === 1"
           :items="store.getBelt(index)"
@@ -21,6 +21,7 @@
 
 <script setup>
 import ContentCard from '~/components/ContentCard'
+import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import UsersBelt from '~/components/modules/users/components/UsersBelt.vue'
 import { FEED } from '~/components/modules/activity/graphql'
 import { ref } from 'vue'
