@@ -49,7 +49,7 @@
           class="hover:text-slate-600"
           v-for="tag in entry.tags"
           :key="tag.id"
-          :to="{name: 'notes', query: {tag_id: tag.id}}">#{{ tag.name }}</NuxtLink>
+          :to="{name: 'tags.tag.content', params: {tag: tag.name.trim(), content: entry.system_name}}">#{{ tag.name }}</NuxtLink>
     </div>
 
     <footer class="flex items-center p-4 border-t border-t-stone-100">
