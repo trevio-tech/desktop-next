@@ -34,13 +34,16 @@
           :count="entry.likes_count"
         />
       </IsLoggedIn>
-      <IsLoggedIn
-          class="flex items-center ml-auto">
-        <BookmarkButton
-          v-model="bookmarks"
-          :model-type="entry.system_name"
-          :model-id="entry.id" />
-      </IsLoggedIn>
+      <CommentsButton title="Количество ответов" :to="to" class="ml-2">{{ entry.answers_count || 0 }}</CommentsButton>
+      <div class="flex items-center ml-auto space-x-2">
+        <QuestionResolvedLabel v-if="entry.resolved_at" />
+        <IsLoggedIn class="flex items-center">
+          <BookmarkButton
+              v-model="bookmarks"
+              :model-type="entry.system_name"
+              :model-id="entry.id" />
+        </IsLoggedIn>
+      </div>
     </footer>
   </article>
 </template>
@@ -48,6 +51,8 @@
 <script setup>
 import useContentCard from '~/components/ContentCard/useContentCard'
 import BookmarkButton from '~/components/modules/bookmarks/components/BookmarkButton'
+import QuestionResolvedLabel from '~/components/modules/questions/components/QuestionResolvedLabel.vue'
+import CommentsButton from '~/components/CommentsButton.vue'
 
 const props = defineProps({
   entry: {

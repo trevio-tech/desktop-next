@@ -11,6 +11,7 @@ export const QUESTION_CARD = `
   system_name
   created_at
   can
+  resolved_at
   cover {
     id
     url
