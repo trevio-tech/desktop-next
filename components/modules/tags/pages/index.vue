@@ -1,5 +1,6 @@
 <template>
   <TheLayout :heading="title">
+    <template #sidebar>1</template>
     <div class="flex flex-wrap">
       <NuxtLink
           v-for="tag in tags"
@@ -8,13 +9,19 @@
           :to="{name: 'tags.tag', params: {tag: tag.name}}" class="mr-4">{{ tag.name }}</NuxtLink>
     </div>
 
-    {{ items }}
+    <div class="space-y-4">
+      <div v-for="(item, index) in items" :key="item.id">
+        <Component :is="item.system_name === 'questions' ? QuestionCard : ContentCard" :entry="item" />
+      </div>
+    </div>
   </TheLayout>
 </template>
 
 <script setup>
+import ContentCard from '~/components/ContentCard'
+import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import TheLayout from '~/components/layout/TheLayout.vue'
-import { useRoute } from 'nuxt/app'
+import { useHead, useRoute } from 'nuxt/app'
 import { FEED } from '~/components/modules/activity/graphql'
 
 const route = useRoute()
@@ -22,11 +29,11 @@ let tags = []
 let items = []
 
 const contentTypes = {
-  albums: 'фотоальбомов',
-  notes: 'заметок',
-  questions: 'вопросов',
-  reviews: 'отзывов',
-  travels: 'путешествий',
+  albums:     'фотоальбомов',
+  notes:      'заметок',
+  questions:  'вопросов',
+  reviews:    'отзывов',
+  travels:    'путешествий',
 }
 
 let titleContentType = ''
@@ -38,6 +45,10 @@ if (Object.hasOwn(contentTypes, route.params?.content)) {
 const title = route.params?.tag
     ? `Поиск ${titleContentType} по тегу ${route.params.tag}`
     : 'Теги'
+
+useHead({
+  title: title,
+})
 
 try {
   if (route.name === 'tags') {
