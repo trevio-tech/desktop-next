@@ -1,5 +1,5 @@
 <template>
-  <button type="button" @click="onClick">
+  <button type="button" @click="onClick" class="p-1 text-sm flex items-center rounded-lg bg-slate-100 text-slate-400 flex items-center space-x-1 font-medium">
     <Bookmark class="w-5 h-5" :class="{'text-red-500': active}" />
   </button>
 </template>

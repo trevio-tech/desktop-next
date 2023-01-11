@@ -11,10 +11,13 @@ export const QUESTION_CARD = `
   system_name
   created_at
   can
-  resolved_at
+  resolved_at(format: "d.m.Y")
   cover {
     id
     url
+  }
+  bookmarks {
+    category_id
   }
   travel {
     id
@@ -100,5 +103,19 @@ export const UPDATE_QUESTION = `
 export const DELETE_QUESTION = `
   mutation ($id: Int!) {
     deleteContent: deleteQuestion(id: $id)
+  }
+`
+
+export const ANSWER_CARD = `
+  id
+  user_id
+  question_id
+  text
+  is_pinned
+  created_at(format: "relative")
+  user {
+    id
+    name
+    avatar
   }
 `

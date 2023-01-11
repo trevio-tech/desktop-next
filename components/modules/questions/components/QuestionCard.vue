@@ -7,9 +7,7 @@
         </NuxtLink>
       </div>
       <div>
-        <div class="text-sm mb-1 text-slate-600">
-          Задан: {{ entry.published_at }}
-        </div>
+        <div class="text-sm mb-1 text-slate-400">Задан {{ entry.published_at }}</div>
         <h2 class="font-semibold text-xl">
           <NuxtLink :to="to">{{ entry.title }}</NuxtLink>
         </h2>
@@ -35,8 +33,8 @@
         />
       </IsLoggedIn>
       <CommentsButton title="Количество ответов" :to="to" class="ml-2">{{ entry.answers_count || 0 }}</CommentsButton>
+      <QuestionResolvedLabel v-if="entry.resolved_at" class="ml-4" :title="entry.resolved_at" />
       <div class="flex items-center ml-auto space-x-2">
-        <QuestionResolvedLabel v-if="entry.resolved_at" />
         <IsLoggedIn class="flex items-center">
           <BookmarkButton
               v-model="bookmarks"
@@ -61,5 +59,5 @@ const props = defineProps({
   },
 })
 
-const { to, label } = useContentCard(props)
+const { to, label, bookmarks } = useContentCard(props)
 </script>

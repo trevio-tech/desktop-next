@@ -101,10 +101,5 @@ const testClick = () => {
   console.log('testClick')
 }
 
-const { to, label } = useContentCard(props)
-
-// Если в ленте добавить в закладки, потом перейти на другую страницу и снова вернуться в ленту,
-// то лента не будет отображать что карточка в закладках, потому что BookmarkButton обновляет локальную модель,
-// состояние карточки в сторе остаеться старое.
-const bookmarks = shallowRef(props.entry.bookmarks?.map((bookmark) => bookmark.category_id))
+const { to, label, bookmarks } = useContentCard(props)
 </script>
