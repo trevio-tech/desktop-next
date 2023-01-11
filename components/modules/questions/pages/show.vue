@@ -10,6 +10,7 @@
     </article>
 
     <h2 class="text-2xl font-medium mt-6" id="answers">Ответы</h2>
+
     <AnswerForm :question-id="question.id" class="mt-2" @created="questionAnswers.data.unshift($event)" />
 
     <div v-if="pinnedAnswers.data.length" class="space-y-4 mt-6">

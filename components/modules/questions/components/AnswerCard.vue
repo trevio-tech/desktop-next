@@ -1,20 +1,26 @@
 <template>
-  <article @click="onPin" class="flex">
+  <article class="flex">
     <NuxtLink :to="{name: 'users.show', params: {userId: entry.user_id}}" class="w-10 h-10 flex-shrink-0 mr-4">
       <img :src="entry.user.avatar" :alt="entry.user.name" class="block rounded-full">
     </NuxtLink>
-    <div class="text-sm">
-      <div class="mb-2">
-        <NuxtLink class="font-medium" :to="{name: 'users.show', params: {userId: entry.user_id}}">{{ entry.user.name }}</NuxtLink>,
-        <div class="text-slate-500">{{ entry.created_at }}</div>
+    <div class="text-sm w-full">
+      <div class="mb-2 flex items-center">
+        <div>
+          <NuxtLink class="font-medium" :to="{name: 'users.show', params: {userId: entry.user_id}}">{{ entry.user.name }}</NuxtLink>
+          <div class="text-slate-500">{{ entry.created_at }}</div>
+        </div>
+        <div class="ml-auto">
+          <MoreHorizontal @click="onPin"  class="w-5 h-5" />
+        </div>
       </div>
       {{ entry.text }}
-      {{ entry.is_pinned }}
     </div>
   </article>
 </template>
 
 <script setup>
+import { MoreHorizontal } from 'lucide-vue-next'
+
 const emit = defineEmits(['pinned', 'unpinned'])
 
 const props = defineProps({
