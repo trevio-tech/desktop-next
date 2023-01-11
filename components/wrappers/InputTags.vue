@@ -1,6 +1,6 @@
 <template>
   <InputTags :key-name="keyName" :placeholder="placeholder" :model-value="tags"
-             @update:modelValue="$emit('update:modelValue', $event)" :select-callback="onSelect"/>
+             @update:modelValue="onUpdate" :select-callback="onSelect"/>
 </template>
 
 <script setup>
@@ -8,6 +8,10 @@ import { ref } from 'vue'
 import { useQuery } from '#imports'
 
 defineEmits(['update:modelValue'])
+
+const onUpdate = (e) => {
+  console.log(e)
+}
 
 const props = defineProps({
   modelValue: {
@@ -25,7 +29,7 @@ const props = defineProps({
 const tags = ref(props.modelValue)
 
 const onSelect = async ({ name }) => {
-  const { createTag } = await useQuery({
+  const { data: { createTag }} = await useQuery({
     query: `
       mutation($name: String) {
         createTag(name: $name) {
