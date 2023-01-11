@@ -7,8 +7,8 @@
       <hr class="mb-4 -mx-4 border-gray-200">
 
       <div class="flex space-x-2">
-        <Button type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</Button>
-        <Button @click="$emit('draft', true)" type="submit" variant="secondary">{{ isEdit ? 'Сохранить' : 'Создать' }} черновик</Button>
+        <Button :loading="loading" type="submit">{{ isEdit ? 'Сохранить' : 'Создать' }}</Button>
+        <Button :loading="loading" @click="$emit('draft', true)" type="submit" variant="secondary">{{ isEdit ? 'Сохранить' : 'Создать' }} черновик</Button>
       </div>
     </footer>
   </form>
@@ -20,6 +20,9 @@ defineEmits(['submit', 'draft'])
 defineProps({
   isEdit: {
     type: Boolean,
+  },
+  loading: {
+    type: Boolean
   }
 })
 </script>
