@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { useRoute } from 'nuxt/app'
+import { useHead, useRoute } from 'nuxt/app'
 import { useAsyncQuery } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE } from '../graphql'
@@ -66,6 +66,10 @@ try {
   })
 
   note.value = data.note
+
+  useHead({
+    title: `${data.note.title} - Заметки`,
+  })
 } catch (error) {
   console.log(error)
 }

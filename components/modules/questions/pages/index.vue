@@ -10,10 +10,14 @@
 <script setup>
 import { QUESTION_CARD } from '../graphql';
 import { useQuery } from '#imports'
-import { shallowRef } from 'vue'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
+import { useHead } from 'nuxt/app'
 
-const questions = shallowRef([])
+useHead({
+  title: 'Вопросы и ответы'
+})
+
+let questions = []
 
 try {
   const { data } = await useQuery({
@@ -26,7 +30,7 @@ try {
     `
   })
 
-  questions.value = data.questions
+  questions = data.questions
 } catch (error) {
   console.log(error)
 }

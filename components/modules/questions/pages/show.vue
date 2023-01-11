@@ -39,8 +39,7 @@ import AnswerCard from '~/components/modules/questions/components/AnswerCard.vue
 import AnswerForm from '~/components/modules/questions/components/AnswerForm.vue'
 import TheLayout from '~/components/layout/TheLayout'
 import { QUESTION_FIELDS, ANSWER_CARD } from '../graphql';
-import { useRoute } from 'nuxt/app'
-import { shallowRef } from 'vue'
+import { useRoute, useHead } from 'nuxt/app'
 
 const route = useRoute()
 let question = {}
@@ -74,6 +73,11 @@ try {
   question = data.question
   questionAnswers = data.questionAnswers
   pinnedAnswers = data.pinnedAnswers
+
+  useHead({
+    title: `${question.title} - Вопросы и ответы`,
+    description: question.text
+  })
 } catch (error) {}
 
 const onUnpin = (answerId) => {
