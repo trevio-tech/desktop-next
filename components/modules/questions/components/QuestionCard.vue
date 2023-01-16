@@ -11,7 +11,7 @@
         <h2 class="font-semibold text-xl">
           <NuxtLink :to="to">{{ entry.title }}</NuxtLink>
         </h2>
-        <p v-if="entry.text" class="mt-2">
+        <p v-if="entry.text" class="mt-2 text-sm leading-normal">
           <NuxtLink :to="to">{{ entry.text }}</NuxtLink>
         </p>
         <div v-if="entry.tags.length" class="space-x-2 mt-2 text-slate-400 text-sm">

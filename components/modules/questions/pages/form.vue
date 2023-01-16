@@ -36,7 +36,7 @@ import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
-import { definePageMeta } from '#imports'
+import { definePageMeta, useQuery } from '#imports'
 
 definePageMeta({
   middleware: 'auth'
@@ -63,7 +63,7 @@ const isEdit = questionId > 0
 const danger = ref(false)
 const loading = ref(false)
 
-const app = useNuxtApp()
+const { $auth } = useNuxtApp()
 
 const { data } = await useQuery({
   query: `
@@ -77,7 +77,7 @@ const { data } = await useQuery({
   `,
   variables: {
     id: questionId,
-    userId: app.$auth.user.id
+    userId: $auth.user.id
   }
 })
 

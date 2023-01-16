@@ -11,13 +11,17 @@
 <script setup>
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
+import { CREATE_ANSWER, UPDATE_ANSWER } from '~/components/modules/questions/graphql'
 
-const emit = defineEmits(['created'])
+const emit = defineEmits(['created', 'updated'])
 
 const props = defineProps({
   questionId: {
     type:     Number,
     required: true
+  },
+  answer: {
+    type: Object,
   }
 })
 
@@ -31,30 +35,35 @@ const formInitialState = {
 }
 
 const form = ref({...formInitialState})
+const isEdit = props.answer?.id > 0
+
+if (isEdit) {
+  form.value.text = props.answer.text
+}
 
 const onSubmit = handleSubmit(async () => {
   if (loading.value) return
 
   loading.value = true
 
+  const variables = {
+    input: {...form.value}
+  }
+
+  if (isEdit) {
+    variables.answer_id = props.answer.id
+  }
+
   try {
     const { data } = await useQuery({
-      query: `
-        mutation($input: AnswerInput!) {
-          createAnswer(input: $input) {
-            id
-            text
-          }
-        }
-      `,
-      variables: {
-        input: {...form.value}
-      }
+      query: isEdit ? UPDATE_ANSWER : CREATE_ANSWER,
+      variables
     })
 
-    if (data.createAnswer?.id > 0) {
+    if (data.answerForm?.id > 0) {
       form.value = {...formInitialState}
-      emit('created', data.createAnswer)
+
+      emit(isEdit ? 'updated' : 'created', data.answerForm)
     }
   } catch (error) {
     if (error['message'] === 'validation') {
