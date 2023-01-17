@@ -11,7 +11,7 @@
 
     <h2 class="text-2xl font-medium mt-6" id="answers">Ответы на вопрос</h2>
 
-    <AnswerForm :question-id="question.id" class="mt-2" @created="questionAnswers.data.unshift($event)" />
+    <AnswerForm :question-id="question.id" class="mt-2" @created="answers.data.unshift($event)" />
 
     <ul class="flex items-center space-x-2 mt-6">
       <li @click="onFetch('new', true)"

@@ -4,13 +4,17 @@
       <Textarea v-model="form.text" placeholder="Введите текст ответа" :variant="hasError ? 'danger' : undefined" />
     </FormField>
 
-    <FormField name="images">
-      <Upload v-model="form.images" model-type="answers" :fields="['id', 'url']" :presets="['default@width:640,height:480']" />
-    </FormField>
-
     <ImageGrid :images="form.images" />
 
-    <Button type="submit" class="mt-2">Отправить</Button>
+    <div class="flex items-center mt-2 space-x-2">
+      <Button type="submit">Отправить</Button>
+      <Upload v-model="form.images" model-type="answers" :fields="['id', 'url']" :presets="['default@width:640,height:480']">
+        <Button variant="secondary">
+          <Image />
+        </Button>
+      </Upload>
+    </div>
+
   </form>
 </template>
 
@@ -18,6 +22,7 @@
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { CREATE_ANSWER, UPDATE_ANSWER } from '~/components/modules/questions/graphql'
+import { Image } from 'lucide-vue-next'
 
 const emit = defineEmits(['created', 'updated'])
 
@@ -73,7 +78,7 @@ const onSubmit = handleSubmit(async () => {
     if (data.answerForm?.id > 0) {
       form.value = {...formInitialState}
 
-      emit(isEdit ? 'updated' : 'created', variables.input)
+      emit(isEdit ? 'updated' : 'created', data.answerForm)
     }
   } catch (error) {
     if (error['message'] === 'validation') {
