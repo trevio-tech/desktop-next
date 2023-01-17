@@ -5,6 +5,7 @@ export { default as QUESTION_FORM } from './queries/question-form'
 
 export { default as CREATE_ANSWER } from './mutations/create-answer'
 export { default as CREATE_QUESTION } from './mutations/create-question'
+export { default as DELETE_ANSWER } from './mutations/delete-answer'
 export { default as DELETE_QUESTION } from './mutations/delete-question'
 export { default as UPDATE_ANSWER } from './mutations/update-answer'
 export { default as UPDATE_QUESTION } from './mutations/update-question'
