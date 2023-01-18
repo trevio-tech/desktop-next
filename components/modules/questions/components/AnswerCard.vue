@@ -33,8 +33,8 @@
 
         <div class="text-sm">{{ entry.text }}</div>
 
-        <ImageViewer class="mt-4">
-          <ImageGrid :images="entry.images" />
+        <ImageViewer v-if="entry.images.length" class="mt-4">
+          <ImageGrid :model-value="entry.images" />
         </ImageViewer>
       </div>
     </div>

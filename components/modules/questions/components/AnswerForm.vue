@@ -4,12 +4,12 @@
       <Textarea v-model="form.text" placeholder="Введите текст ответа" :variant="hasError ? 'danger' : undefined" />
     </FormField>
 
-    <ImageGrid :images="form.images" />
+    <ImageGrid v-if="form.images.length" :model-value="form.images" deletable class="mt-4" />
 
-    <div class="flex items-center mt-2 space-x-2">
-      <Button type="submit">Отправить</Button>
+    <div class="flex items-center mt-4 space-x-2">
+      <Button :loading="loading" type="submit">Отправить</Button>
       <Upload v-model="form.images" model-type="answers" :fields="['id', 'url']" :presets="['default@width:640,height:480']">
-        <Button variant="secondary">
+        <Button :loading="loading" variant="secondary">
           <Image />
         </Button>
       </Upload>
@@ -63,7 +63,7 @@ const onSubmit = handleSubmit(async () => {
     input: {...form.value}
   }
 
-  variables.input.images = form.value.images.map(image => parseInt(image.id))
+  variables.input.images = form.value.images.map(image => image.id)
 
   if (isEdit) {
     variables.answer_id = props.answer.id
