@@ -74,7 +74,9 @@ const onEdit = () => {
     },
     on: {
       'update:modelValue': (data) => {
-        Object.assign(props.entry, data)
+        console.log(data)
+        props.entry.text = data.text
+        props.entry.images = data.images
         $overlay.hide()
       }
     }

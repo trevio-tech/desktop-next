@@ -4,7 +4,7 @@
       <Textarea v-model="form.text" placeholder="Введите текст ответа" :variant="hasError ? 'danger' : undefined" />
     </FormField>
 
-    <ImageGrid v-if="form.images.length" :model-value="form.images" deletable class="mt-4" />
+    <ImageGrid v-if="form.images.length" v-model="form.images" deletable class="mt-4" />
 
     <div class="flex items-center mt-4 space-x-2">
       <Button :loading="loading" type="submit">Отправить</Button>
