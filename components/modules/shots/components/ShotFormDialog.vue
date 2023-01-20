@@ -6,7 +6,7 @@
 
         <ShotEditorTrash
           v-if="isTrash"
-          @mouseup="addToTrash" id="trash" class="absolute" style="bottom: 20px; left: calc(50% - 40px)" />
+          @mouseup="addToTrash" id="trash" class="absolute" style="bottom: 20px; left: calc(50% - 30px)" />
       </div>
 
       <div class="w-[320px] h-full bg-gray-100 rounded-tr-lg p-4">
