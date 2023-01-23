@@ -13,7 +13,6 @@
     "sass": "^1.56.1"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.0.13",
     "@nuxtjs-alt/auth": "^2.1.4",
     "@nuxtjs-alt/http": "^1.4.6",
     "@nuxtjs/tailwindcss": "^6.1.3",

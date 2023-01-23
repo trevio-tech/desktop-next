@@ -4,7 +4,7 @@
       <div class="flex items-center bg-gray-100 rounded-full h-5 text-xs font-medium space-x-1">
         <img :src="item.avatar" class="w-5 h-5 rounded-full" alt="">
         <div class="max-w-60 truncate">{{ item['name'] }}</div>
-        <XMarkIcon class="w-5 h-5 bg-gray-300 rounded-lg cursor-pointer" @click="onDelete(index)" />
+        <X class="w-5 h-5 bg-gray-300 rounded-lg cursor-pointer" @click="onDelete(index)" />
       </div>
     </template>
     <template v-slot:option="{ item }">
@@ -18,7 +18,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { XMarkIcon } from '@heroicons/vue/24/outline'
+import { X } from 'lucide-vue-next'
 
 defineEmits(['update:modelValue'])
 
