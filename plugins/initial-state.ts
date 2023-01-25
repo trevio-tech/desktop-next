@@ -2,6 +2,7 @@ import { MY_CHATS } from '~/components/modules/chats/graphql'
 import { defineNuxtPlugin } from 'nuxt/app'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
+import { useShotsStore } from '~/components/modules/shots/store'
 import { useQuery } from '#imports'
 import { watch } from 'vue'
 
@@ -10,13 +11,23 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     try {
       const variablesString = []
       const variables = {}
-      const queries = []
+      const queries = [`
+        stories2 {
+          id
+          user_id
+          image(sizes: "resize:fit:80:160")
+          user {
+            id
+            name
+            avatar
+          }
+        }
+      `]
 
       if (loggedIn) {
         variablesString.push('$userId: Int!')
         variables.userId = parseInt(nuxtApp.$auth.user.id)
         queries.push(`
-          ${MY_CHATS},
           bookmarksCategories(userId: $userId)  {
             id
             name
@@ -36,6 +47,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         variables,
       }, {
         key: 'initial-state'
+      })
+
+      await useShotsStore().$patch({
+        stories: data.stories2
       })
 
       if (loggedIn) {

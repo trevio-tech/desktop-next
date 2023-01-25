@@ -57,8 +57,8 @@
       </div>
 
       <div class="border-l -ml-[1px] p-2 flex space-x-2 w-[320px]">
-        <Button class="flex-auto" variant="secondary" @click="$overlay.hide">Закрыть</Button>
-        <Button class="flex-auto" @click="onSubmit">Опубликовать</Button>
+        <Button :loading="isLoading" class="flex-auto" variant="secondary" @click="$overlay.hide">Закрыть</Button>
+        <Button :loading="isLoading" class="flex-auto" @click="onSubmit">Опубликовать</Button>
       </div>
     </footer>
   </div>
@@ -82,7 +82,8 @@ const {
   isTrash,
   setBackgroundColor,
   setTextBackgroundColor,
-  onSubmit
+  onSubmit,
+  isLoading
 } = useShotEditor()
 
 const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']
