@@ -5,18 +5,20 @@
         <canvas id="shot"></canvas>
 
         <ShotEditorTrash
-            v-if="isTrash"
-            @mouseup="addToTrash" id="trash" class="absolute" style="bottom: 20px; left: calc(50% - 30px)"/>
+          v-if="isTrash"
+          id="trash"
+          class="absolute"
+          style="bottom: 20px; left: calc(50% - 30px)"
+          @mouseup="addToTrash" />
       </div>
 
-      <div class="w-[320px] h-full bg-gray-100 rounded-tr-lg overflow-hidden">
+      <div class="w-[320px] flex flex-col h-full bg-gray-100 rounded-tr-lg overflow-hidden">
         <ul class="flex items-center cursor-pointer bg-slate-200 text-center font-medium text-sm border-b border-slate-300">
-          <li @click="activeTab = 'text'" class="p-4 flex-auto" :class="{'bg-slate-300': activeTab === 'text'}">Текст</li>
-          <li @click="activeTab = 'stickers'" class="p-4 flex-auto" :class="{'bg-slate-300': activeTab === 'stickers'}">Стикеры</li>
-          <li @click="activeTab = 'more'" class="p-4 flex-auto" :class="{'bg-slate-300': activeTab === 'more'}">Еще</li>
+          <li @click="activeTab = 'text'" class="p-4 flex-1" :class="{'bg-slate-300': activeTab === 'text'}">Текст</li>
+          <li @click="activeTab = 'stickers'" class="p-4 flex-1" :class="{'bg-slate-300': activeTab === 'stickers'}">Стикеры</li>
         </ul>
 
-        <div class="p-4">
+        <div class="p-4 flex-auto flex flex-col">
           <ShotEditorTextPanel
               v-show="activeTab === 'text'"
               @add-text="addText"
@@ -28,10 +30,9 @@
               v-show="activeTab === 'stickers'"
               @add-sticker="addSticker"
           />
-          <ShotEditorMorePanel
-              v-show="activeTab === 'more'"
-              v-model="form.travel_id"
-          />
+
+          <Checkbox v-model="form.is_travel" id="last-travel" class="mt-auto">Прикрепить к последнему путешествию?</Checkbox>
+          {{ form.is_travel }}
         </div>
       </div>
     </div>
@@ -55,16 +56,15 @@
         </div>
       </div>
 
-      <div class="border-l p-2 flex space-x-2 w-[320px]">
+      <div class="border-l -ml-[1px] p-2 flex space-x-2 w-[320px]">
         <Button class="flex-auto" variant="secondary" @click="$overlay.hide">Закрыть</Button>
-        <Button class="flex-auto">Опубликовать</Button>
+        <Button class="flex-auto" @click="onSubmit">Опубликовать</Button>
       </div>
     </footer>
   </div>
 </template>
 
 <script setup>
-import ShotEditorMorePanel from '~/components/modules/shots/components/ShotEditorMorePanel.vue'
 import ShotEditorStickerPanel from '~/components/modules/shots/components/ShotEditorStickerPanel.vue'
 import ShotEditorTextPanel from '~/components/modules/shots/components/ShotEditorTextPanel.vue'
 import ShotEditorTrash from '~/components/modules/shots/components/ShotEditorTrash.vue'
@@ -82,6 +82,7 @@ const {
   isTrash,
   setBackgroundColor,
   setTextBackgroundColor,
+  onSubmit
 } = useShotEditor()
 
 const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']
@@ -89,6 +90,6 @@ const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']
 const activeTab = ref('text')
 
 const form = ref({
-  travel_id: null
+  is_travel: true
 })
 </script>
