@@ -4,7 +4,7 @@
       <div class="bg-emerald-100 w-full h-full"></div>
     </template>
 
-    <ShotsHorizontalList :items="stories" class="mb-2" />
+    <ShotsHorizontalList :is-story="true" :items="stories" class="mb-2" />
 
     <div class="space-y-4">
       <div v-for="(item, index) in store.items" :key="item.id">
