@@ -15,6 +15,7 @@ import StoryDialog from '~/components/modules/shots/components/StoryDialog.vue'
 import { computed } from 'vue'
 import { useRouter, useNuxtApp } from 'nuxt/app'
 
+
 const props = defineProps({
   items: {
     type: Array
@@ -25,9 +26,17 @@ const props = defineProps({
   }
 })
 
-const { $overlay } = useNuxtApp()
+const { $overlay, $auth, $authChannel } = useNuxtApp()
 const router = useRouter()
 const hash = computed(() => router.currentRoute.value.hash)
+
+try {
+  if ($auth.loggedIn) {
+    $authChannel.here((data) => console.log(data))
+  }
+} catch (error) {
+  console.log(error)
+}
 
 const showDialog = () => {
   $overlay.show(props.isStory ? StoryDialog : ShotDialog, {

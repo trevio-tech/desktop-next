@@ -58,7 +58,7 @@
 
       <div class="border-l -ml-[1px] p-2 flex space-x-2 w-[320px]">
         <Button :loading="isLoading" class="flex-auto" variant="secondary" @click="$overlay.hide">Закрыть</Button>
-        <Button :loading="isLoading" class="flex-auto" @click="onSubmit">Опубликовать</Button>
+        <Button :loading="isLoading" class="flex-auto" @click="onSubmit(onSubmitCallback)">Опубликовать</Button>
       </div>
     </footer>
   </div>
@@ -71,6 +71,8 @@ import ShotEditorTrash from '~/components/modules/shots/components/ShotEditorTra
 import { Wand2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useShotEditor } from '#imports'
+import { useShotsStore } from '~/components/modules/shots/store'
+import { useAuth } from '#auth/runtime/composables'
 
 const {
   addSticker,
@@ -93,4 +95,14 @@ const activeTab = ref('text')
 const form = ref({
   is_travel: true
 })
+
+const store = useShotsStore()
+
+const onSubmitCallback = ({ createShot }) => {
+  if (store.stories.length === 0) {
+    store.stories.push(createShot)
+  } else {
+    store.updateStory(createShot)
+  }
+}
 </script>

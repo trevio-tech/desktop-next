@@ -1,9 +1,15 @@
 <template>
-  <div class="place-self-center h-full p-4">
-    <div class="w-[480px] bg-white w-full h-full rounded-lg overflow-hidden">
+  <div class="place-self-center p-4">
+    <div class="w-[480px] h-[840px] bg-white w-full h-full rounded-lg overflow-hidden relative">
+      <div class="p-4 top-0 left-4 right-4 absolute">
+        <div class="swiper-scrollbar"></div>
+      </div>
       <Swiper
-        :modules="[Autoplay]"
+        :modules="[Autoplay, Scrollbar]"
         :preload-images="false"
+        :scrollbar="{
+          el: '.swiper-scrollbar',
+        }"
         :autoplay="{
           delay: 3000,
           pauseOnMouseEnter: true,
@@ -19,14 +25,12 @@
 </template>
 
 <script setup>
-import { useRouter, useNuxtApp } from 'nuxt/app'
-import { ref, nextTick } from 'vue'
-import { Autoplay } from 'swiper'
+import { useRouter } from 'nuxt/app'
+import { ref } from 'vue'
+import { Autoplay, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 import 'swiper/css'
-
-const { $overlay } = useNuxtApp()
 
 const router = useRouter()
 const hash = router.currentRoute.value.hash
