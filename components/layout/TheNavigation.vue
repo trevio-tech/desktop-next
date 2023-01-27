@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <ul class="main-nav space-y-px mb-4">
+    <Button class="w-full mb-6" v-if="$auth.loggedIn" @click="$overlay.show(TheContentCreationDialog)">Написать</Button>
+
+    <ul class="main-nav space-y-px mb-6">
       <li>
         <NuxtLink to="/" class="px-3 py-2 hover:bg-slate-100 rounded-lg flex items-center space-x-3">
           <Users class="w-5 h-5 text-slate-500" />
@@ -31,6 +33,7 @@
 
 <script setup>
 import { Clock2, Users, Flame, Circle } from 'lucide-vue-next'
+import TheContentCreationDialog from './TheContentCreationDialog'
 
 const items = [
   { name: 'Путешествия', href: '/travels' },

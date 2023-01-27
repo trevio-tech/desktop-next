@@ -25,6 +25,7 @@
               @set-background-color="setTextBackgroundColor"
               @set-text-color="changeFillColor"
               @set-text-gradient="generateRandomTextGradient"
+              @change-font="changeFont"
           />
           <ShotEditorStickerPanel
               v-show="activeTab === 'stickers'"
@@ -72,7 +73,6 @@ import { Wand2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useShotEditor } from '#imports'
 import { useShotsStore } from '~/components/modules/shots/store'
-import { useAuth } from '#auth/runtime/composables'
 
 const {
   addSticker,
@@ -85,7 +85,8 @@ const {
   setBackgroundColor,
   setTextBackgroundColor,
   onSubmit,
-  isLoading
+  isLoading,
+  changeFont
 } = useShotEditor()
 
 const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']

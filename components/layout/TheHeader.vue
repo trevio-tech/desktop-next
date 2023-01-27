@@ -6,7 +6,6 @@
       </NuxtLink>
       <div class="flex min-w-[560px] w-[560px] ml-24">
         <Input placeholder="Поиск" class="w-[280px]" />
-        <Button class="ml-auto" v-if="$auth.loggedIn" @click="$overlay.show(TheContentCreationDialog)">Создать</Button>
       </div>
       <ul v-if="!$auth.loggedIn" class="flex space-x-2 ml-auto">
         <li @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/LoginRegisterDialog.vue')))">
@@ -34,7 +33,3 @@
     </div>
   </header>
 </template>
-
-<script setup>
-import TheContentCreationDialog from './TheContentCreationDialog'
-</script>

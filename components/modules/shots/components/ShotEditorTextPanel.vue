@@ -2,6 +2,9 @@
   <div>
     <Button @click="emit('addText')" class="w-full">Добавит текст</Button>
 
+    <div @click="emit('changeFont', 'Montserrat')" class="mt-6 text-2xl">Обычный</div>
+    <div @click="emit('changeFont', 'Pacifico')" class="text-2xl" style="font-family: 'Pacifico';">Пропись</div>
+
     <h3 class="mt-6 mb-4 text-sm font-medium">Цвет текста</h3>
     <div class="grid grid-cols-6 gap-2">
       <div
@@ -44,6 +47,6 @@
 <script setup>
 import { Wand2, X } from 'lucide-vue-next'
 
-const emit = defineEmits(['addText', 'setBackgroundColor', 'setTextColor', 'setTextGradient'])
+const emit = defineEmits(['addText', 'setBackgroundColor', 'setTextColor', 'setTextGradient', 'changeFont'])
 const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']
 </script>

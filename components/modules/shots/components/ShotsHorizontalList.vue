@@ -26,14 +26,15 @@ const props = defineProps({
   }
 })
 
-const { $overlay, $auth, $authChannel } = useNuxtApp()
+const { $overlay, $auth, $channels } = useNuxtApp()
 const router = useRouter()
 const hash = computed(() => router.currentRoute.value.hash)
 
 try {
-  if ($auth.loggedIn) {
-    $authChannel.here((data) => console.log(data))
-  }
+  $channels.public
+    .listen('.shots.created', (data) => {
+      console.log(data)
+    })
 } catch (error) {
   console.log(error)
 }
