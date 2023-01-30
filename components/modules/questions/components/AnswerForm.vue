@@ -66,7 +66,7 @@ const onSubmit = handleSubmit(async () => {
   variables.input.images = form.value.images.map(image => image.id)
 
   if (isEdit) {
-    variables.answer_id = props.answer.id
+    variables.answerId = props.answer.id
   }
 
   try {
@@ -77,7 +77,6 @@ const onSubmit = handleSubmit(async () => {
 
     if (data.answerForm?.id > 0) {
       form.value = {...formInitialState}
-
       emit(isEdit ? 'updated' : 'created', data.answerForm)
     }
   } catch (error) {
