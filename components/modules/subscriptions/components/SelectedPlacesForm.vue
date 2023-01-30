@@ -9,7 +9,7 @@
         <ul class="text-sm">
           <li v-for="(place, index) in modelValue" :key="place.id" class="w-full flex items-center p-1 hover:bg-gray-100 rounded-lg">
             <span class="truncate mr-4">{{ place.full_name }}</span>
-            <XMarkIcon @click="modelValue.splice(index, 1)" class="cursor-pointer flex-shrink-0 w-5 h-5 text-red-500 ml-auto" />
+            <X @click="modelValue.splice(index, 1)" class="cursor-pointer flex-shrink-0 w-5 h-5 text-red-500 ml-auto" />
           </li>
         </ul>
       </div>
@@ -25,7 +25,7 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useGql } from '~/uses'
 import { useNuxtApp } from 'nuxt/app'
-import { XMarkIcon } from '@heroicons/vue/20/solid'
+import { X } from 'lucide-vue-next'
 
 const emit = defineEmits([
   'update:modelValue'

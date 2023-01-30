@@ -9,11 +9,11 @@
 
     <template #top>
       <div class="bg-gradient-to-r from-blue-50 to-blue-200 flex items-center h-40 px-10 rounded-lg">
-        <div class="mr-4">
+        <div class="mr-4 flex-shrink-0">
           <img :src="user.avatar" class="w-24 h-24 rounded-full" alt="">
         </div>
-        <div>
-          <h1 class="text-4xl font-semibold">{{ user.name }}</h1>
+        <div class="overflow-hidden">
+          <h1 class="text-4xl font-semibold truncate">{{ user.name }}</h1>
           <p class="max-w-[480px] text-sm mt-2">{{ user.description }}</p>
         </div>
       </div>
@@ -22,7 +22,7 @@
       <div>
         <h3 class="font-semibold mb-2 flex items-center space-x-1">
           <span>Подписки</span>
-          <Cog6ToothIcon @click="onEditFriends" class="w-5 h-5 text-gray-800 cursor-pointer" />
+          <Cog @click="onEditFriends" class="w-5 h-5 text-gray-800 cursor-pointer" />
         </h3>
         <ul v-if="user.friends.length" class="space-y-2">
           <li v-for="friend in user.friends" :key="friend.id">
@@ -38,7 +38,7 @@
       <div class="mt-4">
         <h3 class="font-semibold mb-2 flex items-center space-x-1">
           <span>Интересы</span>
-          <Cog6ToothIcon @click="onEditInterests" class="w-5 h-5 text-gray-800 cursor-pointer" />
+          <Cog @click="onEditInterests" class="w-5 h-5 text-gray-800 cursor-pointer" />
         </h3>
         <ul v-if="user.interests.length">
           <li v-for="interest in user.interests" :key="interest.id">
@@ -53,7 +53,7 @@
       <div class="mt-4">
         <h3 class="font-semibold mb-2 flex items-center space-x-1">
           <span>Направления</span>
-          <Cog6ToothIcon @click="onEditSelectedPlaces" class="w-5 h-5 text-gray-800 cursor-pointer" />
+          <Cog @click="onEditSelectedPlaces" class="w-5 h-5 text-gray-800 cursor-pointer" />
         </h3>
         <ul v-if="user.selectedPlaces.length" class="space-y-1">
           <li v-for="place in user.selectedPlaces" :key="place.id" class="truncate">
@@ -67,7 +67,7 @@
       </div>
     </template>
 
-    <ContentList :user-id="user.id" />
+<!--    <ContentList :user-id="user.id" />-->
   </TheLayout>
 </template>
 
@@ -76,7 +76,7 @@ import TheLayout from '~/components/layout/TheLayout'
 import { useQuery } from '#imports'
 import { USER } from '../graphql'
 import { useRoute, useNuxtApp } from 'nuxt/app'
-import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
+import { Cog } from 'lucide-vue-next'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
 import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
 import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'

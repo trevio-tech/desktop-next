@@ -4,12 +4,17 @@
       <div class="bg-white flex-shrink-0 w-[480px] h-full rounded-tl-lg overflow-hidden relative" id="shot-container">
         <canvas id="shot"></canvas>
 
-        <ShotEditorTrash
+        <ShotEditorTrashButton
           v-if="isTrash"
           id="trash"
           class="absolute"
           style="bottom: 20px; left: calc(50% - 30px)"
-          @mouseup="addToTrash" />
+          @mouseup="addToTrash"></ShotEditorTrashButton>
+        <ShotEditorImageButton
+            v-else
+            @click="addImage"
+          class="absolute"
+            style="bottom: 30px; left: calc(50% - 20px)"></ShotEditorImageButton>
       </div>
 
       <div class="w-[320px] flex flex-col h-full bg-gray-100 rounded-tr-lg overflow-hidden">
@@ -32,8 +37,10 @@
               @add-sticker="addSticker"
           />
 
-          <Checkbox v-model="form.is_travel" id="last-travel" class="mt-auto">Прикрепить к последнему путешествию?</Checkbox>
-          {{ form.is_travel }}
+          <label v-if="lastUserTravel" for="last-travel" class="mt-auto text-sm">
+            <input type="checkbox" v-model="form.isTravel" id="last-travel">
+            Прикрепить к путешествию "<span class="font-medium">{{ lastUserTravel.title }}</span>"
+          </label>
         </div>
       </div>
     </div>
@@ -59,7 +66,7 @@
 
       <div class="border-l -ml-[1px] p-2 flex space-x-2 w-[320px]">
         <Button :loading="isLoading" class="flex-auto" variant="secondary" @click="$overlay.hide">Закрыть</Button>
-        <Button :loading="isLoading" class="flex-auto" @click="onSubmit(onSubmitCallback)">Опубликовать</Button>
+        <Button :loading="isLoading" class="flex-auto" @click="onSubmit(onSubmitCallback, form.isTravel)">Опубликовать</Button>
       </div>
     </footer>
   </div>
@@ -68,7 +75,8 @@
 <script setup>
 import ShotEditorStickerPanel from '~/components/modules/shots/components/ShotEditorStickerPanel.vue'
 import ShotEditorTextPanel from '~/components/modules/shots/components/ShotEditorTextPanel.vue'
-import ShotEditorTrash from '~/components/modules/shots/components/ShotEditorTrash.vue'
+import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEditorTrashButton.vue'
+import ShotEditorImageButton from '~/components/modules/shots/components/ShotEditorImageButton.vue'
 import { Wand2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useShotEditor } from '#imports'
@@ -86,15 +94,17 @@ const {
   setTextBackgroundColor,
   onSubmit,
   isLoading,
-  changeFont
+  changeFont,
+  addImage,
 } = useShotEditor()
 
 const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']
 
 const activeTab = ref('text')
+const lastUserTravel = ref(null)
 
 const form = ref({
-  is_travel: true
+  isTravel: false
 })
 
 const store = useShotsStore()
@@ -106,4 +116,21 @@ const onSubmitCallback = ({ createShot }) => {
     store.updateStory(createShot)
   }
 }
+
+try {
+  const { data } = await useQuery({
+    query: `
+      query($userId: ID) {
+        lastUserTravel: travels(userId: $userId, limit: 1) {
+          id
+          title
+        }
+      }
+    `
+  })
+
+  if (data.lastUserTravel.length) {
+    lastUserTravel.value = data.lastUserTravel[0]
+  }
+} catch (error) {}
 </script>
