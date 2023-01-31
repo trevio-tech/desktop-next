@@ -4,7 +4,7 @@
         title="Добавить фоновое изображение"
         style="background-image: linear-gradient(rgb(118, 212, 165), rgb(153, 168, 31))"
         class="w-10 h-10 rounded-lg cursor-pointer ring-2 ring-white flex items-center justify-center"
-        @click="generateRandomBackgroundGradient"
+        @click="setBackgroundImage"
     >
       <ImagePlus class="w-5 h-5 text-white"/>
     </div>
@@ -30,7 +30,7 @@
 import { Wand2, ImagePlus } from 'lucide-vue-next'
 import { useShotEditor } from '#imports'
 
-const { generateRandomBackgroundGradient, setBackgroundColor } = useShotEditor()
+const { generateRandomBackgroundGradient, setBackgroundImage, setBackgroundColor } = useShotEditor()
 
 
 const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']

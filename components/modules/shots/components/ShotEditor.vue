@@ -3,13 +3,12 @@
     <div class="h-full flex">
       <div class="bg-white flex-shrink-0 w-[480px] h-full rounded-tl-lg overflow-hidden relative" id="shot-container">
         <canvas id="shot"></canvas>
-
         <ShotEditorTrashButton
           v-if="store.isTrash"
           id="trash"
           class="absolute"
           style="bottom: 20px; left: calc(50% - 30px)"
-          @mouseup="trash"></ShotEditorTrashButton>
+          @mouseup="trashAdd"></ShotEditorTrashButton>
         <ShotEditorImageButton
             v-else
             @click="addImage"
@@ -64,8 +63,6 @@ const {
   addImage,
 } = useShotEditor()
 
-createShotEditor()
-
 const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']
 
 const activeTab = ref('text')
@@ -84,6 +81,8 @@ const onSubmitCallback = ({ createShot }) => {
 }
 
 try {
+  createShotEditor()
+
   const { data } = await useQuery({
     query: `
       query($userId: ID) {

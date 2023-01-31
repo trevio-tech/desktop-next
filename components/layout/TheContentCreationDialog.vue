@@ -20,14 +20,13 @@
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
-import ShotFormDialog from '~/components/modules/shots/components/ShotFormDialog.vue'
 import { useNuxtApp } from '#app'
 
 const { $overlay } = useNuxtApp()
 
 const onClickShot = () => {
   $overlay.hide()
-  $overlay.show(ShotFormDialog)
+  $overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
 }
 
 const items = [
