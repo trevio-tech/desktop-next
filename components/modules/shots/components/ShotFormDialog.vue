@@ -5,7 +5,7 @@
         <canvas id="shot"></canvas>
 
         <ShotEditorTrashButton
-          v-if="isTrash"
+          v-if="store.isTrash"
           id="trash"
           class="absolute"
           style="bottom: 20px; left: calc(50% - 30px)"
@@ -24,18 +24,8 @@
         </ul>
 
         <div class="p-4 flex-auto flex flex-col">
-          <ShotEditorTextPanel
-              v-show="activeTab === 'text'"
-              @add-text="addText"
-              @set-background-color="setTextBackgroundColor"
-              @set-text-color="changeFillColor"
-              @set-text-gradient="generateRandomTextGradient"
-              @change-font="changeFont"
-          />
-          <ShotEditorStickerPanel
-              v-show="activeTab === 'stickers'"
-              @add-sticker="addSticker"
-          />
+          <ShotEditorTextPanel v-show="activeTab === 'text'" />
+          <ShotEditorStickerPanel v-show="activeTab === 'stickers'"/>
 
           <label v-if="lastUserTravel" for="last-travel" class="mt-auto text-sm">
             <input type="checkbox" v-model="form.isTravel" id="last-travel">
@@ -46,23 +36,7 @@
     </div>
 
     <footer class="bg-gray-50 w-full flex items-center rounded-b-lg">
-      <div class="w-[480px] flex items-center space-x-2 py-2 px-4">
-        <div
-            style="background-image: linear-gradient(rgb(218, 112, 165), rgb(253, 168, 31))"
-            class="w-8 h-8 rounded-lg cursor-pointer ring-2 ring-white flex items-center justify-center"
-            @click="generateRandomBackgroundGradient"
-        >
-          <Wand2 class="w-4 h-4 text-white"/>
-        </div>
-        <div
-            v-for="color in colors"
-            :key="color"
-            :style="{backgroundColor: color}"
-            class="w-8 h-8 rounded-lg cursor-pointer ring-2 ring-white"
-            @click="setBackgroundColor(color)"
-        >
-        </div>
-      </div>
+      <ShotEditorBackground class="w-[480px]" />
 
       <div class="border-l -ml-[1px] p-2 flex space-x-2 w-[320px]">
         <Button :loading="isLoading" class="flex-auto" variant="secondary" @click="$overlay.hide">Закрыть</Button>
@@ -73,30 +47,24 @@
 </template>
 
 <script setup>
+import ShotEditorBackground from '~/components/modules/shots/components/ShotEditorBackground.vue'
+import ShotEditorImageButton from '~/components/modules/shots/components/ShotEditorImageButton.vue'
 import ShotEditorStickerPanel from '~/components/modules/shots/components/ShotEditorStickerPanel.vue'
 import ShotEditorTextPanel from '~/components/modules/shots/components/ShotEditorTextPanel.vue'
 import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEditorTrashButton.vue'
-import ShotEditorImageButton from '~/components/modules/shots/components/ShotEditorImageButton.vue'
-import { Wand2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useShotEditor } from '#imports'
-import { useShotsStore } from '~/components/modules/shots/store'
 
 const {
-  addSticker,
-  addText,
+  createShotEditor,
   addToTrash,
-  changeFillColor,
-  generateRandomBackgroundGradient,
-  generateRandomTextGradient,
-  isTrash,
-  setBackgroundColor,
-  setTextBackgroundColor,
+  store,
   onSubmit,
   isLoading,
-  changeFont,
   addImage,
 } = useShotEditor()
+
+createShotEditor()
 
 const colors = ['white', 'black', 'red', 'green', 'yellow', 'orange']
 
@@ -106,8 +74,6 @@ const lastUserTravel = ref(null)
 const form = ref({
   isTravel: false
 })
-
-const store = useShotsStore()
 
 const onSubmitCallback = ({ createShot }) => {
   if (store.stories.length === 0) {

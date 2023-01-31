@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <Button class="w-full mb-6" v-if="$auth.loggedIn" @click="$overlay.show(TheContentCreationDialog)">Написать</Button>
+    <IsLoggedIn>
+      <Button class="w-full mb-6" @click="$overlay.show(TheContentCreationDialog)">Написать</Button>
+    </IsLoggedIn>
 
     <ul class="main-nav space-y-px mb-6">
       <li>

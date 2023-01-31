@@ -41,8 +41,8 @@ const onSubmit = handleSubmit(async () => {
   try {
     const { data } = await useQuery({
       query: `
-        mutation($name: String!, $is_private: Boolean) {
-          createBookmarkCategory(name: $name, is_private: $is_private) {
+        mutation($name: String!, $isPrivate: Boolean) {
+          createBookmarkCategory(name: $name, isPrivate: $isPrivate) {
             id
             name
             content_count
