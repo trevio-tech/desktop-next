@@ -9,7 +9,7 @@
           id="trash"
           class="absolute"
           style="bottom: 20px; left: calc(50% - 30px)"
-          @mouseup="addToTrash"></ShotEditorTrashButton>
+          @mouseup="trash"></ShotEditorTrashButton>
         <ShotEditorImageButton
             v-else
             @click="addImage"
@@ -57,7 +57,7 @@ import { useShotEditor } from '#imports'
 
 const {
   createShotEditor,
-  addToTrash,
+  trashAdd,
   store,
   onSubmit,
   isLoading,
