@@ -1,7 +1,7 @@
 <template>
   <div class="place-self-center flex flex-col items-center justify-center h-full p-4">
     <div class="h-full flex">
-      <div class="bg-white flex-shrink-0 w-[480px] h-full rounded-tl-lg overflow-hidden relative" id="shot-container">
+      <div class="bg-white flex-shrink-0 w-[480px] h-full rounded-tl-lg overflow-hidden relative">
         <canvas id="shot"></canvas>
         <ShotEditorTrashButton
           v-if="store.isTrash"
