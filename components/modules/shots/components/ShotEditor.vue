@@ -22,11 +22,11 @@
           <li @click="activeTab = 'stickers'" class="p-4 flex-1" :class="{'bg-slate-300': activeTab === 'stickers'}">Стикеры</li>
         </ul>
 
-        <div class="p-4 flex-auto flex flex-col">
+        <div class="flex-auto flex flex-col">
           <ShotEditorTextPanel v-show="activeTab === 'text'" />
           <ShotEditorStickerPanel v-show="activeTab === 'stickers'"/>
 
-          <label v-if="lastUserTravel" for="last-travel" class="mt-auto text-sm">
+          <label v-if="lastUserTravel" for="last-travel" class="mt-auto text-sm p-4 ">
             <input type="checkbox" v-model="form.isTravel" id="last-travel">
             Прикрепить к путешествию "<span class="font-medium">{{ lastUserTravel.title }}</span>"
           </label>
