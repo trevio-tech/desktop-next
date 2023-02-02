@@ -2,13 +2,13 @@
   <Dialog title="Выберите тип контента">
     <ul class="w-[640px] grid grid-cols-2 gap-4">
       <li v-ripple v-for="(item, index) in items" :key="index"
-          class="flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-slate-100">
+          class="select-none flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-slate-100">
         <NuxtLink :to="item.href" @click="$overlay.hide" class="block p-4">
           <div class="font-medium">{{ item.name }}</div>
           <div class="text-xs text-gray-400">{{ item.text }}</div>
         </NuxtLink>
       </li>
-      <li @click="onClickShot" class="flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-slate-100">
+      <li @click="onClickShot" class="select-none flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-slate-100">
         <div class="block p-4">
           <div class="font-medium">Шот</div>
           <div class="text-xs text-gray-400">Эмоции и истории здесь и сейчас</div>

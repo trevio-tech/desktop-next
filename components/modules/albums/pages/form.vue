@@ -30,8 +30,8 @@
         <InputCustomTags v-model="form.tags" />
       </FormField>
 
-      <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
-        <Select v-model="form.travel_id" :items="data.travels" key-name="title" />
+      <FormField v-if="data.travels.length" name="input.travel_id" label="Хотите добавить в путешествие?" id="travel">
+        <TravelListField v-model="form.travel_id" :travels="data.travels" />
       </FormField>
     </TheForm>
   </TheLayout>
@@ -49,6 +49,7 @@ import { useGql } from '~/uses'
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
 import FormGallery from '~/components/modules/albums/components/FormGallery.vue'
 import { definePageMeta } from '#imports'
+import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 
 definePageMeta({
   middleware: 'auth'
@@ -82,7 +83,13 @@ const { data } = await useGql(`
       ${isEdit ? `album(id: $id) { ${ALBUM_FORM} }` : ''}
       travels(userId: $userId) {
         id
-        title(words: 6)
+        title(words: 10)
+        cover(sizes: "default@resize:fill:240:160") {
+          id
+          model_id
+          url
+          sizes
+        }
       }
     }
   `, {

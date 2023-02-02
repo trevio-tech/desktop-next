@@ -4,44 +4,44 @@
       123
     </template>
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
-          <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
-            <Input v-model="form.title" placeholder="Введите заголовок" :variant="hasError ? 'danger' : undefined" />
-          </FormField>
+      <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
+        <Input v-model="form.title" placeholder="Введите заголовок" :variant="hasError ? 'danger' : undefined" />
+      </FormField>
 
-          <FormField name="input.place_id" label="Место" required>
-            <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" />
-          </FormField>
+      <FormField name="input.place_id" label="Место" required v-slot="{ hasError }">
+        <SearchPlace :model-value="form.place" @update:modelValue="form.place_id = $event.id" :variant="hasError ? 'danger' : undefined" />
+      </FormField>
 
-          <FormField name="input.text" required label="Текст">
-            <TipTap content-type="notes" v-model="form.text" />
-          </FormField>
+      <FormField name="input.text" required label="Текст">
+        <TipTap model-type="reviews" v-model="form.text" />
+      </FormField>
 
-          <FormField name="input.stars" required label="Оценка">
-            <Rating v-model="form.stars" />
-          </FormField>
+      <FormField name="input.stars" required label="Оценка">
+        <Rating v-model="form.stars" />
+      </FormField>
 
-          <FormField name="input.tags" label="Теги" id="tags">
-            <InputCustomTags v-model="form.tags" />
-          </FormField>
+      <FormField name="input.tags" label="Теги" id="tags">
+        <InputCustomTags v-model="form.tags" />
+      </FormField>
 
-          <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
-            <Select v-model="form.travel_id" :items="data.travels" key-name="title" />
-          </FormField>
+      <FormField v-if="travels.length" name="input.travel_id" label="Хотите добавить в путешествие?" id="travel">
+        <TravelListField v-model="form.travel_id" :travels="travels" />
+      </FormField>
     </TheForm>
   </TheLayout>
 </template>
 
 <script setup>
+import TheForm from '~/components/TheForm'
 import TheLayout from '~/components/layout/TheLayout'
 import pick from 'lodash.pick'
 import { CREATE_REVIEW, UPDATE_REVIEW, REVIEW_FORM } from '../graphql'
-import TheForm from '~/components/TheForm'
 import { InputCustomTags } from '~/components/wrappers'
+import { definePageMeta } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { useGql } from '~/uses'
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
-import { definePageMeta } from '#imports'
+import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 
 definePageMeta({
   middleware: 'auth'
@@ -68,24 +68,40 @@ const reviewId = parseInt(route.params.reviewId)
 const isEdit = reviewId > 0
 const danger = ref(false)
 const loading = ref(false)
+const travels = ref([])
 
 const app = useNuxtApp()
 
-const { data } = await useGql(`
-    query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
-      ${isEdit ? `review(id: $id) { ${REVIEW_FORM} }` : ''}
-      travels(userId: $userId) {
-        id
-        title(words: 6)
+try {
+  const { data } = await useQuery({
+    query: `
+      query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
+        ${isEdit ? `review(id: $id) { ${REVIEW_FORM} }` : ''}
+        travels(userId: $userId) {
+          id
+          title(words: 10)
+          cover(sizes: "default@resize:fill:240:160") {
+            id
+            model_id
+            url
+            sizes
+          }
+        }
       }
+    `,
+    variables: {
+      id: reviewId,
+      userId: app.$auth.user.id
     }
-  `, {
-  id: reviewId,
-  userId: app.$auth.user.id
-})
+  })
 
-if (isEdit) {
-  Object.assign(form.value, data.review)
+  travels.value = data.travels
+
+  if (isEdit) {
+    Object.assign(form.value, data.review)
+  }
+} catch (error) {
+  console.log(error)
 }
 
 const onSubmit = handleSubmit(async () => {
@@ -108,17 +124,20 @@ const onSubmit = handleSubmit(async () => {
   input.tags = input.tags.map(tag => parseInt(tag.id))
 
   try {
-    const { data: { reviewForm }} = await useGql(isEdit ? UPDATE_REVIEW : CREATE_REVIEW, {
-      input,
-      id: reviewId
+    const { data: { reviewForm }} = await useQuery({
+      query: isEdit ? UPDATE_REVIEW : CREATE_REVIEW,
+      variables: {
+        input,
+        id: reviewId
+      }
     })
 
     if (reviewForm > 0) {
       await useRouter().push({name: 'reviews.show', params: {reviewId: reviewForm}})
     }
   } catch (error) {
-    if (error[0]['message'] === 'validation') {
-      setErrors(error[0]['extensions']['validation'])
+    if (error['message'] === 'validation') {
+      setErrors(error['extensions']['validation'])
     }
   } finally {
     loading.value = false

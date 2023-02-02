@@ -1,14 +1,15 @@
 <template>
   <TheLayout :heading="travel.title">
     <Html>
-    <Head>
-      <Title>{{ travel.title }} - Путешествия</Title>
-      <Meta name="description" :content="travel.text"/>
-    </Head>
+      <Head>
+        <Title>{{ travel.title }} - Путешествия</Title>
+        <Meta name="description" :content="travel.text"/>
+      </Head>
     </Html>
 
     <template #sidebar>
-      <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>
+<!--      <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>-->
+      <TheContentCreationList />
     </template>
     <article>
       <ImageViewer>
@@ -27,7 +28,7 @@
       </div>
     </article>
 
-    <TravelSiblings v-if="otherTravels.length" class="mt-4" :items="otherTravels"/>
+<!--    <TravelSiblings v-if="otherTravels.length" class="mt-4" :items="otherTravels"/>-->
     <hr class="my-4">
     <TravelContentList
         v-if="travel.nested_entries_count"
@@ -60,7 +61,7 @@ const { data: { travel } } = await useQuery({
   },
 })
 
-const otherTravelsFromUser = async (travel) => {
+/*const otherTravelsFromUser = async (travel) => {
   const { data: { travels } } = await useQuery({
     query: `
       query($user_id: ID, $previous: ID, $next: ID) {
@@ -81,5 +82,5 @@ const otherTravelsFromUser = async (travel) => {
   })
 }
 
-await otherTravelsFromUser(travel)
+await otherTravelsFromUser(travel)*/
 </script>

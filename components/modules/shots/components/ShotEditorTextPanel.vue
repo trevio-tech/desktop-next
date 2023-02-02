@@ -1,8 +1,8 @@
 <template>
   <div class="divide-y divide-gray-200">
     <div class="pt-4 pb-8 px-4">
-      <h3 class="mb-4 text-sm font-medium">Добавить текст / Изменить шрифт</h3>
-      <ul>
+      <h3 class="mb-4 text-sm font-bold">Добавить текст или изменить шрифт</h3>
+      <ul class="space-y-2">
         <li
             v-for="font in fonts"
             :style="{fontFamily: `${font.font}`}"
@@ -12,7 +12,7 @@
     </div>
 
     <div class="py-8 px-4">
-      <h3 class="mb-4 text-sm font-medium">Цвет текста</h3>
+      <h3 class="mb-4 text-sm font-bold">Цвет текста</h3>
       <div class="grid grid-cols-6 gap-2">
         <div
             style="background-image: linear-gradient(rgb(218, 112, 165), rgb(253, 168, 31))"
@@ -33,7 +33,7 @@
     </div>
 
     <div class="py-8 px-4">
-      <h3 class="mb-4 text-sm font-medium">Цвет подложки для текста</h3>
+      <h3 class="mb-4 text-sm font-bold">Цвет подложки для текста</h3>
       <div class="grid grid-cols-6 gap-2">
         <div title="Убрать подложку" class="w-10 h-10 rounded-full cursor-pointer ring-2 ring-white flex items-center justify-center bg-slate-400"
              @click="textSetBackgroundColor('')"

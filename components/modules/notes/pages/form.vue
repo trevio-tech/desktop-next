@@ -20,8 +20,8 @@
         <InputCustomTags v-model="form.tags" :set-errors="setErrors" />
       </FormField>
 
-      <FormField v-if="data.travels.length" name="input.travel_id" label="Путешествие" id="travel">
-        <Select v-model="form.travel_id" :items="data.travels" key-name="title" />
+      <FormField v-if="data.travels.length" name="input.travel_id" label="Хотите добавить в путешествие?" id="travel">
+        <TravelListField v-model="form.travel_id" :travels="data.travels" />
       </FormField>
     </TheForm>
   </TheLayout>
@@ -37,10 +37,13 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
 import { definePageMeta, useQuery } from '#imports'
+import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 
 definePageMeta({
   middleware: 'auth'
 })
+
+const route = useRoute()
 
 const form = ref({
   place_id: null,
@@ -56,7 +59,6 @@ const form = ref({
   tags: [],
 })
 
-const route = useRoute()
 const { handleSubmit, setErrors } = useForm()
 const noteId = parseInt(route.params.noteId)
 const isEdit = noteId > 0
@@ -71,7 +73,13 @@ const { data } = await useQuery({
       ${isEdit ? `note(id: $id) { ${NOTE_FORM} }` : ''}
       travels(userId: $userId) {
         id
-        title(words: 6)
+        title(words: 10)
+        cover(sizes: "default@resize:fill:240:160") {
+          id
+          model_id
+          url
+          sizes
+        }
       }
     }
   `,
