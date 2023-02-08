@@ -1,11 +1,11 @@
 <template>
   <header class="flex items-center sticky top-0 h-14 shadow-md bg-white z-10">
-    <div class="flex items-center w-full h-full max-w-[1000px] mx-auto">
-      <NuxtLink to="/">
-        <img src="/images/logotype.svg" alt="" class="block h-6">
+    <div class="flex items-center w-full h-full max-w-[1000px] mx-auto gap-6">
+      <NuxtLink to="/" class="w-[180px]">
+        <img src="/images/logotype.svg" alt="" class="block mx-auto h-8">
       </NuxtLink>
-      <div class="flex min-w-[560px] w-[560px] ml-24">
-        <Input placeholder="Поиск" class="w-[280px]" />
+      <div class="flex w-[560px]">
+        <SearchBar class="w-full" />
       </div>
       <ul v-if="!$auth.loggedIn" class="flex space-x-2 ml-auto">
         <li @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/LoginRegisterDialog.vue')))">
