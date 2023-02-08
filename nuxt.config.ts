@@ -1,8 +1,9 @@
 export default {
   extends: [
-    '../nuxt-base-layer',
-    '../nuxt-head-layer',
-    // 'github:trevio-tech/nuxt-base-layer#master'
+    // '../nuxt-base-layer',
+    // '../nuxt-head-layer',
+    'github:trevio-tech/nuxt-base-layer#master',
+    'github:trevio-tech/nuxt-head-layer#master'
   ],
   vite: {
     server: {
