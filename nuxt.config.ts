@@ -5,13 +5,13 @@ export default {
     'github:trevio-tech/nuxt-base-layer#master',
     'github:trevio-tech/nuxt-head-layer#master'
   ],
-  vite: {
+  /*vite: {
     server: {
       fs: {
         allow: ['..']
       }
     }
-  },
+  },*/
   css: [
     '@/assets/scss/main.scss'
   ],
