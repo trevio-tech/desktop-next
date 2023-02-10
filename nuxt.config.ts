@@ -1,9 +1,8 @@
-export default {
+
+export default defineNuxtConfig({
   extends: [
-    '../nuxt-base-layer',
-    '../nuxt-head-layer',
-    // 'github:trevio-tech/nuxt-base-layer#master',
-    //'github:trevio-tech/nuxt-head-layer'
+    process.env.BASE_LAYER ?? '../nuxt-base-layer',
+    process.env.HEAD_LAYER ?? '../nuxt-head-layer',
   ],
   vite: {
     server: {
@@ -66,4 +65,4 @@ export default {
       home: false,
     }
   },
-}
+})
