@@ -76,7 +76,7 @@ import { ChevronDown } from 'lucide-vue-next'
 import { InputCustomTags } from '~/components/wrappers'
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
-import { useRoute, useRouter } from 'nuxt/app'
+import { useRoute, useRouter } from '#imports'
 import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
 import { definePageMeta, useQuery } from '#imports'
 import { format, parseISO, isValid } from 'date-fns'

@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { useBreadcrumbsStore } from '~/components/layout/breadcrumbs/store'
-import { useRoute } from '#app'
+import { useRoute } from '#imports'
 import { useSlots } from 'vue'
 
 const props = defineProps({

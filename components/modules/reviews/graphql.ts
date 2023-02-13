@@ -7,6 +7,9 @@ export const REVIEW_CARD = `
   can
   system_name
   published_at
+  like {
+    is_liked
+  }
   cover(sizes: "default@resize:fill:640:320") {
     id
     model_id

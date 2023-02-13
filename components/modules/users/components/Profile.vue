@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { useNuxtApp } from 'nuxt/app'
+import { useNuxtApp } from '#imports'
 
 const props = defineProps({
   user: {

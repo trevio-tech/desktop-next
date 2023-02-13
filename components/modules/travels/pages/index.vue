@@ -11,7 +11,7 @@
 import ContentCard from '~/components/ContentCard'
 import { TRAVEL_CARD } from '../graphql';
 import { useQuery } from '#imports'
-import { useRoute, useRouter } from 'nuxt/app'
+import { useRoute, useRouter } from '#imports'
 import { watch } from 'vue'
 
 const route = useRoute()

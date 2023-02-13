@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { useNuxtApp } from '#app'
+import { useNuxtApp } from '#imports'
 const { $auth, $overlay } = useNuxtApp()
 import { usePopup } from '#imports'
 

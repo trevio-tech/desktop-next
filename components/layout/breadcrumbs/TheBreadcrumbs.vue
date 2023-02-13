@@ -10,7 +10,7 @@
 <script>
 import { useBreadcrumbsStore } from '~/components/layout/breadcrumbs/store'
 import { ref, watch } from 'vue'
-import { useRoute, useRouter } from '#app';
+import { useRoute, useRouter } from '#imports';
 
 export default {
   setup(_, { $pinia }) {

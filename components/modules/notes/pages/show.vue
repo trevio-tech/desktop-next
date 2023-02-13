@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { useHead, useRoute } from 'nuxt/app'
+import { useHead, useRoute } from '#imports'
 import { useAsyncQuery } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE } from '../graphql'

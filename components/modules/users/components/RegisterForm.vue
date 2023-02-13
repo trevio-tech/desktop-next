@@ -45,7 +45,7 @@ import { HelpCircle } from 'lucide-vue-next'
 import { defineAsyncComponent } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useNuxtApp } from '#app'
+import { useNuxtApp } from '#imports'
 
 const emit = defineEmits(['login'])
 const { $auth } = useNuxtApp()

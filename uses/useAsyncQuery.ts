@@ -1,4 +1,4 @@
-import { useNuxtApp, useFetch } from 'nuxt/app'
+import { useNuxtApp, useFetch } from '#imports'
 
 export default async ({ query, variables }, options = {}) => {
   const { $auth, $config } = useNuxtApp()

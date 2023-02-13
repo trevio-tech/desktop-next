@@ -9,7 +9,7 @@
 
 <script setup>
 import LoginForm from '~/components/modules/users/components/LoginForm.vue'
-import { navigateTo } from '#app'
+import { navigateTo } from '#imports'
 
 definePageMeta({
   middleware: ['guest'],

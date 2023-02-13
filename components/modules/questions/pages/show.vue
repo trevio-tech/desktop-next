@@ -44,7 +44,7 @@ import AnswerForm from '~/components/modules/questions/components/AnswerForm.vue
 import TheLayout from '~/components/layout/TheLayout'
 import { Check } from 'lucide-vue-next'
 import { QUESTION_FIELDS, ANSWER_CARD } from '../graphql';
-import { useRoute, useHead } from 'nuxt/app'
+import { useRoute, useHead } from '#imports'
 import { shallowRef } from 'vue'
 
 const route = useRoute()

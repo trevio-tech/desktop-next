@@ -6,7 +6,7 @@
 
 <script setup>
 import RegisterForm from '~/components/modules/users/components/RegisterForm.vue'
-import { navigateTo } from '#app'
+import { navigateTo } from '#imports'
 
 definePageMeta({
   middleware: ['guest'],

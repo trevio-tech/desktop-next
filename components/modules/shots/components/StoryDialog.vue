@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { useRouter } from 'nuxt/app'
+import { useRouter } from '#imports'
 import { ref } from 'vue'
 import { Autoplay, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'

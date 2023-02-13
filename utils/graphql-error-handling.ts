@@ -1,4 +1,4 @@
-import { createError } from '#app'
+import { createError } from '#imports'
 
 export default (error) => {
   if (error[0].message !== 'validation') {

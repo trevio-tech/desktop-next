@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from '#app'
+import { defineNuxtPlugin } from '#imports'
 import TheLayout from '~/components/layout/TheLayout.vue'
 
 export default defineNuxtPlugin((nuxtApp) => {

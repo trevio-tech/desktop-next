@@ -17,7 +17,7 @@
 <script setup>
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
-import { useRouter } from 'nuxt/app'
+import { useRouter } from '#imports'
 
 defineProps({
   items: {

@@ -20,7 +20,7 @@ import { InputUsers } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useGql } from '~/uses'
-import { useNuxtApp } from 'nuxt/app'
+import { useNuxtApp } from '#imports'
 
 const emit = defineEmits([
   'update:modelValue'

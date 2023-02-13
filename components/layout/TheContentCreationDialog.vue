@@ -20,7 +20,7 @@
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
-import { useNuxtApp } from '#app'
+import { useNuxtApp } from '#imports'
 
 const { $overlay } = useNuxtApp()
 

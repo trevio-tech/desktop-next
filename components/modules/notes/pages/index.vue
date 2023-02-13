@@ -11,7 +11,7 @@
 import ContentCard from '~/components/ContentCard'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE_CARD } from '../graphql'
-import { useRoute, useHead } from 'nuxt/app'
+import { useRoute, useHead } from '#imports'
 import { ref, watch, computed } from 'vue'
 import { useAsyncQuery } from '~/uses'
 

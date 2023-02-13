@@ -11,7 +11,7 @@ export default {
 <script setup>
 import Chat from '../components/Chat/Chat'
 import { useChatStore } from '../stores/chat'
-import { useHead } from 'nuxt/app'
+import { useHead } from '#imports'
 import { definePageMeta } from '#imports'
 
 definePageMeta({

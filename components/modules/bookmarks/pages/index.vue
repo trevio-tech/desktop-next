@@ -18,7 +18,7 @@ import { NOTE_CARD_RECTANGLE } from '~/components/modules/notes/graphql'
 import { TRAVEL_CARD_RECTANGLE } from '~/components/modules/travels/graphql'
 import { useBookmarksStore } from '../store'
 import { useQuery } from '#imports'
-import { useRoute } from 'nuxt/app'
+
 
 const params = useRoute().params
 const store = useBookmarksStore()

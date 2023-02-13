@@ -8,11 +8,11 @@
         <SearchBar class="w-full" />
       </div>
       <ul v-if="!$auth.loggedIn" class="flex space-x-2 ml-auto">
-        <li @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/LoginRegisterDialog.vue')))">
+        <li @click="onLogin">
           <Button>Войти</Button>
         </li>
       </ul>
-      <Dropdown placement="bottom-end" v-else class="ml-auto h-full flex items-center">
+      <Dropdown v-else placement="bottom-end" class="ml-auto h-full flex items-center">
         <img :src="$auth.user.avatar" :alt="$auth.user.name" class="w-10 h-10 rounded-full block" />
         <template v-slot:popper="{ hide }">
           <DropdownItem as="div" @click="hide">
@@ -33,3 +33,13 @@
     </div>
   </header>
 </template>
+
+<script setup>
+import { useNuxtApp } from '#app'
+
+const { $overlay } = useNuxtApp()
+
+const onLogin = async () => {
+  $overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/LoginRegisterDialog.vue')))
+}
+</script>

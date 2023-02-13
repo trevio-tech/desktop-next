@@ -21,7 +21,7 @@
 import ContentCard from '~/components/ContentCard'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import TheLayout from '~/components/layout/TheLayout.vue'
-import { useHead, useRoute } from 'nuxt/app'
+import { useHead, useRoute } from '#imports'
 import { FEED } from '~/components/modules/activity/graphql'
 
 const route = useRoute()

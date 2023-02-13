@@ -4,9 +4,9 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import { useNuxtApp, useRoute } from '#app'
+import { useNuxtApp, useRoute } from '#imports'
 import { ref } from 'vue'
-import { useFetch } from 'nuxt/app'
+import { useFetch } from '#imports'
 
 const { $auth } = useNuxtApp()
 const route = useRoute()

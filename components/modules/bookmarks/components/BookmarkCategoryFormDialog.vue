@@ -20,7 +20,7 @@
 import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useNuxtApp } from 'nuxt/app'
+import { useNuxtApp } from '#imports'
 import { useQuery } from '#imports'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 

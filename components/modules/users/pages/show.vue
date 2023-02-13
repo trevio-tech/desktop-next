@@ -75,7 +75,7 @@
 import TheLayout from '~/components/layout/TheLayout'
 import { useQuery } from '#imports'
 import { USER } from '../graphql'
-import { useRoute, useNuxtApp } from 'nuxt/app'
+import { useRoute, useNuxtApp } from '#imports'
 import { Cog } from 'lucide-vue-next'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
 import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'

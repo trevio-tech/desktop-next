@@ -1,15 +1,13 @@
-
 export default defineNuxtConfig({
+  /*experimental: {
+    treeshakeClientOnly: false
+  },*/
   extends: [
-    process.env.BASE_LAYER ?? '../nuxt-base-layer',
-    process.env.HEAD_LAYER ?? '../nuxt-head-layer',
+    '../nuxt-base-layer',
+    '../nuxt-head-layer',
   ],
   vite: {
     server: {
-      hmr: {
-        protocol: 'ws',
-        host: 'localhost'
-      },
       fs: {
         allow: ['..']
       }
@@ -25,9 +23,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '~/modules/routes',
   ],
-  build: {
-    transpile: ['@headlessui/vue']
-  },
   runtimeConfig: {
     public: {
       GRAPHQL_URL: process.env.GRAPHQL_URL,

@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { useRoute } from 'nuxt/app'
+
 import { useAsyncGql } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 

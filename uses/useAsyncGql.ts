@@ -1,4 +1,4 @@
-import { useFetch, useNuxtApp } from 'nuxt/app'
+import { useFetch, useNuxtApp } from '#imports'
 
 export default async (query, variables) => await useFetch(
   'http://127.0.0.1:9000/graphql',

@@ -50,7 +50,7 @@ import { definePageMeta } from '#imports'
 import { pick } from 'lodash'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
+import { useRoute, useRouter, useNuxtApp } from '#imports'
 
 definePageMeta({
   middleware: 'auth'

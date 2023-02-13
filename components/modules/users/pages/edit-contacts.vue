@@ -49,7 +49,7 @@
 import TheLayout from '~/components/layout/TheLayout'
 import { useQuery } from '#imports'
 import { ref } from 'vue'
-import { useRoute } from 'nuxt/app'
+
 import { UPDATE_USER } from '../graphql'
 
 const form = ref({

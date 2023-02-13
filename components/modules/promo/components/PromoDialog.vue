@@ -43,7 +43,7 @@
 import Dialog from '~/components/base/Dialog.vue'
 import PromoFindContentDialog from '~/components/modules/promo/components/PromoFindContentDialog.vue'
 import { ref } from 'vue'
-import { useNuxtApp } from '#app'
+import { useNuxtApp } from '#imports'
 import { useQuery } from '#imports'
 import { X } from 'lucide-vue-next'
 import { usePromoStore } from '~/components/modules/promo/store'

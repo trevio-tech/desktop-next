@@ -24,7 +24,7 @@ import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useGql } from '~/uses'
-import { useNuxtApp } from 'nuxt/app'
+import { useNuxtApp } from '#imports'
 import { X } from 'lucide-vue-next'
 
 const emit = defineEmits([

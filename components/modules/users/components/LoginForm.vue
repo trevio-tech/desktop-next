@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { useNuxtApp } from '#app'
+import { useNuxtApp } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'

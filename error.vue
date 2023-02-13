@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { useError } from 'nuxt/app'
+import { useError } from '#imports'
 
 const error = useError()
 

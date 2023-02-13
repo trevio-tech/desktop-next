@@ -51,7 +51,7 @@
 <script setup>
 import TheLayout from '~/components/layout/TheLayout'
 import { ref } from 'vue'
-import { useRoute } from 'nuxt/app'
+
 import { UPDATE_USER } from '../graphql'
 import { PLACE_WITH_PARENTS_FIELDS } from '~/components/modules/places/graphql'
 import { useQuery } from '#imports'

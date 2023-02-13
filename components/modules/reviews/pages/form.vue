@@ -40,7 +40,7 @@ import { InputCustomTags } from '~/components/wrappers'
 import { definePageMeta } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { useRoute, useRouter, useNuxtApp } from 'nuxt/app'
+import { useRoute, useRouter, useNuxtApp } from '#imports'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 
 definePageMeta({

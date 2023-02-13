@@ -32,7 +32,7 @@ import { useActivityStore } from '~/components/modules/activity/store'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { useIntersectionObserver } from '@vueuse/core'
 import { useQuery } from '#imports'
-import { useRoute } from 'nuxt/app'
+
 
 const store = useActivityStore()
 const route = useRoute()

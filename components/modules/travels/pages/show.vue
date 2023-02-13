@@ -43,7 +43,7 @@ import TravelContentList from '../components/TravelContentList'
 import TravelSiblings from '../components/TravelSiblings.vue'
 import { TRAVEL, TRAVEL_CARD_SQUARE } from '../graphql'
 import { ref } from 'vue'
-import { useRoute } from 'nuxt/app'
+
 
 const route = useRoute()
 const otherTravels = ref([])

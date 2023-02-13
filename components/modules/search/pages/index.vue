@@ -39,7 +39,7 @@ import UserSearchCard from '~/components/modules/users/components/UserSearchCard
 import TheLayout from '~/components/layout/TheLayout.vue'
 import { groupBy } from 'lodash'
 import { useQuery, useSearchHead } from '#imports'
-import { useRoute } from 'nuxt/app'
+
 import { watch, shallowRef, computed } from 'vue'
 
 const route = useRoute()

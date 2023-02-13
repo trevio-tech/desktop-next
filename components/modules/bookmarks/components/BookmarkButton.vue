@@ -7,7 +7,7 @@
 <script setup>
 import { Bookmark } from 'lucide-vue-next'
 import { defineAsyncComponent, ref } from 'vue'
-import { useNuxtApp } from 'nuxt/app'
+import { useNuxtApp } from '#imports'
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({

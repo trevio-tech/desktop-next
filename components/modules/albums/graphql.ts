@@ -19,6 +19,9 @@ export const ALBUM_CARD = `
     id
     url
   }
+  like {
+    is_liked
+  }
   travel {
     id
     place_id

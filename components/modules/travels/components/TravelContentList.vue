@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { useRoute } from 'nuxt/app'
+
 import { ref } from 'vue'
 import { NESTED_CONTENT_LIST } from '~/components/modules/travels/graphql'
 
