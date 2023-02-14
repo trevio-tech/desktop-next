@@ -14,6 +14,12 @@
           :items="store.getBelt(index)"
           @loaded="store.addBelt(index, $event)"
           class="mt-4" />
+
+        <PromoLoadingContainer v-if="index % 4 === 3" class="mt-4">
+          <template v-slot:default="{ item }">
+            <Component :is="item.system_name === 'questions' ? QuestionCard : ContentCard" :entry="item" />
+          </template>
+        </PromoLoadingContainer>
       </div>
     </div>
 
@@ -26,13 +32,13 @@ import ContentCard from '~/components/ContentCard'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import UsersBelt from '~/components/modules/users/components/UsersBelt.vue'
 import ShotsHorizontalList from '~/components/modules/shots/components/ShotsHorizontalList.vue'
+import PromoLoadingContainer from '~/components/modules/promo/components/PromoLoadingContainer.vue'
 import { FEED } from '~/components/modules/activity/graphql'
 import { ref } from 'vue'
 import { useActivityStore } from '~/components/modules/activity/store'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { useIntersectionObserver } from '@vueuse/core'
 import { useQuery } from '#imports'
-
 
 const store = useActivityStore()
 const route = useRoute()

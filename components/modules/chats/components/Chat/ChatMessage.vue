@@ -12,6 +12,7 @@
         </NuxtLink>
       </div>
       <div>{{ message.text }}</div>
+      <ImageGrid v-if="message.images" :model-value="message.images"></ImageGrid>
     </div>
   </div>
 </template>

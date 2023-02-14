@@ -19,11 +19,13 @@
       <div class="w-[320px] flex flex-col h-full bg-gray-100 rounded-tr-lg overflow-hidden">
         <ul class="flex items-center cursor-pointer bg-slate-200 text-center font-medium text-sm border-b border-slate-300">
           <li @click="activeTab = 'text'" class="p-4 flex-1" :class="{'bg-slate-300': activeTab === 'text'}">Текст</li>
+<!--          <li @click="activeTab = 'brushes'" class="p-4 flex-1" :class="{'bg-slate-300': activeTab === 'brushes'}">Кисти</li>-->
           <li @click="activeTab = 'stickers'" class="p-4 flex-1" :class="{'bg-slate-300': activeTab === 'stickers'}">Стикеры</li>
         </ul>
 
         <div class="flex-auto flex flex-col">
           <ShotEditorTextPanel v-show="activeTab === 'text'" />
+<!--          <ShotEditorPanelBrushes  v-show="activeTab === 'brushes'" />-->
           <ShotEditorStickerPanel v-show="activeTab === 'stickers'"/>
 
           <label v-if="lastUserTravel" for="last-travel" class="mt-auto text-sm p-4 ">
@@ -51,6 +53,7 @@ import ShotEditorImageButton from '~/components/modules/shots/components/ShotEdi
 import ShotEditorStickerPanel from '~/components/modules/shots/components/ShotEditorStickerPanel.vue'
 import ShotEditorTextPanel from '~/components/modules/shots/components/ShotEditorTextPanel.vue'
 import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEditorTrashButton.vue'
+import ShotEditorPanelBrushes from '~/components/modules/shots/components/ShotEditorPanelBrushes.vue'
 import { ref } from 'vue'
 import { useShotEditor } from '#imports'
 

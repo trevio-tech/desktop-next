@@ -3,21 +3,35 @@
     <div v-if="store.mode === 'reply'">
       {{ reply.text }}
     </div>
-    <Textarea v-model="form.text" placeholder="Текст сообщения" class="flex-auto" />
+    <FormField name="input.text">
+      <Textarea v-model="form.text" placeholder="Текст сообщения" class="flex-auto" />
+    </FormField>
+    <ImageGrid :model-value="form.images"></ImageGrid>
     <footer class="flex space-x-2 justify-end mt-2">
-      <Button variant="secondary">
-        <ImagePlus class="w-5 h-5" />
-      </Button>
+      <Upload model-type="chatMessage" :presets="['default@width:120,height:120']" v-model="form.images">
+        <Button variant="secondary">
+          <ImagePlus class="w-5 h-5" />
+        </Button>
+      </Upload>
       <Button type="submit">Отправить</Button>
     </footer>
   </form>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
 import { CREATE_CHAT_MESSAGE } from '../../graphql'
 import { ImagePlus } from 'lucide-vue-next'
+import { ref, watch } from 'vue'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
+import { useForm } from 'vee-validate'
+import { pick } from 'lodash'
+
+const formInitialState = {
+  parent_id:  null,
+  link_id:    null,
+  text:       '',
+  images:     [],
+}
 
 const { chatId } = defineProps({
   chatId: {
@@ -26,14 +40,10 @@ const { chatId } = defineProps({
   }
 })
 
-const form = ref({
-  parent_id:  null,
-  link_id:    null,
-  text:       ''
-})
+const form = ref({...formInitialState})
 const reply = ref({})
-
 const store = useChatStore()
+const isLoading = ref(false)
 
 watch(() => store.selectedMessages, (newValue) => {
   if (store.mode === 'edit') {
@@ -48,19 +58,40 @@ watch(() => store.selectedMessages, (newValue) => {
   }
 })
 
-const onSubmit = async () => {
+const { handleSubmit, setErrors } = useForm()
+
+const onSubmit = handleSubmit(async () => {
+  if (isLoading.value) {
+    return
+  }
+
+  isLoading.value = true
+
+  const input = pick(form.value, [
+    'parent_id',
+    'link_id',
+    'text',
+    'images',
+  ])
+
+  input.images = input.images.map(image => parseInt(image.id))
+
   try {
     await useQuery({
       query: CREATE_CHAT_MESSAGE,
       variables: {
-        chat_id: chatId,
-        input: {
-          parent_id: parseInt(form.value.parent_id),
-          link_id:   parseInt(form.value.link_id),
-          text:      form.value.text,
-        }
+        chatId,
+        input
       }
     })
-  } catch (error) {}
-}
+
+    form.value = {...formInitialState}
+  } catch (error) {
+    if (error['message'] === 'validation') {
+      setErrors(error['extensions']['validation'])
+    }
+  } finally {
+    isLoading.value = false
+  }
+})
 </script>

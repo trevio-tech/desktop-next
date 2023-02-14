@@ -47,6 +47,8 @@ import { ChatForm, ChatList, MessageList } from './'
 import { groupBy } from 'lodash'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 import { X, MoreHorizontal } from 'lucide-vue-next'
+import { useNuxtApp } from '#imports'
+import { CHAT_MESSAGE } from '~/components/modules/chats/graphql'
 
 const props = defineProps({
   chatId: {
@@ -57,6 +59,12 @@ const props = defineProps({
 const stacks = ref([])
 
 const store = useChatStore()
+
+const { $channels } = useNuxtApp()
+
+$channels.personal.on('chats.messages.new', (event) => {
+  stacks.value[Object.keys(stacks.value).at(-1)].push(event.message)
+})
 
 const onLoad = async (chatId = null) => {
   if (! chatId) {
@@ -69,22 +77,7 @@ const onLoad = async (chatId = null) => {
     query: `
       query($modelType: String, $modelId: Int) {
         chatMessages(modelType: $modelType, modelId: $modelId) {
-          id
-          chat_id
-          parent_id
-          text
-          stack
-          stack_name
-          time
-          chat {
-            id
-            name
-          }
-          user {
-            id
-            name
-            avatar
-          }
+          ${CHAT_MESSAGE}
         }
       }
     `, variables: {

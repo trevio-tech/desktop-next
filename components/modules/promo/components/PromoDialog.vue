@@ -64,7 +64,7 @@ if (props.entry?.system_name) {
 }
 
 try {
-  const { data: {promoTariffs}} = await useQuery({
+  const { data: { promoTariffs }} = await useQuery({
     query: `
       query {
         promoTariffs {
@@ -77,6 +77,8 @@ try {
         }
       }
     `
+  }, {
+    key: 'promo'
   })
 
   tariffs.value = promoTariffs

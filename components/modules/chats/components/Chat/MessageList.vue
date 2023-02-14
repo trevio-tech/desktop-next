@@ -1,12 +1,12 @@
 <template>
-  <div id="stacks">
+  <ImageViewer id="stacks">
     <div v-for="(messages, date) in stacks" :key="date">
       <div class="text-center py-4 sticky top-0">
         <span class="inline-block font-medium text-xs py-1 px-2 bg-gray-100 rounded-full">{{ date }}</span>
       </div>
       <ChatMessage v-for="message in messages" :key="message.id" :message="message" />
     </div>
-  </div>
+  </ImageViewer>
 </template>
 
 <script setup>
@@ -29,7 +29,9 @@ const scrollBottom = () => {
 
 onMounted(scrollBottom)
 
-watch(() => props.stacks, async () => {
+const last = props.stacks[Object.keys(props.stacks).at(-1)]
+
+watch(() => last.length, async () => {
   await nextTick()
   scrollBottom()
 })
