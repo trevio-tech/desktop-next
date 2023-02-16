@@ -68,6 +68,7 @@ export const NOTE_CARD_RECTANGLE = `
 export const NOTE = `
   note(id: $id) {
     id
+    user_id
     place_id
     title
     text
@@ -86,6 +87,12 @@ export const NOTE = `
       model_id
       model_type
       category_id
+    }
+    user {
+      id
+      name
+      avatar
+      description
     }
   }
 `

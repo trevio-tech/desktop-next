@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="note.title">
+  <TheLayout>
     <template #sidebar>
       <Menu>
         <MenuList>
@@ -29,26 +29,22 @@
       </Menu>
     </template>
 
-    <article>
-      <ImageViewer>
-        <div v-html="note.text" class="prose"></div>
-      </ImageViewer>
-    </article>
+    <ContentPage :entry="note" />
 
     <ContentCardSlider v-if="note?.tags.length > 0" :notIn="[note.id]" :tags="note?.tags.map((tag) => tag.id)" />
   </TheLayout>
 </template>
 
 <script setup>
-import { useHead, useRoute } from '#imports'
-import { useAsyncQuery } from '~/uses'
+import ContentCardSlider from '~/components/ContentCardSlider.vue'
+import ContentPage from '~/components/ContentPage.vue'
+import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
 import TheLayout from '~/components/layout/TheLayout'
 import { NOTE } from '../graphql'
-import { ref } from 'vue'
-import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
-
 import { Pencil, Trash } from 'lucide-vue-next'
-import ContentCardSlider from '~/components/ContentCardSlider.vue'
+import { ref } from 'vue'
+import { useAsyncQuery } from '~/uses'
+import { useHead, useRoute } from '#imports'
 
 const route = useRoute()
 const note = ref()
