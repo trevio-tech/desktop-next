@@ -60,11 +60,13 @@ const stacks = ref([])
 
 const store = useChatStore()
 
-const { $channels } = useNuxtApp()
+const { $echo } = useNuxtApp()
 
-$channels.personal.on('chats.messages.new', (event) => {
-  stacks.value[Object.keys(stacks.value).at(-1)].push(event.message)
-})
+$echo.channel(`chats.${props.chatId}`)
+  .listen('newMessage', (event) => {
+    console.log(event)
+    stacks.value[Object.keys(stacks.value).at(-1)].push(event.message)
+  })
 
 const onLoad = async (chatId = null) => {
   if (! chatId) {

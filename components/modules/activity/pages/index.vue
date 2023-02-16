@@ -4,7 +4,7 @@
       <div class="bg-emerald-100 w-full h-full"></div>
     </template>
 
-    <ShotsHorizontalList :is-story="true" :items="stories" class="mb-2" />
+    <ShotsHorizontalList :is-story="true" :items="shotsStore.stories" class="mb-2" />
 
     <div class="space-y-4">
       <div v-for="(item, index) in store.items" :key="item.id">
@@ -44,7 +44,7 @@ const store = useActivityStore()
 const route = useRoute()
 const more  = ref(false)
 const moreIsEmpty = ref(false)
-const { stories } = useShotsStore()
+const shotsStore = useShotsStore()
 
 const fetchFeed = async () => {
   const { data: { feed } } = await useQuery({

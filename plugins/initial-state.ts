@@ -67,7 +67,9 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     }
   }
 
-  watch(() => nuxtApp.$auth.loggedIn, initialState, {
+  watch(() => nuxtApp.$auth.loggedIn, (loggedIn) => {
+    initialState(loggedIn)
+  }, {
     immediate: true
   })
 })

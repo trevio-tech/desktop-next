@@ -77,6 +77,7 @@ const onFetch = async (searchBy = undefined) => {
           }
           ... on Note {
             id
+            cover_id
             title
             text(words: 16)
             system_name
@@ -89,6 +90,7 @@ const onFetch = async (searchBy = undefined) => {
           }
           ... on Album {
             id
+            cover_id
             title
             text(words: 16)
             system_name
