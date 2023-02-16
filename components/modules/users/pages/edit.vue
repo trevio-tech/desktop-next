@@ -73,7 +73,7 @@ try {
           id
           name
           description
-          birthday
+          birthday(format: "Y-m-d")
           gender
           place {
             ${PLACE_WITH_PARENTS_FIELDS}
@@ -91,7 +91,7 @@ try {
 
 const onSubmit = async () => {
   try {
-    const input = form.value
+    const input = {...form.value}
 
     delete input.id
     delete input.__typename

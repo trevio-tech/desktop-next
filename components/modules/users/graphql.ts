@@ -75,7 +75,7 @@ export const USER = `
 
 
 export const UPDATE_USER = `
-  mutation updateUser ($id: Int!, $input: UserInput!) {
+  mutation updateUser ($id: ID!, $input: UserInput!) {
     updateUser(id: $id, input: $input)
   }
 `

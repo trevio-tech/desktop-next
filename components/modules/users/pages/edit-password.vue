@@ -10,14 +10,14 @@
     <Card>
       <form @submit.prevent="onSubmit" class="p-4">
         <div class="space-y-4">
-          <FormField name="password_old" label="Старый пароль" required>
-            <Input v-model="form.password_old" id="password-old" type="password" />
+          <FormField name="password_old" label="Старый пароль" required v-slot="{ hasError }">
+            <Input v-model="form.password_old" id="password-old" type="password" :variant="hasError ? 'danger' : ''" />
           </FormField>
-          <FormField name="password" label="Новый пароль" required>
-            <Input v-model="form.password" id="password" type="password" />
+          <FormField name="password" label="Новый пароль" required v-slot="{ hasError }">
+            <Input v-model="form.password" id="password" type="password" :variant="hasError ? 'danger' : ''" />
           </FormField>
-          <FormField name="password_confirmation" label="Повторите новый пароль" required>
-            <Input v-model="form.password_confirmation" id="password-confirmation" type="password" />
+          <FormField name="password_confirmation" label="Повторите новый пароль" required v-slot="{ hasError }">
+            <Input v-model="form.password_confirmation" id="password-confirmation" type="password" :variant="hasError ? 'danger' : ''" />
           </FormField>
         </div>
 
@@ -50,15 +50,15 @@ const onSubmit = handleSubmit(async () => {
   try {
     const { data } = await useQuery({
       query: UPDATE_USER_PASSWORD,
-      variables: form.value
+      variables: {...form.value}
     })
 
     if (data.updateUserPassword) {
       form.value = {...formInitialState}
     }
   } catch (error) {
-    if (error[0].message === 'validation') {
-      setErrors(error[0]['extensions']['validation'])
+    if (error.message === 'validation') {
+      setErrors(error['extensions']['validation'])
     }
   }
 })
