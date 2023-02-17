@@ -3,7 +3,7 @@
     <div class="flex-auto rounded-lg overflow-hidden">
       <div class="flex items-center space-x-2">
         <h2 class="text-lg font-semibold truncate underline" :title="place.name">
-          <NuxtLink :to="{name: 'reviews', query: {place_id: place.id}}">{{ place.name }}</NuxtLink>
+          <NuxtLink :to="{name: 'places.reviews', params: {placeId: place.id}}">{{ place.name }}</NuxtLink>
         </h2>
         <div class="flex items-center space-x-1">
           <Rating :stars="1" model-value="1" size="16px" />
@@ -22,35 +22,35 @@
     <div class="text-sm leading-none flex-shrink-0 space-y-2">
       <div class="flex items-center space-x-2">
         <Rating :stars="5" model-value="5" size="16px" />
-        <NuxtLink :to="{name: 'reviews', query: {place_id: place.id, stars: 5}}" class="underline text-sm">
+        <NuxtLink :to="{name: 'places.reviews', params: {placeId: place.id, stars: 5}}" class="underline text-sm">
           {{ place.reviews_count_5 }}
           {{ declOfNum(place.reviews_count_5, 'отзыв', 'отзыва', 'отзывов') }}
         </NuxtLink>
       </div>
       <div class="flex items-center space-x-2">
         <Rating :stars="5" model-value="4" size="16px" />
-        <NuxtLink :to="{name: 'reviews', query: {place_id: place.id, stars: 4}}" class="underline text-sm">
+        <NuxtLink :to="{name: 'places.reviews', params: {placeId: place.id, stars: 4}}" class="underline text-sm">
           {{ place.reviews_count_4 }}
           {{ declOfNum(place.reviews_count_4, 'отзыв', 'отзыва', 'отзывов') }}
         </NuxtLink>
       </div>
       <div class="flex items-center space-x-2">
         <Rating :stars="5" model-value="3" size="16px" />
-        <NuxtLink :to="{name: 'reviews', query: {place_id: place.id, stars: 3}}" class="underline text-sm">
+        <NuxtLink :to="{name: 'places.reviews', params: {placeId: place.id, stars: 3}}" class="underline text-sm">
           {{ place.reviews_count_3 }}
           {{ declOfNum(place.reviews_count_3, 'отзыв', 'отзыва', 'отзывов') }}
         </NuxtLink>
       </div>
       <div class="flex items-center space-x-2">
         <Rating :stars="5" model-value="2" size="16px" />
-        <NuxtLink :to="{name: 'reviews', query: {place_id: place.id, stars: 2}}" class="underline text-sm">
+        <NuxtLink :to="{name: 'places.reviews', params: {placeId: place.id, stars: 2}}" class="underline text-sm">
           {{ place.reviews_count_2 }}
           {{ declOfNum(place.reviews_count_2, 'отзыв', 'отзыва', 'отзывов') }}
         </NuxtLink>
       </div>
       <div class="flex items-center space-x-2">
         <Rating :stars="5" model-value="1" size="16px" />
-        <NuxtLink :to="{name: 'reviews', query: {place_id: place.id, stars: 1}}" class="underline text-sm">
+        <NuxtLink :to="{name: 'places.reviews', params: {placeId: place.id, stars: 1}}" class="underline text-sm">
           {{ place.reviews_count_1 }}
           {{ declOfNum(place.reviews_count_1, 'отзыв', 'отзыва', 'отзывов') }}
         </NuxtLink>

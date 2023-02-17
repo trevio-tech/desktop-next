@@ -1,12 +1,13 @@
 export const REVIEW_CARD = `
   id
   user_id
+  cover_id
   title
   text(words: 12)
   likes_count
   can
   system_name
-  published_at
+  published_at(format: "d.m.Y")
   like {
     is_liked
   }
@@ -32,7 +33,7 @@ export const REVIEW_FORM = `
   place_id
   travel_id
   title
-  text
+  text(raw: true)
   is_draft
   stars
   tags {

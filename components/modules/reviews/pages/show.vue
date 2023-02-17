@@ -9,10 +9,10 @@
 </template>
 
 <script setup>
-
 import { useAsyncGql } from '~/uses'
 import TheLayout from '~/components/layout/TheLayout'
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
+import { PLACE } from '~/components/modules/places/graphql'
 
 const route = useRoute()
 
@@ -26,28 +26,7 @@ const { data: { value: { review }}} = await useAsyncGql(`
       can
       stars
       place {
-        id
-        parent_id
-        parent_names
-        full_name
-        name
-        rating
-        reviews_count
-        reviews_count_1
-        reviews_count_2
-        reviews_count_3
-        reviews_count_4
-        reviews_count_5
-        parent {
-          id
-          parent_id
-          name
-          parent {
-            id
-            parent_id
-            name
-          }
-        }
+        ${PLACE}
       }
     }
   }

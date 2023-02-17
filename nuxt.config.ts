@@ -3,6 +3,8 @@ export default defineNuxtConfig({
     treeshakeClientOnly: false
   },*/
   extends: [
+    //'github:trevio-tech/nuxt-base-layer#master',
+    //'github:trevio-tech/nuxt-head-layer#master',
     '../nuxt-base-layer',
     '../nuxt-head-layer',
   ],

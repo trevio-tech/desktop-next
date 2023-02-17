@@ -31,7 +31,7 @@
     <div class="m-4">
       <Profile :user="entry.user">
         <template #footer>
-          {{ entry.created_at }}
+          {{ entry.published_at }}
         </template>
       </Profile>
     </div>

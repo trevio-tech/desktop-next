@@ -13,7 +13,7 @@
       </FormField>
 
       <FormField name="input.text" required label="Текст">
-        <TipTap model-type="reviews" v-model="form.text" />
+        <TipTap model-type="reviews" v-model="form.text" v-model:cover-id="form.cover_id" />
       </FormField>
 
       <FormField name="input.stars" required label="Оценка">
@@ -48,6 +48,7 @@ definePageMeta({
 })
 
 const form = ref({
+  cover_id: null,
   place_id: null,
   travel_id: null,
   title: '',
@@ -112,6 +113,7 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   const input = pick(form.value, [
+    'cover_id',
     'place_id',
     'travel_id',
     'title',
