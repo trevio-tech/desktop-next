@@ -35,6 +35,9 @@
           <DropdownItem as="div" @click="hide">
             <NuxtLink :to="{name: 'promo'}">Продвижение</NuxtLink>
           </DropdownItem>
+          <DropdownItem as="div" @click="hide">
+            <NuxtLink :to="{name: 'users.premium'}">Premium</NuxtLink>
+          </DropdownItem>
           <DropdownItem as="div" @click="$auth.logout()">Выход</DropdownItem>
         </template>
       </Dropdown>

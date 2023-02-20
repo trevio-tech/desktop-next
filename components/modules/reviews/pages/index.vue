@@ -1,10 +1,10 @@
 <template>
-  <TheLayout heading="Отзывы">
+  <NuxtLayout heading="Отзывы">
     <template #sidebar>1</template>
     <div class="space-y-4">
       <ContentCard v-for="review in reviews" :entry="review" :key="review.id" />
     </div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="album.title">
+  <NuxtLayout :heading="album.title">
     <template #sidebar>
       <NuxtLink :to="`/albums/${album.id}/edit`">edit</NuxtLink>
     </template>
@@ -14,11 +14,11 @@
         </div>
       </ImageViewer>
     </article>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
+
 import { ALBUM } from '~/components/modules/albums/graphql'
 import { ref } from 'vue'
 

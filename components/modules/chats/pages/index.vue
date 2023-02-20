@@ -1,5 +1,5 @@
 <template>
-  <TheLayout heading="Чаты">
+  <NuxtLayout heading="Чаты">
     {{ $route.params }}
     <ul class="bg-white overflow-hidden shadow ring-1 ring-slate-200 rounded-lg divide-y divide-slate-200">
       <li v-for="chat in chats" :key="chat.id" class="flex space-x-2 p-4 hover:bg-slate-100 text-sm">
@@ -12,11 +12,11 @@
         </div>
       </li>
     </ul>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
+
 import { ref } from 'vue'
 
 const chats = ref([])

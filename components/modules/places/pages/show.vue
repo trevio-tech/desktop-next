@@ -1,18 +1,17 @@
 <template>
-  <TheLayout :heading="head.title">
+  <NuxtLayout :heading="head.title">
     <template #sidebar>
       1
     </template>
     <PlaceRatingBar :place="place" class="mb-4" />
     <ContentCard v-for="item in items" :key="item.id" :entry="item" />
     <div v-if="items.length === 0">Ничего не найдено.</div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import ContentCard from '~/components/ContentCard.vue'
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
-import TheLayout from '~/components/layout/TheLayout.vue'
 import { PLACE } from '~/components/modules/places/graphql'
 import { REVIEW_CARD } from '~/components/modules/reviews/graphql'
 import { useRoute, usePlaceSeo } from '#imports'

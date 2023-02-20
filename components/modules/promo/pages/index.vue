@@ -1,13 +1,12 @@
 <template>
-  <TheLayout heading="Продвигаемые записи">
+  <NuxtLayout heading="Продвигаемые записи">
     <div v-for="item in items" :key="item.id">
       {{ item.model.title }} - {{ item.ends_at }}
     </div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout.vue'
 import { ref } from 'vue'
 
 definePageMeta({

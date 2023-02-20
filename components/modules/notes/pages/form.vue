@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} заметки`">
+  <NuxtLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} заметки`">
     <template #sidebar>
       1
     </template>
@@ -24,11 +24,11 @@
         <TravelListField v-model="form.travel_id" :travels="data.travels" />
       </FormField>
     </TheForm>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
+
 import TheForm from '~/components/TheForm'
 import pick from 'lodash.pick'
 import { CREATE_NOTE, UPDATE_NOTE, NOTE_FORM } from '../graphql'

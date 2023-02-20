@@ -1,10 +1,10 @@
 <template>
-  <TheLayout heading="Авторизация">
+  <NuxtLayout heading="Авторизация">
     <template #sidebar>
       Сайдбар
     </template>
     <LoginForm @login="navigateTo('/')" />
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>

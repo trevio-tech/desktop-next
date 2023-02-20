@@ -28,6 +28,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       GRAPHQL_URL: process.env.GRAPHQL_URL,
+      GRAPHQL_URL_V2: process.env.GRAPHQL_URL_V2,
     }
   },
   auth: {

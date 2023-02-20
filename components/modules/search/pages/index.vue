@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="heading">
+  <NuxtLayout :heading="heading">
     <template #sidebar-before>
       <ul class="space-y-2">
         <li><NuxtLink :to="{name: 'search', params: {query: route.params.query}}">Все</NuxtLink></li>
@@ -30,13 +30,12 @@
       </div>
       <div v-if="search.length === 0">Ничего не найдено</div>
     </div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import SearchCard from '~/components/modules/search/components/SearchCard.vue'
 import UserSearchCard from '~/components/modules/users/components/UserSearchCard.vue'
-import TheLayout from '~/components/layout/TheLayout.vue'
 import { groupBy } from 'lodash'
 import { useQuery, useSearchHead } from '#imports'
 

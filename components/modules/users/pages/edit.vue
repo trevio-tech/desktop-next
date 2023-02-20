@@ -1,5 +1,5 @@
 <template>
-  <TheLayout heading="Редактирование профиля">
+  <NuxtLayout heading="Редактирование профиля">
     <template #sidebar>
       <ul>
         <li><NuxtLink :to="{name: 'users.edit', params: {userId: $route.params.userId}}">Основные настройки</NuxtLink></li>
@@ -45,11 +45,11 @@
         </div>
       </footer>
     </form>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
+
 import { ref } from 'vue'
 
 import { UPDATE_USER } from '../graphql'
@@ -97,7 +97,7 @@ const onSubmit = async () => {
     delete input.__typename
     delete input.place
 
-    const { data: { updateUser } } = await useQuery({
+    const { data: { updateUser } } = await useQuery2({
       query: `
         ${UPDATE_USER}
       `,

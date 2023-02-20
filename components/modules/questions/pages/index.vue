@@ -1,10 +1,10 @@
 <template>
-  <TheLayout heading="Вопросы">
+  <NuxtLayout heading="Вопросы">
     <template #sidebar>1</template>
     <div class="space-y-4">
       <QuestionCard v-for="question in questions" :key="question.id" :entry="question "/>
     </div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>

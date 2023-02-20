@@ -1,15 +1,15 @@
 <template>
-  <TheLayout :heading="title">
+  <NuxtLayout :heading="title">
     <template #sidebar>1</template>
     <div class="space-y-4">
       <ContentCard v-for="note in notes" :entry="note" :key="note.id"/>
     </div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import ContentCard from '~/components/ContentCard'
-import TheLayout from '~/components/layout/TheLayout'
+
 import { NOTE_CARD } from '../graphql'
 import { useRoute, useHead } from '#imports'
 import { ref, watch, computed } from 'vue'

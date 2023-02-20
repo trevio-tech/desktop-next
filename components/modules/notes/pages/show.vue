@@ -1,5 +1,5 @@
 <template>
-  <TheLayout>
+  <NuxtLayout>
     <template #sidebar>
       <Menu>
         <MenuList>
@@ -32,14 +32,14 @@
     <ContentPage :entry="note" />
 
     <ContentCardSlider v-if="note?.tags.length > 0" :notIn="[note.id]" :tags="note?.tags.map((tag) => tag.id)" />
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import ContentCardSlider from '~/components/ContentCardSlider.vue'
 import ContentPage from '~/components/ContentPage.vue'
 import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
-import TheLayout from '~/components/layout/TheLayout'
+
 import { NOTE } from '../graphql'
 import { Pencil, Trash } from 'lucide-vue-next'
 import { ref } from 'vue'

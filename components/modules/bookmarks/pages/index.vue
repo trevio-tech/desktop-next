@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="title">
+  <NuxtLayout :heading="title">
     <template #sidebar>
       <BookmarkCategoriesList />
     </template>
@@ -7,7 +7,7 @@
       <ContentCardRectangle v-for="bookmark in bookmarks" :key="bookmark.id" :entry="bookmark" />
     </div>
     <div v-else>В этой категории нет закладок</div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>

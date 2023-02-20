@@ -1,5 +1,5 @@
 <template>
-  <TheLayout>
+  <NuxtLayout>
     <template #sidebar>
       <div class="bg-emerald-100 w-full h-full"></div>
     </template>
@@ -24,7 +24,7 @@
     </div>
 
     <div ref="more"></div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>

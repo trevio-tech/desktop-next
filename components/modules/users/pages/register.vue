@@ -1,7 +1,7 @@
 <template>
-  <TheLayout heading="Регистрация">
+  <NuxtLayout heading="Регистрация">
     <RegisterForm @login="navigateTo('/')" />
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>

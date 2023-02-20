@@ -1,10 +1,10 @@
 <template>
-  <TheLayout heading="Путешествия">
+  <NuxtLayout heading="Путешествия">
     <template #sidebar>1</template>
     <div class="space-y-4">
       <ContentCard v-for="travel in travels" :entry="travel" :key="travel.id" />
     </div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>

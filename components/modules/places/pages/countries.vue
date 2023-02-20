@@ -1,5 +1,5 @@
 <template>
-  <TheLayout heading="Страны">
+  <NuxtLayout heading="Страны">
     <div class="grid grid-cols-3 gap-4">
       <div v-for="(countries, letter) in alphabet" :key="letter">
         <h3 class="mb-2 font-semibold text-xl">{{ letter }}</h3>
@@ -10,12 +10,10 @@
         </div>
       </div>
     </div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout.vue'
-
 let alphabet = {}
 let memory = null
 

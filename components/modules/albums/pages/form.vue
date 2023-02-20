@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} фотоальбома`">
+  <NuxtLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} фотоальбома`">
     <template #sidebar>
       123
     </template>
@@ -36,13 +36,13 @@
         <TravelListField v-model="form.travel_id" :travels="travels" />
       </FormField>
     </TheForm>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import FormGallery from '~/components/modules/albums/components/FormGallery.vue'
 import TheForm from '~/components/TheForm'
-import TheLayout from '~/components/layout/TheLayout'
+
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 import { CREATE_ALBUM, UPDATE_ALBUM, ALBUM_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'

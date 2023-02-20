@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="title">
+  <NuxtLayout :heading="title">
     <template #sidebar>1</template>
     <div class="flex flex-wrap">
       <NuxtLink
@@ -14,13 +14,12 @@
         <Component :is="item.system_name === 'questions' ? QuestionCard : ContentCard" :entry="item" />
       </div>
     </div>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import ContentCard from '~/components/ContentCard'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
-import TheLayout from '~/components/layout/TheLayout.vue'
 import { useHead, useRoute } from '#imports'
 import { FEED } from '~/components/modules/activity/graphql'
 

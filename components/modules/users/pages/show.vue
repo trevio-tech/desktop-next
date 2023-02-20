@@ -1,5 +1,5 @@
 <template>
-  <TheLayout heading="Пользователь">
+  <NuxtLayout heading="Пользователь">
     <Html>
       <Head>
         <Title>{{ user.name }} - Пользователи</Title>
@@ -7,7 +7,7 @@
       </Head>
     </Html>
 
-    <template #top>
+    <template #hero>
       <div class="bg-gradient-to-r from-blue-50 to-blue-200 flex items-center h-40 px-10 rounded-lg">
         <div class="mr-4 flex-shrink-0">
           <img :src="user.avatar" class="w-24 h-24 rounded-full" alt="">
@@ -68,11 +68,11 @@
     </template>
 
 <!--    <ContentList :user-id="user.id" />-->
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
+
 import { useQuery } from '#imports'
 import { USER } from '../graphql'
 import { useRoute, useNuxtApp } from '#imports'

@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} отзыва`">
+  <NuxtLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} отзыва`">
     <template #sidebar>
       123
     </template>
@@ -28,12 +28,12 @@
         <TravelListField v-model="form.travel_id" :travels="travels" />
       </FormField>
     </TheForm>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import TheForm from '~/components/TheForm'
-import TheLayout from '~/components/layout/TheLayout'
+
 import pick from 'lodash.pick'
 import { CREATE_REVIEW, UPDATE_REVIEW, REVIEW_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'

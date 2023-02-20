@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="travel.title">
+  <NuxtLayout :heading="travel.title">
     <Html>
       <Head>
         <Title>{{ travel.title }} - Путешествия</Title>
@@ -34,11 +34,11 @@
         v-if="travel.nested_entries_count"
         :nested-entries-count="travel.nested_entries_count"
         class="mt-4"/>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
+
 import TravelContentList from '../components/TravelContentList'
 import TravelSiblings from '../components/TravelSiblings.vue'
 import { TRAVEL, TRAVEL_CARD_SQUARE } from '../graphql'

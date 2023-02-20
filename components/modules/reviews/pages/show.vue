@@ -1,16 +1,16 @@
 <template>
-  <TheLayout :heading="review.title">
+  <NuxtLayout :heading="review.title">
     <template #sidebar>1</template>
     <ImageViewer>
       <PlaceRatingBar v-if="review.place" :place="review.place" :user-rating="review.stars" class="mb-4" />
       <div class="prose-sm" v-html="review.text"></div>
     </ImageViewer>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import { useAsyncGql } from '~/uses'
-import TheLayout from '~/components/layout/TheLayout'
+
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
 import { PLACE } from '~/components/modules/places/graphql'
 

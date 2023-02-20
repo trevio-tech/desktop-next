@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} вопроса`">
+  <NuxtLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} вопроса`">
     <template #sidebar>
       123
     </template>
@@ -24,11 +24,11 @@
         <TravelListField v-model="form.travel_id" :travels="data.travels" />
       </FormField>
     </TheForm>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
+
 import TheForm from '~/components/TheForm'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 import pick from 'lodash.pick'

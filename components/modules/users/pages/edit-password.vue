@@ -1,5 +1,5 @@
 <template>
-  <TheLayout heading="Смена пароля">
+  <NuxtLayout heading="Смена пароля">
     <template #sidebar>
       <ul>
         <li><NuxtLink :to="{name: 'users.edit', params: {userId: $route.params.userId}}">Основные настройки</NuxtLink></li>
@@ -26,12 +26,12 @@
         <Button type="submit">Сохранить</Button>
       </form>
     </Card>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import Card from '~/components/Card'
-import TheLayout from '~/components/layout/TheLayout'
+
 import { UPDATE_USER_PASSWORD } from '../graphql'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'

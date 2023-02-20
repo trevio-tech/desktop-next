@@ -1,5 +1,5 @@
 <template>
-  <TheLayout heading="Редактирование профиля">
+  <NuxtLayout heading="Редактирование профиля">
     <template #sidebar>
       <ul>
         <li><NuxtLink :to="{name: 'users.edit', params: {userId: $route.params.userId}}">Основные настройки</NuxtLink></li>
@@ -42,11 +42,11 @@
         </div>
       </footer>
     </form>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>
-import TheLayout from '~/components/layout/TheLayout'
+
 import { useQuery } from '#imports'
 import { ref } from 'vue'
 

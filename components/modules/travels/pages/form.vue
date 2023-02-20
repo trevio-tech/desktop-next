@@ -1,5 +1,5 @@
 <template>
-  <TheLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} путешествия`">
+  <NuxtLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} путешествия`">
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
       <div class="grid grid-cols-2 gap-6">
         <FormField name="input.images" label="Обложка">
@@ -63,7 +63,7 @@
         </div>
       </div>
     </TheForm>
-  </TheLayout>
+  </NuxtLayout>
 </template>
 
 <script setup>

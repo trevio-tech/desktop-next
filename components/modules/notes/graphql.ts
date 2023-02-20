@@ -9,7 +9,7 @@ export const NOTE_CARD = `
   likes_count
   system_name
   messages_count
-  published_at
+  published_at(format: "d.m.Y")
   can
   cover {
     id
@@ -48,7 +48,7 @@ export const NOTE_CARD_RECTANGLE = `
   title
   text(words: 12)
   system_name
-  created_at
+  published_at(format: "d.m.Y")
   cover(sizes: "default@resize:fill:160:160") {
     id
     model_id
