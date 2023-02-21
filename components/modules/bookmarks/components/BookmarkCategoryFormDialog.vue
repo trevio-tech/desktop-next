@@ -1,8 +1,8 @@
 <template>
   <Dialog title="Создание категории закладок">
     <form @submit.prevent="onSubmit">
-      <FormField name="name" for="name" label="Название категории" required>
-        <Input v-model="form.name" id="name" placeholder="Введите название категории" />
+      <FormField name="name" for="name" label="Название категории" required v-slot="{ hasError }">
+        <Input v-model="form.name" id="name" placeholder="Введите название категории" :variant="hasError ? 'danger' : ''" />
       </FormField>
       <label for="is-private" class="flex items-center space-x-1 leading-loose mt-1 text-sm">
         <input type="checkbox" id="is-private" v-model="form.is_private" />
@@ -39,17 +39,19 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   try {
-    const { data } = await useQuery({
+    const { data } = await useQuery2({
       query: `
-        mutation($name: String!, $isPrivate: Boolean) {
-          createBookmarkCategory(name: $name, isPrivate: $isPrivate) {
+        mutation createBookmarkCategory($input: BookmarkCategoryInput!) {
+          createBookmarkCategory(input: $input) {
             id
             name
             content_count
           }
         }
       `,
-      variables: {...form.value}
+      variables: {
+        input: {...form.value}
+      }
     })
 
     if (data.createBookmarkCategory) {
@@ -57,7 +59,7 @@ const onSubmit = handleSubmit(async () => {
       $overlay.hide()
     }
   } catch (error) {
-    if (error.message === 'validation') {
+    if (error.extensions.validation) {
       setErrors(error.extensions.validation)
     }
   } finally {

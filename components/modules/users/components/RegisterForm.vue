@@ -66,10 +66,12 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   try {
-    const { data } = await useQuery({
+    const { data } = await useQuery2({
       query: `
         mutation ($input: RegisterUserInput!) {
-          registerUser(input: $input)
+          registerUser(input: $input) {
+            id
+          }
         }
       `,
       variables: {
@@ -86,7 +88,7 @@ const onSubmit = handleSubmit(async () => {
       emit('login')
     }
   } catch (error) {
-    if (error.message === 'validation') {
+    if (error.extensions.validation) {
       setErrors(error.extensions.validation)
     }
   } finally {

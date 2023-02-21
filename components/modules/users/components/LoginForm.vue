@@ -42,7 +42,7 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   try {
-    await $auth.loginWith('local', {body: form.value})
+    await $auth.loginWith('graphql', {...form.value})
     emit('login')
   } catch ({ data }) {
     if (Object.hasOwn(data, 'errors')) {

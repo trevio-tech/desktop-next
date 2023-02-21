@@ -4,6 +4,30 @@ export default `
   title
   text(words: 12)
   likes_count
+  system_name
+  created_at
+  published_at
+  tags {
+    id
+    name
+  }
+  user {
+    id
+    name
+    avatar
+  }
+  bookmarks {
+    category_id
+  }
+`
+
+/*
+export default `
+  id
+  user_id
+  title
+  text(words: 12)
+  likes_count
   can
   rating
   system_name
@@ -27,4 +51,4 @@ export default `
   bookmarks {
     category_id
   }
-`
+`*/

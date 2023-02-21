@@ -10,31 +10,14 @@
 <script setup>
 import ContentCard from '~/components/ContentCard'
 import { TRAVEL_CARD } from '../graphql';
-import { useQuery } from '#imports'
-import { useRoute, useRouter } from '#imports'
-import { watch } from 'vue'
 
-const route = useRoute()
-const router = useRouter()
-
-const { data: { travels }, refresh } = await useQuery({
+const { data: { travels }, refresh } = await useQuery2({
   query: `
-    query($filter_by: String, $tag_id: Int) {
-      travels(filter_by: $filter_by, tag_id: $tag_id) {
+    query {
+      travels {
         ${TRAVEL_CARD}
       }
     }
   `,
-  variables: {
-    tag_id: parseInt(route.query.tag_id),
-    filter_by: !!route.query.timeline ? undefined : 'subscriptions'
-  }
-})
-
-watch(() => route.query.tag_id, () => {
-  refresh()
-})
-watch(() => route.query.timeline, () => {
-  refresh()
 })
 </script>
