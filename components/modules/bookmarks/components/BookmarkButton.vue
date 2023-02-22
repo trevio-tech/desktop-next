@@ -16,7 +16,7 @@ const props = defineProps({
     required: true,
   },
   modelId: {
-    type: Number,
+    type: [Number, String],
     required: true,
   },
   modelValue: {

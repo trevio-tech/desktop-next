@@ -14,7 +14,7 @@
 
         <!-- CONTENT, CONTENT-SIDEBAR -->
         <div class="flex-auto flex w-[800px] gap-4" :class="{'flex-row-reverse': isReverse}">
-          <div class="flex-shrink-0 w-[560px]">
+          <div class="flex-shrink-0 min-w-[560px] max-w-[840px]">
             <slot />
           </div>
           <div v-if="hasSidebar" class="flex-shrink-0 w-[240px] bg-gray-100">

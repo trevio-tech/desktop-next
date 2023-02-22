@@ -7,6 +7,10 @@ export default `
   system_name
   created_at
   published_at
+  cover {
+    url
+    presets(variants: "default@resize:fill:640:320")
+  }
   tags {
     id
     name
@@ -18,6 +22,9 @@ export default `
   }
   bookmarks {
     category_id
+  }
+  like {
+    is_liked
   }
 `
 
