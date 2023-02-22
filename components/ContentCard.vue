@@ -9,7 +9,7 @@
         <div class="absolute top-0 left-0 p-2">
           <div class="bg-slate-500/40 py-1 px-3 text-white font-medium text-sm rounded-lg">{{ label }}</div>
         </div>
-        <img v-if="entry.cover" :src="entry.cover?.presets?.default" :alt="entry.title" class="object-cover w-full h-full" loading="lazy">
+        <img v-if="entry.cover" :src="entry.cover?.url?.default" :alt="entry.title" class="object-cover w-full h-full" loading="lazy">
       </NuxtLink>
       <div v-if="entry.travel_id > 0"
            @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/travels/components/TravelAboutDialog.vue')), {
