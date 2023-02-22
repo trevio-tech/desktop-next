@@ -10,7 +10,9 @@
     <template #hero>
       <div class="bg-gradient-to-r from-blue-50 to-blue-200 flex items-center h-40 px-10 rounded-lg">
         <div class="mr-4 flex-shrink-0">
-          <img :src="user.avatar" class="w-24 h-24 rounded-full" alt="">
+          <Upload v-model="user.avatar" mutation-name="uploadAvatar">
+            <img :src="user.avatar" class="w-24 h-24 rounded-full" alt="">
+          </Upload>
         </div>
         <div class="overflow-hidden">
           <h1 class="text-4xl font-semibold truncate">{{ user.name }}</h1>
