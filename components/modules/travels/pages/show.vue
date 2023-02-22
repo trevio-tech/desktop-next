@@ -8,8 +8,7 @@
     </Html>
 
     <template #sidebar>
-<!--      <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>-->
-      <TheContentCreationList />
+      <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>
     </template>
     <article>
       <ImageViewer>

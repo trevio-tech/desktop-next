@@ -6,13 +6,13 @@
       @update:modelValue="onUploaded"
       class="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0"
     />
-    <div v-if="! image.url" class="flex flex-col items-center">
+    <div v-if="! image" class="flex flex-col items-center">
       <img src="/images/upload.png" class="w-32" alt="">
       <div class="font-medium text-gray-600 mt-2">
           Нажмите, чтобы выбрать обложку
       </div>
     </div>
-    <img v-else :src="image.url" class="object-cover w-full h-full" alt="" />
+    <img v-else :src="image" class="object-cover w-full h-full" alt="" />
   </div>
 </template>
 
@@ -33,8 +33,8 @@ const fields = ['id', 'url']
 
 const image = ref({id: null, url: null})
 
-if (props.modelValue.length === 1) {
-  image.value = props.modelValue[0]
+if (props.modelValue.url.original) {
+  image.value = props.modelValue.url.original
 }
 
 const onUploaded = (images) => {

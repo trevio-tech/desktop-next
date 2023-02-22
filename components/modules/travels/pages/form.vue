@@ -3,7 +3,7 @@
     <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
       <div class="grid grid-cols-2 gap-6">
         <FormField name="input.images" label="Обложка">
-          <TravelUpload v-model="form.images" />
+          <TravelUpload v-model="form.cover" />
         </FormField>
 
         <div class="space-y-6">
@@ -111,18 +111,16 @@ const loading = ref(false)
 const currencies = ref([])
 
 if (isEdit) {
-  const { data } = await useQuery({
+  const { data } = await useQuery2({
     query: `
-      query($id: Int!) {
-        ${TRAVEL_FORM}
-        currencies {
-          id
-          name
+      query($travel_id: ID!) {
+        travel(id: $travel_id) {
+          ${TRAVEL_FORM}
         }
       }
     `,
     variables: {
-      id: parseInt(route.params.travelId)
+      travel_id: route.params.travelId
     }
   })
 
@@ -209,7 +207,7 @@ const getCurrency = computed(() => {
     return currencies.value.filter((currency) => currency.id === form.value.currency_id)[0].name
   }
 
-  return currencies.value[0].name
+  return [] || currencies.value[0].name
 })
 
 const readableDateStartDateEnd = computed(() => {
