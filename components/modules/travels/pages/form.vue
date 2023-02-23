@@ -79,8 +79,8 @@ import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter } from '#imports'
 import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
-import { definePageMeta, useQuery } from '#imports'
-import { format, parseISO, isValid } from 'date-fns'
+import { definePageMeta } from '#imports'
+import { format, parseISO } from 'date-fns'
 
 definePageMeta({
   middleware: 'auth'
@@ -133,17 +133,8 @@ if (isEdit) {
 
   Object.assign(form.value, data.travel)
 
-  if (isValid(form.value.date_start)) {
-    form.value.date_start = parseISO(form.value.date_start)
-  } else {
-    form.value.date_start = ''
-  }
-
-  if (isValid(form.value.date_end)) {
-    form.value.date_end = parseISO(form.value.date_end)
-  } else {
-    form.value.date_end = ''
-  }
+  form.value.date_start = parseISO(form.value.date_start)
+  form.value.date_end = parseISO(form.value.date_end)
 } else {
   const { data } = await useQuery2({
     query: `
@@ -162,7 +153,6 @@ const onDateChange = (dates) => {
   form.value.date_start = dates[0]
   form.value.date_end = dates[1]
 }
-
 
 const onSubmit = handleSubmit(async (values, actions) => {
   if (loading.value) {
@@ -219,11 +209,11 @@ const readableDateStartDateEnd = computed(() => {
   let date = ''
 
   if (form.value.date_start) {
-    date += format(form.value.date_start, 'd.L.Y')
+    date += format(form.value.date_start, 'dd.LL.Y')
   }
 
   if (form.value.date_end) {
-    date += ' - ' +  format(form.value.date_end, 'd.L.Y')
+    date += ' - ' +  format(form.value.date_end, 'dd.LL.Y')
   }
 
   return date
