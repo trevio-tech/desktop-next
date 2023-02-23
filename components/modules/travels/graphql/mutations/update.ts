@@ -1,5 +1,5 @@
 export default `
-  mutation ($id: Int!, $input: TravelInput!) {
+  mutation ($id: ID!, $input: TravelInput!) {
     travelForm: updateTravel(id: $id, input: $input)
   }
 `

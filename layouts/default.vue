@@ -13,8 +13,8 @@
         <!-- / HERO -->
 
         <!-- CONTENT, CONTENT-SIDEBAR -->
-        <div class="flex-auto flex w-[800px]" :class="{'flex-row-reverse': isReverse, 'gap-4': hasSidebar}">
-          <div class="flex-shrink-0" :class="{'w-[560px]': hasSidebar}">
+        <div class="flex-auto flex max-w-[800px]" :class="{'flex-row-reverse': isReverse, 'gap-4': hasSidebar}">
+          <div :class="{'w-[560px]': hasSidebar}">
             <slot />
           </div>
           <div v-if="hasSidebar" class="flex-shrink-0 w-[240px] bg-gray-100">

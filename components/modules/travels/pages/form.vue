@@ -63,6 +63,7 @@
         </div>
       </div>
     </TheForm>
+    {{ form.date_start }}
   </NuxtLayout>
 </template>
 
@@ -117,6 +118,10 @@ if (isEdit) {
         travel(id: $travel_id) {
           ${TRAVEL_FORM}
         }
+        currencies {
+          id
+          name
+        }
       }
     `,
     variables: {
@@ -140,7 +145,7 @@ if (isEdit) {
     form.value.date_end = ''
   }
 } else {
-  const { data } = await useQuery({
+  const { data } = await useQuery2({
     query: `
       query {
         currencies {
@@ -178,15 +183,15 @@ const onSubmit = handleSubmit(async (values, actions) => {
     'date_end',
   ])
 
-  input.tags = input.tags.map(tag => parseInt(tag.id))
-  input.images = input.images.map(image => parseInt(image.id))
+  input.tags = input.tags.map(tag => tag.id)
+  input.images = input.images.map(image => image.id)
 
   try {
-    const {data: { travelForm }} = await useQuery({
+    const {data: { travelForm }} = await useQuery2({
       query: isEdit ? UPDATE_TRAVEL : CREATE_TRAVEL,
       variables: {
         input,
-        id: parseInt(route.params.travelId)
+        id: route.params.travelId
       }
     })
 
@@ -194,7 +199,7 @@ const onSubmit = handleSubmit(async (values, actions) => {
       await useRouter().push({name: 'travels.show', params: {travelId: travelForm}})
     }
   } catch (error) {
-    if (error['message'] === 'validation') {
+    if (error['extensions']['validation']) {
       actions.setErrors(error['extensions']['validation'])
     }
   } finally {

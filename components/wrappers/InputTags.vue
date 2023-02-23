@@ -1,17 +1,13 @@
 <template>
   <InputTags :key-name="keyName" :placeholder="placeholder" :model-value="tags"
-             @update:modelValue="onUpdate" :select-callback="onSelect"/>
+             @update:modelValue="emit('update:modelValue', $event)" :select-callback="onSelect"/>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useQuery } from '#imports'
 
-defineEmits(['update:modelValue'])
-
-const onUpdate = (e) => {
-  console.log(e)
-}
+const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps({
   modelValue: {

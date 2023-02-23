@@ -33,7 +33,7 @@ const fields = ['id', 'url']
 
 const image = ref({id: null, url: null})
 
-if (props.modelValue.url.original) {
+if (props.modelValue?.url?.original) {
   image.value = props.modelValue.url.original
 }
 
