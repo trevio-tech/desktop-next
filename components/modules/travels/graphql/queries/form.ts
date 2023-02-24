@@ -19,6 +19,6 @@ export default `
   }
   cover {
     id
-    url(presets: "default@resize:fill:640:320")
+    url(presets: "default@resize:fill:640:640")
   }
 `

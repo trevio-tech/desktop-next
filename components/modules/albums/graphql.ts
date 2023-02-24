@@ -78,10 +78,9 @@ export const ALBUM = `
     id
     title
   }
-  images(sizes: "default@resize:fill:126:126") {
+  images {
     id
-    url
-    sizes
+    url(presets: "default@resize:fill:126:126")
   }
   tags {
     id

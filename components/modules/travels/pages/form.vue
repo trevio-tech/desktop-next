@@ -63,7 +63,6 @@
         </div>
       </div>
     </TheForm>
-    {{ form.date_start }}
   </NuxtLayout>
 </template>
 
@@ -100,7 +99,7 @@ const form = ref({
   },
   text: '',
   tags: [],
-  images: []
+  cover: {}
 })
 
 const route = useRoute()
@@ -167,14 +166,13 @@ const onSubmit = handleSubmit(async (values, actions) => {
     'place_id',
     'budget',
     'text',
-    'tags',
-    'images',
     'date_start',
     'date_end',
+    'tags',
   ])
 
   input.tags = input.tags.map(tag => tag.id)
-  input.images = input.images.map(image => image.id)
+  input.images = [form.value.cover.id]
 
   try {
     const {data: { travelForm }} = await useQuery2({

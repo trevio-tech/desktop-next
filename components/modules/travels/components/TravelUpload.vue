@@ -1,8 +1,8 @@
 <template>
   <div class="overflow-hidden flex items-center justify-center h-[366px] relative border-2 border-gray-300 border-dashed rounded-md appearance-none hover:border-gray-400 focus:outline-none aspect-square">
     <Upload
-      model-type="travels"
       :fields="fields"
+      :input="{model_type: 'travels'}"
       @update:modelValue="onUploaded"
       class="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0"
     />
@@ -29,16 +29,16 @@ const emit = defineEmits([
   'update:modelValue'
 ])
 
-const fields = ['id', 'url']
+const fields = ['id', 'url(presets: "default@resize:fill:640:640")']
 
 const image = ref({id: null, url: null})
 
-if (props.modelValue?.url?.original) {
-  image.value = props.modelValue.url.original
+if (Array.isArray(props.modelValue) && props.modelValue[0]?.url?.default) {
+  image.value = props.modelValue[0].url.default
 }
 
 const onUploaded = (images) => {
-  image.value = images[0]
+  image.value = images[0].url.default
   emit('update:modelValue', images)
 }
 </script>
