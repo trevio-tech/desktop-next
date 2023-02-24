@@ -15,9 +15,10 @@
         required
       >
         <FormGallery v-if="form.images" v-model="form.images" />
-        <Upload :fields="['id', 'url']" :presets="['default@width:640,height:480']" model-type="albums" v-model="form.images">
+        <Upload :fields="fields" :input="{model_type: 'albums'}" v-model="form.images">
           <Button>Добавить фото</Button>
         </Upload>
+        {{ form.images }}
       </FormField>
 
       <FormField name="input.text" label="Текст">
@@ -55,6 +56,8 @@ import { useRoute, useRouter, useNuxtApp } from '#imports'
 definePageMeta({
   middleware: 'auth'
 })
+
+const fields = ['id', 'url(presets: "default@width:640,height:480")']
 
 const form = ref({
   place_id: null,
@@ -120,6 +123,7 @@ const onSubmit = handleSubmit(async () => {
   const input = pick(form.value, [
     'place_id',
     'travel_id',
+    'is_draft',
     'title',
     'text',
     'tags',
@@ -130,7 +134,7 @@ const onSubmit = handleSubmit(async () => {
   input.images = input.images.map(image => parseInt(image.id))
 
   try {
-    const { data: { albumForm }} = await useQuery({
+    const { data: { albumForm }} = await useQuery2({
       query: isEdit ? UPDATE_ALBUM : CREATE_ALBUM,
       variables: {
         input,
@@ -141,9 +145,9 @@ const onSubmit = handleSubmit(async () => {
     if (albumForm > 0) {
       await useRouter().push({name: 'albums.show', params: {albumId: albumForm}})
     }
-  } catch (error) {
-    if (error['message'] === 'validation') {
-      setErrors(error['extensions']['validation'])
+  } catch (errors) {
+    if (errors?.extensions?.validation) {
+      setErrors(errors.extensions.validation)
     }
   } finally {
     loading.value = false

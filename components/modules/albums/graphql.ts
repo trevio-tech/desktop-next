@@ -105,10 +105,9 @@ export const ALBUM_FORM = `
   text
   is_draft
   image_order
-  images(presets: "default@resize:fill:126:126") {
+  images {
     id
-    url
-    presets
+    url(presets: "default@resize:fill:126:126")
   }
   tags {
     id
@@ -126,7 +125,7 @@ export const CREATE_ALBUM = `
 `
 
 export const UPDATE_ALBUM = `
-  mutation ($id: Int!, $input: AlbumInput!) {
+  mutation ($id: ID!, $input: AlbumInput!) {
     albumForm: updateAlbum(id: $id, input: $input)
   }
 `

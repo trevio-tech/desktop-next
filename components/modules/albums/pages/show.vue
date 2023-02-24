@@ -4,6 +4,7 @@
       <NuxtLink :to="`/albums/${album.id}/edit`">edit</NuxtLink>
     </template>
     <article class="space-y-4">
+      <h1 class="text-2xl mb-4">{{ album.title }}</h1>
       <div v-if="album.text" class="prose-sm">{{ album.text }}</div>
 
       <ImageViewer>

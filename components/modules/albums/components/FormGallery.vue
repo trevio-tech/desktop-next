@@ -2,7 +2,7 @@
   <Draggable :model-value="modelValue" @update:modelValue="$emit('update:modelValue', $event)" tag="div" item-key="id" class="grid grid-cols-4 gap-2">
     <template #item="{ element, index }">
       <div class="cursor-move select-none relative rounded-lg overflow-hidden aspect-square">
-        <img :src="element.presets.default" alt="" class="w-full h-full object-cover block">
+        <img :src="element.url.default" alt="" class="w-full h-full object-cover block">
 
         <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center space-x-1 bg-black bg-opacity-25 text-white">
           <div class="p-2 bg-gray-400/80 rounded-full cursor-pointer">
