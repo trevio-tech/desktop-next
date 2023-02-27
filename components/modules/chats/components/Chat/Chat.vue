@@ -62,12 +62,6 @@ const store = useChatStore()
 
 const { $echo } = useNuxtApp()
 
-$echo.channel(`chats.${props.chatId}`)
-  .listen('newMessage', (event) => {
-    console.log(event)
-    stacks.value[Object.keys(stacks.value).at(-1)].push(event.message)
-  })
-
 const onLoad = async (chatId = null) => {
   if (! chatId) {
     chatId = props.chatId
