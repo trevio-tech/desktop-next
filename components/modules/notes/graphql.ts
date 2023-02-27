@@ -13,7 +13,7 @@ export const NOTE_CARD = `
   can
   cover {
     id
-    url
+    url(presets: "default@resize:fill:560:320")
   }
   travel {
     id
@@ -115,19 +115,19 @@ export const NOTE_FORM = `
     name
     full_name
     parent {
+      id
+      parent_id
+      name
+      parent {
         id
         parent_id
         name
         parent {
-            id
-            parent_id
-            name
-            parent {
-                id
-                parent_id
-                name
-            }
+          id
+          parent_id
+          name
         }
+      }
     }
   }
 `
@@ -139,13 +139,13 @@ export const CREATE_NOTE = `
 `
 
 export const UPDATE_NOTE = `
-  mutation ($id: Int!, $input: NoteInput!) {
+  mutation ($id: ID!, $input: NoteInput!) {
     noteForm: updateNote(id: $id, input: $input)
   }
 `
 
 export const DELETE_NOTE = `
-  mutation ($id: Int!) {
+  mutation ($id: ID!) {
     deleteContent: deleteNote(id: $id)
   }
 `

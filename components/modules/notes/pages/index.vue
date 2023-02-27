@@ -11,9 +11,8 @@
 import ContentCard from '~/components/ContentCard'
 
 import { NOTE_CARD } from '../graphql'
-import { useRoute, useHead } from '#imports'
+import { useRoute, useHead, useQuery2 } from '#imports'
 import { ref, watch, computed } from 'vue'
-import { useAsyncQuery } from '~/uses'
 
 const route = useRoute()
 
@@ -41,19 +40,15 @@ const getNotes = async (tagId) => {
       name
     }` : ''
 
-  const { data } = await useAsyncQuery({
+  const { data } = await useQuery2({
     query: `
-      query getNotes ($tag_id: Int${tagId > 0 ? `, $tag_tag_id: Int!` : ''}) {
-        notes(tag_id: $tag_id) {
+      query getNotes {
+        notes {
           ${NOTE_CARD}
         }
         ${tagQuery}
       }
     `,
-    variables: {
-      tag_id: tagId || undefined,
-      tag_tag_id: tagId || undefined,
-    },
   })
 
   notes.value = data.notes
