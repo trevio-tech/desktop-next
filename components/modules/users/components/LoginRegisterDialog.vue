@@ -1,5 +1,5 @@
 <template>
-  <div class="place-self-center p-5 max-w-[1480px] h-full max-h-[800px]">
+  <div class="place-self-center p-5 max-w-[1480px] h-full w-full max-h-[800px]">
     <div class="flex items-center justify-center h-full w-full overflow-hidden rounded-lg">
       <div class="flex justify-center flex-col w-[400px] p-10 bg-white h-full flex-shrink-0 overflow-y-auto">
         <NuxtLink to="/" class="block mb-10" title="Trevio.ru - о путешествиях">
@@ -13,7 +13,7 @@
         </Button>
       </div>
 
-      <div class="select-none flex-auto h-full relative">
+      <div class="select-none h-full w-full max-w-[1040px] relative">
         <button @click="$overlay.hide" type="button" class="absolute top-2 right-2 text-gray-100 bg-transparent bg-black/20 hover:bg-black/50 rounded-lg p-1.5">
           <X class="w-5 h-5" />
           <span class="sr-only">Закрыть</span>
