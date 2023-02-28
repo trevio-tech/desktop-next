@@ -1,7 +1,7 @@
 <template>
   <article class="flex space-x-2">
     <NuxtLink v-if="entry.cover" :to="to" class="w-28 aspect-square flex-shrink-0">
-      <img :src="entry.cover.sizes.default" :alt="entry.name" class="block object-cover w-full h-full" />
+      <img :src="entry.cover.url.default" :alt="entry.name" class="block object-cover w-full h-full" />
     </NuxtLink>
     <main>
       <h2 class="font-medium">

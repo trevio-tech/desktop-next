@@ -15,6 +15,7 @@
         <!-- CONTENT, CONTENT-SIDEBAR -->
         <div class="flex-auto flex max-w-[800px]" :class="{'flex-row-reverse': isReverse, 'gap-4': hasSidebar}">
           <div :class="{'w-[560px]': hasSidebar}">
+            <h1 v-if="heading" class="text-xl font-bold mb-4">{{ heading }}</h1>
             <slot />
           </div>
           <div v-if="hasSidebar" class="flex-shrink-0 w-[240px] bg-gray-100">
@@ -35,15 +36,19 @@ import TheFooter from '~/components/layout/TheFooter'
 import TheNavigation from '~/components/layout/TheNavigation'
 import { computed, useSlots } from 'vue'
 
-useHead({
-  titleTemplate: '%s — Trevio.ru - о путешествиях',
-})
-
-defineProps({
+const props = defineProps({
+  heading: {
+    type: String,
+    default: ''
+  },
   isReverse: {
     type: Boolean,
     default: false
   }
+})
+
+useHead({
+  titleTemplate: '%s — Trevio.ru - о путешествиях',
 })
 
 const slots = useSlots()

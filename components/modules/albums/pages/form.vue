@@ -18,7 +18,6 @@
         <Upload :fields="fields" :input="{model_type: 'albums'}" v-model="form.images">
           <Button>Добавить фото</Button>
         </Upload>
-        {{ form.images }}
       </FormField>
 
       <FormField name="input.text" label="Текст">
@@ -43,15 +42,13 @@
 <script setup>
 import FormGallery from '~/components/modules/albums/components/FormGallery.vue'
 import TheForm from '~/components/TheForm'
-
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 import { CREATE_ALBUM, UPDATE_ALBUM, ALBUM_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'
-import { definePageMeta } from '#imports'
 import { pick } from 'lodash'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useRoute, useRouter, useNuxtApp } from '#imports'
+import { useRoute, useRouter, useNuxtApp, definePageMeta } from '#imports'
 
 definePageMeta({
   middleware: 'auth'
@@ -84,25 +81,23 @@ let travels = []
 const app = useNuxtApp()
 
 try {
-  const { data } = await useQuery({
+  const { data } = await useQuery2({
     query: `
-      query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
+      query(${isEdit ? '$id: ID!, ' : ''}$user_id: ID) {
         ${isEdit ? `album(id: $id) { ${ALBUM_FORM} }` : ''}
-        travels(userId: $userId) {
+        travels(user_id: $user_id) {
           id
           title(words: 10)
-          cover(sizes: "default@resize:fill:240:160") {
+          cover {
             id
-            model_id
-            url
-            sizes
+            url(presets: "default@resize:fill:240:160")
           }
         }
       }
     `,
     variables: {
       id: albumId,
-      userId: app.$auth.user.id
+      user_id: app.$auth.user.id
     }
   })
 
@@ -130,15 +125,15 @@ const onSubmit = handleSubmit(async () => {
     'images',
   ])
 
-  input.tags = input.tags.map(tag => parseInt(tag.id))
-  input.images = input.images.map(image => parseInt(image.id))
+  input.tags = input.tags.map(tag => tag.id)
+  input.images = input.images.map(image => image.id)
 
   try {
     const { data: { albumForm }} = await useQuery2({
       query: isEdit ? UPDATE_ALBUM : CREATE_ALBUM,
       variables: {
-        input,
-        id: albumId
+        id: albumId,
+        input
       }
     })
 

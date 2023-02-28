@@ -17,7 +17,7 @@ export const ALBUM_CARD = `
   }
   cover {
     id
-    url
+    url(presets: "default@resize:fill:560:320")
   }
   like {
     is_liked

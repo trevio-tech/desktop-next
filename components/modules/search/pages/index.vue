@@ -58,7 +58,7 @@ const groupNames = {
 }
 
 const onFetch = async (searchBy = undefined) => {
-  const { data } = await useQuery({
+  const { data } = await useQuery2({
     query: `
       query ($query: String!, $searchBy: String) {
         search(query: $query, searchBy: $searchBy) {
@@ -67,11 +67,14 @@ const onFetch = async (searchBy = undefined) => {
             title
             text(words: 16)
             system_name
-            cover(sizes: "default@resize:fill:640:320") {
+            user {
               id
-              model_id
-              url
-              sizes
+              name
+              avatar
+            }
+            cover {
+              id
+              url(presets: "default@resize:fill:640:320")
             }
           }
           ... on Note {
@@ -80,11 +83,9 @@ const onFetch = async (searchBy = undefined) => {
             title
             text(words: 16)
             system_name
-            cover(sizes: "default@resize:fill:640:320") {
+            cover {
               id
-              model_id
-              url
-              sizes
+              url(presets: "default@resize:fill:640:320")
             }
           }
           ... on Album {
@@ -93,11 +94,9 @@ const onFetch = async (searchBy = undefined) => {
             title
             text(words: 16)
             system_name
-            cover(sizes: "default@resize:fill:640:320") {
+            cover {
               id
-              model_id
-              url
-              sizes
+              url(presets: "default@resize:fill:640:320")
             }
           }
           ... on User {
