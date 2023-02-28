@@ -124,7 +124,7 @@ const onSubmit = handleSubmit(async () => {
   input.tags = input.tags.map(tag => parseInt(tag.id))
 
   try {
-    const { data: { reviewForm }} = await useQuery({
+    const { data: { reviewForm }} = await useQuery2({
       query: isEdit ? UPDATE_REVIEW : CREATE_REVIEW,
       variables: {
         input,
@@ -136,8 +136,8 @@ const onSubmit = handleSubmit(async () => {
       await useRouter().push({name: 'reviews.show', params: {reviewId: reviewForm}})
     }
   } catch (error) {
-    if (error['message'] === 'validation') {
-      setErrors(error['extensions']['validation'])
+    if (error?.extensions?.validation) {
+      setErrors(error.extensions.validation)
     }
   } finally {
     loading.value = false

@@ -1,3 +1,5 @@
+import {PLACE_WITH_PARENTS_FIELDS} from '~/components/modules/places/graphql';
+
 export const REVIEW_CARD = `
   id
   user_id
@@ -39,25 +41,7 @@ export const REVIEW_FORM = `
     name
   }
   place {
-    id
-    parent_id
-    name
-    full_name
-    parent {
-        id
-        parent_id
-        name
-        parent {
-            id
-            parent_id
-            name
-            parent {
-                id
-                parent_id
-                name
-            }
-        }
-    }
+    ${PLACE_WITH_PARENTS_FIELDS}
   }
 `
 
