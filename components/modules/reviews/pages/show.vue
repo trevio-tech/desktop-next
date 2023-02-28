@@ -9,28 +9,37 @@
 </template>
 
 <script setup>
-import { useAsyncGql } from '~/uses'
-
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
 import { PLACE } from '~/components/modules/places/graphql'
 
 const route = useRoute()
 
-const { data: { value: { review }}} = await useAsyncGql(`
-  query($id: Int!) {
-    review(id: $id) {
-      id
-      place_id
-      title
-      text
-      can
-      stars
-      place {
-        ${PLACE}
+let review = []
+
+try {
+  const { data } = await useQuery2({
+    query: `
+      query($id: ID!) {
+        review(id: $id) {
+          id
+          place_id
+          title
+          text
+          can
+          stars
+          place {
+            ${PLACE}
+          }
+        }
       }
+    `,
+    variables: {
+      id: parseInt(route.params.reviewId)
     }
-  }
-`, {
-  id: parseInt(route.params.reviewId)
-})
+  })
+
+  review = data.review
+} catch (error) {
+  console.log(error)
+}
 </script>

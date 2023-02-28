@@ -11,11 +11,9 @@ export const REVIEW_CARD = `
   like {
     is_liked
   }
-  cover(sizes: "default@resize:fill:640:320") {
+  cover {
     id
-    model_id
-    url
-    sizes
+    url(presets: "default@resize:fill:640:320")
   }
   tags {
     id

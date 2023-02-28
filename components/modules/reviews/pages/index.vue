@@ -17,7 +17,7 @@ import { shallowRef } from 'vue'
 const reviews = shallowRef([])
 
 try {
-  const { data } = await useQuery({
+  const { data } = await useQuery2({
     query: `
       query {
         reviews {

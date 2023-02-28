@@ -74,25 +74,23 @@ const travels = ref([])
 const app = useNuxtApp()
 
 try {
-  const { data } = await useQuery({
+  const { data } = await useQuery2({
     query: `
-      query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
+      query(${isEdit ? '$id: ID!, ' : ''}$user_id: ID) {
         ${isEdit ? `review(id: $id) { ${REVIEW_FORM} }` : ''}
-        travels(userId: $userId) {
+        travels(user_id: $user_id) {
           id
           title(words: 10)
-          cover(sizes: "default@resize:fill:240:160") {
+          cover {
             id
-            model_id
-            url
-            sizes
+            url(presets: "default@resize:fill:240:160")
           }
         }
       }
     `,
     variables: {
       id: reviewId,
-      userId: app.$auth.user.id
+      user_id: app.$auth.user.id
     }
   })
 
