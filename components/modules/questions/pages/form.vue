@@ -66,25 +66,23 @@ const loading = ref(false)
 
 const { $auth } = useNuxtApp()
 
-const { data } = await useQuery({
+const { data } = await useQuery2({
   query: `
-    query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
+    query(${isEdit ? '$id: ID!, ' : ''}$user_id: ID) {
       ${isEdit ? `question(id: $id) { ${QUESTION_FORM} }` : ''}
-      travels(userId: $userId) {
+      travels(user_id: $user_id) {
         id
         title(words: 10)
-        cover(sizes: "default@resize:fill:240:160") {
+        cover {
           id
-          model_id
           url
-          sizes
         }
       }
     }
   `,
   variables: {
     id: questionId,
-    userId: $auth.user.id
+    user_id: $auth.user.id
   }
 })
 
@@ -105,12 +103,13 @@ const onSubmit = handleSubmit(async () => {
     'title',
     'text',
     'tags',
+    'is_draft'
   ])
 
   input.tags = input.tags.map(tag => parseInt(tag.id))
 
   try {
-    const { data: { questionForm }} = await useQuery({
+    const { data: { questionForm }} = await useQuery2({
       query: isEdit ? UPDATE_QUESTION : CREATE_QUESTION,
       variables: {
         input,

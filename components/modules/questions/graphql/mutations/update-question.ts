@@ -1,5 +1,5 @@
 export default `
-  mutation ($id: Int!, $input: QuestionInput!) {
+  mutation ($id: ID!, $input: QuestionInput!) {
     questionForm: updateQuestion(id: $id, input: $input)
   }
 `

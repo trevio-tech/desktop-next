@@ -4,7 +4,7 @@
       <div
           :class="[modelValue === travel.id ? 'ring-green-400' : 'ring-slate-200']"
           class="relative cursor-pointer rounded-lg overflow-hidden ring-4">
-        <img :src="travel.cover?.sizes?.default" class="w-full" :alt="travel.title" />
+        <img :src="travel.cover?.url?.default" class="w-full" :alt="travel.title" />
         <div class="absolute left-0 top-0 w-full h-full bg-black/50 p-4 text-sm font-medium text-white">
           {{ travel.title }}
         </div>

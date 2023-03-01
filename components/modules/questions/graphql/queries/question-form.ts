@@ -1,3 +1,5 @@
+import {PLACE_WITH_PARENTS_FIELDS} from '~/components/modules/places/graphql';
+
 export default `
   id
   place_id
@@ -10,24 +12,6 @@ export default `
     name
   }
   place {
-    id
-    parent_id
-    name
-    full_name
-    parent {
-        id
-        parent_id
-        name
-        parent {
-            id
-            parent_id
-            name
-            parent {
-                id
-                parent_id
-                name
-            }
-        }
-    }
+    ${PLACE_WITH_PARENTS_FIELDS}
   }
 `

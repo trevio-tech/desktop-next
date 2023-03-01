@@ -20,7 +20,7 @@ useHead({
 let questions = []
 
 try {
-  const { data } = await useQuery({
+  const { data } = await useQuery2({
     query: `
       query {
         questions {
