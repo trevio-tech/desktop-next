@@ -70,18 +70,18 @@ const onSubmit = handleSubmit(async () => {
   }
 
   try {
-    const { data } = await useQuery({
+    const { data } = await useQuery2({
       query: isEdit ? UPDATE_ANSWER : CREATE_ANSWER,
       variables
     })
 
-    if (data.answerForm?.id > 0) {
+    if (data.answer?.id > 0) {
       form.value = {...formInitialState}
-      emit(isEdit ? 'updated' : 'created', data.answerForm)
+      emit(isEdit ? 'updated' : 'created', data.answer)
     }
   } catch (error) {
-    if (error['message'] === 'validation') {
-      setErrors(error['extensions']['validation'])
+    if (error?.extensions?.validation) {
+      setErrors(error.extensions.validation)
     }
   } finally {
     loading.value = false

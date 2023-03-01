@@ -5,16 +5,14 @@ export default `
   text
   is_pinned
   created_at(format: "relative")
-  can_pin
   system_name
   likes_count
   like {
     is_liked
   }
-  images(presets: "default@resize:fill:120:120") {
+  images {
     id
     url
-    presets
   }
   question {
     id
