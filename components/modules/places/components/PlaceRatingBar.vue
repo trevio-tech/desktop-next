@@ -68,7 +68,7 @@ defineProps({
     required: true,
   },
   userRating: {
-    type: Number,
+    type: [Number, String],
   }
 })
 </script>

@@ -1,4 +1,3 @@
-import { MY_CHATS } from '~/components/modules/chats/graphql'
 import { defineNuxtPlugin } from '#imports'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
@@ -8,7 +7,7 @@ import { watch } from 'vue'
 export default defineNuxtPlugin(async (nuxtApp) => {
   const initialState = async (loggedIn) => {
     try {
-      const variablesString = []
+      let variablesString = []
       const variables = {}
       const queries = [`
         stories2 {
@@ -35,8 +34,13 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         `)
       }
 
-      const query = `
-        query initialState(${variablesString.join(', ')}) {
+      let queryPayload = ''
+      if (variablesString.length) {
+        queryPayload = `(${variablesString.join(', ')})`
+      }
+
+      const query = /* GraphQL */`
+        query initialState${queryPayload} {
           ${queries.join(',')}
         }
       `
@@ -53,9 +57,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       })
 
       if (loggedIn) {
-        await useChatsStore().$patch({
-          chats: data.myChats
-        })
         await useBookmarksStore().$patch({
           categories: data.bookmarksCategories
         })

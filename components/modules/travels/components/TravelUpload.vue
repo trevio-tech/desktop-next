@@ -6,13 +6,13 @@
       @update:modelValue="onUploaded"
       class="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0"
     />
-    <div v-if="! image" class="flex flex-col items-center">
+    <div v-if="! image.url?.default" class="flex flex-col items-center">
       <img src="/images/upload.png" class="w-32" alt="">
       <div class="font-medium text-gray-600 mt-2">
           Нажмите, чтобы выбрать обложку
       </div>
     </div>
-    <img v-else :src="image" class="object-cover w-full h-full" alt="" />
+    <img v-else :src="image.url.default" class="object-cover w-full h-full" alt="" />
   </div>
 </template>
 
@@ -21,7 +21,10 @@ import { ref } from 'vue'
 
 const props = defineProps({
   modelValue: {
-    type: Array,
+    type: Object,
+    default: () => {
+      return {id: null, url: ''}
+    }
   }
 })
 
@@ -31,14 +34,10 @@ const emit = defineEmits([
 
 const fields = ['id', 'url(presets: "default@resize:fill:640:640")']
 
-const image = ref({id: null, url: null})
-
-if (Array.isArray(props.modelValue) && props.modelValue[0]?.url?.default) {
-  image.value = props.modelValue[0].url.default
-}
+const image = ref(props.modelValue)
 
 const onUploaded = (images) => {
-  image.value = images[0].url.default
-  emit('update:modelValue', images)
+  image.value = images[0]
+  emit('update:modelValue', images[0])
 }
 </script>
