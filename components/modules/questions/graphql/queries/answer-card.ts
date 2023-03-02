@@ -12,7 +12,7 @@ export default `
   }
   images {
     id
-    url
+    url(presets: "default@width:120,height:120")
   }
   question {
     id

@@ -36,7 +36,7 @@ import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter, useNuxtApp } from '#imports'
-import { definePageMeta, useQuery } from '#imports'
+import { definePageMeta, useQuery2 } from '#imports'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 
 definePageMeta({
@@ -67,25 +67,23 @@ const loading = ref(false)
 
 const app = useNuxtApp()
 
-const { data } = await useQuery({
+const { data } = await useQuery2({
   query: `
-    query(${isEdit ? '$id: Int!, ' : ''}$userId: ID) {
+    query(${isEdit ? '$id: ID!, ' : ''}$user_id: ID) {
       ${isEdit ? `note(id: $id) { ${NOTE_FORM} }` : ''}
-      travels(userId: $userId) {
+      travels(user_id: $user_id) {
         id
         title(words: 10)
-        cover(sizes: "default@resize:fill:240:160") {
+        cover {
           id
-          model_id
-          url
-          sizes
+          url(presets: "default@resize:fill:240:160")
         }
       }
     }
   `,
   variables: {
     id: noteId,
-    userId: app.$auth.user.id
+    user_id: app.$auth.user.id
   }
 })
 

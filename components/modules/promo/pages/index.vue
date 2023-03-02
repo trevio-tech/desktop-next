@@ -16,8 +16,8 @@ definePageMeta({
 const items = ref([])
 
 try {
-  const { data } = await useQuery({
-    query: `
+  const { data } = await useQuery2({
+    query: /* GraphQL */ `
       query {
         promo {
           id

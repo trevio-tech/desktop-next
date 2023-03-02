@@ -39,25 +39,23 @@
 import ContentCardSlider from '~/components/ContentCardSlider.vue'
 import ContentPage from '~/components/ContentPage.vue'
 import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
-
 import { NOTE } from '../graphql'
 import { Pencil, Trash } from 'lucide-vue-next'
 import { ref } from 'vue'
-import { useAsyncQuery } from '~/uses'
 import { useHead, useRoute } from '#imports'
 
 const route = useRoute()
 const note = ref()
 
 try {
-  const { data } = await useAsyncQuery({
+  const { data } = await useQuery2({
     query: `
-      query($id: Int!) {
+      query($id: ID!) {
         ${NOTE}
       }
     `,
     variables: {
-      id: parseInt(route.params.noteId)
+      id: route.params.noteId
     }
   })
 

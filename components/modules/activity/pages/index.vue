@@ -47,10 +47,10 @@ const moreIsEmpty = ref(false)
 const shotsStore = useShotsStore()
 
 const fetchFeed = async () => {
-  const { data: { feed } } = await useQuery({
+  const { data: { activity } } = await useQuery2({
     query: `
-      query ($page: Int, $is_timeline: Boolean) {
-        feed (page: $page, is_timeline: $is_timeline) {
+      query getActivity($page: Int, $is_timeline: Boolean) {
+        activity (page: $page, is_timeline: $is_timeline) {
           ${FEED}
         }
       }
@@ -61,7 +61,7 @@ const fetchFeed = async () => {
     }
   })
 
-  return feed
+  return activity
 }
 
 // При переключение между главной и new, нужно сбросить записи.

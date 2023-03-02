@@ -11,7 +11,7 @@
 
     <h2 class="text-2xl font-medium mt-6" id="answers">Ответы на вопрос</h2>
 
-    <AnswerForm :question-id="question.id" class="mt-2" @created="answers.data.unshift($event)" />
+    <AnswerForm :question-id="question.id" class="mt-2" @created="answers.unshift($event)" />
 
     <ul class="flex items-center space-x-2 mt-6">
       <li @click="onFetch('new', true)"
@@ -28,9 +28,9 @@
           class="py-2 px-3 cursor-pointer rounded-lg text-sm font-medium ring-1">Лучшие ответы</li>
     </ul>
 
-    <div v-if="answers.data.length" class="space-y-4 mt-6">
+    <div v-if="answers.length" class="space-y-4 mt-6">
       <AnswerCard
-          v-for="answer in answers.data"
+          v-for="answer in answers"
           :key="answer.id"
           :entry="answer"
           @unpinned="onUnpin(answer.id)" />
@@ -65,33 +65,27 @@ const onFetch = async (tab = 'new', skipQuestion = false) => {
 
   if (tab === 'new') {
     query.push(`
-      questionAnswers(questionId: $id) {
-        data {
-          ${ANSWER_CARD}
-        }
+      answers(question_id: $id) {
+        ${ANSWER_CARD}
       }
     `)
   } else if (tab === 'resolve') {
     query.push(`
-      questionAnswers(questionId: $id, only_pinned: true) {
-        data {
-          ${ANSWER_CARD}
-        }
+      answers(question_id: $id, only_pinned: true) {
+        ${ANSWER_CARD}
       }
     `)
   } else if (tab === 'likes') {
     query.push(`
-      questionAnswers(questionId: $id, order_by: "likes") {
-        data {
-          ${ANSWER_CARD}
-        }
+      answers(question_id: $id, order_by: "likes") {
+        ${ANSWER_CARD}
       }
     `)
   }
 
-  const { data } = await useQuery({
+  const { data } = await useQuery2({
     query: `
-      query($id: Int!) {
+      query($id: ID!) {
         ${query.join('\n')}
       }
   `,
@@ -106,7 +100,7 @@ const onFetch = async (tab = 'new', skipQuestion = false) => {
     question.value = data.question
   }
 
-  answers.value = data.questionAnswers
+  answers.value = data.answers
 }
 
 try {

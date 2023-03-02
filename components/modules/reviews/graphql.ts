@@ -26,6 +26,9 @@ export const REVIEW_CARD = `
     name
     avatar
   }
+  bookmarks {
+    category_id
+  }
 `
 
 export const REVIEW_FORM = `

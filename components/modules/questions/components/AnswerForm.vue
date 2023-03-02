@@ -8,7 +8,10 @@
 
     <div class="flex items-center mt-4 space-x-2">
       <Button :loading="loading" type="submit">Отправить</Button>
-      <Upload v-model="form.images" model-type="answers" :fields="['id', 'url']" :presets="['default@width:640,height:480']">
+      <Upload
+          v-model="form.images"
+          :fields="uploadFields"
+          :input="{model_type: 'answers'}">
         <Button :loading="loading" variant="secondary">
           <Image />
         </Button>
@@ -35,6 +38,11 @@ const props = defineProps({
     type: Object,
   }
 })
+
+const uploadFields = [
+    'id',
+    'url(presets: "default@width:120,height:120")'
+]
 
 const { setErrors, handleSubmit } = useForm()
 
@@ -66,7 +74,7 @@ const onSubmit = handleSubmit(async () => {
   variables.input.images = form.value.images.map(image => image.id)
 
   if (isEdit) {
-    variables.answerId = props.answer.id
+    variables.id = props.answer.id
   }
 
   try {

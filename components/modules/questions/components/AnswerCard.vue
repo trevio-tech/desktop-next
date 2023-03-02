@@ -1,5 +1,5 @@
 <template>
-  <article class="bg-white rounded-lg">
+  <article class="rounded-lg" :class="[entry.is_pinned ? 'bg-green-50' : 'bg-white']">
     <div class="flex p-4">
       <NuxtLink :to="{name: 'users.show', params: {userId: entry.user_id}}" class="w-10 h-10 flex-shrink-0 mr-4">
         <img :src="entry.user.avatar" :alt="entry.user.name" class="block rounded-full">
@@ -85,9 +85,9 @@ const onEdit = () => {
 
 const onPin = async () => {
   try {
-    const { data: { pinUnpinAnswer }} = await useQuery({
+    const { data: { pinUnpinAnswer }} = await useQuery2({
       query: `
-        mutation ($id: Int!) {
+        mutation ($id: ID!) {
           pinUnpinAnswer(id: $id)
         }
       `,
@@ -98,7 +98,7 @@ const onPin = async () => {
 
     props.entry.is_pinned = pinUnpinAnswer === 'pinned'
 
-    if (!props.entry.is_pinned) {
+    if (! props.entry.is_pinned) {
       emit('unpinned')
     }
   } catch (error) {}
@@ -106,7 +106,7 @@ const onPin = async () => {
 
 const onDelete = async () => {
   try {
-    const { data } = await useQuery({
+    const { data } = await useQuery2({
       query: DELETE_ANSWER,
       variables: {
         id: props.entry.id

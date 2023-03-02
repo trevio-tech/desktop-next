@@ -14,7 +14,6 @@
 </template>
 
 <script setup>
-import { useAsyncQuery } from '~/uses'
 import { ref, onMounted } from 'vue'
 import Dialog from '~/components/base/Dialog'
 
@@ -29,20 +28,20 @@ const props = defineProps({
 
 onMounted(async () => {
   try {
-    const { data } = await useAsyncQuery({
-      query: `
-      query ($id: Int!) {
-        travel(id: $id) {
-          id
-          place_id
-          title
-          text
-          country {
+    const { data } = await useQuery2({
+      query: /* GraphQL */`
+        query ($id: ID!) {
+          travel(id: $id) {
             id
-            name
+            place_id
+            title
+            text
+            country {
+              id
+              name
+            }
           }
         }
-      }
     `,
       variables: {
         id: props.id

@@ -12,8 +12,8 @@
     </template>
     <article>
       <ImageViewer>
-        <img v-if="travel.preview.length" loading="lazy" :src="travel.preview[0].sizes.default"
-             :data-src="travel.preview[0].url" class="rounded-lg mb-4 w-full" :alt="travel.title">
+        <img v-if="travel.cover" loading="lazy" :src="travel.cover.url.default"
+             :data-src="travel.cover.url.original" class="rounded-lg mb-4 w-full" :alt="travel.title">
       </ImageViewer>
       <p>{{ travel.text }}</p>
       <div v-if="travel.tags.length" class="space-x-2 mt-4 text-slate-400 text-sm truncate">
@@ -47,9 +47,9 @@ import { ref } from 'vue'
 const route = useRoute()
 const otherTravels = ref([])
 
-const { data: { travel } } = await useQuery({
-  query: `
-    query($id: Int!) {
+const { data: { travel } } = await useQuery2({
+  query: /* GraphQL */`
+    query($id: ID!) {
       travel(id: $id) {
         ${TRAVEL}
       }
