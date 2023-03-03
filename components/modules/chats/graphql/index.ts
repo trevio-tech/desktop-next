@@ -21,14 +21,6 @@ export const CHAT_MESSAGE = `
   }
 `
 
-export const CREATE_CHAT_MESSAGE = `
-  mutation ($chatId: ID!, $input: ChatMessageInput!) {
-    messageId: createChatMessage(chatId: $chatId, input: $input) {
-      ${CHAT_MESSAGE}
-    }
-  }
-`
-
 export const MY_CHATS = `
   myChats {
     id
