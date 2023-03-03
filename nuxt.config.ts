@@ -1,3 +1,7 @@
+import { createResolver } from '@nuxt/kit'
+
+const { resolve } = createResolver(import.meta.url)
+
 export default defineNuxtConfig({
   extends: [
     // 'github:trevio-tech/nuxt-base-layer#master',
@@ -21,6 +25,9 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '~/modules/routes',
   ],
+  alias: {
+    '@trevio/core': resolve('../core')
+  },
   runtimeConfig: {
     public: {
       GRAPHQL_URL: process.env.GRAPHQL_URL,

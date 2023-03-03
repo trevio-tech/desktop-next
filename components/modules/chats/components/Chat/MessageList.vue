@@ -12,22 +12,18 @@
 <script setup>
 import { watch, nextTick } from 'vue'
 import { ChatMessage } from './'
+import { useChat } from '@trevio/core'
 
-const props = defineProps({
-  stacks: {
-    type:     Object,
-    required: true
-  }
-})
+const { stacks } = useChat()
 
 const scrollBottom = () => {
-  const stacks = document
+  const stacks1 = document
       .getElementById('stacks')
 
-  stacks.scrollTop = stacks.scrollHeight
+  stacks1.scrollTop = stacks1.scrollHeight
 }
 
-const last = props.stacks[Object.keys(props.stacks).at(-1)]
+const last = stacks.value[Object.keys(stacks.value).at(-1)]
 
 watch(() => last.length, async () => {
   await nextTick()

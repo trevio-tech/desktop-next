@@ -1,9 +1,5 @@
 <template>
-  <Chat
-    v-slot="{ getMessages, stacks }"
-    :chatMessageFields="CHAT_MESSAGE"
-    :chatId="chatId"
-    class="w-full overflow-hidden border border-slate-200 rounded-lg h-full relative flex-auto flex bg-white">
+  <div class="w-full overflow-hidden border border-slate-200 rounded-lg h-full relative flex-auto flex bg-white">
 
     <ChatList class="flex-shrink-0 flex-auto w-full max-w-[260px] border-r border-r-slate-200" @select="getMessages" />
 
@@ -37,13 +33,13 @@
         </div>
       </header>
 
-      <MessageList class="flex-auto overflow-y-auto h-full" v-if="Object.keys(stacks).length" :stacks="stacks" />
+      <MessageList class="flex-auto overflow-y-auto h-full" v-if="Object.keys(stacks).length" />
       <div v-else class="flex justify-center items-center h-full">
         Нет сообщений
       </div>
 
       <!-- CHAT FORM -->
-      <ChatForm v-slot="{ form, reply, loading }" class="flex-auto flex-shrink-0 p-4 bg-white border-t border-gray-200" :chat-id="chatId">
+      <ChatForm v-slot="{ form, reply, loading }" :chat-message-fields="CHAT_MESSAGE" class="flex-auto flex-shrink-0 p-4 bg-white border-t border-gray-200" :chat-id="activeChatId">
         <div v-if="store.mode === 'reply'">
           {{ reply.text }}
         </div>
@@ -62,15 +58,19 @@
       </ChatForm>
       <!-- / CHAT FORM -->
     </div>
-  </Chat>
+  </div>
 </template>
 
 <script setup>
+import { useChat } from '@trevio/core'
 import { ChatList, MessageList } from './'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 import { X, MoreHorizontal } from 'lucide-vue-next'
 import { CHAT_MESSAGE } from '~/components/modules/chats/graphql'
 import { ImagePlus } from 'lucide-vue-next'
+import { useNuxtApp } from 'nuxt/app'
+import { gql } from 'graphql-tag'
+import { onBeforeUnmount } from 'vue'
 
 const props = defineProps({
   chatId: {
@@ -78,7 +78,29 @@ const props = defineProps({
   }
 })
 
+const { $echo } = useNuxtApp()
+
+const { stacks, getMessages, addMessage, activeChatId, setMessageFields } = useChat()
+
 const uploadFields = ['id', 'url(presets: "default@width:120,height:120")']
 
 const store = useChatStore()
+
+setMessageFields(CHAT_MESSAGE)
+
+const subscriber = $echo
+  .subscribe({
+    query: gql`
+      subscription {
+        chatMessageCreated {
+          ${CHAT_MESSAGE}
+        }
+      }
+    `,
+  })
+  .subscribe(({ data }) => addMessage(data.chatMessageCreated))
+
+await getMessages(props.chatId)
+
+onBeforeUnmount(() => subscriber.unsubscribe())
 </script>
