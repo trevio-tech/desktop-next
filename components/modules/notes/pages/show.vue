@@ -31,6 +31,13 @@
 
     <ContentPage :entry="note" />
 
+    <ChatButton
+        @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
+        props: {
+          chatId: `${note.system_name}-${note.id}`,
+          title: note.title
+        }
+      })" :messages-count="note.messages_count" />
     <ContentCardSlider v-if="note?.tags.length > 0" :notIn="[note.id]" :tags="note?.tags.map((tag) => tag.id)" />
   </NuxtLayout>
 </template>

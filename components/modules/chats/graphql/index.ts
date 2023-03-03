@@ -15,11 +15,9 @@ export const CHAT_MESSAGE = `
     name
     avatar
   }
-  images(presets: "default@resize:fill:80:80") {
+  images {
     id
-    model_id
-    url
-    presets
+    url(presets: "default@resize:fill:80:80")
   }
 `
 

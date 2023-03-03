@@ -1,6 +1,11 @@
 <template>
-  <div class="w-full overflow-hidden border border-slate-200 rounded-lg h-full relative flex-auto flex bg-white">
-    <ChatList class="flex-shrink-0 flex-auto w-full max-w-[260px] border-r border-r-slate-200" @select="onLoad($event)"/>
+  <Chat
+    v-slot="{ getMessages, stacks }"
+    :chatMessageFields="CHAT_MESSAGE"
+    :chatId="chatId"
+    class="w-full overflow-hidden border border-slate-200 rounded-lg h-full relative flex-auto flex bg-white">
+
+    <ChatList class="flex-shrink-0 flex-auto w-full max-w-[260px] border-r border-r-slate-200" @select="getMessages" />
 
     <div class="flex flex-col flex-auto overflow-hidden">
       <header class="border-b border-gray-200 rounded-t">
@@ -39,15 +44,13 @@
 
       <ChatForm class="flex-auto flex-shrink-0 p-4 bg-white border-t border-gray-200" :chat-id="chatId"/>
     </div>
-  </div>
+  </Chat>
 </template>
 
 <script setup>
 import { ChatForm, ChatList, MessageList } from './'
-import { groupBy } from 'lodash'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 import { X, MoreHorizontal } from 'lucide-vue-next'
-import { useNuxtApp } from '#imports'
 import { CHAT_MESSAGE } from '~/components/modules/chats/graphql'
 
 const props = defineProps({
@@ -56,39 +59,5 @@ const props = defineProps({
   }
 })
 
-const stacks = ref([])
-
 const store = useChatStore()
-
-const { $echo } = useNuxtApp()
-
-const onLoad = async (chatId = null) => {
-  if (! chatId) {
-    chatId = props.chatId
-  }
-
-  const [modelType, modelId] = chatId.split('-')
-
-  const { data: { chatMessages }} = await useQuery({
-    query: `
-      query($modelType: String, $modelId: Int) {
-        chatMessages(modelType: $modelType, modelId: $modelId) {
-          ${CHAT_MESSAGE}
-        }
-      }
-    `, variables: {
-      modelType,
-      modelId: parseInt(modelId)
-    }
-  })
-
-  if (chatMessages.length) {
-    stacks.value = groupBy(chatMessages, 'stack')
-    store.$patch({
-      activeChat: chatMessages[0].chat
-    })
-  }
-}
-
-await onLoad()
 </script>

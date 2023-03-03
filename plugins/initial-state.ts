@@ -3,17 +3,16 @@ import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { watch } from 'vue'
+import { MY_CHATS } from '~/components/modules/chats/graphql';
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   const initialState = async (loggedIn) => {
     try {
-      let variablesString = []
-      const variables = {}
       const queries = [`
-        stories2 {
+        stories {
           id
           user_id
-          image(sizes: "resize:fit:80:160")
+          image
           user {
             id
             name
@@ -23,42 +22,38 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       `]
 
       if (loggedIn) {
-        variablesString.push('$userId: Int!')
-        variables.userId = parseInt(nuxtApp.$auth.user.id)
         queries.push(`
-          bookmarksCategories(userId: $userId)  {
+          bookmarkCategories(user_id: ${nuxtApp.$auth.user.id})  {
             id
             name
             content_count
           }
         `)
-      }
-
-      let queryPayload = ''
-      if (variablesString.length) {
-        queryPayload = `(${variablesString.join(', ')})`
+        queries.push(MY_CHATS)
       }
 
       const query = /* GraphQL */`
-        query initialState${queryPayload} {
+        query initialState {
           ${queries.join(',')}
         }
       `
 
-      const { data } = await useQuery({
+      const { data } = await useQuery2({
         query,
-        variables,
       }, {
         key: 'initial-state'
       })
 
       await useShotsStore().$patch({
-        stories: data.stories2
+        stories: data.stories
       })
 
       if (loggedIn) {
         await useBookmarksStore().$patch({
-          categories: data.bookmarksCategories
+          categories: data.bookmarkCategories
+        })
+        await useChatsStore().$patch({
+          chats: data.myChats
         })
       }
 
