@@ -31,6 +31,7 @@
 
 <script setup>
 import Card from '~/components/Card'
+import { useQuery } from '@trevio/ui'
 
 import { UPDATE_USER_PASSWORD } from '../graphql'
 import { ref } from 'vue'

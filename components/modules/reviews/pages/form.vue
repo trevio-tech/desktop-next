@@ -42,6 +42,7 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter, useNuxtApp } from '#imports'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
+import { useQuery } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'
@@ -74,7 +75,7 @@ const travels = ref([])
 const app = useNuxtApp()
 
 try {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query(${isEdit ? '$id: ID!, ' : ''}$user_id: ID) {
         ${isEdit ? `review(id: $id) { ${REVIEW_FORM} }` : ''}
@@ -124,7 +125,7 @@ const onSubmit = handleSubmit(async () => {
   input.tags = input.tags.map(tag => parseInt(tag.id))
 
   try {
-    const { data: { reviewForm }} = await useQuery2({
+    const { data: { reviewForm }} = await useQuery({
       query: isEdit ? UPDATE_REVIEW : CREATE_REVIEW,
       variables: {
         input,

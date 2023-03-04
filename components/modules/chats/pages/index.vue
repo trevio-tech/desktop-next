@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-
+import { useQuery } from '@trevio/ui'
 import { ref } from 'vue'
 
 const chats = ref([])

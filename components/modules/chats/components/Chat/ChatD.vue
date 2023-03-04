@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { useChat } from '@trevio/core'
+import { useChat } from '@trevio/ui'
 import { ChatList, MessageList } from './'
 import { useChatStore } from '~/components/modules/chats/stores/chat'
 import { X, MoreHorizontal } from 'lucide-vue-next'

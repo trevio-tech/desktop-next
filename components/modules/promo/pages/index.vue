@@ -8,6 +8,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useQuery } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'
@@ -16,7 +17,7 @@ definePageMeta({
 const items = ref([])
 
 try {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: /* GraphQL */ `
       query {
         promo {

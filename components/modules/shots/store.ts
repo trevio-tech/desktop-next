@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useAuth } from '#auth/runtime/composables';
+import { useNuxtApp } from '#app'
 
 export const useShotsStore = defineStore('shots', {
   state: () => {
@@ -12,8 +12,10 @@ export const useShotsStore = defineStore('shots', {
       this.stories = stories
     },
     updateStory(shot) {
+      const { $auth } = useNuxtApp()
+
       this.stories.forEach((story, index) => {
-        if (parseInt(story.user_id) === parseInt(useAuth().user.id)) {
+        if (parseInt(story.user_id) === parseInt($auth.user.id)) {
           this.stories[index] = shot
         }
       })

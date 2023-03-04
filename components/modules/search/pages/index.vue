@@ -37,8 +37,8 @@
 import SearchCard from '~/components/modules/search/components/SearchCard.vue'
 import UserSearchCard from '~/components/modules/users/components/UserSearchCard.vue'
 import { groupBy } from 'lodash'
-import { useQuery, useSearchHead } from '#imports'
-
+import { useSearchHead } from '#imports'
+import { useQuery } from '@trevio/ui'
 import { watch, shallowRef, computed } from 'vue'
 
 const route = useRoute()
@@ -58,7 +58,7 @@ const groupNames = {
 }
 
 const onFetch = async (searchBy = undefined) => {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query ($query: String!, $searchBy: String) {
         search(query: $query, searchBy: $searchBy) {

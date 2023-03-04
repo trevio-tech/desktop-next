@@ -46,6 +46,7 @@ import { Check } from 'lucide-vue-next'
 import { QUESTION_FIELDS, ANSWER_CARD } from '../graphql';
 import { useRoute, useHead } from '#imports'
 import { shallowRef } from 'vue'
+import { useQuery } from '@trevio/ui'
 
 const route = useRoute()
 const question = shallowRef({})
@@ -83,7 +84,7 @@ const onFetch = async (tab = 'new', skipQuestion = false) => {
     `)
   }
 
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query($id: ID!) {
         ${query.join('\n')}

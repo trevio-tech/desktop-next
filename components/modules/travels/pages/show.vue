@@ -42,12 +42,12 @@ import TravelContentList from '../components/TravelContentList'
 import TravelSiblings from '../components/TravelSiblings.vue'
 import { TRAVEL, TRAVEL_CARD_SQUARE } from '../graphql'
 import { ref } from 'vue'
-
+import { useQuery } from '@trevio/ui'
 
 const route = useRoute()
 const otherTravels = ref([])
 
-const { data: { travel } } = await useQuery2({
+const { data: { travel } } = await useQuery({
   query: /* GraphQL */`
     query($id: ID!) {
       travel(id: $id) {

@@ -14,6 +14,7 @@
 </template>
 
 <script setup>
+import { useQuery } from '@trevio/ui'
 let alphabet = {}
 let memory = null
 

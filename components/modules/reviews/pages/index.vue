@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 import { REVIEW_CARD } from '../graphql';
 import ContentCard from '~/components/ContentCard'
 
@@ -17,7 +17,7 @@ import { shallowRef } from 'vue'
 const reviews = shallowRef([])
 
 try {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query {
         reviews {

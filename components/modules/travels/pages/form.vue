@@ -80,7 +80,7 @@ import { useRoute, useRouter } from '#imports'
 import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
 import { definePageMeta } from '#imports'
 import { format, parseISO } from 'date-fns'
-
+import { useQuery } from '@trevio/ui'
 definePageMeta({
   middleware: 'auth'
 })
@@ -111,7 +111,7 @@ const loading = ref(false)
 const currencies = ref([])
 
 if (isEdit) {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query($travel_id: ID!) {
         travel(id: $travel_id) {
@@ -135,7 +135,7 @@ if (isEdit) {
   form.value.date_start = parseISO(form.value.date_start)
   form.value.date_end = parseISO(form.value.date_end)
 } else {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query {
         currencies {
@@ -175,7 +175,7 @@ const onSubmit = handleSubmit(async (values, actions) => {
   input.images = [form.value.cover.id]
 
   try {
-    const {data: { travelForm }} = await useQuery2({
+    const {data: { travelForm }} = await useQuery({
       query: isEdit ? UPDATE_TRAVEL : CREATE_TRAVEL,
       variables: {
         input,

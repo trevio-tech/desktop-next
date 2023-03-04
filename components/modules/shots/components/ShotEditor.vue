@@ -55,7 +55,8 @@ import ShotEditorTextPanel from '~/components/modules/shots/components/ShotEdito
 import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEditorTrashButton.vue'
 import ShotEditorPanelBrushes from '~/components/modules/shots/components/ShotEditorPanelBrushes.vue'
 import { ref } from 'vue'
-import { useShotEditor } from '#imports'
+import { useShotEditor } from '@trevio/ui'
+import { useQuery } from '@trevio/ui'
 
 const {
   createShotEditor,

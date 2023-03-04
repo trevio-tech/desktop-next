@@ -46,7 +46,7 @@ import { defineAsyncComponent } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useNuxtApp } from '#imports'
-
+import { useQuery } from '@trevio/ui'
 const emit = defineEmits(['login'])
 const { $auth } = useNuxtApp()
 const { handleSubmit, setErrors } = useForm()
@@ -66,7 +66,7 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   try {
-    const { data } = await useQuery2({
+    const { data } = await useQuery({
       query: `
         mutation ($input: RegisterUserInput!) {
           registerUser(input: $input) {

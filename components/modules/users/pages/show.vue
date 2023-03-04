@@ -75,7 +75,7 @@
 
 <script setup>
 
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 import { USER } from '../graphql'
 import { useRoute, useNuxtApp } from '#imports'
 import { Cog } from 'lucide-vue-next'

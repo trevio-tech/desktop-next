@@ -36,8 +36,9 @@ import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { useRoute, useRouter, useNuxtApp } from '#imports'
-import { definePageMeta, useQuery2 } from '#imports'
+import { definePageMeta } from '#imports'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
+import { useQuery } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'
@@ -67,7 +68,7 @@ const loading = ref(false)
 
 const app = useNuxtApp()
 
-const { data } = await useQuery2({
+const { data } = await useQuery({
   query: `
     query(${isEdit ? '$id: ID!, ' : ''}$user_id: ID) {
       ${isEdit ? `note(id: $id) { ${NOTE_FORM} }` : ''}
@@ -113,7 +114,7 @@ const onSubmit = handleSubmit(async () => {
   input.tags = input.tags.map(tag => parseInt(tag.id))
 
   try {
-    const { data } = await useQuery2({
+    const { data } = await useQuery({
       query: isEdit ? UPDATE_NOTE : CREATE_NOTE,
       variables: {
         input,

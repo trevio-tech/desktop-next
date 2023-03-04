@@ -16,7 +16,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Dialog from '~/components/base/Dialog'
-
+import { useQuery } from '@trevio/ui'
 const travel = ref(null)
 
 const props = defineProps({
@@ -28,7 +28,7 @@ const props = defineProps({
 
 onMounted(async () => {
   try {
-    const { data } = await useQuery2({
+    const { data } = await useQuery({
       query: /* GraphQL */`
         query ($id: ID!) {
           travel(id: $id) {

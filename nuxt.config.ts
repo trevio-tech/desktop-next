@@ -19,14 +19,14 @@ export default defineNuxtConfig({
     '@/assets/scss/main.scss'
   ],
   modules: [
+    '@nuxt-alt/auth',
+    '@nuxt-alt/http',
     '@pinia/nuxt',
-    '@nuxtjs-alt/auth',
-    '@nuxtjs-alt/http',
     '@nuxtjs/tailwindcss',
     '~/modules/routes',
   ],
   alias: {
-    '@trevio/core': resolve('../core')
+    '@trevio/ui': resolve('../ui')
   },
   runtimeConfig: {
     public: {

@@ -1,5 +1,5 @@
 import { LocalScheme } from '#auth/runtime'
-import { useQuery2 } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 export default class GraphQLScheme extends LocalScheme {
   /**
@@ -13,7 +13,7 @@ export default class GraphQLScheme extends LocalScheme {
     }
 
     try {
-      const { data: { token } } = await useQuery2({
+      const { data: { token } } = await useQuery({
         query: `
           query getJwtToken($email: String!, $password: String!) {
             token: login(email: $email, password: $password)
@@ -39,7 +39,7 @@ export default class GraphQLScheme extends LocalScheme {
     }
 
     try {
-      const { data } = await useQuery2({
+      const { data } = await useQuery({
         query: `
           query getMe {
             me {
@@ -64,7 +64,7 @@ export default class GraphQLScheme extends LocalScheme {
   }
 
   async logout(): Promise<void> {
-    await useQuery2({
+    await useQuery({
       query: `
         query logout {
           logout

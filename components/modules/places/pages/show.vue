@@ -15,6 +15,7 @@ import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBa
 import { PLACE } from '~/components/modules/places/graphql'
 import { REVIEW_CARD } from '~/components/modules/reviews/graphql'
 import { useRoute, usePlaceSeo } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 const route = useRoute()
 

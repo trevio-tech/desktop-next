@@ -21,12 +21,12 @@
 </template>
 
 <script setup>
-import { useQuery2 } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 let tariffs = []
 
 try {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query premiumTariffs {
         premiumTariffs {

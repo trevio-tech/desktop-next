@@ -23,12 +23,12 @@
 import { ALBUM } from '~/components/modules/albums/graphql'
 import { ref } from 'vue'
 
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 const album = ref()
 
 try {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query getAlbum($id: ID!) {
         album(id: $id) {

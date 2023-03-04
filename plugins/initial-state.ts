@@ -4,6 +4,7 @@ import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { watch } from 'vue'
 import { MY_CHATS } from '~/components/modules/chats/graphql';
+import { useQuery } from '@trevio/ui'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   const initialState = async (loggedIn) => {
@@ -38,7 +39,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         }
       `
 
-      const { data } = await useQuery2({
+      const { data } = await useQuery({
         query,
       }, {
         key: 'initial-state'

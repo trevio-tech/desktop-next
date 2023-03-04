@@ -9,9 +9,9 @@
 
 <script setup>
 import ContentCard from '~/components/ContentCard'
-
+import { useQuery } from '@trevio/ui'
 import { NOTE_CARD } from '../graphql'
-import { useRoute, useHead, useQuery2 } from '#imports'
+import { useRoute, useHead } from '#imports'
 import { ref, watch, computed } from 'vue'
 
 const route = useRoute()
@@ -40,7 +40,7 @@ const getNotes = async (tagId) => {
       name
     }` : ''
 
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query getNotes {
         notes {

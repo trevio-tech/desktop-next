@@ -31,6 +31,7 @@ import { Autoplay, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css/scrollbar'
 import 'swiper/css'
+import { useQuery } from '@trevio/ui'
 
 const router = useRouter()
 const hash = router.currentRoute.value.hash

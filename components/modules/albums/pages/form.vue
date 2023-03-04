@@ -49,6 +49,7 @@ import { pick } from 'lodash'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useRoute, useRouter, useNuxtApp, definePageMeta } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'
@@ -81,7 +82,7 @@ let travels = []
 const app = useNuxtApp()
 
 try {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query(${isEdit ? '$id: ID!, ' : ''}$user_id: ID) {
         ${isEdit ? `album(id: $id) { ${ALBUM_FORM} }` : ''}
@@ -129,7 +130,7 @@ const onSubmit = handleSubmit(async () => {
   input.images = input.images.map(image => image.id)
 
   try {
-    const { data: { albumForm }} = await useQuery2({
+    const { data: { albumForm }} = await useQuery({
       query: isEdit ? UPDATE_ALBUM : CREATE_ALBUM,
       variables: {
         id: albumId,

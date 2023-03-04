@@ -55,6 +55,7 @@
 import { MoreHorizontal, Check, Pencil, Trash } from 'lucide-vue-next'
 import { useNuxtApp } from '#imports'
 import { DELETE_ANSWER } from '~/components/modules/questions/graphql'
+import { useQuery } from '@trevio/ui'
 
 const emit = defineEmits(['unpinned'])
 
@@ -85,7 +86,7 @@ const onEdit = () => {
 
 const onPin = async () => {
   try {
-    const { data: { pinUnpinAnswer }} = await useQuery2({
+    const { data: { pinUnpinAnswer }} = await useQuery({
       query: `
         mutation ($id: ID!) {
           pinUnpinAnswer(id: $id)
@@ -106,7 +107,7 @@ const onPin = async () => {
 
 const onDelete = async () => {
   try {
-    const { data } = await useQuery2({
+    const { data } = await useQuery({
       query: DELETE_ANSWER,
       variables: {
         id: props.entry.id

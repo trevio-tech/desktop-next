@@ -38,7 +38,7 @@ import { ref } from 'vue'
 import { useActivityStore } from '~/components/modules/activity/store'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { useIntersectionObserver } from '@vueuse/core'
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 const store = useActivityStore()
 const route = useRoute()
@@ -47,7 +47,7 @@ const moreIsEmpty = ref(false)
 const shotsStore = useShotsStore()
 
 const fetchFeed = async () => {
-  const { data: { activity } } = await useQuery2({
+  const { data: { activity } } = await useQuery({
     query: `
       query getActivity($page: Int, $is_timeline: Boolean) {
         activity (page: $page, is_timeline: $is_timeline) {

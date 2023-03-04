@@ -9,7 +9,7 @@
 
 <script setup>
 import { QUESTION_CARD } from '../graphql';
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import { useHead } from '#imports'
 
@@ -20,7 +20,7 @@ useHead({
 let questions = []
 
 try {
-  const { data } = await useQuery2({
+  const { data } = await useQuery({
     query: `
       query {
         questions {

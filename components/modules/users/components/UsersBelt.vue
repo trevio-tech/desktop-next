@@ -17,7 +17,7 @@ import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 const emit = defineEmits(['loaded'])
 const props = defineProps({
