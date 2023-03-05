@@ -37,12 +37,11 @@ import TheForm from '~/components/TheForm'
 import pick from 'lodash.pick'
 import { CREATE_REVIEW, UPDATE_REVIEW, REVIEW_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'
-import { definePageMeta } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { useRoute, useRouter, useNuxtApp } from '#imports'
+import { definePageMeta, useRoute, useRouter, useNuxtApp } from '#imports'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
-import { useQuery } from '@trevio/ui'
+import { useQuery, TipTap } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'

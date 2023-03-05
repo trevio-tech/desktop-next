@@ -36,9 +36,8 @@ import { CREATE_QUESTION, UPDATE_QUESTION, QUESTION_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { useRoute, useRouter, useNuxtApp } from '#imports'
-import { definePageMeta } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { definePageMeta, useRoute, useRouter, useNuxtApp } from '#imports'
+import { useQuery, TipTap } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'

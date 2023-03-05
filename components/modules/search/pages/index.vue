@@ -37,8 +37,7 @@
 import SearchCard from '~/components/modules/search/components/SearchCard.vue'
 import UserSearchCard from '~/components/modules/users/components/UserSearchCard.vue'
 import { groupBy } from 'lodash'
-import { useSearchHead } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { useQuery, useSearchHead } from '@trevio/ui'
 import { watch, shallowRef, computed } from 'vue'
 
 const route = useRoute()

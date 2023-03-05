@@ -9,7 +9,6 @@ export default {
 </script>
 
 <script setup>
-import Chat from '../components/Chat/Chat'
 import { useChatStore } from '../stores/chat'
 import { useHead } from '#imports'
 import { definePageMeta } from '#imports'

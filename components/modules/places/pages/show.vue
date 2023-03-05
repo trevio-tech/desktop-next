@@ -14,8 +14,8 @@ import ContentCard from '~/components/ContentCard.vue'
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
 import { PLACE } from '~/components/modules/places/graphql'
 import { REVIEW_CARD } from '~/components/modules/reviews/graphql'
-import { useRoute, usePlaceSeo } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { useRoute } from '#imports'
+import { useQuery, usePlaceSeo } from '@trevio/ui'
 
 const route = useRoute()
 
