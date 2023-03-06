@@ -1,3 +1,4 @@
+import { defineNuxtPlugin } from '#imports'
 import { echo } from '@trevio/ui'
 
 export default defineNuxtPlugin(async (nuxtApp) => {

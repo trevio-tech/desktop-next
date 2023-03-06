@@ -9,7 +9,6 @@
   "devDependencies": {
     "@nuxt/kit": "^3.2.0",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/fabric": "^4.5.15",
     "sass": "^1.58.0"
   },
   "dependencies": {
@@ -28,7 +27,8 @@
     "pinia": "^2.0.30",
     "swiper": "^8.4.7",
     "vee-validate": "^4.7.4",
-    "vuedraggable": "^4.1.0"
+    "vuedraggable": "^4.1.0",
+    "@trevio/ui": "https://github.com/trevio-tech/nuxt3-ui.git"
   },
   "peerDependencies": {}
 }
