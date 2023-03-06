@@ -11,7 +11,7 @@
 <script setup>
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
 import { PLACE } from '~/components/modules/places/graphql'
-import { useQuery } from '@trevio/ui'
+
 
 const route = useRoute()
 

@@ -36,7 +36,6 @@
 <script setup>
 import { Clock2, Users, Flame } from 'lucide-vue-next'
 import TheContentCreationDialog from './TheContentCreationDialog'
-import { IsLoggedIn } from '@trevio/ui'
 
 const items = [
   { name: 'Путешествия', href: '/travels' },

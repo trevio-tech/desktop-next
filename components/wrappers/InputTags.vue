@@ -5,7 +5,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useQuery } from '@trevio/ui'
+
 
 const emit = defineEmits(['update:modelValue'])
 

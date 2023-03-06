@@ -23,7 +23,6 @@
 <script setup>
 import { useNuxtApp } from '#imports'
 const { $auth, $overlay } = useNuxtApp()
-import { useQuery, usePopup } from '@trevio/ui'
 window.setToken = async (token) => {
   await $auth.setUserToken(token)
   $overlay.hide()

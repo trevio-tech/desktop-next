@@ -27,7 +27,7 @@
 
 import { ref } from 'vue'
 import { NESTED_CONTENT_LIST } from '~/components/modules/travels/graphql'
-import { useQuery } from '@trevio/ui'
+
 
 const props = defineProps({
   nestedEntriesCount: {

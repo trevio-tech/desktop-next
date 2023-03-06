@@ -48,7 +48,6 @@
 <script setup>
 import { useNuxtApp } from '#app'
 import { ChevronDown } from 'lucide-vue-next'
-import { SearchBar } from '@trevio/ui'
 
 const { $overlay } = useNuxtApp()
 

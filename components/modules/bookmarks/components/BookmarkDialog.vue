@@ -21,7 +21,7 @@
 <script setup>
 import BookmarksCategoryForm from './BookmarkCategoryFormDialog'
 import { ref } from 'vue'
-import { useQuery } from '@trevio/ui'
+
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import Dialog from '~/components/base/Dialog.vue'
 const emit = defineEmits([

@@ -12,7 +12,6 @@
 <script setup>
 import { watch, nextTick } from 'vue'
 import { ChatMessage } from './'
-import { useChat } from '@trevio/ui'
 
 const { stacks } = useChat()
 

@@ -16,6 +16,7 @@
     "@nuxt-alt/http": "^1.6.1",
     "@nuxtjs/tailwindcss": "^6.3.1",
     "@pinia/nuxt": "^0.4.6",
+    "@trevio-tech/ui": "^0.0.1",
     "@vuepic/vue-datepicker": "^3.6.7",
     "@vueuse/core": "^9.12.0",
     "date-fns": "^2.29.3",
@@ -27,8 +28,7 @@
     "pinia": "^2.0.30",
     "swiper": "^8.4.7",
     "vee-validate": "^4.7.4",
-    "vuedraggable": "^4.1.0",
-    "@trevio/ui": "https://github.com/trevio-tech/nuxt3-ui.git"
+    "vuedraggable": "^4.1.0"
   },
   "peerDependencies": {}
 }

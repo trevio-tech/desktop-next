@@ -38,7 +38,7 @@ import { ref } from 'vue'
 import { useActivityStore } from '~/components/modules/activity/store'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { useIntersectionObserver } from '@vueuse/core'
-import { useQuery } from '@trevio/ui'
+
 
 const store = useActivityStore()
 const route = useRoute()

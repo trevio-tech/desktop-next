@@ -22,7 +22,7 @@ import ContentCard from '~/components/ContentCard'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import { useHead, useRoute } from '#imports'
 import { FEED } from '~/components/modules/activity/graphql'
-import { useQuery } from '@trevio/ui'
+
 
 const route = useRoute()
 let tags = []

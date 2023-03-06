@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { useShotEditor } from '@trevio/ui'
+
 
 const { setBrush, setBrushColor } = useShotEditor()
 

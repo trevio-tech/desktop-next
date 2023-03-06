@@ -9,7 +9,7 @@
 
 <script setup>
 import ContentCard from '~/components/ContentCard'
-import { useQuery } from '@trevio/ui'
+
 import { NOTE_CARD } from '../graphql'
 import { useRoute, useHead } from '#imports'
 import { ref, watch, computed } from 'vue'

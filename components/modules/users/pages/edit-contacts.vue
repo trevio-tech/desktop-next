@@ -47,7 +47,7 @@
 
 <script setup>
 
-import { useQuery } from '@trevio/ui'
+
 import { ref } from 'vue'
 
 import { UPDATE_USER } from '../graphql'

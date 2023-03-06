@@ -80,7 +80,7 @@ import { useRoute, useRouter } from '#imports'
 import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
 import { definePageMeta } from '#imports'
 import { format, parseISO } from 'date-fns'
-import { useQuery } from '@trevio/ui'
+
 definePageMeta({
   middleware: 'auth'
 })

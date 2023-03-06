@@ -9,7 +9,7 @@
 
 <script setup>
 import { QUESTION_CARD } from '../graphql';
-import { useQuery } from '@trevio/ui'
+
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import { useHead } from '#imports'
 

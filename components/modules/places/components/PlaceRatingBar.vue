@@ -60,7 +60,6 @@
 </template>
 
 <script setup>
-import { declOfNum } from '@trevio/ui'
 
 defineProps({
   place: {

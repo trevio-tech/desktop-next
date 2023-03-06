@@ -23,7 +23,7 @@
 import { ALBUM } from '~/components/modules/albums/graphql'
 import { ref } from 'vue'
 
-import { useQuery } from '@trevio/ui'
+
 
 const album = ref()
 

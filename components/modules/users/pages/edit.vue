@@ -54,7 +54,7 @@ import { ref } from 'vue'
 
 import { UPDATE_USER } from '../graphql'
 import { PLACE_WITH_PARENTS_FIELDS } from '~/components/modules/places/graphql'
-import { useQuery } from '@trevio/ui'
+
 
 const form = ref({
   place_id: null,

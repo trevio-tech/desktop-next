@@ -55,7 +55,7 @@
 import { MoreHorizontal, Check, Pencil, Trash } from 'lucide-vue-next'
 import { useNuxtApp } from '#imports'
 import { DELETE_ANSWER } from '~/components/modules/questions/graphql'
-import { useQuery } from '@trevio/ui'
+
 
 const emit = defineEmits(['unpinned'])
 

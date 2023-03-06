@@ -1,18 +1,16 @@
-import { createResolver } from '@nuxt/kit'
-
-const { resolve } = createResolver(import.meta.url)
-
-const conf = {
-  /*imports: {
-    autoImport: false
-  },*/
+const config = {
+  extends: [
+      process.env.LAYER || '@trevio-tech/ui'
+  ],
   vite: {
-    optimizeDeps: {
-      exclude: ['fabric']
-    },
+    server: {
+      fs: {
+        allow: ['..']
+      }
+    }
   },
   css: [
-    '@/assets/scss/main.scss'
+    '@/assets/scss/main.scss',
   ],
   modules: [
     '@nuxt-alt/auth',
@@ -21,9 +19,6 @@ const conf = {
     '@nuxtjs/tailwindcss',
     '~/modules/routes',
   ],
-  build: {
-    transpile: ['@headlessui/vue']
-  },
   runtimeConfig: {
     public: {
       GRAPHQL_URL: process.env.GRAPHQL_URL,
@@ -39,21 +34,4 @@ const conf = {
   }
 }
 
-if (process.env.ENV === 'development') {
-  console.log(conf)
-  if (! Object.hasOwn(conf, 'alias')) {
-    conf.alias = {}
-  }
-
-  conf.alias['@trevio/ui'] = resolve('../ui')
-
-  if (! conf.vite?.server) {
-    conf.vite.server = {
-      fs: {
-        allow: ['..']
-      }
-    }
-  }
-}
-
-export default defineNuxtConfig(conf)
+export default defineNuxtConfig(config)

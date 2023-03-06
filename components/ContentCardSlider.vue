@@ -17,7 +17,6 @@ import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref, shallowRef } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
-import { useQuery } from '@trevio/ui'
 
 const props = defineProps({
   notIn: {

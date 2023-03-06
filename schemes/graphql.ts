@@ -1,5 +1,5 @@
 import { LocalScheme } from '#auth/runtime'
-import { useQuery } from '@trevio/ui'
+
 
 export default class GraphQLScheme extends LocalScheme {
   /**

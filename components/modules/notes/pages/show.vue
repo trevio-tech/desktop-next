@@ -50,7 +50,7 @@ import { NOTE } from '../graphql'
 import { Pencil, Trash } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useHead, useRoute } from '#imports'
-import { useQuery } from '@trevio/ui'
+
 
 const route = useRoute()
 const note = ref()

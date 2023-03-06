@@ -21,7 +21,7 @@ import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useNuxtApp } from '#imports'
-import { useQuery } from '@trevio/ui'
+
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 
 const { handleSubmit, setErrors} = useForm()
