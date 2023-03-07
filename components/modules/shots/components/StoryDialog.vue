@@ -32,7 +32,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css/scrollbar'
 import 'swiper/css'
 
-
 const router = useRouter()
 const hash = router.currentRoute.value.hash
 const id = hash.replace(/\D+/g, '')
@@ -44,7 +43,7 @@ try {
       const { data } = await useQuery({
         query: `
         query($user_id: ID!) {
-          story2(user_id: $user_id) {
+          story(user_id: $user_id) {
             id
             image
           }
@@ -57,7 +56,7 @@ try {
         key: hash
       })
 
-      items.value = data.story2
+      items.value = data.story
     }, 0)
   }
 } catch (error) {}

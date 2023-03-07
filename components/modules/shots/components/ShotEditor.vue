@@ -55,7 +55,9 @@ import ShotEditorTextPanel from '~/components/modules/shots/components/ShotEdito
 import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEditorTrashButton.vue'
 import ShotEditorPanelBrushes from '~/components/modules/shots/components/ShotEditorPanelBrushes.vue'
 import { ref } from 'vue'
+import { useNuxtApp } from '#imports'
 
+const { $overlay } = useNuxtApp()
 
 const {
   createShotEditor,
@@ -76,6 +78,8 @@ const form = ref({
 })
 
 const onSubmitCallback = ({ createShot }) => {
+  $overlay.hide()
+
   if (store.stories.length === 0) {
     store.stories.push(createShot)
   } else {
