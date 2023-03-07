@@ -16,11 +16,9 @@
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
-import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useGql } from '~/uses'
-import { useNuxtApp } from '#imports'
+import { useNuxtApp, useQuery } from '#imports'
 
 const emit = defineEmits([
   'update:modelValue'
@@ -51,13 +49,16 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   try {
-    await useGql(`
-      mutation($type: String!, $items: [Int]!) {
-        updateSubscriptions(type: $type, items: $items)
+    await useQuery({
+      query: `
+        mutation($type: String!, $items: [Int]!) {
+          updateSubscriptions(type: $type, items: $items)
+        }
+      `,
+      variables: {
+        type: 'tags',
+        items: interests.value.map(interest => parseInt(interest.id)),
       }
-    `, {
-      type: 'tags',
-      items: interests.value.map(interest => parseInt(interest.id)),
     })
 
     $overlay.hide()

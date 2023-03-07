@@ -23,7 +23,6 @@
 import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useGql } from '~/uses'
 import { useNuxtApp } from '#imports'
 import { X } from 'lucide-vue-next'
 
@@ -52,7 +51,8 @@ const onSelect = async (place) => {
 }
 
 const onChange = async (query) => {
-  const { data: { searchPlaces }} = await useGql(`
+  const { data: { searchPlaces }} = await useQuery({
+    query: `
     query($query: String!) {
       searchPlaces(query: $query) {
         id
@@ -65,8 +65,10 @@ const onChange = async (query) => {
         }
       }
     }
-  `, {
-    query
+  `,
+    variables: {
+      query
+    }
   })
 
   return searchPlaces
@@ -80,13 +82,16 @@ const onSubmit = handleSubmit(async (values, errors) => {
   loading.value = true
 
   try {
-    await useGql(`
+    await useQuery({
+      query: `
       mutation($type: String!, $items: [Int]!) {
         updateSubscriptions(type: $type, items: $items)
       }
-    `, {
-      type: 'places',
-      items: places.value.map(place => parseInt(place.id)),
+    `,
+      variables: {
+        type: 'places',
+        items: places.value.map(place => parseInt(place.id)),
+      }
     })
 
     $overlay.hide()

@@ -1,6 +1,6 @@
-const config = {
+export default defineNuxtConfig({
   extends: [
-      process.env.LAYER || '@trevio-tech/ui'
+    process.env.LAYER || '@trevio-tech/ui'
   ],
   vite: {
     server: {
@@ -22,7 +22,6 @@ const config = {
   runtimeConfig: {
     public: {
       GRAPHQL_URL: process.env.GRAPHQL_URL,
-      GRAPHQL_URL_V2: process.env.GRAPHQL_URL_V2,
     }
   },
   auth: {
@@ -32,6 +31,4 @@ const config = {
       }
     }
   }
-}
-
-export default defineNuxtConfig(config)
+})

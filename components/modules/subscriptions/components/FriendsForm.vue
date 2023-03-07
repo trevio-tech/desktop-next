@@ -19,7 +19,6 @@ import Dialog from '~/components/base/Dialog.vue'
 import { InputUsers } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useGql } from '~/uses'
 import { useNuxtApp } from '#imports'
 
 const emit = defineEmits([
@@ -55,13 +54,16 @@ const onSubmit = handleSubmit(async (values, errors) => {
   loading.value = true
 
   try {
-    await useGql(`
+    await useQuery({
+      query: `
       mutation($type: String!, $items: [Int]!) {
         updateSubscriptions(type: $type, items: $items)
       }
-    `, {
-      type: 'users',
-      items: users.value.map(user => parseInt(user.id)),
+    `,
+      variables:{
+        type: 'users',
+        items: users.value.map(user => parseInt(user.id)),
+      }
     })
 
     $overlay.hide()

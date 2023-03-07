@@ -12,7 +12,6 @@
 
 <script setup>
 import { TIMELINE } from '~/components/modules/activity/graphql'
-import { useGql } from '~/uses'
 import ContentCard from '~/components/ContentCard'
 import { ref } from 'vue'
 
@@ -32,16 +31,19 @@ const nextPage = ref(0)
 const page = ref(1)
 
 const fetchFeed = async () => {
-  const { data: { feed }} = await useGql(`
-    query($user_id: Int, $page: Int, $system_name: String) {
-      feed(user_id: $user_id, page: $page, system_name: $system_name) {
-        ${TIMELINE}
+  const { data: { feed }} = await useQuery({
+    query: `
+      query($user_id: Int, $page: Int, $system_name: String) {
+        feed(user_id: $user_id, page: $page, system_name: $system_name) {
+          ${TIMELINE}
+        }
       }
+    `,
+    variables: {
+      user_id: props.userId,
+      page: page.value++,
+      system_name: props.systemName
     }
-  `, {
-    user_id: props.userId,
-    page: page.value++,
-    system_name: props.systemName
   })
 
   if (feed.length) {
