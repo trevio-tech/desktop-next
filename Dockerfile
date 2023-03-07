@@ -21,4 +21,4 @@ USER nobody
 
 EXPOSE 3000
 
-CMD ["yarn", "perview"]
+CMD ["yarn", "preview"]
