@@ -35,7 +35,7 @@ const hash = computed(() => router.currentRoute.value.hash)
 
 const createShot = () => {
   $overlay.hide()
-  // $overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
+  $overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
 }
 
 const showDialog = () => {

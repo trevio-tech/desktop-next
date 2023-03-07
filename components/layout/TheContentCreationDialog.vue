@@ -26,7 +26,7 @@ const { $overlay } = useNuxtApp()
 
 const onClickShot = () => {
   $overlay.hide()
-  // $overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
+  $overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
 }
 
 const items = [
