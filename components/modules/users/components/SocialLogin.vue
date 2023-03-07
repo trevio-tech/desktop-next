@@ -22,11 +22,16 @@
 
 <script setup>
 import { useNuxtApp } from '#imports'
+import { onMounted } from 'vue'
+
 const { $auth, $overlay } = useNuxtApp()
-window.setToken = async (token) => {
-  await $auth.setUserToken(token)
-  $overlay.hide()
-}
+
+onMounted(() => {
+  window.setToken = async (token) => {
+    await $auth.setUserToken(token)
+    $overlay.hide()
+  }
+})
 
 const onSocial = async (provider) => {
   const { data: { socialiteProvider } } = await useQuery({

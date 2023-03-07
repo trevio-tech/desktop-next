@@ -1,10 +1,9 @@
-import { defineNuxtPlugin } from '#imports'
+import { defineNuxtPlugin, useQuery } from '#imports'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { watch } from 'vue'
-import { MY_CHATS } from '~/components/modules/chats/graphql';
-
+import { MY_CHATS } from '~/components/modules/chats/graphql'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   const initialState = async (loggedIn) => {
