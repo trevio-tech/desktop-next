@@ -4,7 +4,7 @@
       <div class="bg-white flex-shrink-0 w-[480px] h-full rounded-tl-lg overflow-hidden relative">
         <canvas id="shot"></canvas>
         <ShotEditorTrashButton
-          v-if="store.isTrash"
+          v-if="shotEditorStore.isTrash"
           id="trash"
           class="absolute"
           style="bottom: 20px; left: calc(50% - 30px)"
@@ -56,13 +56,14 @@ import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEdi
 import ShotEditorPanelBrushes from '~/components/modules/shots/components/ShotEditorPanelBrushes.vue'
 import { ref } from 'vue'
 import { useNuxtApp } from '#imports'
+import { useShotsStore } from '~/components/modules/shots/store'
 
 const { $overlay } = useNuxtApp()
 
 const {
   createShotEditor,
   trashAdd,
-  store,
+  shotEditorStore,
   onSubmit,
   isLoading,
   addImage,
@@ -78,13 +79,8 @@ const form = ref({
 })
 
 const onSubmitCallback = ({ createShot }) => {
+  useShotsStore().updateStory(createShot)
   $overlay.hide()
-
-  if (store.stories.length === 0) {
-    store.stories.push(createShot)
-  } else {
-    store.updateStory(createShot)
-  }
 }
 
 try {
