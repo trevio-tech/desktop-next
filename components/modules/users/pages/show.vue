@@ -69,13 +69,11 @@
       </div>
     </template>
 
-<!--    <ContentList :user-id="user.id" />-->
+    <ContentList :user-id="user.id" />
   </NuxtLayout>
 </template>
 
 <script setup>
-
-
 import { USER } from '../graphql'
 import { useRoute, useNuxtApp } from '#imports'
 import { Cog } from 'lucide-vue-next'
@@ -97,7 +95,7 @@ const { data: { user }} = await useQuery({
     }
   `,
   variables: {
-    id: parseInt(useRoute().params.userId),
+    id: useRoute().params.userId,
   }
 })
 

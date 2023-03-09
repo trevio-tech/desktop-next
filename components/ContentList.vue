@@ -31,30 +31,34 @@ const nextPage = ref(0)
 const page = ref(1)
 
 const fetchFeed = async () => {
-  const { data: { feed }} = await useQuery({
-    query: `
-      query($user_id: Int, $page: Int, $system_name: String) {
-        feed(user_id: $user_id, page: $page, system_name: $system_name) {
-          ${TIMELINE}
+  try {
+    const { data: { activity }} = await useQuery({
+      query: `
+        query($user_id: ID, $page: Int, $system_name: String) {
+          activity(user_id: $user_id, page: $page, system_name: $system_name) {
+            ${TIMELINE}
+          }
         }
+      `,
+      variables: {
+        user_id: props.userId,
+        page: page.value++,
+        system_name: props.systemName
       }
-    `,
-    variables: {
-      user_id: props.userId,
-      page: page.value++,
-      system_name: props.systemName
+    })
+
+    if (activity.length) {
+      activity.forEach(item => items.value.push(item))
     }
-  })
 
-  if (feed.length) {
-    feed.forEach(item => items.value.push(item))
+    if (activity.length < 2) {
+      isEnd.value = true
+    }
+
+    nextPage.value = Math.round(activity.length / 2)
+  } catch (error) {
+    console.log(error)
   }
-
-  if (feed.length < 2) {
-    isEnd.value = true
-  }
-
-  nextPage.value = Math.round(feed.length / 2)
 }
 
 await fetchFeed()

@@ -6,6 +6,8 @@
       <TheNavigation class="w-[180px]" />
 
       <main class="flex flex-col gap-4">
+        <h1 v-if="heading" class="text-xl font-bold">{{ heading }}</h1>
+
         <!-- HERO -->
         <div v-if="hasHero" class="bg-red-50">
           <slot name="hero" />
@@ -15,7 +17,6 @@
         <!-- CONTENT, CONTENT-SIDEBAR -->
         <div class="flex-auto flex max-w-[800px]" :class="{'flex-row-reverse': isReverse, 'gap-4': hasSidebar}">
           <div :class="{'w-[560px]': hasSidebar}">
-            <h1 v-if="heading" class="text-xl font-bold mb-4">{{ heading }}</h1>
             <slot />
           </div>
           <div v-if="hasSidebar" class="flex-shrink-0 w-[240px] bg-gray-100">
