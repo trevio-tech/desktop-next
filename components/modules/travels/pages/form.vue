@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} путешествия`">
-    <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
+    <TheForm @submit="onSubmit" :is-edit="isEdit">
       <div class="grid grid-cols-2 gap-6">
         <FormField name="input.images" label="Обложка">
           <TravelUpload v-model="form.cover" />
@@ -76,10 +76,9 @@ import { ChevronDown } from 'lucide-vue-next'
 import { InputCustomTags } from '~/components/wrappers'
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
-import { useRoute, useRouter } from '#imports'
-import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql';
-import { definePageMeta } from '#imports'
-import { format, parseISO } from 'date-fns'
+import { useRoute, useRouter, definePageMeta } from '#imports'
+import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql'
+import { format, parseISO, isValid } from 'date-fns'
 
 definePageMeta({
   middleware: 'auth'
@@ -103,7 +102,7 @@ const form = ref({
 })
 
 const route = useRoute()
-const { handleSubmit } = useForm()
+const { setErrors } = useForm()
 const isEdit = route.params.travelId > 0
 const searchBy = ['countries']
 const danger = ref(false)
@@ -132,8 +131,13 @@ if (isEdit) {
 
   Object.assign(form.value, data.travel)
 
-  form.value.date_start = parseISO(form.value.date_start)
-  form.value.date_end = parseISO(form.value.date_end)
+  if (isValid(form.value.date_start)) {
+    form.value.date_start = parseISO(form.value.date_start)
+  }
+
+  if (isValid(form.value.date_end)) {
+    form.value.date_end = parseISO(form.value.date_end)
+  }
 } else {
   const { data } = await useQuery({
     query: `
@@ -153,7 +157,9 @@ const onDateChange = (dates) => {
   form.value.date_end = dates[1]
 }
 
-const onSubmit = handleSubmit(async (values, actions) => {
+const onSubmit = async (isDraft) => {
+  form.value.is_draft = isDraft
+
   if (loading.value) {
     return
   }
@@ -169,6 +175,7 @@ const onSubmit = handleSubmit(async (values, actions) => {
     'date_start',
     'date_end',
     'tags',
+    'is_draft',
   ])
 
   input.tags = input.tags.map(tag => tag.id)
@@ -188,12 +195,12 @@ const onSubmit = handleSubmit(async (values, actions) => {
     }
   } catch (error) {
     if (error['extensions']['validation']) {
-      actions.setErrors(error['extensions']['validation'])
+      setErrors(error['extensions']['validation'])
     }
   } finally {
     loading.value = false
   }
-})
+}
 
 const getCurrency = computed(() => {
   if (form.value.currency_id > 0) {
