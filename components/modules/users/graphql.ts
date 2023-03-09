@@ -60,17 +60,6 @@ export const USER = `
     name
     avatar
   }
-  links {
-    id
-    name
-    url
-    title
-    host
-  }
-  premium {
-    user_id
-    color
-  }
 `
 
 

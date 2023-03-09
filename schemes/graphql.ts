@@ -46,6 +46,7 @@ export default class GraphQLScheme extends LocalScheme {
               id
               email
               name
+              avatar
             }
           }
         `,

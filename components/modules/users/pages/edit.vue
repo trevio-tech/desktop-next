@@ -2,9 +2,9 @@
   <NuxtLayout heading="Редактирование профиля">
     <template #sidebar>
       <ul>
-        <li><NuxtLink :to="{name: 'users.edit', params: {userId: $route.params.userId}}">Основные настройки</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.password', params: {userId: $route.params.userId}}">Смена пароля</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.contacts', params: {userId: $route.params.userId}}">Контакты</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit', params: {userId}}">Основные настройки</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.password', params: {userId}}">Смена пароля</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.contacts', params: {userId}}">Контакты</NuxtLink></li>
       </ul>
     </template>
     <form @submit.prevent="onSubmit" class="min-h-full flex flex-col justify-between bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
@@ -68,7 +68,7 @@ const userId = parseInt(useRoute().params.userId)
 try {
   const { data: { user } } = await useQuery({
     query: `
-      query($id: Int!) {
+      query($id: ID!) {
         user(id: $id) {
           id
           name

@@ -90,7 +90,7 @@ const activityStore = useActivityStore()
 
 const { data: { user }} = await useQuery({
   query: `
-    query($id: Int!) {
+    query($id: ID!) {
       user(id: $id) {
         ${USER}
       }
