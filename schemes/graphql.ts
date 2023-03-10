@@ -1,12 +1,12 @@
 import { LocalScheme } from '#auth/runtime'
-
+import { HTTPResponse } from '@nuxt-alt/auth'
 
 export default class GraphQLScheme extends LocalScheme {
   /**
    * @param credentials
    * @param reset
    */
-  async login(credentials, { reset = true } = {}) {
+  async login(credentials, { reset = true } = {}): Promise<HTTPResponse> {
     // Ditch any leftover local tokens before attempting to log in.
     if (reset) {
       this.$auth.reset({ resetInterceptor: false });
@@ -29,7 +29,9 @@ export default class GraphQLScheme extends LocalScheme {
       }
 
       await this.fetchUser()
-    } catch (error) {}
+    } catch (error) {
+      throw error
+    }
   }
 
   async fetchUser() {
