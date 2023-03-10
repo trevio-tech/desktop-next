@@ -20,17 +20,28 @@
 import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useNuxtApp } from '#imports'
-
+import { useOverlay } from '#imports'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
+import { CREATE_BOOKMARK_CATEGORY, UPDATE_BOOKMARK_CATEGORY } from '../graphql/mutations'
+
+const props = defineProps({
+  category: {
+    type: Object,
+    default: () => {
+      return {
+        name: '',
+        is_private: false,
+      }
+    }
+  }
+})
 
 const { handleSubmit, setErrors} = useForm()
-const { $overlay } = useNuxtApp()
+const $overlay = useOverlay()
 const store = useBookmarksStore()
-const form = ref({
-  name: '',
-  is_private: false,
-})
+
+const form = ref({...props.category})
+
 const loading = ref(false)
 
 const onSubmit = handleSubmit(async () => {
@@ -39,23 +50,32 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   try {
-    const { data } = await useQuery({
-      query: `
-        mutation createBookmarkCategory($input: BookmarkCategoryInput!) {
-          createBookmarkCategory(input: $input) {
-            id
-            name
-            content_count
-          }
-        }
-      `,
-      variables: {
-        input: {...form.value}
+    const isEdit = form.value.id
+
+    const variables = {
+      input: {
+        name: form.value.name,
+        is_private: form.value.is_private,
       }
+    }
+
+    if (isEdit) {
+      variables.id = form.value.id
+    }
+
+    const { data } = await useQuery({
+      query: isEdit
+          ? UPDATE_BOOKMARK_CATEGORY
+          : CREATE_BOOKMARK_CATEGORY,
+      variables
     })
 
-    if (data.createBookmarkCategory) {
-      store.addCategory(data.createBookmarkCategory)
+    if (data.bookmarkCategory) {
+      if (isEdit) {
+        store.updateCategory(data.bookmarkCategory)
+      } else {
+        store.addCategory(data.bookmarkCategory)
+      }
       $overlay.hide()
     }
   } catch (error) {

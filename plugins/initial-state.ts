@@ -27,6 +27,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
             id
             name
             content_count
+            is_private
           }
         `)
         queries.push(MY_CHATS)

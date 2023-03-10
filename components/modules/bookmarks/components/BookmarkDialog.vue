@@ -2,11 +2,14 @@
   <Dialog title="Категории закладок">
     <div class="w-[480px]">
       <div v-if="store.categories.length" class="space-y-1">
-        <div v-for="category in store.categories" :key="category.id">
-          <label :for="`category-${category.id}`" class="space-x-1">
+        <div v-for="category in store.categories" :key="category.id" class="flex items-center justify-between">
+          <label :for="`category-${category.id}`" class="space-x-1 mr-2">
             <input type="checkbox" :id="`category-${category.id}`" :value="category.id" v-model="categories" />
             <span>{{ category.name }}</span>
           </label>
+          <button type="button" @click="onEdit(category)">
+            <Pencil class="w-4 h-4" />
+          </button>
         </div>
       </div>
       <div v-else>У вас нет категорий для закладок</div>
@@ -21,9 +24,13 @@
 <script setup>
 import BookmarksCategoryForm from './BookmarkCategoryFormDialog'
 import { ref } from 'vue'
-
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import Dialog from '~/components/base/Dialog.vue'
+import { Pencil } from 'lucide-vue-next'
+import { useOverlay } from '#imports'
+
+const overlay = useOverlay()
+
 const emit = defineEmits([
     'change'
 ])
@@ -45,6 +52,14 @@ const props = defineProps({
 const store = useBookmarksStore()
 const loading = ref(false)
 const categories = ref(props.modelValue)
+
+const onEdit = (category) => {
+  overlay.show(BookmarksCategoryForm, {
+    props: {
+      category
+    }
+  })
+}
 
 const onSubmit = async () => {
   if (loading.value) {

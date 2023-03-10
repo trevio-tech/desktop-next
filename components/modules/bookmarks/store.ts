@@ -10,6 +10,15 @@ export const useBookmarksStore = defineStore('bookmarks', {
     addCategory(category) {
       this.categories.push(category)
     },
+    updateCategory(category) {
+      for (let existsCategory of this.categories) {
+        if (parseInt(category.id) === parseInt(existsCategory.id)) {
+          existsCategory.name = category.name
+          existsCategory.is_private = category.is_private
+          break
+        }
+      }
+    },
     incrementBookmarksCount(categories: number[]) {
       categories.forEach((category) => {
         this.categories.forEach((bookmarkCategory) => {
