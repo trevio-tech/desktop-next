@@ -1425,10 +1425,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@trevio-tech/ui@^0.0.35":
-  version "0.0.35"
-  resolved "https://registry.yarnpkg.com/@trevio-tech/ui/-/ui-0.0.35.tgz#0c6cdf43808a4c28a1a0ad60efe5ac660980b25b"
-  integrity sha512-E3vGkL82dlLX8/CIF3W3XvhZcUxfL+++iq3B/C9avvM2cm9oqQs7KeCEFv+Yi1kITwqOtAqa2Bz6h8K70KICzg==
+"@trevio-tech/ui@^0.0.37":
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/@trevio-tech/ui/-/ui-0.0.37.tgz#5003b81998ffcb77c2be7d322642dbc669ab52a0"
+  integrity sha512-Zn66zPFC+C6YT3TQnHKU9753rKoaoV1uaIIhmWKIPFe0NlGZ6xAgaP7Col7Ea+keylbUC/m2vELddtMObDGi3A==
   dependencies:
     "@apollo/client" "^3.7.9"
     "@floating-ui/dom" "^1.2.3"
