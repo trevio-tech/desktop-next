@@ -36,8 +36,8 @@ if (categoryId > 0) {
 }
 
 const query = `
-  query ($userId: Int!, $categoryId: Int) {
-    bookmarks (userId: $userId, categoryId: $categoryId) {
+  query ($user_id: ID!, $category_id: ID) {
+    bookmarks (user_id: $user_id, category_id: $category_id) {
       ...on Travel {
         ${TRAVEL_CARD_RECTANGLE}
       }
@@ -55,8 +55,8 @@ try {
   const { data } = await useQuery({
     query,
     variables: {
-      userId:     parseInt(params.userId),
-      categoryId,
+      user_id: params.userId,
+      category_id: categoryId,
     }
   })
 

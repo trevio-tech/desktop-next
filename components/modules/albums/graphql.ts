@@ -50,11 +50,9 @@ export const ALBUM_CARD_RECTANGLE = `
   text(words: 12)
   system_name
   created_at
-  cover(sizes: "default@resize:fill:160:160") {
+  cover {
     id
-    model_id
-    url
-    sizes
+    url(presets: "default@resize:fill:640:320")
   }
   user {
     id
