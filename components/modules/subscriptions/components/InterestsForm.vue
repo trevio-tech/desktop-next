@@ -63,6 +63,7 @@ const onSubmit = handleSubmit(async () => {
 
     $overlay.hide()
   } catch (errors) {
+    console.log(errors)
     if (errors[0].message === 'validation') {
       setErrors(errors[0]['extensions']['validation'])
     }

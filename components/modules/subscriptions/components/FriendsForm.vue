@@ -56,10 +56,10 @@ const onSubmit = handleSubmit(async (values, errors) => {
   try {
     await useQuery({
       query: `
-      mutation($type: String!, $items: [Int]!) {
-        updateSubscriptions(type: $type, items: $items)
-      }
-    `,
+        mutation($type: String!, $items: [Int]!) {
+          updateSubscriptions(type: $type, items: $items)
+        }
+      `,
       variables:{
         type: 'users',
         items: users.value.map(user => parseInt(user.id)),
@@ -68,7 +68,7 @@ const onSubmit = handleSubmit(async (values, errors) => {
 
     $overlay.hide()
   } catch (error) {
-    errors.setErrors(error[0]['extensions']['validation'])
+    errors.setErrors(error['extensions']['validation'])
   } finally {
     loading.value = false
   }
