@@ -56,7 +56,7 @@ const onSubmit = async () => {
   try {
     const { data } = await useQuery({
       query: `
-        mutation ($model_type: String!, $model_id: Int!, $categories: [Int!]!) {
+        mutation ($model_type: String!, $model_id: ID!, $categories: [ID!]!) {
           createDeleteBookmark(model_type: $model_type, model_id: $model_id, categories: $categories) {
             insert
             delete
