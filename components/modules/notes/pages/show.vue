@@ -43,14 +43,13 @@
 </template>
 
 <script setup>
+import Article from '~/components/Article.vue'
 import ContentCardSlider from '~/components/ContentCardSlider.vue'
-import ContentPage from '~/components/ContentPage.vue'
 import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
 import { NOTE } from '../graphql'
 import { Pencil, Trash } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useHead, useRoute } from '#imports'
-import Article from '~/components/Article.vue'
 
 
 const route = useRoute()

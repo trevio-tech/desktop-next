@@ -66,6 +66,7 @@ export const ALBUM_CARD_RECTANGLE = `
 
 export const ALBUM = `
   id
+  user_id
   place_id
   travel_id
   title
