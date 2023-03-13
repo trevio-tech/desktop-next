@@ -2,6 +2,7 @@ import { defineNuxtPlugin } from '#imports'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { useShotsStore } from '~/components/modules/shots/store'
+import { useSubscriptionsStore } from '~/components/modules/subscriptions/store'
 import { watch } from 'vue'
 import { MY_CHATS } from '~/components/modules/chats/graphql'
 
@@ -28,6 +29,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
             name
             content_count
             is_private
+          }
+          subscriptions(user_id: ${nuxtApp.$auth.user.id}) {
+            model_type
+            model_id
           }
         `)
         queries.push(MY_CHATS)
@@ -56,6 +61,13 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         await useChatsStore().$patch({
           chats: data.myChats
         })
+
+        if (data.subscriptions.length) {
+          useSubscriptionsStore().$patch({
+            subscriptions: data.subscriptions
+              .reduce((accumulator, currentValue) => ({ ...accumulator, [currentValue.model_type + currentValue.model_id]: true}), {})
+          })
+        }
       }
 
       console.log('Initial state')

@@ -1,13 +1,28 @@
 <template>
   <article class="p-4 rounded-t-lg bg-white">
-    <div class="flex items-center space-x-2 pb-4 px-4 mb-4 -mx-4 border-b">
-      <NuxtLink :to="{name: 'users.show', params: {userId: entry.user.id}}" class="w-10 flex-shrink-0">
-        <img :src="entry.user.avatar" :alt="entry.user.name" class="rounded-full" />
-      </NuxtLink>
-      <NuxtLink :to="{name: 'users.show', params: {userId: entry.user.id}}" class="font-medium text-sm">
-        {{ entry.user.name }}
-      </NuxtLink>
-    </div>
+    <header class="flex items-center justify-between pb-4 px-4 mb-4 -mx-4 border-b">
+      <div class="flex items-center space-x-2">
+        <NuxtLink :to="{name: 'users.show', params: {userId: entry.user.id}}" class="w-10 flex-shrink-0">
+          <img :src="entry.user.avatar" :alt="entry.user.name" class="rounded-full" />
+        </NuxtLink>
+        <div class="text-sm">
+          <NuxtLink :to="{name: 'users.show', params: {userId: entry.user.id}}" class="font-medium">
+            {{ entry.user.name }}
+          </NuxtLink>
+          <div class="text-slate-400">{{ entry.published_at }}</div>
+        </div>
+      </div>
+      <SubscriptionButton
+        v-slot="{ onSubmit, isSubscribed, isLoading }"
+        model-type="users"
+        :model-id="entry.user_id"
+        :subscriptions="store.subscriptions"
+      >
+        <Button :loading="isLoading" @click="onSubmit('users', entry.user_id)" type="button">
+          {{ isSubscribed ? 'Отписаться' : 'Подписаться' }}
+        </Button>
+      </SubscriptionButton>
+    </header>
 
     <h2 class="text-xl font-semibold mb-4">{{ entry.title }}</h2>
 
@@ -18,6 +33,10 @@
 </template>
 
 <script setup>
+import { useSubscriptionsStore } from '~/components/modules/subscriptions/store'
+
+const store = useSubscriptionsStore()
+
 defineProps({
   entry: {
     type:     Object,

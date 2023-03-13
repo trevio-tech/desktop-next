@@ -72,6 +72,7 @@ export const NOTE = `
     text
     can
     system_name
+    published_at(format: "relative")
     images {
         id
         url

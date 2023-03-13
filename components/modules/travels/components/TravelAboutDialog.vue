@@ -7,6 +7,7 @@
         </h2>
         <p>{{ travel.text }}</p>
         <p v-if="travel.place_id">Страна: {{ travel.country?.name }}</p>
+        <NuxtLink :to="{name: 'travels.show', params: {travelId: travel.id}}" class="underline">Перейти в путешествие</NuxtLink>
       </div>
       <Loader v-else />
     </div>
