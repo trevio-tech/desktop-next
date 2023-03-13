@@ -13,10 +13,10 @@
         </div>
       </div>
       <SubscriptionButton
-        v-slot="{ onSubmit, isSubscribed, isLoading }"
-        model-type="users"
-        :model-id="entry.user_id"
-        :subscriptions="store.subscriptions"
+          v-slot="{ onSubmit, isSubscribed, isLoading }"
+          model-type="users"
+          :model-id="entry.user_id"
+          :subscriptions="store.subscriptions"
       >
         <Button :loading="isLoading" @click="onSubmit('users', entry.user_id)" type="button">
           {{ isSubscribed ? 'Отписаться' : 'Подписаться' }}
@@ -24,10 +24,14 @@
       </SubscriptionButton>
     </header>
 
-    <h2 class="text-xl font-semibold mb-4">{{ entry.title }}</h2>
+    <slot name="after-header" />
+
+    <h2 class="heading text-2xl mb-4">{{ entry.title }}</h2>
 
     <ImageViewer>
-      <div v-html="entry.text" class="prose"></div>
+      <slot name="body">
+        <div v-html="entry.text" class="prose"></div>
+      </slot>
     </ImageViewer>
   </article>
 </template>

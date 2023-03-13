@@ -29,7 +29,7 @@
       </Menu>
     </template>
 
-    <ContentPage :entry="note" />
+    <Article :entry="note" />
 
     <ChatButton
         @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
@@ -50,6 +50,7 @@ import { NOTE } from '../graphql'
 import { Pencil, Trash } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useHead, useRoute } from '#imports'
+import Article from '~/components/Article.vue'
 
 
 const route = useRoute()

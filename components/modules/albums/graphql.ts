@@ -88,7 +88,6 @@ export const ALBUM = `
     id
     name
     avatar
-    description
   }
   place {
     ${PLACE_WITH_PARENTS_FIELDS}

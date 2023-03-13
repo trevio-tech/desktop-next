@@ -1,13 +1,10 @@
 <template>
-  <NuxtLayout :heading="question.title">
+  <NuxtLayout>
     <template #sidebar>
       <NuxtLink :to="`/questions/${question.id}/edit`">Редактировать</NuxtLink>
     </template>
-    <article>
-      <ImageViewer>
-        <div v-html="question.text" class="prose"></div>
-      </ImageViewer>
-    </article>
+
+    <Article :entry="question" />
 
     <h2 class="text-2xl font-medium mt-6" id="answers">Ответы на вопрос</h2>
 

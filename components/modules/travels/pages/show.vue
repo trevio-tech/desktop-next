@@ -10,22 +10,18 @@
     <template #sidebar>
       <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>
     </template>
-    <article>
-      <ImageViewer>
-        <img v-if="travel.cover" loading="lazy" :src="travel.cover.url.default"
-             :data-src="travel.cover.url.original" class="rounded-lg mb-4 w-full" :alt="travel.title">
-      </ImageViewer>
-      <p>{{ travel.text }}</p>
-      <div v-if="travel.tags.length" class="space-x-2 mt-4 text-slate-400 text-sm truncate">
-        <NuxtLink
-            class="hover:text-slate-600"
-            v-for="tag in travel.tags"
-            :key="tag.id"
-            :title="tag.name"
-            :to="{name: 'travels', query: {tag_id: tag.id}}">#{{ tag.name }}
-        </NuxtLink>
-      </div>
-    </article>
+
+    <Article :entry="travel" />
+
+    <div v-if="travel.tags.length" class="space-x-2 mt-4 text-slate-400 text-sm truncate">
+      <NuxtLink
+          class="hover:text-slate-600"
+          v-for="tag in travel.tags"
+          :key="tag.id"
+          :title="tag.name"
+          :to="{name: 'travels', query: {tag_id: tag.id}}">#{{ tag.name }}
+      </NuxtLink>
+    </div>
 
 <!--    <TravelSiblings v-if="otherTravels.length" class="mt-4" :items="otherTravels"/>-->
     <hr class="my-4">
@@ -42,6 +38,7 @@ import TravelContentList from '../components/TravelContentList'
 import TravelSiblings from '../components/TravelSiblings.vue'
 import { TRAVEL, TRAVEL_CARD_SQUARE } from '../graphql'
 import { ref } from 'vue'
+import Article from '~/components/Article.vue'
 
 
 const route = useRoute()
