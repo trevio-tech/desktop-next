@@ -39,7 +39,12 @@
       </div>
 
       <!-- CHAT FORM -->
-      <ChatForm v-slot="{ form, reply, loading }" :chat-message-fields="CHAT_MESSAGE" class="flex-auto flex-shrink-0 p-4 bg-white border-t border-gray-200" :chat-id="activeChatId">
+      <ChatForm
+        v-slot="{ form, reply, loading }"
+        :chat-message-fields="CHAT_MESSAGE"
+        :chat-id="activeChatId"
+        :store="store"
+        class="flex-auto flex-shrink-0 p-4 bg-white border-t border-gray-200">
         <div v-if="store.mode === 'reply'">
           {{ reply.text }}
         </div>
@@ -70,6 +75,7 @@ import { ImagePlus } from 'lucide-vue-next'
 import { useNuxtApp } from 'nuxt/app'
 import { gql } from 'graphql-tag'
 import { onBeforeUnmount } from 'vue'
+import { useChat } from '#imports'
 
 const props = defineProps({
   chatId: {

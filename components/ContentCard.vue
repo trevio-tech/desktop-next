@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, shallowRef } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import BookmarkButton from '~/components/modules/bookmarks/components/BookmarkButton'
 import Profile from '~/components/modules/users/components/Profile'
 import useContentCard from '~/components/ContentCard/useContentCard'

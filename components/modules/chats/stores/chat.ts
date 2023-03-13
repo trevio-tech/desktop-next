@@ -47,7 +47,7 @@ export const useChatStore = defineStore('chat', {
         }
       }
 
-      // При повтором клике, сообщение будет удаленно из выбранных.
+      // При повторном клике, сообщение будет удаленно из выбранных.
       if (Object.hasOwn(this.selectedMessages, message.id)) {
         delete this.selectedMessages[message.id]
       } else {
