@@ -1,17 +1,15 @@
 export default `
-  query getTravelContentList ($travelId: Int!, $offset: String!, $filter: TravelContentListFilterInput) {
-    travelContentList(travelId: $travelId, offset: $offset, filter: $filter) {
+  query travelContent ($travel_id: ID!, $offset: String!, $filter: TravelContentFilterInput) {
+    travelContent(travel_id: $travel_id, offset: $offset, filter: $filter) {
       items {
         ...on Note {
           id
           cover_id
           title(words: 7)
           text(words: 10)
-          cover(sizes: "default@resize:fill:200:200") {
+          cover {
             id
-            model_id
-            url
-            sizes
+            url(presets: "default@resize:fill:200:200")
           }
           system_name
         }
@@ -19,11 +17,9 @@ export default `
           id
           title
           cover_id
-          cover(sizes: "default@resize:fill:200:200") {
+          cover {
             id
-            model_id
-            url
-            sizes
+            url(presets: "default@resize:fill:200:200")
           }
           system_name
         }
@@ -31,11 +27,9 @@ export default `
           id
           title
           cover_id
-          cover(sizes: "default@resize:fill:200:200") {
+          cover {
             id
-            model_id
-            url
-            sizes
+            url(presets: "default@resize:fill:200:200")
           }
           system_name
         }
@@ -43,11 +37,9 @@ export default `
           id
           title
           cover_id
-          cover(sizes: "default@resize:fill:200:200") {
+          cover {
             id
-            model_id
-            url
-            sizes
+            url(presets: "default@resize:fill:200:200")
           }
           system_name
         }

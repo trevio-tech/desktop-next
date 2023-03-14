@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :heading="travel.title">
+  <NuxtLayout>
     <Html>
       <Head>
         <Title>{{ travel.title }} - Путешествия</Title>
@@ -13,7 +13,7 @@
 
     <Article :entry="travel" />
 
-    <div v-if="travel.tags.length" class="space-x-2 mt-4 text-slate-400 text-sm truncate">
+    <div v-if="travel.tags && travel.tags.length" class="space-x-2 mt-4 text-slate-400 text-sm truncate">
       <NuxtLink
           class="hover:text-slate-600"
           v-for="tag in travel.tags"
@@ -43,19 +43,26 @@ import Article from '~/components/Article.vue'
 
 const route = useRoute()
 const otherTravels = ref([])
+let travel = {}
 
-const { data: { travel } } = await useQuery({
-  query: /* GraphQL */`
-    query($id: ID!) {
-      travel(id: $id) {
-        ${TRAVEL}
+try {
+  const { data } = await useQuery({
+    query: /* GraphQL */`
+      query($id: ID!) {
+        travel(id: $id) {
+          ${TRAVEL}
+        }
       }
-    }
-  `,
-  variables: {
-    id: parseInt(route.params.travelId),
-  },
-})
+    `,
+    variables: {
+      id: route.params.travelId,
+    },
+  })
+
+  travel = data.travel
+} catch (error) {
+  console.log(error)
+}
 
 /*const otherTravelsFromUser = async (travel) => {
   const { data: { travels } } = await useQuery({
