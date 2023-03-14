@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-
+import { useRoute } from '#app'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 
 const store = useBookmarksStore()

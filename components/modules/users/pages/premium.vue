@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-
+import { useQuery } from '#imports'
 
 let tariffs = []
 

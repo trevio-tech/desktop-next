@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-
+import { useQuery } from '#imports'
 let alphabet = {}
 let memory = null
 

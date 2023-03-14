@@ -49,7 +49,7 @@ import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
 import { NOTE } from '../graphql'
 import { Pencil, Trash } from 'lucide-vue-next'
 import { ref } from 'vue'
-import { useHead, useRoute } from '#imports'
+import { useHead, useRoute, useQuery } from '#imports'
 
 
 const route = useRoute()

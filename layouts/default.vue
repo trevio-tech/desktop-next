@@ -1,21 +1,21 @@
 <template>
-  <div class="flex flex-col h-full gap-4">
+  <div class="flex flex-col h-full gap-6">
     <TheHeader class="flex-shrink-0" />
 
-    <div class="flex justify-center gap-4 h-full">
+    <div class="flex justify-center gap-10 h-full">
       <TheNavigation class="w-[180px]" />
 
-      <main class="flex flex-col gap-4">
-        <h1 v-if="heading" class="text-xl font-bold">{{ heading }}</h1>
+      <main class="flex flex-col">
+        <h1 v-if="heading" class="text-xl font-bold mb-4">{{ heading }}</h1>
 
         <!-- HERO -->
-        <div v-if="hasHero" class="bg-red-50">
+        <div v-if="hasHero" class="bg-red-50 mb-4">
           <slot name="hero" />
         </div>
         <!-- / HERO -->
 
         <!-- CONTENT, CONTENT-SIDEBAR -->
-        <div class="flex-auto flex max-w-[800px]" :class="{'flex-row-reverse': isReverse, 'gap-4': hasSidebar}">
+        <div class="flex-auto flex max-w-[800px]" :class="{'flex-row-reverse': isReverse, 'gap-10': hasSidebar}">
           <div :class="{'w-[560px]': hasSidebar}">
             <slot />
           </div>
@@ -36,6 +36,7 @@ import TheHeader from '~/components/layout/TheHeader'
 import TheFooter from '~/components/layout/TheFooter'
 import TheNavigation from '~/components/layout/TheNavigation'
 import { computed, useSlots } from 'vue'
+import { useHead } from '#head'
 
 const props = defineProps({
   heading: {

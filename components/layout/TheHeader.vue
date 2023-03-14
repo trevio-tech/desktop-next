@@ -1,6 +1,6 @@
 <template>
   <header class="flex items-center sticky top-0 h-14 shadow-md bg-white z-10">
-    <div class="flex items-center w-full h-full max-w-[1000px] mx-auto gap-6">
+    <div class="flex items-center w-full h-full max-w-[1020px] mx-auto gap-10">
       <NuxtLink to="/" class="w-[180px] flex-shrink-0">
         <img src="/images/logotype.svg" alt="" class="block mx-auto h-8">
       </NuxtLink>
@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { useNuxtApp } from '#app'
+import { useNuxtApp, defineAsyncComponent } from '#imports'
 import { ChevronDown } from 'lucide-vue-next'
 
 const { $overlay } = useNuxtApp()

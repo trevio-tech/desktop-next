@@ -16,7 +16,7 @@
 import ShotDialog from '~/components/modules/shots/components/ShotDialog.vue'
 import StoryDialog from '~/components/modules/shots/components/StoryDialog.vue'
 import { computed } from 'vue'
-import { useNuxtApp } from '#imports'
+import { useNuxtApp, useRouter, defineAsyncComponent } from '#imports'
 import { PlusCircle } from 'lucide-vue-next'
 
 const props = defineProps({

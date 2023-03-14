@@ -17,6 +17,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Dialog from '~/components/base/Dialog'
+import { useQuery } from '#imports'
 
 const travel = ref(null)
 

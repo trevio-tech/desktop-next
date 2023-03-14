@@ -36,7 +36,7 @@ import { CREATE_QUESTION, UPDATE_QUESTION, QUESTION_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { definePageMeta, useRoute, useRouter, useNuxtApp } from '#imports'
+import { definePageMeta, useRoute, useRouter, useNuxtApp, useQuery } from '#imports'
 
 definePageMeta({
   middleware: 'auth'

@@ -33,12 +33,12 @@
 </template>
 
 <script setup>
-
+import Article from '~/components/Article.vue'
 import TravelContentList from '../components/TravelContentList'
 import TravelSiblings from '../components/TravelSiblings.vue'
 import { TRAVEL, TRAVEL_CARD_SQUARE } from '../graphql'
 import { ref } from 'vue'
-import Article from '~/components/Article.vue'
+import { useQuery, useRoute } from '#imports'
 
 
 const route = useRoute()

@@ -50,7 +50,7 @@ const items = [
 <style lang="scss">
 .main-nav {
   .router-link-active {
-    @apply bg-slate-200/80;
+    @apply bg-blue-200/20 text-blue-500;
   }
 }
 </style>

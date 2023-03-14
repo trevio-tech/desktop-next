@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-
+import { useQuery } from '#imports'
 import { ref } from 'vue'
 
 import { UPDATE_USER } from '../graphql'

@@ -17,6 +17,7 @@
 
 <script setup>
 
+import { useQuery, useRoute } from '#imports'
 import { ALBUM } from '~/components/modules/albums/graphql'
 import { ref } from 'vue'
 

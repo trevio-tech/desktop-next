@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-
+import { useShotEditor } from '#imports'
 
 const { setBrush, setBrushColor } = useShotEditor()
 

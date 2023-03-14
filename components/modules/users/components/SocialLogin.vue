@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { useNuxtApp } from '#imports'
+import { useNuxtApp, useQuery } from '#imports'
 import { onMounted } from 'vue'
 
 const { $auth, $overlay } = useNuxtApp()

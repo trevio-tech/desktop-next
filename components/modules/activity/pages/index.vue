@@ -35,10 +35,10 @@ import ShotsHorizontalList from '~/components/modules/shots/components/ShotsHori
 import PromoLoadingContainer from '~/components/modules/promo/components/PromoLoadingContainer.vue'
 import { FEED } from '~/components/modules/activity/graphql'
 import { ref } from 'vue'
+import { useRoute, useQuery } from '#imports'
 import { useActivityStore } from '~/components/modules/activity/store'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { useIntersectionObserver } from '@vueuse/core'
-
 
 const store = useActivityStore()
 const route = useRoute()

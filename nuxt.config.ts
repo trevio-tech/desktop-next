@@ -1,4 +1,7 @@
 export default defineNuxtConfig({
+  imports: {
+    autoImport: false
+  },
   extends: [
     process.env.LAYER || '@trevio-tech/ui'
   ],

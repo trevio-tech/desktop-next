@@ -75,7 +75,7 @@
 
 <script setup>
 import { USER } from '../graphql'
-import { useRoute, useNuxtApp } from '#imports'
+import { useRoute, useNuxtApp, useQuery } from '#imports'
 import { Cog } from 'lucide-vue-next'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
 import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'

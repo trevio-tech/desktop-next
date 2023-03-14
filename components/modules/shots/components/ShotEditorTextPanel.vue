@@ -55,6 +55,7 @@
 
 <script setup>
 import { Wand2, X } from 'lucide-vue-next'
+import { useShotEditor } from '#imports'
 
 
 const {

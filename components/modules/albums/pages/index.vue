@@ -9,6 +9,7 @@
 
 <script setup>
 
+import { useQuery } from '#imports'
 import ContentCard from '~/components/ContentCard.vue'
 import { ALBUM_CARD } from '~/components/modules/albums/graphql'
 

@@ -17,7 +17,7 @@ import { ContentCardRectangle } from '~/components'
 import { NOTE_CARD_RECTANGLE } from '~/components/modules/notes/graphql'
 import { TRAVEL_CARD_RECTANGLE } from '~/components/modules/travels/graphql'
 import { useBookmarksStore } from '../store'
-
+import { useQuery, useRoute } from '#imports'
 
 
 const params = useRoute().params

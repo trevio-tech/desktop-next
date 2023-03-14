@@ -1,6 +1,6 @@
 import { LocalScheme } from '#auth/runtime'
 import { HTTPResponse } from '@nuxt-alt/auth'
-
+import { useQuery } from '#imports'
 export default class GraphQLScheme extends LocalScheme {
   /**
    * @param credentials

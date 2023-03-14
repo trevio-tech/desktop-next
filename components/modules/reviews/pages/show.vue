@@ -9,6 +9,7 @@
 <script setup>
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
 import { PLACE } from '~/components/modules/places/graphql'
+import { useQuery, useRoute } from '#imports'
 
 const route = useRoute()
 

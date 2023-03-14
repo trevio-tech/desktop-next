@@ -11,7 +11,7 @@
 import { QUESTION_CARD } from '../graphql';
 
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
-import { useHead } from '#imports'
+import { useHead, useQuery } from '#imports'
 
 useHead({
   title: 'Вопросы и ответы'

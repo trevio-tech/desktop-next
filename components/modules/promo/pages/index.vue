@@ -8,7 +8,7 @@
 
 <script setup>
 import { ref } from 'vue'
-
+import { useQuery, definePageMeta } from '#imports'
 
 definePageMeta({
   middleware: 'auth'

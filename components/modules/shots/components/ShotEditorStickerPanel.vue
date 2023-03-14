@@ -10,6 +10,7 @@
 </template>
 
 <script setup>
+import { useShotEditor } from '#imports'
 
 const { addSticker } = useShotEditor()
 </script>

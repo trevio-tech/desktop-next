@@ -10,6 +10,7 @@
 <script setup>
 import ContentCard from '~/components/ContentCard'
 import { TRAVEL_CARD } from '../graphql';
+import { useQuery } from '#imports'
 
 const { data: { travels }, refresh } = await useQuery({
   query: `

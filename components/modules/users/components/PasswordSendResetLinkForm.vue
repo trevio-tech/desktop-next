@@ -22,6 +22,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
+import { useQuery } from '#imports'
 
 const { handleSubmit, setErrors } = useForm()
 const loading = ref(false)

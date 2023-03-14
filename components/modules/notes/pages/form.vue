@@ -35,7 +35,7 @@ import { CREATE_NOTE, UPDATE_NOTE, NOTE_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { definePageMeta, useRoute, useRouter, useNuxtApp } from '#imports'
+import { definePageMeta, useRoute, useRouter, useNuxtApp, useQuery } from '#imports'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
 
 definePageMeta({

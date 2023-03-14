@@ -28,7 +28,7 @@
 
 <script setup>
 import { Wand2, ImagePlus } from 'lucide-vue-next'
-
+import { useShotEditor } from '#imports'
 
 const { setRandomBackgroundGradient, setBackgroundImage, setBackgroundColor } = useShotEditor()
 
