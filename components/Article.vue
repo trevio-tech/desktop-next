@@ -16,7 +16,6 @@
           v-slot="{ onSubmit, isSubscribed, isLoading }"
           model-type="users"
           :model-id="entry.user_id"
-          :subscriptions="store.subscriptions"
       >
         <Button :loading="isLoading" @click="onSubmit('users', entry.user_id)" type="button">
           {{ isSubscribed ? 'Отписаться' : 'Подписаться' }}
@@ -37,8 +36,7 @@
 </template>
 
 <script setup>
-import { Button } from '@trevio/ui'
-import { useSubscriptionsStore } from '~/components/modules/subscriptions/store'
+import { Button, SubscriptionButton, useSubscriptionsStore } from '@trevio/ui'
 
 const store = useSubscriptionsStore()
 

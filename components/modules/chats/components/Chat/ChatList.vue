@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white overflow-hidden">
+  <div class="bg-white overflow-y-auto">
     <ul>
       <li v-for="chat in chats.chats" :key="chat.id" @click="onSelect(chat)" :class="{'bg-blue-100': parseInt(store.activeChat.id) === parseInt(chat.id)}"
           class="p-2 cursor-pointer">
@@ -25,7 +25,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['select'])
+const emits = defineEmits(['select'])
 
 const store = useChatStore()
 const chats = useChatsStore()
@@ -37,7 +37,7 @@ const onSelect = async (chat) => {
   if (router.currentRoute.value.name === 'chats.show') {
     await router.push({name: 'chats.show', params: {chatType: chat.model_type, chatId: chat.model_id}})
   } else {
-    emit('select', `${chat.model_type}-${chat.model_id}`)
+    emits('select', `${chat.model_type}-${chat.model_id}`)
   }
 }
 </script>

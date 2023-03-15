@@ -75,7 +75,7 @@ import { ImagePlus } from 'lucide-vue-next'
 import { useNuxtApp } from 'nuxt/app'
 import { gql } from 'graphql-tag'
 import { onBeforeUnmount } from 'vue'
-import { useChat } from '#imports'
+import { useChat } from '@trevio/ui'
 
 const props = defineProps({
   chatId: {

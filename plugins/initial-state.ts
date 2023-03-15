@@ -2,13 +2,12 @@ import { defineNuxtPlugin, useQuery } from '#imports'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { useShotsStore } from '~/components/modules/shots/store'
-import { useSubscriptionsStore } from '~/components/modules/subscriptions/store'
 import { watch } from 'vue'
 import { MY_CHATS } from '~/components/modules/chats/graphql'
-import { Button } from '@trevio/ui'
+import { useSubscriptionsStore } from '@trevio/ui'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-  nuxtApp.vueApp.component('Button', Button)
+  const subStore = useSubscriptionsStore()
 
   const initialState = async (loggedIn) => {
     try {
@@ -66,9 +65,9 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         })
 
         if (data.subscriptions.length) {
-          useSubscriptionsStore().$patch({
+          subStore.$patch({
             subscriptions: data.subscriptions
-              .reduce((accumulator, currentValue) => ({ ...accumulator, [currentValue.model_type + currentValue.model_id]: true}), {})
+                .reduce((accumulator, currentValue) => ({ ...accumulator, [currentValue.model_type + currentValue.model_id]: true}), {})
           })
         }
       }
