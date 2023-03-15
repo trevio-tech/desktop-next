@@ -2,24 +2,13 @@ import { createResolver } from '@nuxt/kit'
 
 const { resolve } = createResolver(import.meta.url)
 
-export default defineNuxtConfig({
+const config = {
   extends: [
     process.env.LAYER || '@trevio-tech/ui'
   ],
-  vite: {
-    server: {
-      fs: {
-        allow: ['..']
-      }
-    }
-  },
   css: [
-    '@/assets/scss/main.scss',
-    resolve('./node_modules/@trevio/ui/src/assets/style.css')
+    '@/assets/scss/main.scss'
   ],
-  alias: {
-    "@trevio/ui": resolve('../ui-3/src/index.ts'),
-  },
   modules: [
     '@nuxt-alt/auth',
     '@nuxt-alt/http',
@@ -39,4 +28,21 @@ export default defineNuxtConfig({
       }
     }
   }
-})
+}
+
+if (process.env.ENV === 'production') {
+  config.css.push(resolve('./node_modules/@trevio/ui/src/assets/style.css'))
+} else {
+  config.assets = {
+    "@trevio/ui": resolve('../ui-3/src/index.ts'),
+  }
+  config.vite = {
+    server: {
+      fs: {
+        allow: ['..']
+      }
+    }
+  }
+}
+
+export default defineNuxtConfig(config)

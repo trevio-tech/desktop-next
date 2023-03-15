@@ -22,6 +22,7 @@
 
 <script setup>
 import { useQuery } from '#imports'
+import { Alert } from '@trevio/ui'
 
 let tariffs = []
 
