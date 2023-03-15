@@ -17,9 +17,9 @@ export default defineNuxtConfig({
     '@/assets/scss/main.scss',
     resolve('./node_modules/@trevio/ui/src/assets/style.css')
   ],
-  /*alias: {
+  alias: {
     "@trevio/ui": resolve('../ui-3/src/index.ts'),
-  },*/
+  },
   modules: [
     '@nuxt-alt/auth',
     '@nuxt-alt/http',

@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { Button, SubscriptionButton, useSubscriptionsStore } from '@trevio/ui'
+import { Button, SubscriptionButton, useSubscriptionsStore, ImageViewer } from '@trevio/ui'
 
 const store = useSubscriptionsStore()
 

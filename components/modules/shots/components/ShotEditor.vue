@@ -55,8 +55,9 @@ import ShotEditorTextPanel from '~/components/modules/shots/components/ShotEdito
 import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEditorTrashButton.vue'
 import ShotEditorPanelBrushes from '~/components/modules/shots/components/ShotEditorPanelBrushes.vue'
 import { ref } from 'vue'
-import { useNuxtApp, useShotEditor } from '#imports'
+import { useNuxtApp } from '#imports'
 import { useShotsStore } from '~/components/modules/shots/store'
+import { useShotEditor } from '@trevio/ui'
 
 const { $overlay } = useNuxtApp()
 

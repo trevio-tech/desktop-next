@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { useShotEditor } from '#imports'
+import { useShotEditor } from '@trevio/ui'
 
 const { addSticker } = useShotEditor()
 </script>
