@@ -31,7 +31,7 @@ const config = {
   }
 }
 
-if (process.env.ENV !== 'production') {
+if (process.env.ENV === 'production') {
   config.css.push(resolve('./node_modules/@trevio/ui/src/assets/style.css'))
 } else {
   config.alias = {
