@@ -1,7 +1,8 @@
+import { createResolver } from '@nuxt/kit'
+
+const { resolve } = createResolver(import.meta.url)
+
 export default defineNuxtConfig({
-  /*imports: {
-    autoImport: false
-  },*/
   extends: [
     process.env.LAYER || '@trevio-tech/ui'
   ],
@@ -14,7 +15,11 @@ export default defineNuxtConfig({
   },
   css: [
     '@/assets/scss/main.scss',
+    resolve('./node_modules/@trevio/ui/src/assets/style.css')
   ],
+  /*alias: {
+    "@trevio/ui": resolve('../ui-3/src/index.ts'),
+  },*/
   modules: [
     '@nuxt-alt/auth',
     '@nuxt-alt/http',

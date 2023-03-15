@@ -5,8 +5,11 @@ import { useShotsStore } from '~/components/modules/shots/store'
 import { useSubscriptionsStore } from '~/components/modules/subscriptions/store'
 import { watch } from 'vue'
 import { MY_CHATS } from '~/components/modules/chats/graphql'
+import { Button } from '@trevio/ui'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
+  nuxtApp.vueApp.component('Button', Button)
+
   const initialState = async (loggedIn) => {
     try {
       const queries = [`
