@@ -1470,7 +1470,9 @@
 
 "@trevio/ui@https://github.com/trevio-tech/testui-3.git":
   version "1.0.0"
-  resolved "https://github.com/trevio-tech/testui-3.git#7da80c526a7aedfe0978f0a944e791cf594f5d4f"
+  resolved "https://github.com/trevio-tech/testui-3.git#94b5f77bacbde70e5feb9b3bd912460c6e47c79d"
+  dependencies:
+    graphql "^16.6.0"
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
