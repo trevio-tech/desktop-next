@@ -33,7 +33,7 @@ const config = {
 if (process.env.ENV === 'production') {
   config.css.push(resolve('./node_modules/@trevio/ui/src/assets/style.css'))
 } else {
-  config.assets = {
+  config.alias = {
     "@trevio/ui": resolve('../ui-3/src/index.ts'),
   }
   config.vite = {

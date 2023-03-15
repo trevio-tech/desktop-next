@@ -82,6 +82,7 @@ import FriendsForm from '~/components/modules/subscriptions/components/FriendsFo
 import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
 import ContentList from '~/components/ContentList'
 import { useActivityStore } from '~/components/modules/activity/store'
+import { Upload } from '@trevio/ui'
 
 const { $overlay } = useNuxtApp()
 const activityStore = useActivityStore()

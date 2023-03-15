@@ -49,6 +49,7 @@ import { pick } from 'lodash'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useRoute, useRouter, useNuxtApp, definePageMeta, useQuery } from '#imports'
+import { Upload } from '@trevio/ui'
 
 
 definePageMeta({

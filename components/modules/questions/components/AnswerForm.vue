@@ -27,6 +27,7 @@ import { useForm } from 'vee-validate'
 import { CREATE_ANSWER, UPDATE_ANSWER } from '~/components/modules/questions/graphql'
 import { Image } from 'lucide-vue-next'
 import { useQuery } from '#imports'
+import { Upload } from '@trevio/ui'
 
 
 const emit = defineEmits(['created', 'updated'])

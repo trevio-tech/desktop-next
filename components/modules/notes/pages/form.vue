@@ -37,6 +37,7 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { definePageMeta, useRoute, useRouter, useNuxtApp, useQuery } from '#imports'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
+import { TipTap } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'
