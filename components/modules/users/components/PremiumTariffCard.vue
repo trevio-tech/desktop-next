@@ -1,5 +1,5 @@
 <template>
-  <div @click="onClick" class="p-4 rounded-lg flex flex-col flex-1 shadow-sm border border-sky-200 bg-gradient-to-r from-sky-200 to-indigo-200 hover:shadow-md cursor-pointer transition-shadow">
+  <div class="p-4 rounded-lg flex flex-col flex-1 shadow-sm border border-sky-200 bg-gradient-to-r from-sky-200 to-indigo-200 hover:shadow-md transition-shadow">
     <div v-if="tariff.discount > 0" class="absolute top-0 right-0 p-3">
       <div class="py-1 px-2 rounded-full bg-pink text-sm text-white">-{{ tariff.discount }}%</div>
     </div>
@@ -12,7 +12,7 @@
         Новая цена {{ tariff.total_price }} монет
       </div>
       <div class="text-3xl font-bold mt-2 mb-6">{{ tariff.period_value }} {{ tariff.period_text }}</div>
-      <Button class="w-full">Купить</Button>
+      <Button @click="onClick" class="w-full">Купить</Button>
     </footer>
   </div>
 </template>
