@@ -44,7 +44,8 @@ import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'
 import { HelpCircle } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { defineAsyncComponent, useNuxtApp, useQuery } from '#imports'
+import { defineAsyncComponent, useNuxtApp } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 const emit = defineEmits(['login'])
 const { $auth } = useNuxtApp()
