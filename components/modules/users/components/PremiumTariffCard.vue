@@ -47,6 +47,11 @@ const onSubmit = async () => {
         dangerouslyHTMLString: true,
         position: 'top-center',
       })
+
+      let audio = new Audio('/sounds/anime-wow-sound-effect.mp3')
+      audio.volume = 0.1
+      await audio.play()
+      audio = null
     }
   } catch (errors) {
     toast(errors[0].extensions.debugMessage, {
