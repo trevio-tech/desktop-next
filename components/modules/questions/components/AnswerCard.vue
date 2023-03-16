@@ -53,7 +53,8 @@
 
 <script setup>
 import { MoreHorizontal, Check, Pencil, Trash } from 'lucide-vue-next'
-import { useNuxtApp, useQuery } from '#imports'
+import { useNuxtApp } from '#imports'
+import { useQuery } from '@trevio/ui'
 import { DELETE_ANSWER } from '~/components/modules/questions/graphql'
 
 

@@ -29,27 +29,20 @@
       </Menu>
     </template>
 
-    <Article :entry="note" />
-
-    <ChatButton
-        @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
-        props: {
-          chatId: `${note.system_name}-${note.id}`,
-          title: note.title
-        }
-      })" :messages-count="note.messages_count" />
+    <Content :entry="note" />
     <ContentCardSlider v-if="note?.tags.length > 0" :notIn="[note.id]" :tags="note?.tags.map((tag) => tag.id)" />
   </NuxtLayout>
 </template>
 
 <script setup>
-import Article from '~/components/Article.vue'
+import Content from '~/components/Content.vue'
 import ContentCardSlider from '~/components/ContentCardSlider.vue'
 import PromoDialog from '~/components/modules/promo/components/PromoDialog.vue'
 import { NOTE } from '../graphql'
 import { Pencil, Trash } from 'lucide-vue-next'
 import { ref } from 'vue'
-import { useHead, useRoute, useQuery } from '#imports'
+import { useHead, useRoute } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 
 const route = useRoute()

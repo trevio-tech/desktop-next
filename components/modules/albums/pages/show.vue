@@ -3,7 +3,7 @@
     <template #sidebar>
       <NuxtLink :to="`/albums/${album.id}/edit`">edit</NuxtLink>
     </template>
-    <Article :entry="album">
+    <Content :entry="album">
       <template #body>
         <div class="grid grid-cols-4 gap-2">
           <div v-for="image in album.images" :key="image.id" class="aspect-square">
@@ -11,15 +11,15 @@
           </div>
         </div>
       </template>
-    </Article>
+    </Content>
   </NuxtLayout>
 </template>
 
 <script setup>
-import { useQuery, useRoute } from '#imports'
+import { useRoute } from '#imports'
 import { ALBUM } from '~/components/modules/albums/graphql'
 import { ref } from 'vue'
-
+import { useQuery } from '@trevio/ui'
 
 const album = ref()
 

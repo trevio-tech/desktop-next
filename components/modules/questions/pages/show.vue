@@ -4,7 +4,7 @@
       <NuxtLink :to="`/questions/${question.id}/edit`">Редактировать</NuxtLink>
     </template>
 
-    <Article :entry="question" />
+    <Content :entry="question" />
 
     <h2 class="text-2xl font-medium mt-6" id="answers">Ответы на вопрос</h2>
 
@@ -41,8 +41,9 @@ import AnswerForm from '~/components/modules/questions/components/AnswerForm.vue
 
 import { Check } from 'lucide-vue-next'
 import { QUESTION_FIELDS, ANSWER_CARD } from '../graphql';
-import { useRoute, useHead, useQuery } from '#imports'
+import { useRoute, useHead } from '#imports'
 import { shallowRef } from 'vue'
+import { useQuery } from '@trevio/ui'
 
 
 const route = useRoute()

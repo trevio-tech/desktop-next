@@ -10,7 +10,7 @@
 <script setup>
 import ContentCard from '~/components/ContentCard'
 import { TRAVEL_CARD } from '../graphql';
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 const { data: { travels }, refresh } = await useQuery({
   query: `

@@ -11,7 +11,7 @@
       <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>
     </template>
 
-    <Article :entry="travel" />
+    <Content :entry="travel" />
 
     <div v-if="travel.tags && travel.tags.length" class="space-x-2 mt-4 text-slate-400 text-sm truncate">
       <NuxtLink
@@ -33,12 +33,13 @@
 </template>
 
 <script setup>
-import Article from '~/components/Article.vue'
+import Content from '~/components/Content.vue'
 import TravelContentList from '../components/TravelContentList'
 import TravelSiblings from '../components/TravelSiblings.vue'
 import { TRAVEL, TRAVEL_CARD_SQUARE } from '../graphql'
 import { ref } from 'vue'
-import { useQuery, useRoute } from '#imports'
+import { useRoute } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 
 const route = useRoute()

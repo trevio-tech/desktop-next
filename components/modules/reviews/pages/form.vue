@@ -39,9 +39,9 @@ import { CREATE_REVIEW, UPDATE_REVIEW, REVIEW_FORM } from '../graphql'
 import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
-import { definePageMeta, useRoute, useRouter, useNuxtApp, useQuery } from '#imports'
+import { definePageMeta, useRoute, useRouter, useNuxtApp } from '#imports'
 import TravelListField from '~/components/modules/travels/components/TravelListField.vue'
-import { TipTap } from '@trevio/ui'
+import { TipTap, useQuery } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'

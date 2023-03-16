@@ -17,7 +17,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Dialog from '~/components/base/Dialog'
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 const travel = ref(null)
 

@@ -38,7 +38,7 @@ import SearchCard from '~/components/modules/search/components/SearchCard.vue'
 import UserSearchCard from '~/components/modules/users/components/UserSearchCard.vue'
 import { groupBy } from 'lodash-es'
 import { watch, shallowRef, computed } from 'vue'
-import { useSearchHead, useQuery, useRoute } from '#imports'
+import { useSearchHead, useRoute } from '#imports'
 
 const route = useRoute()
 

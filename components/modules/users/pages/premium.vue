@@ -12,17 +12,16 @@
       <li>Возможность скрыть продвигаемые записи</li>
     </ul>
 
-    <div class="mt-6">
-      <div v-for="tariff in tariffs" :key="tariff.id">
-        {{ tariff }}
-      </div>
+    <div class="mt-6 grid grid-cols-3 gap-4">
+      <PremiumTariffCard v-for="tariff in tariffs" :key="tariff.id" :tariff="tariff" />
     </div>
   </NuxtLayout>
 </template>
 
 <script setup>
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 import { Alert } from '@trevio/ui'
+import PremiumTariffCard from '~/components/modules/users/components/PremiumTariffCard.vue'
 
 let tariffs = []
 

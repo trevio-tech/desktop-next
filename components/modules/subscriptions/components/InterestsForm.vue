@@ -18,7 +18,7 @@
 import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useNuxtApp, useQuery } from '#imports'
+import { useNuxtApp } from '#imports'
 
 const emit = defineEmits([
   'update:modelValue'

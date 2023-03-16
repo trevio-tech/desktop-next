@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
     <template #sidebar>1</template>
-    <Article :entry="review" />
+    <Content :entry="review" />
     <PlaceRatingBar v-if="review.place" :place="review.place" :user-rating="review.stars" class="mb-4" />
   </NuxtLayout>
 </template>
@@ -9,7 +9,8 @@
 <script setup>
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
 import { PLACE } from '~/components/modules/places/graphql'
-import { useQuery, useRoute } from '#imports'
+import { useRoute } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 const route = useRoute()
 

@@ -17,7 +17,8 @@ import { ContentCardRectangle } from '~/components'
 import { NOTE_CARD_RECTANGLE } from '~/components/modules/notes/graphql'
 import { TRAVEL_CARD_RECTANGLE } from '~/components/modules/travels/graphql'
 import { useBookmarksStore } from '../store'
-import { useQuery, useRoute } from '#imports'
+import { useRoute } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 
 const params = useRoute().params

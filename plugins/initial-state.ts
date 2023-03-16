@@ -1,10 +1,10 @@
-import { defineNuxtPlugin, useQuery } from '#imports'
+import { defineNuxtPlugin } from '#imports'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { useChatsStore } from '~/components/modules/chats/stores/chats'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { watch } from 'vue'
 import { MY_CHATS } from '~/components/modules/chats/graphql'
-import { useSubscriptionsStore } from '@trevio/ui'
+import { useSubscriptionsStore, useQuery } from '@trevio/ui'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   const subStore = useSubscriptionsStore()

@@ -11,8 +11,9 @@
 import ContentCard from '~/components/ContentCard'
 
 import { NOTE_CARD } from '../graphql'
-import { useRoute, useHead, useQuery } from '#imports'
+import { useRoute, useHead } from '#imports'
 import { ref, watch, computed } from 'vue'
+import { useQuery } from '@trevio/ui'
 
 const route = useRoute()
 

@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { useQuery } from '#imports'
+import { useQuery } from '@trevio/ui'
 import { REVIEW_CARD } from '../graphql';
 import ContentCard from '~/components/ContentCard'
 

@@ -75,14 +75,14 @@
 
 <script setup>
 import { USER } from '../graphql'
-import { useRoute, useNuxtApp, useQuery } from '#imports'
+import { useRoute, useNuxtApp } from '#imports'
 import { Cog } from 'lucide-vue-next'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
 import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
 import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
 import ContentList from '~/components/ContentList'
 import { useActivityStore } from '~/components/modules/activity/store'
-import { Upload } from '@trevio/ui'
+import { Upload, useQuery } from '@trevio/ui'
 
 const { $overlay } = useNuxtApp()
 const activityStore = useActivityStore()

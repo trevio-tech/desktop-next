@@ -1,6 +1,6 @@
 <template>
-  <article class="p-4 rounded-t-lg bg-white">
-    <header class="flex items-center justify-between pb-4 px-4 mb-4 -mx-4 border-b">
+  <article class="rounded-t-lg bg-white">
+    <header class="flex items-center justify-between p-4 mb-4 border-b">
       <div class="flex items-center space-x-2">
         <NuxtLink :to="{name: 'users.show', params: {userId: entry.user.id}}" class="w-10 flex-shrink-0">
           <img :src="entry.user.avatar" :alt="entry.user.name" class="rounded-full" />
@@ -23,19 +23,23 @@
       </SubscriptionButton>
     </header>
 
-    <slot name="after-header" />
+    <div class="p-4">
+      <slot name="after-header" />
 
-    <h2 class="heading text-2xl mb-4">{{ entry.title }}</h2>
+      <h2 class="heading text-2xl mb-4">{{ entry.title }}</h2>
 
-    <ImageViewer>
-      <slot name="body">
-        <div v-html="entry.text" class="prose"></div>
-      </slot>
-    </ImageViewer>
+      <ImageViewer>
+        <slot name="body">
+          <div v-html="entry.text" class="prose"></div>
+        </slot>
+      </ImageViewer>
+    </div>
+    <ContentFooter :entry="entry" />
   </article>
 </template>
 
 <script setup>
+import ContentFooter from '~/components/ContentFooter.vue'
 import { Button, SubscriptionButton, useSubscriptionsStore, ImageViewer } from '@trevio/ui'
 
 const store = useSubscriptionsStore()

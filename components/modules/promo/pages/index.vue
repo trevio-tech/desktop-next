@@ -8,7 +8,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useQuery, definePageMeta } from '#imports'
+import { definePageMeta } from '#imports'
+import { useQuery } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'
