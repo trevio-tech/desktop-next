@@ -124,9 +124,9 @@ const onSubmit = handleSubmit(async () => {
     if (data.noteForm > 0) {
       await useRouter().push({name: 'notes.show', params: {noteId: data.noteForm }})
     }
-  } catch (error) {
-    if (error?.extensions?.validation) {
-      setErrors(error.extensions.validation)
+  } catch (errors) {
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
     }
   } finally {
     loading.value = false

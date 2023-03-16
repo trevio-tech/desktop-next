@@ -120,8 +120,10 @@ const onSubmit = handleSubmit(async () => {
     if (questionForm > 0) {
       await useRouter().push({name: 'questions.show', params: {questionId: questionForm}})
     }
-  } catch (error) {
-    setErrors(error['extensions']['validation'])
+  } catch (errors) {
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
+    }
   } finally {
     loading.value = false
   }

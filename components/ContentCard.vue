@@ -29,17 +29,15 @@
     </div>
 
     <div class="m-4">
-      <Profile :user="entry.user">
-        <template #footer>
-          {{ entry.published_at }}
-        </template>
-      </Profile>
+      <Profile :user="entry.user"></Profile>
     </div>
 
     <div class="m-4">
       <h2 class="text-xl font-semibold mb-2">
         <NuxtLink :to="to">{{ entry.title }}</NuxtLink>
       </h2>
+
+      <div class="text-slate-400 text-sm mb-2">{{ entry.published_at }}</div>
 
       <NuxtLink v-if="entry.text" :to="to">{{ entry.text }}</NuxtLink>
     </div>

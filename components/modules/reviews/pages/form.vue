@@ -135,9 +135,9 @@ const onSubmit = handleSubmit(async () => {
     if (reviewForm > 0) {
       await useRouter().push({name: 'reviews.show', params: {reviewId: reviewForm}})
     }
-  } catch (error) {
-    if (error?.extensions?.validation) {
-      setErrors(error.extensions.validation)
+  } catch (errors) {
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
     }
   } finally {
     loading.value = false

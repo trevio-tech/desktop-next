@@ -194,9 +194,9 @@ const onSubmit = async (isDraft) => {
     if (travelForm > 0) {
       await useRouter().push({name: 'travels.show', params: {travelId: travelForm}})
     }
-  } catch (error) {
-    if (error['extensions']['validation']) {
-      setErrors(error['extensions']['validation'])
+  } catch (errors) {
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
     }
   } finally {
     loading.value = false

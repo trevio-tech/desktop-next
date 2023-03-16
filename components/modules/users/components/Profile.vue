@@ -8,15 +8,16 @@
       <NuxtLink :to="{name: 'users.show', params: {userId: user.id}}" class="font-bold">
         {{ user.name }}
       </NuxtLink>
-      <div class="text-slate-400">
-        <slot name="footer"></slot>
-      </div>
+      <SubscriptionButton v-slot="{ onSubmit, isSubscribed, isLoading }" model-type="users" :model-id="user.id">
+        <div class="text-slate-400" @click="onSubmit">{{ isSubscribed ? 'Отписаться' : 'Подписаться' }}</div>
+      </SubscriptionButton>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useNuxtApp } from '#imports'
+import { SubscriptionButton } from '@trevio/ui'
 
 const props = defineProps({
   user: {
@@ -30,7 +31,7 @@ const { $auth } = useNuxtApp()
 let avatar = props.user.avatar
 
 // При загрузке нового аватара,
-// во всех местах где используеться этот компонент,
+// во всех местах, где используется этот компонент,
 // аватар смениться на лету.
 if ($auth.loggedIn && parseInt(props.user.id) === parseInt($auth.user.id)) {
   avatar = $auth.user.avatar

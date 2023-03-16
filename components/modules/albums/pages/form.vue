@@ -143,8 +143,8 @@ const onSubmit = handleSubmit(async () => {
       await useRouter().push({name: 'albums.show', params: {albumId: albumForm}})
     }
   } catch (errors) {
-    if (errors?.extensions?.validation) {
-      setErrors(errors.extensions.validation)
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
     }
   } finally {
     loading.value = false
