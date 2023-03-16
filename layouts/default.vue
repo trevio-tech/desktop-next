@@ -9,7 +9,7 @@
         <h1 v-if="heading" class="text-xl font-bold mb-4">{{ heading }}</h1>
 
         <!-- HERO -->
-        <div v-if="hasHero" class="bg-red-50 mb-4">
+        <div v-if="hasHero" class="mb-4">
           <slot name="hero" />
         </div>
         <!-- / HERO -->

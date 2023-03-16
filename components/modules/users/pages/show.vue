@@ -8,18 +8,9 @@
     </Html>
 
     <template #hero>
-      <div class="bg-gradient-to-r from-blue-50 to-blue-200 flex items-center h-40 px-10 rounded-lg">
-        <div class="mr-4 flex-shrink-0">
-          <Upload v-model="user.avatar" mutation-name="uploadAvatar">
-            <img :src="user.avatar" class="w-24 h-24 rounded-full" alt="">
-          </Upload>
-        </div>
-        <div class="overflow-hidden">
-          <h1 class="text-4xl font-semibold truncate">{{ user.name }}</h1>
-          <p class="max-w-[480px] text-sm mt-2">{{ user.description }}</p>
-        </div>
-      </div>
+      <UserHero :user="user" />
     </template>
+
     <template #sidebar>
       <div>
         <h3 class="font-semibold mb-2 flex items-center space-x-1">
@@ -74,15 +65,16 @@
 </template>
 
 <script setup>
-import { USER } from '../graphql'
-import { useRoute, useNuxtApp } from '#imports'
-import { Cog } from 'lucide-vue-next'
-import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
-import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
-import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
 import ContentList from '~/components/ContentList'
+import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
+import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
+import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
+import UserHero from '~/components/modules/users/components/UserHero.vue'
+import { Cog } from 'lucide-vue-next'
+import { USER } from '../graphql'
 import { useActivityStore } from '~/components/modules/activity/store'
-import { Upload, useQuery } from '@trevio/ui'
+import { useQuery } from '@trevio/ui'
+import { useRoute, useNuxtApp } from '#imports'
 
 const { $overlay } = useNuxtApp()
 const activityStore = useActivityStore()
