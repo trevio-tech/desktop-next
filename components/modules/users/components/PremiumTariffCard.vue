@@ -1,5 +1,5 @@
 <template>
-  <div @click="onSubmit" class="p-4 rounded-lg flex flex-col flex-1 shadow-sm border border-sky-200 bg-gradient-to-r from-sky-200 to-indigo-200 hover:shadow-md cursor-pointer transition-shadow">
+  <div @click="onClick" class="p-4 rounded-lg flex flex-col flex-1 shadow-sm border border-sky-200 bg-gradient-to-r from-sky-200 to-indigo-200 hover:shadow-md cursor-pointer transition-shadow">
     <div v-if="tariff.discount > 0" class="absolute top-0 right-0 p-3">
       <div class="py-1 px-2 rounded-full bg-pink text-sm text-white">-{{ tariff.discount }}%</div>
     </div>
@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-import { useQuery } from '@trevio/ui'
-import { toast } from 'vue3-toastify'
+import PremiumTariffBuyConfirmDialog from '~/components/modules/users/components/PremiumTariffBuyConfirmDialog.vue'
+import { useOverlay } from '@trevio/ui'
 
 const props = defineProps({
   tariff: {
@@ -28,35 +28,9 @@ const props = defineProps({
   },
 })
 
-const onSubmit = async () => {
-  try {
-    const { data } = await useQuery({
-      query: `
-        mutation buyPremium($tariff_id: ID!) {
-          buyPremium(tariff_id: $tariff_id)
-        }
-      `,
-      variables: {
-        tariff_id: props.tariff.id
-      }
-    })
-
-    if (data.buyPremium) {
-      toast(`Премиум аккаунт куплен!<br />Действует до ${data.buyPremium}`, {
-        type: 'success',
-        dangerouslyHTMLString: true,
-        position: 'top-center',
-      })
-
-      let audio = new Audio('/sounds/anime-wow-sound-effect.mp3')
-      audio.volume = 0.1
-      await audio.play()
-      audio = null
-    }
-  } catch (errors) {
-    toast(errors[0].extensions.debugMessage, {
-      type: 'error'
-    })
-  }
+const onClick = () => {
+  useOverlay().show(PremiumTariffBuyConfirmDialog, {
+    props
+  })
 }
 </script>
