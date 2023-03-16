@@ -1,12 +1,10 @@
 import { defineNuxtPlugin } from '#imports'
-import { Echo } from '@trevio/ui'
+import { websockets } from '@trevio/ui'
 
-export default defineNuxtPlugin(async (nuxtApp) => {
-  const echo = await Echo(nuxtApp)
-
+export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
-      echo,
+      echo: websockets(nuxtApp),
     }
   }
 })

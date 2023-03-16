@@ -83,7 +83,7 @@ const props = defineProps({
   }
 })
 
-// const { $echo } = useNuxtApp()
+const { $echo } = useNuxtApp()
 
 const { stacks, getMessages, addMessage, activeChatId, setMessageFields } = useChat()
 
@@ -93,7 +93,7 @@ const store = useChatStore()
 
 setMessageFields(CHAT_MESSAGE)
 
-/*const subscriber = $echo
+const subscriber = $echo
   .subscribe({
     query: gql`
       subscription {
@@ -103,7 +103,7 @@ setMessageFields(CHAT_MESSAGE)
       }
     `,
   })
-  .subscribe(({ data }) => addMessage(data.chatMessageCreated))*/
+  .subscribe(({ data }) => addMessage(data.chatMessageCreated))
 
 await getMessages(props.chatId)
 
