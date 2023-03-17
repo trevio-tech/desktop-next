@@ -8,7 +8,8 @@ export const USER = `
   gender
   subscribers_count
   subscriptions_count
-  travels_count,
+  travels_count
+  created_at(format: "relative")
   place {
     id
     parent_id

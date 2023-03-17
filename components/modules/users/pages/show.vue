@@ -60,7 +60,7 @@
       </div>
     </template>
 
-    <ContentList :user-id="user.id" />
+<!--    <ContentList :user-id="user.id" />-->
   </NuxtLayout>
 </template>
 
