@@ -28,10 +28,10 @@ const config = {
         scheme: '~/schemes/graphql.ts',
       }
     }
-  }
+  },
 }
 
-if (process.env.ENV === 'production') {
+if (process.env.ENV !== 'development') {
   config.css.push(resolve('./node_modules/@trevio/ui/src/assets/style.css'))
 } else {
   config.css.push(resolve('../ui-3/src/assets/style.css'))

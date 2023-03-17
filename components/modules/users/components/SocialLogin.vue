@@ -22,7 +22,7 @@
 
 <script setup>
 import { useNuxtApp } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { useQuery, usePopup } from '@trevio/ui'
 import { onMounted } from 'vue'
 
 const { $auth, $overlay } = useNuxtApp()
