@@ -7,7 +7,9 @@
 <script setup>
 import { Bookmark } from 'lucide-vue-next'
 import { defineAsyncComponent, ref } from 'vue'
-import { useNuxtApp } from '#imports'
+import { useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
@@ -25,18 +27,16 @@ const props = defineProps({
   }
 })
 
-const { $overlay } = useNuxtApp()
-
 const active = ref(props.modelValue?.length > 0)
 
 const onClick = async () => {
-  $overlay.show(defineAsyncComponent(() => import('~/components/modules/bookmarks/components/BookmarkDialog.vue')), {
+  overlay.show(defineAsyncComponent(() => import('~/components/modules/bookmarks/components/BookmarkDialog.vue')), {
     props,
     on: {
       change: (categories) => {
         active.value = categories.length > 0
         emit('update:modelValue', categories)
-        $overlay.hide()
+        overlay.hide()
       }
     }
   })

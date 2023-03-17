@@ -14,10 +14,11 @@
 import { TIMELINE } from '~/components/modules/activity/graphql'
 import ContentCard from '~/components/ContentCard'
 import { ref } from 'vue'
+import { useQuery } from '@trevio/ui'
 
 const props = defineProps({
   userId: {
-    type: Number,
+    type: [Number, String],
     required: true
   },
   systemName: {

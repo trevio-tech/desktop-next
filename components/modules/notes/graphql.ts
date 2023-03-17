@@ -72,6 +72,7 @@ export const NOTE = `
     text
     can
     system_name
+    likes_count
     published_at(format: "relative")
     images {
         id
@@ -86,6 +87,9 @@ export const NOTE = `
       model_id
       model_type
       category_id
+    }
+    like {
+      is_liked
     }
     user {
       id

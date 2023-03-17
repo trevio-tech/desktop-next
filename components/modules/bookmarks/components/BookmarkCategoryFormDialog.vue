@@ -10,7 +10,7 @@
       </label>
       <footer class="flex items-center space-x-2 mt-4">
         <Button type="submit" :loading="loading">Сохранить</Button>
-        <Button variant="secondary" @click="$overlay.hide">Назад</Button>
+        <Button variant="secondary" @click="overlay.hide">Назад</Button>
       </footer>
     </form>
   </Dialog>
@@ -20,7 +20,7 @@
 import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useOverlay } from '#imports'
+import { useOverlay, useQuery } from '@trevio/ui'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { CREATE_BOOKMARK_CATEGORY, UPDATE_BOOKMARK_CATEGORY } from '../graphql/mutations'
 
@@ -37,7 +37,7 @@ const props = defineProps({
 })
 
 const { handleSubmit, setErrors} = useForm()
-const $overlay = useOverlay()
+const overlay = useOverlay()
 const store = useBookmarksStore()
 
 const form = ref({...props.category})
@@ -76,11 +76,11 @@ const onSubmit = handleSubmit(async () => {
       } else {
         store.addCategory(data.bookmarkCategory)
       }
-      $overlay.hide()
+      overlay.hide()
     }
-  } catch (error) {
-    if (error.extensions.validation) {
-      setErrors(error.extensions.validation)
+  } catch (errors) {
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
     }
   } finally {
     loading.value = false

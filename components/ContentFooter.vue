@@ -9,6 +9,7 @@
       />
     </IsLoggedIn>
 
+<!--
     <ChatButton
         class="ml-1"
       @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
@@ -17,6 +18,7 @@
         title: entry.title
       }
       })" :messages-count="entry.messages_count" />
+-->
 
     <BookmarkButton
       class="ml-auto"

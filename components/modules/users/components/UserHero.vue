@@ -11,7 +11,7 @@
       </div>
     </Upload>
 
-    <div class="bg-gray-300 p-4 rounded-lg h-[80px] -mt-[40px] flex items-center">
+    <div class="bg-gradient-to-r from-cyan-100 to-blue-300 p-4 rounded-lg h-[80px] -mt-[40px] flex items-center">
 
       <div class="mr-4 flex-shrink-0 -mt-[120px]">
         <Upload v-model="user.avatar" mutation-name="uploadAvatar">
@@ -19,7 +19,7 @@
         </Upload>
       </div>
       <div>
-        <h1 class="truncate">{{ user.name }}</h1>
+        <h1 class="truncate text-lg">{{ user.name }}</h1>
 <!--        <p class="max-w-[480px] text-sm mt-2">{{ user.description }}</p>-->
       </div>
     </div>

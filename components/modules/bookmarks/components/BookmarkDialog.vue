@@ -15,7 +15,7 @@
       <div v-else>У вас нет категорий для закладок</div>
       <footer class="flex items-center space-x-2 mt-4">
         <Button @click="onSubmit">Сохранить</Button>
-        <Button variant="secondary" @click="$overlay.show(BookmarksCategoryForm)">Создать категорию</Button>
+        <Button variant="secondary" @click="overlay.show(BookmarksCategoryForm)">Создать категорию</Button>
       </footer>
     </div>
   </Dialog>
@@ -27,7 +27,7 @@ import { ref } from 'vue'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import Dialog from '~/components/base/Dialog.vue'
 import { Pencil } from 'lucide-vue-next'
-import { useOverlay } from '#imports'
+import { useOverlay, useQuery } from '@trevio/ui'
 
 const overlay = useOverlay()
 
