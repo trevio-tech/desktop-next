@@ -25,12 +25,13 @@
 </template>
 
 <script setup>
-import { useRouter } from '#imports'
-import { ref } from 'vue'
+import 'swiper/css'
+import 'swiper/css/scrollbar'
 import { Autoplay, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css/scrollbar'
-import 'swiper/css'
+import { ref } from 'vue'
+import { useQuery } from '@trevio/ui'
+import { useRouter } from '#imports'
 
 const router = useRouter()
 const hash = router.currentRoute.value.hash
