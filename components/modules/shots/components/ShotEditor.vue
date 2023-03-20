@@ -56,8 +56,7 @@ import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEdi
 import ShotEditorPanelBrushes from '~/components/modules/shots/components/ShotEditorPanelBrushes.vue'
 import { ref } from 'vue'
 import { useShotsStore } from '~/components/modules/shots/store'
-import { useShotEditor } from '@trevio/ui'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, Button, useShotEditor } from '@trevio/ui'
 
 const overlay = useOverlay()
 

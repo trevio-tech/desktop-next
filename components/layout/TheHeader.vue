@@ -23,22 +23,12 @@
           </div>
         </template>
         <template v-slot:popper="{ hide }">
-          <DropdownItem as="div" @click="hide">
-            <NuxtLink :to="{name: 'users.show', params: {userId: $auth.user.id}}">Мой профиль</NuxtLink>
-          </DropdownItem>
-          <DropdownItem as="div" @click="hide">
-            <NuxtLink :to="{name: 'users.edit', params: {userId: $auth.user.id}}">Настройки</NuxtLink>
-          </DropdownItem>
-          <DropdownItem as="div" @click="hide">
-            <NuxtLink :to="{name: 'bookmarks', params: {userId: $auth.user.id}}">Закладки</NuxtLink>
-          </DropdownItem>
-          <DropdownItem as="div" @click="hide">
-            <NuxtLink :to="{name: 'promo'}">Продвижение</NuxtLink>
-          </DropdownItem>
-          <DropdownItem as="div" @click="hide">
-            <NuxtLink :to="{name: 'users.premium'}">Premium</NuxtLink>
-          </DropdownItem>
-          <DropdownItem as="div" @click="$auth.logout()">Выход</DropdownItem>
+          <DropdownItem :to="{name: 'users.show', params: {userId: $auth.user.id}}" @click="hide">Мой профиль</DropdownItem>
+          <DropdownItem :to="{name: 'users.edit', params: {userId: $auth.user.id}}" @click="hide">Настройки</DropdownItem>
+          <DropdownItem :to="{name: 'bookmarks', params: {userId: $auth.user.id}}" @click="hide">Закладки</DropdownItem>
+          <DropdownItem :to="{name: 'promo'}" @click="hide">Продвижение</DropdownItem>
+          <DropdownItem :to="{name: 'users.premium'}" @click="hide">Премиум</DropdownItem>
+          <DropdownItem @click="$auth.logout()">Выход</DropdownItem>
         </template>
       </Dropdown>
     </div>
@@ -48,7 +38,7 @@
 <script setup>
 import { defineAsyncComponent } from '#imports'
 import { ChevronDown } from 'lucide-vue-next'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 

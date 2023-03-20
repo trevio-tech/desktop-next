@@ -20,7 +20,7 @@
 import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useOverlay, useQuery } from '@trevio/ui'
+import { useOverlay, useQuery, Button } from '@trevio/ui'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { CREATE_BOOKMARK_CATEGORY, UPDATE_BOOKMARK_CATEGORY } from '../graphql/mutations'
 

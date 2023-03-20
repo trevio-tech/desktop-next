@@ -20,6 +20,7 @@ import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import ContentList from '~/components/ContentList.vue'
 import PromoItem from '~/components/modules/promo/components/PromoItem.vue'
+import { Button } from '@trevio/ui'
 
 const emit = defineEmits(['select'])
 

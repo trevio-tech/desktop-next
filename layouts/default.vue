@@ -19,7 +19,7 @@
           <div :class="{'w-[560px]': hasSidebar}">
             <slot />
           </div>
-          <div v-if="hasSidebar" class="flex-shrink-0 w-[240px] bg-gray-100">
+          <div v-if="hasSidebar" class="flex-shrink-0 w-[240px]">
             <slot name="sidebar-before" />
             <slot name="sidebar" />
             <slot name="sidebar-after" />

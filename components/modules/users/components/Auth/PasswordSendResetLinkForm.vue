@@ -22,7 +22,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useQuery } from '@trevio/ui'
+import { useQuery, Button } from '@trevio/ui'
 
 const { handleSubmit, setErrors } = useForm()
 const loading = ref(false)

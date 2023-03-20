@@ -35,7 +35,7 @@ import LoginForm from './LoginForm.vue'
 import RegisterForm from './RegisterForm.vue'
 import { ref } from 'vue'
 import { X } from 'lucide-vue-next'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 const isRegister = ref(false)

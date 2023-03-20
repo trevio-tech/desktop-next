@@ -27,7 +27,7 @@ import { ref } from 'vue'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import Dialog from '~/components/base/Dialog.vue'
 import { Pencil } from 'lucide-vue-next'
-import { useOverlay, useQuery } from '@trevio/ui'
+import { useOverlay, useQuery, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 

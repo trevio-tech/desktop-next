@@ -24,7 +24,7 @@ import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { X } from 'lucide-vue-next'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 

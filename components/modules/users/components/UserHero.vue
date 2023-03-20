@@ -15,10 +15,10 @@
           </Button>
         </template>
         <template v-slot:popper="{ hide }">
-          <DropdownItem as="div" @click="hide">
+          <DropdownItem @click="hide">
             <Upload v-model="user.banner" mutation-name="uploadBanner">Загрузить</Upload>
           </DropdownItem>
-          <DropdownItem v-if="user.banner !== null" as="div" @click="hide(); onDelete()">Удалить</DropdownItem>
+          <DropdownItem v-if="user.banner !== null" @click="hide(); onDelete()">Удалить</DropdownItem>
         </template>
       </Dropdown>
     </div>
@@ -34,7 +34,7 @@
       <div class="flex-auto flex items-center justify-between">
         <div>
           <h1 class="truncate text-xl font-semibold">{{ user.name }}</h1>
-          <div class="underline text-sm font-medium text-blue-400 cursor-pointer">О пользователи...</div>
+          <div class="underline text-sm font-medium text-blue-400 cursor-pointer">Подробнее...</div>
         </div>
         <Button @click="$router.push({name: 'users.edit', params: {userId: user.id}})">Редактировать</Button>
       </div>
@@ -46,7 +46,7 @@
 <script setup>
 import ColorThief from 'colorthief/dist/color-thief'
 import { Pencil } from 'lucide-vue-next'
-import { Upload, shadeColor, useQuery } from '@trevio/ui'
+import { Upload, shadeColor, useQuery, Button } from '@trevio/ui'
 import { computed } from 'vue'
 
 const props = defineProps({

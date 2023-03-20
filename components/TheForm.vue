@@ -16,6 +16,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { Button } from '@trevio/ui'
 
 defineEmits(['submit'])
 defineProps({

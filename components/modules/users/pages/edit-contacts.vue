@@ -46,11 +46,9 @@
 </template>
 
 <script setup>
-
-
 import { ref } from 'vue'
-
 import { UPDATE_USER } from '../graphql'
+import { Button } from '@trevio/ui'
 
 const form = ref({
   name: '',

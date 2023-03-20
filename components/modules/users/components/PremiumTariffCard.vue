@@ -19,7 +19,7 @@
 
 <script setup>
 import PremiumTariffBuyConfirmDialog from '~/components/modules/users/components/PremiumTariffBuyConfirmDialog.vue'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, Button } from '@trevio/ui'
 
 const props = defineProps({
   tariff: {

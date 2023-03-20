@@ -25,7 +25,7 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import SocialLogin from './SocialLogin.vue'
 import PasswordSendResetLinkDialog from './PasswordSendResetLinkDialog.vue'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 const emit = defineEmits(['login', 'register'])

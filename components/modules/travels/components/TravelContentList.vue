@@ -22,9 +22,9 @@
 </template>
 
 <script setup>
-
 import { ref } from 'vue'
 import { NESTED_CONTENT_LIST } from '~/components/modules/travels/graphql'
+import { Button } from '@trevio/ui'
 
 
 const props = defineProps({

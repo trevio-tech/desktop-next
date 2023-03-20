@@ -45,7 +45,7 @@ import PromoFindContentDialog from '~/components/modules/promo/components/PromoF
 import { ref } from 'vue'
 import { X } from 'lucide-vue-next'
 import { usePromoStore } from '~/components/modules/promo/store'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 

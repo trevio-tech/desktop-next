@@ -17,7 +17,7 @@
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
-import { useQuery } from '@trevio/ui'
+import { useQuery, Button } from '@trevio/ui'
 import { toast } from 'vue3-toastify'
 import { shallowRef } from 'vue'
 

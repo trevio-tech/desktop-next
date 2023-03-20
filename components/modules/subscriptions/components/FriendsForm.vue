@@ -19,7 +19,7 @@ import Dialog from '~/components/base/Dialog.vue'
 import { InputUsers } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 
