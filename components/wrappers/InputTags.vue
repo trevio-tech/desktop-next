@@ -5,6 +5,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { InputTags } from '@trevio/ui'
 
 
 const emit = defineEmits(['update:modelValue'])

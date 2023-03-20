@@ -37,7 +37,7 @@ import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { definePageMeta, useRoute, useRouter, useNuxtApp } from '#imports'
-import { TipTap, useQuery } from '@trevio/ui'
+import { TipTap, useQuery, SearchPlace } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'

@@ -36,7 +36,9 @@
 <script setup>
 import { Clock2, Users, Flame } from 'lucide-vue-next'
 import TheContentCreationDialog from './TheContentCreationDialog'
-import { Button, IsLoggedIn } from '@trevio/ui'
+import { Button, IsLoggedIn, useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 const items = [
   { name: 'Путешествия', href: '/travels' },

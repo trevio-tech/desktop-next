@@ -19,6 +19,7 @@
 <script setup>
 import { ref } from 'vue'
 import { X } from 'lucide-vue-next'
+import { InputTags } from '@trevio/ui'
 
 defineEmits(['update:modelValue'])
 
