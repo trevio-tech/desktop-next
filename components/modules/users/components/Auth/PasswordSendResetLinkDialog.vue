@@ -6,5 +6,5 @@
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
-import PasswordSendResetLinkForm from '~/components/modules/users/components/PasswordSendResetLinkForm.vue'
+import PasswordSendResetLinkForm from './PasswordSendResetLinkForm.vue'
 </script>

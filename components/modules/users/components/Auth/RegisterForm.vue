@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'
+import SocialLogin from './SocialLogin.vue'
 import { HelpCircle } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'

@@ -55,7 +55,7 @@ const onLoad = (event) => {
     const color = colorThief.getColor(event.target)
     const el = document.querySelector('#bb')
 
-    el.style.backgroundImage = `linear-gradient(to right, ${shadeColor(color, 10)}, ${shadeColor(color, 50)})`;
+    el.style.backgroundImage = `linear-gradient(-45deg, ${shadeColor(color, 10)}, ${shadeColor(color, 50)})`;
   }
 }
 </script>

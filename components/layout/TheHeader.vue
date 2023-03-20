@@ -53,6 +53,6 @@ import { useOverlay } from '@trevio/ui'
 const overlay = useOverlay()
 
 const onLogin = async () => {
-  overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/LoginRegisterDialog.vue')))
+  overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/Auth/LoginRegisterDialog.vue')))
 }
 </script>

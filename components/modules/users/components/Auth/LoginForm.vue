@@ -23,8 +23,8 @@
 import { useNuxtApp } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'
-import PasswordSendResetLinkDialog from '~/components/modules/users/components/PasswordSendResetLinkDialog.vue'
+import SocialLogin from './SocialLogin.vue'
+import PasswordSendResetLinkDialog from './PasswordSendResetLinkDialog.vue'
 import { useOverlay } from '@trevio/ui'
 
 const overlay = useOverlay()
@@ -46,9 +46,9 @@ const onSubmit = handleSubmit(async () => {
   try {
     await $auth.loginWith('graphql', {...form.value})
     emit('login')
-  } catch (error) {
-    if (error.extensions.validation) {
-      setErrors(error.extensions.validation)
+  } catch (errors) {
+    if (errors[0].extensions.validation) {
+      setErrors(errors[0].extensions.validation)
     }
   } finally {
     loading.value = false

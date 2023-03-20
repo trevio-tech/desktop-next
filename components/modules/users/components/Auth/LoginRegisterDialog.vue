@@ -31,8 +31,8 @@
 </template>
 
 <script setup>
-import LoginForm from '~/components/modules/users/components/LoginForm.vue'
-import RegisterForm from '~/components/modules/users/components/RegisterForm.vue'
+import LoginForm from './LoginForm.vue'
+import RegisterForm from './RegisterForm.vue'
 import { ref } from 'vue'
 import { X } from 'lucide-vue-next'
 import { useOverlay } from '@trevio/ui'
