@@ -19,7 +19,9 @@ import Dialog from '~/components/base/Dialog.vue'
 import { InputUsers } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useNuxtApp } from '#imports'
+import { useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 const emit = defineEmits([
   'update:modelValue'
@@ -33,8 +35,6 @@ const props = defineProps({
     default: () => []
   }
 })
-
-const { $overlay } = useNuxtApp()
 
 const users = ref(props.modelValue)
 
@@ -66,7 +66,7 @@ const onSubmit = handleSubmit(async (values, errors) => {
       }
     })
 
-    $overlay.hide()
+    overlay.hide()
   } catch (error) {
     errors.setErrors(error['extensions']['validation'])
   } finally {

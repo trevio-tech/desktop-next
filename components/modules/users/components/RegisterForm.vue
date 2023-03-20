@@ -24,7 +24,7 @@
           Бизнес-аккаунт
         </Checkbox>
         <HelpCircle
-            @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/AboutBusinessAccountDialog.vue')))"
+            @click="overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/AboutBusinessAccountDialog.vue')))"
             class="w-4 h-4 text-gray-400 hover:text-blue-500 cursor-pointer" />
       </div>
     </FormField>
@@ -45,7 +45,9 @@ import { HelpCircle } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { defineAsyncComponent, useNuxtApp } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { useQuery, useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 const emit = defineEmits(['login'])
 const { $auth } = useNuxtApp()

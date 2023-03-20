@@ -5,8 +5,8 @@
         <NuxtLink to="/" class="block mb-10" title="Trevio.ru - о путешествиях">
           <img src="/images/logotype.svg" alt="Trevio.ru - о путешествиях" class="mx-auto" />
         </NuxtLink>
-        <RegisterForm v-if="isRegister" @login="$overlay.hide()" />
-        <LoginForm v-else @login="$overlay.hide()" />
+        <RegisterForm v-if="isRegister" @login="overlay.hide()" />
+        <LoginForm v-else @login="overlay.hide()" />
 
         <Button @click="isRegister = !isRegister" class="w-full mt-2" variant="secondary">
           {{ isRegister ? 'Войти в профиль' : 'Быстрая регистрация' }}
@@ -14,7 +14,7 @@
       </div>
 
       <div class="select-none h-full w-full max-w-[1040px] relative">
-        <button @click="$overlay.hide" type="button" class="absolute top-2 right-2 text-gray-100 bg-transparent bg-black/20 hover:bg-black/50 rounded-lg p-1.5">
+        <button @click="overlay.hide" type="button" class="absolute top-2 right-2 text-gray-100 bg-transparent bg-black/20 hover:bg-black/50 rounded-lg p-1.5">
           <X class="w-5 h-5" />
           <span class="sr-only">Закрыть</span>
         </button>
@@ -35,7 +35,9 @@ import LoginForm from '~/components/modules/users/components/LoginForm.vue'
 import RegisterForm from '~/components/modules/users/components/RegisterForm.vue'
 import { ref } from 'vue'
 import { X } from 'lucide-vue-next'
+import { useOverlay } from '@trevio/ui'
 
+const overlay = useOverlay()
 const isRegister = ref(false)
 
 const random = (min, max) => {

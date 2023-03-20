@@ -43,10 +43,11 @@
 import Dialog from '~/components/base/Dialog.vue'
 import PromoFindContentDialog from '~/components/modules/promo/components/PromoFindContentDialog.vue'
 import { ref } from 'vue'
-import { useNuxtApp } from '#imports'
-
 import { X } from 'lucide-vue-next'
 import { usePromoStore } from '~/components/modules/promo/store'
+import { useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 const props = defineProps({
   entry: {
@@ -54,7 +55,6 @@ const props = defineProps({
   }
 })
 
-const { $overlay } = useNuxtApp()
 const store = usePromoStore()
 
 const tariffs = ref([])
@@ -85,7 +85,7 @@ try {
 } catch (error) {}
 
 const onClickMore = (systemName) => {
-  $overlay.show(PromoFindContentDialog, {
+  overlay.show(PromoFindContentDialog, {
     props: {
       systemName
     },
@@ -100,7 +100,7 @@ const onClickMore = (systemName) => {
           }
         })
 
-        $overlay.hide()
+        overlay.hide()
       }
     }
   })

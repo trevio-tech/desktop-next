@@ -46,12 +46,13 @@
 </template>
 
 <script setup>
-import { useNuxtApp, defineAsyncComponent } from '#imports'
+import { defineAsyncComponent } from '#imports'
 import { ChevronDown } from 'lucide-vue-next'
+import { useOverlay } from '@trevio/ui'
 
-const { $overlay } = useNuxtApp()
+const overlay = useOverlay()
 
 const onLogin = async () => {
-  $overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/LoginRegisterDialog.vue')))
+  overlay.show(defineAsyncComponent(() => import('~/components/modules/users/components/LoginRegisterDialog.vue')))
 }
 </script>

@@ -12,7 +12,7 @@
         <img v-if="entry.cover" :src="entry.cover?.url?.default" :alt="entry.title" class="object-cover w-full h-full" loading="lazy">
       </NuxtLink>
       <div v-if="entry.travel_id > 0"
-           @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/travels/components/TravelAboutDialog.vue')), {
+           @click="overlay.show(defineAsyncComponent(() => import('~/components/modules/travels/components/TravelAboutDialog.vue')), {
              props: {
                id: entry.travel_id
              }
@@ -59,6 +59,9 @@ import { defineAsyncComponent } from 'vue'
 import Profile from '~/components/modules/users/components/Profile'
 import useContentCard from '~/components/ContentCard/useContentCard'
 import ContentFooter from '~/components/ContentFooter.vue'
+import { useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 const props = defineProps({
   entry: {

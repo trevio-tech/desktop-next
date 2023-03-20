@@ -3,7 +3,7 @@
     <ul class="w-[640px] grid grid-cols-2 gap-4">
       <li v-ripple v-for="(item, index) in items" :key="index"
           class="select-none flex items-center cursor-pointer bg-white rounded-lg hover:bg-blue-50 hover:border-blue-200 border border-slate-100">
-        <NuxtLink :to="item.href" @click="$overlay.hide" class="block p-4">
+        <NuxtLink :to="item.href" @click="overlay.hide" class="block p-4">
           <div class="font-medium">{{ item.name }}</div>
           <div class="text-xs text-gray-400">{{ item.text }}</div>
         </NuxtLink>
@@ -20,13 +20,13 @@
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
-import { useNuxtApp } from '#imports'
+import { useOverlay } from '@trevio/ui'
 
-const { $overlay } = useNuxtApp()
+const overlay = useOverlay()
 
 const onClickShot = () => {
-  $overlay.hide()
-  $overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
+  overlay.hide()
+  overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
 }
 
 const items = [

@@ -73,10 +73,11 @@ import UserHero from '~/components/modules/users/components/UserHero.vue'
 import { Cog } from 'lucide-vue-next'
 import { USER } from '../graphql'
 import { useActivityStore } from '~/components/modules/activity/store'
-import { useQuery } from '@trevio/ui'
-import { useRoute, useNuxtApp } from '#imports'
+import { useRoute } from '#imports'
+import { useQuery, useOverlay } from '@trevio/ui'
 
-const { $overlay } = useNuxtApp()
+const overlay = useOverlay()
+
 const activityStore = useActivityStore()
 
 const { data: { user }} = await useQuery({
@@ -93,7 +94,7 @@ const { data: { user }} = await useQuery({
 })
 
 const onEditInterests = () => {
-  $overlay.show(InterestsForm, {
+  overlay.show(InterestsForm, {
     props: {
       modelValue: user.interests
     },
@@ -105,7 +106,7 @@ const onEditInterests = () => {
   })
 }
 const onEditFriends = () => {
-  $overlay.show(FriendsForm, {
+  overlay.show(FriendsForm, {
     props: {
       modelValue: user.friends,
     },
@@ -119,7 +120,7 @@ const onEditFriends = () => {
   })
 }
 const onEditSelectedPlaces = () => {
-  $overlay.show(SelectedPlacesForm, {
+  overlay.show(SelectedPlacesForm, {
     props: {
       modelValue: user.selectedPlaces
     },

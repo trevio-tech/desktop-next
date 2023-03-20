@@ -40,7 +40,7 @@
       <ShotEditorBackground class="w-[480px]" />
 
       <div class="border-l -ml-[1px] p-2 flex space-x-2 w-[320px]">
-        <Button :loading="isLoading" class="flex-auto" variant="secondary" @click="$overlay.hide">Закрыть</Button>
+        <Button :loading="isLoading" class="flex-auto" variant="secondary" @click="overlay.hide">Закрыть</Button>
         <Button :loading="isLoading" class="flex-auto" @click="onSubmit(onSubmitCallback, form.isTravel)">Опубликовать</Button>
       </div>
     </footer>
@@ -55,11 +55,11 @@ import ShotEditorTextPanel from '~/components/modules/shots/components/ShotEdito
 import ShotEditorTrashButton from '~/components/modules/shots/components/ShotEditorTrashButton.vue'
 import ShotEditorPanelBrushes from '~/components/modules/shots/components/ShotEditorPanelBrushes.vue'
 import { ref } from 'vue'
-import { useNuxtApp } from '#imports'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { useShotEditor } from '@trevio/ui'
+import { useOverlay } from '@trevio/ui'
 
-const { $overlay } = useNuxtApp()
+const overlay = useOverlay()
 
 const {
   createShotEditor,
@@ -81,7 +81,7 @@ const form = ref({
 
 const onSubmitCallback = ({ createShot }) => {
   useShotsStore().updateStory(createShot)
-  $overlay.hide()
+  overlay.hide()
 }
 
 try {

@@ -16,7 +16,7 @@
             <MoreHorizontal class="w-6 h-6" />
             <span class="sr-only">Настройки</span>
           </button>
-          <button title="Закрыть" @click="$overlay.hide" type="button"
+          <button title="Закрыть" @click="overlay.hide" type="button"
                   class="text-gray-400 bg-transparent hover:bg-red-200 hover:text-red-500 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
             <X class="w-6 h-6"/>
             <span class="sr-only">Закрыть</span>
@@ -75,7 +75,9 @@ import { ImagePlus } from 'lucide-vue-next'
 import { useNuxtApp } from '#imports'
 import { gql } from 'graphql-tag'
 import { onBeforeUnmount } from 'vue'
-import { Upload, useChat } from '@trevio/ui'
+import { Upload, useChat, useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 const props = defineProps({
   chatId: {

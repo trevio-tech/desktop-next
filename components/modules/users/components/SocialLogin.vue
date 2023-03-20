@@ -22,15 +22,17 @@
 
 <script setup>
 import { useNuxtApp } from '#imports'
-import { useQuery, usePopup } from '@trevio/ui'
+import { useQuery, usePopup, useOverlay } from '@trevio/ui'
 import { onMounted } from 'vue'
 
-const { $auth, $overlay } = useNuxtApp()
+const { $auth } = useNuxtApp()
+
+const overlay = useOverlay()
 
 onMounted(() => {
   window.setToken = async (token) => {
     await $auth.setUserToken(token)
-    $overlay.hide()
+    overlay.hide()
   }
 })
 

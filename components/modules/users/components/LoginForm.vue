@@ -10,7 +10,7 @@
                :variant="hasError ? 'danger' : undefined"
                autocomplete="none" type="password" id="password" placeholder="Пароль" />
       </FormField>
-      <div @click="$overlay.show(PasswordSendResetLinkDialog)" class="text-sm text-gray-500 underline cursor-pointer">Восстановить пароль</div>
+      <div @click="overlay.show(PasswordSendResetLinkDialog)" class="text-sm text-gray-500 underline cursor-pointer">Восстановить пароль</div>
     </fieldset>
 
     <Button class="w-full mt-4" type="submit" :loading="loading">Войти</Button>
@@ -25,7 +25,9 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import SocialLogin from '~/components/modules/users/components/SocialLogin.vue'
 import PasswordSendResetLinkDialog from '~/components/modules/users/components/PasswordSendResetLinkDialog.vue'
+import { useOverlay } from '@trevio/ui'
 
+const overlay = useOverlay()
 const emit = defineEmits(['login', 'register'])
 const { $auth } = useNuxtApp()
 const { handleSubmit, setErrors } = useForm()

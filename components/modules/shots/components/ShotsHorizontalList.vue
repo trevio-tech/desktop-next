@@ -18,6 +18,9 @@ import StoryDialog from '~/components/modules/shots/components/StoryDialog.vue'
 import { computed } from 'vue'
 import { useNuxtApp, useRouter, defineAsyncComponent } from '#imports'
 import { PlusCircle } from 'lucide-vue-next'
+import { useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 const props = defineProps({
   items: {
@@ -29,17 +32,17 @@ const props = defineProps({
   }
 })
 
-const { $overlay, $auth } = useNuxtApp()
+const { $auth } = useNuxtApp()
 const router = useRouter()
 const hash = computed(() => router.currentRoute.value.hash)
 
 const createShot = () => {
-  $overlay.hide()
-  $overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
+  overlay.hide()
+  overlay.show(defineAsyncComponent(() => import('~/components/modules/shots/components/ShotEditor.vue')))
 }
 
 const showDialog = () => {
-  $overlay.show(props.isStory ? StoryDialog : ShotDialog, {
+  overlay.show(props.isStory ? StoryDialog : ShotDialog, {
     onHide: async () => {
       await router.push({
         name: router.currentRoute.value.name,

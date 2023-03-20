@@ -19,7 +19,7 @@
             <template #icon>
               <Trash class="w-5 h-5" />
             </template>
-            <div @click="$overlay.show(PromoDialog, {
+            <div @click="overlay.show(PromoDialog, {
               props: {
                 entry: note
               }

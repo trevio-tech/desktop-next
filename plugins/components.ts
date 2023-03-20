@@ -13,10 +13,4 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   nuxtApp.vueApp.use(Vue3Toasity, {
     autoClose: 3000,
   } as ToastContainerOptions)
-
-  return {
-    provide: {
-      overlay: nuxtApp.vueApp.config.globalProperties.$overlay,
-    }
-  }
 })

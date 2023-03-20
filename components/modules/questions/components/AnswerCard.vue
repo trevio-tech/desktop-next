@@ -53,9 +53,11 @@
 
 <script setup>
 import { MoreHorizontal, Check, Pencil, Trash } from 'lucide-vue-next'
-import { useNuxtApp } from '#imports'
 import { useQuery } from '@trevio/ui'
 import { DELETE_ANSWER } from '~/components/modules/questions/graphql'
+import { useOverlay } from '@trevio/ui'
+
+const overlay = useOverlay()
 
 
 const emit = defineEmits(['unpinned'])
@@ -67,10 +69,8 @@ const props = defineProps({
   }
 })
 
-const { $overlay } = useNuxtApp()
-
 const onEdit = () => {
-  $overlay.show(defineAsyncComponent(() => import('~/components/modules/questions/components/AnswerEditDialog.vue')), {
+  overlay.show(defineAsyncComponent(() => import('~/components/modules/questions/components/AnswerEditDialog.vue')), {
     props: {
       modelValue: props.entry
     },
@@ -79,7 +79,7 @@ const onEdit = () => {
         console.log(data)
         props.entry.text = data.text
         props.entry.images = data.images
-        $overlay.hide()
+        overlay.hide()
       }
     }
   })
