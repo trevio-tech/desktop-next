@@ -44,7 +44,7 @@
 <script setup>
 import ColorThief from 'colorthief/dist/color-thief'
 import { Pencil } from 'lucide-vue-next'
-import { Upload, shadeColor, useQuery, Button, Avatar } from '@trevio/ui'
+import { Upload, shadeColor, useQuery, Button, Avatar, DropdownItem, Dropdown } from '@trevio/ui'
 import { computed } from 'vue'
 import { useAuth } from '#auth/runtime/composables'
 

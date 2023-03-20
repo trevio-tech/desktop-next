@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Button } from '@trevio/ui'
+import { Button, DropdownItem, Dropdown } from '@trevio/ui'
 
 defineEmits(['update:modelValue'])
 const props = defineProps({

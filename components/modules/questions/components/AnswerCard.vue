@@ -55,7 +55,7 @@
 import { MoreHorizontal, Check, Pencil, Trash } from 'lucide-vue-next'
 import { useQuery } from '@trevio/ui'
 import { DELETE_ANSWER } from '~/components/modules/questions/graphql'
-import { useOverlay } from '@trevio/ui'
+import { useOverlay, DropdownItem, Dropdown, IsLoggedIn } from '@trevio/ui'
 
 const overlay = useOverlay()
 
