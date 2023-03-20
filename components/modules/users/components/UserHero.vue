@@ -25,11 +25,9 @@
 
     <div class="bg-white shadow border-b border-gray-200/50 p-4 rounded-lg h-[120px] -mt-[60px] flex items-center relative">
       <div class="mr-4 flex-shrink-0 -mt-[120px]">
-        <Upload v-model="user.avatar" mutation-name="uploadAvatar">
-          <div class="p-1 shadow w-[200px] h-[200px] rounded-full bg-white">
-            <img :src="user.avatar" class="rounded-full" @load="onLoad" crossorigin="anonymous" alt="" />
-          </div>
-        </Upload>
+        <div class="p-1 shadow w-[200px] h-[200px] rounded-full bg-white">
+          <Avatar v-model="user.avatar" :alt="user.name" :editable="isIam" @load="onLoad"/>
+        </div>
       </div>
       <div class="flex-auto flex items-center justify-between">
         <div>
@@ -46,8 +44,11 @@
 <script setup>
 import ColorThief from 'colorthief/dist/color-thief'
 import { Pencil } from 'lucide-vue-next'
-import { Upload, shadeColor, useQuery, Button } from '@trevio/ui'
+import { Upload, shadeColor, useQuery, Button, Avatar } from '@trevio/ui'
 import { computed } from 'vue'
+import { useAuth } from '#auth/runtime/composables'
+
+const auth = useAuth()
 
 const props = defineProps({
   user: {
@@ -63,6 +64,8 @@ let styles = computed(() => {
     backgroundImage: `url(${props.user.banner})`
   }
 })
+
+const isIam = computed(() => parseInt(props.user.id) === parseInt(auth?.user?.id))
 
 const colorThief = new ColorThief()
 
