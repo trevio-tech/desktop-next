@@ -1,19 +1,26 @@
 <template>
   <section class="overflow-hidden rounded-lg">
 
-    <div id="bb" class="h-[320px] relative"
-      :style="{
-        backgroundPosition: 'center',
-        backgroundSize: 'cover'
-      }">
-      <Upload v-model="user.banner" mutation-name="uploadBanner" class="absolute right-0 top-0 p-4">
-        <Button variant="secondary" class="text-white bg-white/10">
-          Изменить обложку
-          <template #prepend>
-            <Pencil class="w-4 h-4" />
-          </template>
-        </Button>
-      </Upload>
+    <div class="h-[320px] relative">
+      <div id="banner" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+      <div :style="styles" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+
+      <Dropdown placement="bottom-end" class="absolute right-0 top-0 p-4">
+        <template v-slot:default="{ isActive }">
+          <Button variant="secondary" class="text-white bg-white/10">
+            Изменить обложку
+            <template #prepend>
+              <Pencil class="w-4 h-4" />
+            </template>
+          </Button>
+        </template>
+        <template v-slot:popper="{ hide }">
+          <DropdownItem as="div" @click="hide">
+            <Upload v-model="user.banner" mutation-name="uploadBanner">Загрузить</Upload>
+          </DropdownItem>
+          <DropdownItem v-if="user.banner !== null" as="div" @click="hide(); onDelete()">Удалить</DropdownItem>
+        </template>
+      </Dropdown>
     </div>
 
     <div class="bg-white shadow border-b border-gray-200/50 p-4 rounded-lg h-[120px] -mt-[60px] flex items-center relative">
@@ -37,14 +44,23 @@
 </template>
 
 <script setup>
-import { Upload, shadeColor } from '@trevio/ui'
 import ColorThief from 'colorthief/dist/color-thief'
 import { Pencil } from 'lucide-vue-next'
+import { Upload, shadeColor, useQuery } from '@trevio/ui'
+import { computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   user: {
     type: Object,
     required: true
+  }
+})
+
+let styles = computed(() => {
+  return {
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundImage: `url(${props.user.banner})`
   }
 })
 
@@ -53,9 +69,25 @@ const colorThief = new ColorThief()
 const onLoad = (event) => {
   if (event.target.complete) {
     const color = colorThief.getColor(event.target)
-    const el = document.querySelector('#bb')
+    const el = document.querySelector('#banner')
 
     el.style.backgroundImage = `linear-gradient(-45deg, ${shadeColor(color, 10)}, ${shadeColor(color, 50)})`;
   }
+}
+
+const onDelete = async () => {
+  try {
+    const { data } = await useQuery({
+      query: /* GraphQL */`
+      mutation deleteBanner {
+        deleteBanner
+      }
+    `
+    })
+
+    if (data.deleteBanner) {
+      props.user.banner = null
+    }
+  } catch (errors) {}
 }
 </script>
