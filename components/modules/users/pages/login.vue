@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import LoginForm from '~/components/modules/users/components/LoginForm.vue'
+import LoginForm from '~/components/modules/users/components/Auth/LoginForm.vue'
 import { navigateTo,definePageMeta } from '#imports'
 
 definePageMeta({

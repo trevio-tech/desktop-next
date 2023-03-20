@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import RegisterForm from '~/components/modules/users/components/RegisterForm.vue'
+import RegisterForm from '~/components/modules/users/components/Auth/RegisterForm.vue'
 import { navigateTo, definePageMeta } from '#imports'
 
 definePageMeta({
