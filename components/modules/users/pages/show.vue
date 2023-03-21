@@ -60,12 +60,12 @@
       </div>
     </template>
 
-<!--    <ContentList :user-id="user.id" />-->
+    <UserContentList :user-id="user.id" />
   </NuxtLayout>
 </template>
 
 <script setup>
-import ContentList from '~/components/ContentList'
+import UserContentList from '../components/UserContentList.vue'
 import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
 import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'

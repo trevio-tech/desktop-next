@@ -15,10 +15,18 @@
           </Button>
         </template>
         <template v-slot:popper="{ hide }">
-          <DropdownItem @click="hide">
-            <Upload v-model="user.banner" mutation-name="uploadBanner">Загрузить</Upload>
+          <DropdownItem @click="onUpload(hide)">
+            <template #prepend>
+              <Image class="w-5 h-5 text-blue-500" />
+            </template>
+            Загрузить
           </DropdownItem>
-          <DropdownItem v-if="user.banner !== null" @click="hide(); onDelete()">Удалить</DropdownItem>
+          <DropdownItem v-if="user.banner !== null" @click="onDelete(hide)">
+            <template #prepend>
+              <Trash class="w-5 h-5 text-red-500" />
+            </template>
+            Удалить
+          </DropdownItem>
         </template>
       </Dropdown>
     </div>
@@ -38,12 +46,13 @@
       </div>
     </div>
 
+    <Upload style="display: none" id="upload-banner" v-model="user.banner" mutation-name="uploadBanner"></Upload>
   </section>
 </template>
 
 <script setup>
 import ColorThief from 'colorthief/dist/color-thief'
-import { Pencil } from 'lucide-vue-next'
+import { Pencil, Image, Trash } from 'lucide-vue-next'
 import { Upload, shadeColor, useQuery, Button, Avatar, DropdownItem, Dropdown } from '@trevio/ui'
 import { computed } from 'vue'
 import { useAuth } from '#auth/runtime/composables'
@@ -78,7 +87,8 @@ const onLoad = (event) => {
   }
 }
 
-const onDelete = async () => {
+const onDelete = async (hide) => {
+  hide()
   try {
     const { data } = await useQuery({
       query: /* GraphQL */`
@@ -92,5 +102,10 @@ const onDelete = async () => {
       props.user.banner = null
     }
   } catch (errors) {}
+}
+
+const onUpload = (hide) => {
+  document.querySelector('#upload-banner').click()
+  hide()
 }
 </script>

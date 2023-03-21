@@ -63,7 +63,66 @@ export const USER = `
   }
 `
 
-
+export const NESTED_USER_CONTENT = `
+  query travelContent ($user_id: ID!, $offset: String!, $filter: TravelContentFilterInput) {
+    userContent(user_id: $user_id, offset: $offset, filter: $filter) {
+      items {
+      ...on Travel {
+          id
+          title(words: 7)
+          text(words: 10)
+          cover {
+            id
+            url(presets: "default@resize:fill:200:200")
+          }
+          system_name
+        }
+        ...on Note {
+          id
+          cover_id
+          title(words: 7)
+          text(words: 10)
+          cover {
+            id
+            url(presets: "default@resize:fill:200:200")
+          }
+          system_name
+        }
+        ...on Review {
+          id
+          title
+          cover_id
+          cover {
+            id
+            url(presets: "default@resize:fill:200:200")
+          }
+          system_name
+        }
+        ...on Question {
+          id
+          title
+          cover_id
+          cover {
+            id
+            url(presets: "default@resize:fill:200:200")
+          }
+          system_name
+        }
+        ...on Album {
+          id
+          title
+          cover_id
+          cover {
+            id
+            url(presets: "default@resize:fill:200:200")
+          }
+          system_name
+        }
+      }
+      offset
+    }
+  }
+`
 export const UPDATE_USER = `
   mutation updateUser ($id: ID!, $input: UserInput!) {
     updateUser(id: $id, input: $input)
