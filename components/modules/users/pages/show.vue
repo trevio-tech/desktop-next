@@ -8,7 +8,7 @@
     </Html>
 
     <template #hero>
-      <UserHero :user="user" />
+      <UserHero v-if="user" :user="user" />
     </template>
 
     <template #sidebar>
@@ -17,7 +17,7 @@
           <span>Подписки</span>
           <Cog @click="onEditFriends" class="w-5 h-5 text-gray-800 cursor-pointer" />
         </h3>
-        <ul v-if="user.friends.length" class="space-y-2">
+        <ul v-if="user?.friends" class="space-y-2">
           <li v-for="friend in user.friends" :key="friend.id">
             <NuxtLink :to="{name: 'users.show', params: {userId: friend.id}}" class="flex items-center space-x-2">
               <img :src="friend.avatar" class="w-5 h-5 rounded-full block" alt="">
@@ -33,7 +33,7 @@
           <span>Интересы</span>
           <Cog @click="onEditInterests" class="w-5 h-5 text-gray-800 cursor-pointer" />
         </h3>
-        <ul v-if="user.interests.length">
+        <ul v-if="user?.interests">
           <li v-for="interest in user.interests" :key="interest.id">
             <NuxtLink :to="{name: 'users.show', params: {userId: interest.id}}" class="text-sm font-medium">
               {{ interest.name }}
@@ -48,7 +48,7 @@
           <span>Направления</span>
           <Cog @click="onEditSelectedPlaces" class="w-5 h-5 text-gray-800 cursor-pointer" />
         </h3>
-        <ul v-if="user.selectedPlaces.length" class="space-y-1">
+        <ul v-if="user?.selectedPlaces" class="space-y-1">
           <li v-for="place in user.selectedPlaces" :key="place.id" class="truncate">
             <NuxtLink :to="{name: 'users.show', params: {userId: place.id}}">
               <div  class="text-sm font-medium">{{ place.name }}</div>
@@ -60,38 +60,47 @@
       </div>
     </template>
 
-    <UserContentList :user-id="user.id" />
+    <UserContentList v-if="route.params.userId" :userId="route.params.userId" />
   </NuxtLayout>
 </template>
 
 <script setup>
-import UserContentList from '../components/UserContentList.vue'
 import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
 import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
+import UserContentList from '../components/UserContentList.vue'
 import UserHero from '~/components/modules/users/components/UserHero.vue'
 import { Cog } from 'lucide-vue-next'
 import { USER } from '../graphql'
+import { shallowRef } from 'vue'
 import { useActivityStore } from '~/components/modules/activity/store'
-import { useRoute } from '#imports'
 import { useQuery, useOverlay } from '@trevio/ui'
+import { useRoute } from '#imports'
 
 const overlay = useOverlay()
+const route = useRoute()
 
 const activityStore = useActivityStore()
+const user = shallowRef()
 
-const { data: { user }} = await useQuery({
-  query: `
-    query($id: ID!) {
-      user(id: $id) {
-        ${USER}
+try {
+  const { data } = await useQuery({
+    query: `
+      query($id: ID!) {
+        user(id: $id) {
+          ${USER}
+        }
       }
+    `,
+    variables: {
+      id: route.params.userId,
     }
-  `,
-  variables: {
-    id: useRoute().params.userId,
-  }
-})
+  })
+
+  user.value = data.user
+} catch (errors) {
+  console.log(errors)
+}
 
 const onEditInterests = () => {
   overlay.show(InterestsForm, {

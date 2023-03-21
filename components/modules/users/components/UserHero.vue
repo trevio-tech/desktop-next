@@ -83,7 +83,9 @@ const onLoad = (event) => {
     const color = colorThief.getColor(event.target)
     const el = document.querySelector('#banner')
 
-    el.style.backgroundImage = `linear-gradient(-45deg, ${shadeColor(color, 10)}, ${shadeColor(color, 50)})`;
+    if (el) {
+      el.style.backgroundImage = `linear-gradient(-45deg, ${shadeColor(color, 10)}, ${shadeColor(color, 50)})`;
+    }
   }
 }
 

@@ -55,10 +55,6 @@ useHead({
 
 const slots = useSlots()
 
-const hasSidebar = computed(() => {
-  return !!slots['sidebar-before'] || !!slots['sidebar'] || !!slots['sidebar-after']
-})
-const hasHero = computed(() => {
-  return !!slots['hero']
-})
+const hasSidebar = computed(() => !!slots['sidebar-before'] || !!slots['sidebar'] || !!slots['sidebar-after'])
+const hasHero = computed(() => !!slots['hero'])
 </script>

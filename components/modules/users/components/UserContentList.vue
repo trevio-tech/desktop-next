@@ -22,9 +22,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import { NESTED_USER_CONTENT } from '~/components/modules/users/graphql'
 import { useQuery } from '@trevio/ui'
+
+const props = defineProps({
+  userId: {
+    type: [String, Number]
+  }
+})
 
 const items = ref([])
 const offset = ref('')
@@ -32,8 +38,7 @@ const loading = ref(false)
 const myFilter = ref({
   orderByDate: 'new'
 })
-
-const getData = async () => {
+const getData = async (isNew = false) => {
   try {
     if (loading.value) {
       return
@@ -44,15 +49,20 @@ const getData = async () => {
     const { data: { userContent } } = await useQuery({
       query: NESTED_USER_CONTENT,
       variables: {
-        user_id: useRoute().params.userId,
+        user_id: props.userId,
         offset: offset.value,
         filter: {...myFilter.value}
       }
     })
 
     if (userContent.items.length) {
-      offset.value = userContent.offset
-      items.value = [...items.value, ...userContent.items]
+      if (isNew) {
+        items.value = userContent.items
+        offset.value = ''
+      } else {
+        items.value = [...items.value, ...userContent.items]
+        offset.value = userContent.offset
+      }
     }
   } catch (error) {}
   finally {
@@ -66,8 +76,8 @@ const onMore = async () => {
 
 const setFilter = async (filter) => {
   Object.assign(myFilter.value, filter)
-  await getData()
+  await getData(true)
 }
 
-await getData()
+onBeforeMount(async () => await getData())
 </script>

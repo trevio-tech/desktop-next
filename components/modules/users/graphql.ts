@@ -64,7 +64,7 @@ export const USER = `
 `
 
 export const NESTED_USER_CONTENT = `
-  query travelContent ($user_id: ID!, $offset: String!, $filter: TravelContentFilterInput) {
+  query travelContent ($user_id: ID!, $offset: String, $filter: TravelContentFilterInput) {
     userContent(user_id: $user_id, offset: $offset, filter: $filter) {
       items {
       ...on Travel {
