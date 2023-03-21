@@ -50,20 +50,13 @@ const getData = async (isNew = false) => {
       query: NESTED_USER_CONTENT,
       variables: {
         user_id: props.userId,
-        offset: offset.value,
+        offset: offset.value || undefined,
         filter: {...myFilter.value}
       }
     })
 
-    if (userContent.items.length) {
-      if (isNew) {
-        items.value = userContent.items
-        offset.value = ''
-      } else {
-        items.value = [...items.value, ...userContent.items]
-        offset.value = userContent.offset
-      }
-    }
+    items.value = [...items.value, ...userContent]
+    offset.value = items.value.length
   } catch (error) {}
   finally {
     loading.value = false

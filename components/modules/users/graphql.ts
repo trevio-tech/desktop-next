@@ -64,62 +64,59 @@ export const USER = `
 `
 
 export const NESTED_USER_CONTENT = `
-  query travelContent ($user_id: ID!, $offset: String, $filter: TravelContentFilterInput) {
-    userContent(user_id: $user_id, offset: $offset, filter: $filter) {
-      items {
+  query travelContent ($user_id: ID!, $offset: Int) {
+    userContent(user_id: $user_id, offset: $offset) {
       ...on Travel {
+        id
+        title(words: 7)
+        text(words: 10)
+        cover {
           id
-          title(words: 7)
-          text(words: 10)
-          cover {
-            id
-            url(presets: "default@resize:fill:200:200")
-          }
-          system_name
+          url(presets: "default@resize:fill:200:200")
         }
-        ...on Note {
-          id
-          cover_id
-          title(words: 7)
-          text(words: 10)
-          cover {
-            id
-            url(presets: "default@resize:fill:200:200")
-          }
-          system_name
-        }
-        ...on Review {
-          id
-          title
-          cover_id
-          cover {
-            id
-            url(presets: "default@resize:fill:200:200")
-          }
-          system_name
-        }
-        ...on Question {
-          id
-          title
-          cover_id
-          cover {
-            id
-            url(presets: "default@resize:fill:200:200")
-          }
-          system_name
-        }
-        ...on Album {
-          id
-          title
-          cover_id
-          cover {
-            id
-            url(presets: "default@resize:fill:200:200")
-          }
-          system_name
-        }
+        system_name
       }
-      offset
+      ...on Note {
+        id
+        cover_id
+        title(words: 7)
+        text(words: 10)
+        cover {
+          id
+          url(presets: "default@resize:fill:200:200")
+        }
+        system_name
+      }
+      ...on Review {
+        id
+        title
+        cover_id
+        cover {
+          id
+          url(presets: "default@resize:fill:200:200")
+        }
+        system_name
+      }
+      ...on Question {
+        id
+        title
+        cover_id
+        cover {
+          id
+          url(presets: "default@resize:fill:200:200")
+        }
+        system_name
+      }
+      ...on Album {
+        id
+        title
+        cover_id
+        cover {
+          id
+          url(presets: "default@resize:fill:200:200")
+        }
+        system_name
+      }
     }
   }
 `
