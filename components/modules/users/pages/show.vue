@@ -60,7 +60,14 @@
       </div>
     </template>
 
-    <UserContentList v-if="route.params.userId" :userId="route.params.userId" />
+    <ContentList :userId="route.params.userId" :query="NESTED_USER_CONTENT">
+      <template v-slot="{ items, isMore, onFetch }">
+        <div class="space-y-4">
+          <ContentCardRectangle v-for="item in items" :key="item.id" :entry="item" />
+          <Button v-if="isMore" @click="onFetch" class="w-full" variant="secondary">Показать еще</Button>
+        </div>
+      </template>
+    </ContentList>
   </NuxtLayout>
 </template>
 
@@ -68,13 +75,15 @@
 import FriendsForm from '~/components/modules/subscriptions/components/FriendsForm'
 import InterestsForm from '~/components/modules/subscriptions/components/InterestsForm'
 import SelectedPlacesForm from '~/components/modules/subscriptions/components/SelectedPlacesForm'
-import UserContentList from '../components/UserContentList.vue'
 import UserHero from '~/components/modules/users/components/UserHero.vue'
 import { Cog } from 'lucide-vue-next'
+import { ContentCardRectangle } from '~/components'
+import { ContentList } from '@trevio/ui'
+import { NESTED_USER_CONTENT } from '~/components/modules/users/graphql'
 import { USER } from '../graphql'
 import { shallowRef } from 'vue'
 import { useActivityStore } from '~/components/modules/activity/store'
-import { useQuery, useOverlay } from '@trevio/ui'
+import { useQuery, useOverlay, Button } from '@trevio/ui'
 import { useRoute } from '#imports'
 
 const overlay = useOverlay()

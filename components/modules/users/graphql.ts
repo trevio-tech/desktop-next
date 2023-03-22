@@ -64,8 +64,8 @@ export const USER = `
 `
 
 export const NESTED_USER_CONTENT = `
-  query travelContent ($user_id: ID!, $offset: Int) {
-    userContent(user_id: $user_id, offset: $offset) {
+  query userContent ($user_id: ID!, $page: Int, $limit: Int) {
+    userContent(user_id: $user_id, page: $page, limit: $limit) {
       ...on Travel {
         id
         title(words: 7)
