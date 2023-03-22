@@ -23,27 +23,29 @@
       </NuxtLink>
     </div>
 
-<!--    <TravelSiblings v-if="otherTravels.length" class="mt-4" :items="otherTravels"/>-->
     <hr class="my-4">
-    <TravelContentList
-        v-if="travel.nested_entries_count"
-        :nested-entries-count="travel.nested_entries_count"
-        class="mt-4"/>
+
+    <ContentList :travelId="travel.id" :fields="NESTED_CONTENT_LIST">
+      <template v-slot="{ items, isMore, isLoading, onFetch }">
+        <div class="space-y-4">
+          <ContentCardRectangle v-for="item in items" :key="item.id" :entry="item" />
+          <Button v-if="isMore" :loading="isLoading" @click="onFetch" class="w-full" variant="secondary">Показать еще</Button>
+        </div>
+      </template>
+    </ContentList>
   </NuxtLayout>
 </template>
 
 <script setup>
 import Content from '~/components/Content.vue'
-import TravelContentList from '../components/TravelContentList'
-import TravelSiblings from '../components/TravelSiblings.vue'
-import { TRAVEL, TRAVEL_CARD_SQUARE } from '../graphql'
-import { ref } from 'vue'
+import { ContentCardRectangle } from '~/components'
+import { TRAVEL } from '../graphql'
+import { useQuery, ContentList, Button } from '@trevio/ui'
 import { useRoute } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { NESTED_CONTENT_LIST } from '../graphql'
 
 
 const route = useRoute()
-const otherTravels = ref([])
 let travel = {}
 
 try {
@@ -64,27 +66,4 @@ try {
 } catch (error) {
   console.log(error)
 }
-
-/*const otherTravelsFromUser = async (travel) => {
-  const { data: { travels } } = await useQuery({
-    query: `
-      query($user_id: ID, $previous: ID, $next: ID) {
-        travels(user_id: $user_id, previous: $previous, next: $next) {
-          ${TRAVEL_CARD_SQUARE}
-        }
-      }
-    `,
-    variables: {
-      user_id: travel.user_id,
-      previous: travel.id,
-      next: travel.id,
-    }
-  })
-
-  otherTravels.value = travels.sort(function (a, b) {
-    return a.id - b.id
-  })
-}
-
-await otherTravelsFromUser(travel)*/
 </script>

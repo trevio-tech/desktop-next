@@ -64,61 +64,57 @@ export const USER = `
 `
 
 export const NESTED_USER_CONTENT = `
-  query userContent ($user_id: ID!, $page: Int, $limit: Int) {
-    userContent(user_id: $user_id, page: $page, limit: $limit) {
-      ...on Travel {
+    ...on Travel {
+      id
+      title(words: 7)
+      text(words: 10)
+      cover {
         id
-        title(words: 7)
-        text(words: 10)
-        cover {
-          id
-          url(presets: "default@resize:fill:200:200")
-        }
-        system_name
+        url(presets: "default@resize:fill:200:200")
       }
-      ...on Note {
-        id
-        cover_id
-        title(words: 7)
-        text(words: 10)
-        cover {
-          id
-          url(presets: "default@resize:fill:200:200")
-        }
-        system_name
-      }
-      ...on Review {
-        id
-        title
-        cover_id
-        cover {
-          id
-          url(presets: "default@resize:fill:200:200")
-        }
-        system_name
-      }
-      ...on Question {
-        id
-        title
-        cover_id
-        cover {
-          id
-          url(presets: "default@resize:fill:200:200")
-        }
-        system_name
-      }
-      ...on Album {
-        id
-        title
-        cover_id
-        cover {
-          id
-          url(presets: "default@resize:fill:200:200")
-        }
-        system_name
-      }
+      system_name
     }
-  }
+    ...on Note {
+      id
+      cover_id
+      title(words: 7)
+      text(words: 10)
+      cover {
+        id
+        url(presets: "default@resize:fill:200:200")
+      }
+      system_name
+    }
+    ...on Review {
+      id
+      title
+      cover_id
+      cover {
+        id
+        url(presets: "default@resize:fill:200:200")
+      }
+      system_name
+    }
+    ...on Question {
+      id
+      title
+      cover_id
+      cover {
+        id
+        url(presets: "default@resize:fill:200:200")
+      }
+      system_name
+    }
+    ...on Album {
+      id
+      title
+      cover_id
+      cover {
+        id
+        url(presets: "default@resize:fill:200:200")
+      }
+      system_name
+    }
 `
 export const UPDATE_USER = `
   mutation updateUser ($id: ID!, $input: UserInput!) {
