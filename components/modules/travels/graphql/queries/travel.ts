@@ -1,4 +1,4 @@
-export default /* GraphQL */`
+export default `
   id
   place_id
   user_id
@@ -6,6 +6,7 @@ export default /* GraphQL */`
   text
   date_start
   date_end
+  system_name
   nested_entries_count
   tags {
     id
@@ -20,6 +21,9 @@ export default /* GraphQL */`
     id
     name
     full_name
+  }
+  bookmarks {
+    category_id
   }
   cover {
     id

@@ -43,11 +43,11 @@ import { TRAVEL } from '../graphql'
 import { useQuery, ContentList, Button } from '@trevio/ui'
 import { useRoute } from '#imports'
 import { NESTED_CONTENT_LIST } from '../graphql'
-import { shallowRef } from 'vue'
+import { ref } from 'vue'
 
 const route = useRoute()
 
-const travel = shallowRef({})
+const travel = ref({})
 
 try {
   const { data } = await useQuery({
@@ -64,7 +64,7 @@ try {
   })
 
   travel.value = data.travel
-} catch (error) {
-  console.log(error)
+} catch (errors) {
+  console.log(errors)
 }
 </script>
