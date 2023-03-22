@@ -61,10 +61,10 @@
     </template>
 
     <ContentList :userId="route.params.userId" :query="NESTED_USER_CONTENT">
-      <template v-slot="{ items, isMore, onFetch }">
+      <template v-slot="{ items, isMore, isLoading, onFetch }">
         <div class="space-y-4">
           <ContentCardRectangle v-for="item in items" :key="item.id" :entry="item" />
-          <Button v-if="isMore" @click="onFetch" class="w-full" variant="secondary">Показать еще</Button>
+          <Button v-if="isMore" :loading="isLoading" @click="onFetch" class="w-full" variant="secondary">Показать еще</Button>
         </div>
       </template>
     </ContentList>
