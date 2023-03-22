@@ -25,7 +25,7 @@
 
     <hr class="my-4">
 
-    <ContentList :travelId="travel.id" :fields="NESTED_CONTENT_LIST">
+    <ContentList :travelId="travel.id" :fields="NESTED_CONTENT_LIST" order-by="date">
       <template v-slot="{ items, isMore, isLoading, onFetch }">
         <div class="space-y-4">
           <ContentCardRectangle v-for="item in items" :key="item.id" :entry="item" />
@@ -33,6 +33,15 @@
         </div>
       </template>
     </ContentList>
+
+<!--    <ContentList :fields="NESTED_CONTENT_LIST" :query="travel.tags.map((tag) => tag.name).join(' ')">
+      <template v-slot="{ items, isMore, isLoading, onFetch }">
+        <div class="space-y-4">
+          <ContentCardRectangle v-for="item in items" :key="item.id" :entry="item" />
+          <Button v-if="isMore" :loading="isLoading" @click="onFetch" class="w-full" variant="secondary">Показать еще</Button>
+        </div>
+      </template>
+    </ContentList>-->
   </NuxtLayout>
 </template>
 

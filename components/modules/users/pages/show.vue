@@ -60,7 +60,7 @@
       </div>
     </template>
 
-    <ContentList :userId="route.params.userId" :fields="NESTED_USER_CONTENT">
+    <ContentList :userId="route.params.userId" :fields="NESTED_USER_CONTENT" order-by="date">
       <template v-slot="{ items, isMore, isLoading, onFetch }">
         <div class="space-y-4">
           <ContentCardRectangle v-for="item in items" :key="item.id" :entry="item" />

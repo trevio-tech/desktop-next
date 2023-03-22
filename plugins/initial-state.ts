@@ -52,15 +52,15 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         key: 'initial-state'
       })
 
-      await useShotsStore().$patch({
+      useShotsStore().$patch({
         stories: data.stories
       })
 
       if (loggedIn) {
-        await useBookmarksStore().$patch({
+        useBookmarksStore().$patch({
           categories: data.bookmarkCategories
         })
-        await useChatsStore().$patch({
+        useChatsStore().$patch({
           chats: data.myChats
         })
 
