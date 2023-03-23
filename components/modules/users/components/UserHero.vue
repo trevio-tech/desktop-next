@@ -40,7 +40,11 @@
       <div class="flex-auto flex items-center justify-between">
         <div>
           <h1 class="truncate text-xl font-semibold">{{ user.name }}</h1>
-          <div class="underline text-sm font-medium text-blue-400 cursor-pointer">Подробнее...</div>
+          <div @click="overlay.show(UserAboutDialog, {
+            props: {
+              user
+            }
+          })" class="underline text-sm font-medium text-blue-400 cursor-pointer">Подробнее...</div>
         </div>
         <Button @click="$router.push({name: 'users.edit', params: {userId: user.id}})">Редактировать</Button>
       </div>
@@ -52,12 +56,14 @@
 
 <script setup>
 import ColorThief from 'colorthief/dist/color-thief'
+import UserAboutDialog from '~/components/modules/users/components/UserAboutDialog.vue'
 import { Pencil, Image, Trash } from 'lucide-vue-next'
-import { Upload, shadeColor, usePageQuery, Button, Avatar, DropdownItem, Dropdown } from '@trevio/ui'
+import { Upload, shadeColor, usePageQuery, Button, Avatar, DropdownItem, Dropdown, useOverlay } from '@trevio/ui'
 import { computed } from 'vue'
 import { useAuth } from '#auth/runtime/composables'
 
 const auth = useAuth()
+const overlay = useOverlay()
 
 const props = defineProps({
   user: {

@@ -38,7 +38,7 @@
 <script setup>
 import { defineAsyncComponent } from '#imports'
 import { ChevronDown } from 'lucide-vue-next'
-import { useOverlay, Button, DropdownItem, Dropdown } from '@trevio/ui'
+import { useOverlay, Button, SearchBar, DropdownItem, Dropdown } from '@trevio/ui'
 
 const overlay = useOverlay()
 
