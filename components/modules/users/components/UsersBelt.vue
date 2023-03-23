@@ -17,7 +17,7 @@ import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 const emit = defineEmits(['loaded'])
 const props = defineProps({
@@ -31,7 +31,7 @@ const target = ref()
 const users = ref(props.items)
 
 const getUsers = async () => {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query ($filterBy: String) {
         users (filterBy: $filterBy) {

@@ -30,7 +30,7 @@ import 'swiper/css/scrollbar'
 import { Autoplay, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 import { useRouter } from '#imports'
 
 const router = useRouter()
@@ -41,7 +41,7 @@ let items = ref([])
 try {
   if (hash.includes('#story-')) {
     setTimeout(async () => {
-      const { data } = await useQuery({
+      const { data } = await usePageQuery({
         query: `
         query($user_id: ID!) {
           story(user_id: $user_id) {

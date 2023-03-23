@@ -64,7 +64,7 @@ if (props.entry?.system_name) {
 }
 
 try {
-  const { data: { promoTariffs }} = await useQuery({
+  const { data: { promoTariffs }} = await usePageQuery({
     query: `
       query {
         promoTariffs {
@@ -126,7 +126,7 @@ const onSubmit = async () => {
       .map((selectedItem) => selectedItem.id)
   }
 
-  const { data: { createPromo }} = await useQuery({
+  const { data: { createPromo }} = await usePageQuery({
     query: `
       mutation ($tariff_id: Int!, $input: PromoInput!) {
         createPromo(tariff_id: $tariff_id, input: $input)

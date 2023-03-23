@@ -86,7 +86,7 @@ const onSubmitCallback = ({ createShot }) => {
 try {
   createShotEditor()
 
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query($userId: ID) {
         lastUserTravel: travels(userId: $userId, limit: 1) {

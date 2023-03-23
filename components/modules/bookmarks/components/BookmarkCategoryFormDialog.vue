@@ -20,7 +20,7 @@
 import Dialog from '~/components/base/Dialog.vue'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useOverlay, useQuery, Button } from '@trevio/ui'
+import { useOverlay, usePageQuery, Button } from '@trevio/ui'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import { CREATE_BOOKMARK_CATEGORY, UPDATE_BOOKMARK_CATEGORY } from '../graphql/mutations'
 
@@ -63,7 +63,7 @@ const onSubmit = handleSubmit(async () => {
       variables.id = form.value.id
     }
 
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: isEdit
           ? UPDATE_BOOKMARK_CATEGORY
           : CREATE_BOOKMARK_CATEGORY,

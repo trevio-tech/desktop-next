@@ -14,7 +14,7 @@
 import { TIMELINE } from '~/components/modules/activity/graphql'
 import ContentCard from '~/components/ContentCard'
 import { ref } from 'vue'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 const props = defineProps({
   userId: {
@@ -33,7 +33,7 @@ const page = ref(1)
 
 const fetchFeed = async () => {
   try {
-    const { data: { activity }} = await useQuery({
+    const { data: { activity }} = await usePageQuery({
       query: `
         query($user_id: ID, $page: Int, $system_name: String) {
           activity(user_id: $user_id, page: $page, system_name: $system_name) {

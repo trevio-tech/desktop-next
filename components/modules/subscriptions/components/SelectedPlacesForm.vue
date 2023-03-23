@@ -51,7 +51,7 @@ const onSelect = async (place) => {
 }
 
 const onChange = async (query) => {
-  const { data: { searchPlaces }} = await useQuery({
+  const { data: { searchPlaces }} = await usePageQuery({
     query: `
     query($query: String!) {
       searchPlaces(query: $query) {
@@ -82,7 +82,7 @@ const onSubmit = handleSubmit(async (values, errors) => {
   loading.value = true
 
   try {
-    await useQuery({
+    await usePageQuery({
       query: `
       mutation($type: String!, $items: [Int]!) {
         updateSubscriptions(type: $type, items: $items)

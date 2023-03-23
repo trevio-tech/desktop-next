@@ -54,7 +54,7 @@ const onSubmit = handleSubmit(async (values, errors) => {
   loading.value = true
 
   try {
-    await useQuery({
+    await usePageQuery({
       query: `
         mutation($type: String!, $items: [Int]!) {
           updateSubscriptions(type: $type, items: $items)

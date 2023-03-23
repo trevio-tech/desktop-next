@@ -22,7 +22,7 @@ import { ref } from 'vue'
 const chats = ref([])
 
 const onLoad = async () => {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query {
         chatsV2 {

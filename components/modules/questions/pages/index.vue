@@ -12,7 +12,7 @@ import { QUESTION_CARD } from '../graphql';
 
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import { useHead } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 useHead({
   title: 'Вопросы и ответы'
@@ -21,7 +21,7 @@ useHead({
 let questions = []
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query {
         questions {

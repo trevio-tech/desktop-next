@@ -53,7 +53,7 @@
 <script setup>
 import ColorThief from 'colorthief/dist/color-thief'
 import { Pencil, Image, Trash } from 'lucide-vue-next'
-import { Upload, shadeColor, useQuery, Button, Avatar, DropdownItem, Dropdown } from '@trevio/ui'
+import { Upload, shadeColor, usePageQuery, Button, Avatar, DropdownItem, Dropdown } from '@trevio/ui'
 import { computed } from 'vue'
 import { useAuth } from '#auth/runtime/composables'
 
@@ -92,7 +92,7 @@ const onLoad = (event) => {
 const onDelete = async (hide) => {
   hide()
   try {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: /* GraphQL */`
       mutation deleteBanner {
         deleteBanner

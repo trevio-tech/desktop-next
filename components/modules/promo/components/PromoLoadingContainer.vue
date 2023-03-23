@@ -25,7 +25,7 @@ useIntersectionObserver(
   root,
   async ([{ isIntersecting }]) => {
     if (isIntersecting && isLoaded.value === false) {
-      const { data } = await useQuery({
+      const { data } = await usePageQuery({
         query: `{
           promo {
             id

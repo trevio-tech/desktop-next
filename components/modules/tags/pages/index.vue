@@ -22,7 +22,7 @@ import ContentCard from '~/components/ContentCard'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import { FEED } from '~/components/modules/activity/graphql'
 import { useHead, useRoute } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 const route = useRoute()
 let tags = []
@@ -52,7 +52,7 @@ useHead({
 
 try {
   if (route.name === 'tags') {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: `
         query {
           tags {
@@ -66,7 +66,7 @@ try {
 
     tags = data.tags
   } else if (route.name === 'tags.tag' || route.name === 'tags.tag.content') {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: `
         query($tag: String, $system_name: String) {
           contentList(tag: $tag, system_name: $system_name) {

@@ -26,7 +26,7 @@ const props = defineProps({
 const tags = ref(props.modelValue)
 
 const onSelect = async ({ name }) => {
-  const { data: { createTag }} = await useQuery({
+  const { data: { createTag }} = await usePageQuery({
     query: `
       mutation($name: String!) {
         createTag(name: $name) {

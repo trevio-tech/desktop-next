@@ -59,7 +59,7 @@ const form = ref({
 const userId = parseInt(useRoute().params.userId)
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query($id: Int!) {
         user(id: $id) {
@@ -86,7 +86,7 @@ const onSubmit = async () => {
     delete input.id
     delete input.__typename
 
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: UPDATE_USER,
       variables: {
         id: userId,

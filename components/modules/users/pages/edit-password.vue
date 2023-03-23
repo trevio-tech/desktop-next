@@ -48,7 +48,7 @@ const { handleSubmit, setErrors } = useForm()
 
 const onSubmit = handleSubmit(async () => {
   try {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: UPDATE_USER_PASSWORD,
       variables: {...form.value}
     })

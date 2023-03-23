@@ -55,7 +55,7 @@ setTimeout(() => {
 }, 1000)
 
 const load = async () => {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query getSimilarNotes ($tags: [Int], $notIn: [Int], $limit: Int){
         notes (tags: $tags, notIn: $notIn, limit: $limit) {

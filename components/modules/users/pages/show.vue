@@ -83,7 +83,7 @@ import { NESTED_USER_CONTENT } from '~/components/modules/users/graphql'
 import { USER } from '../graphql'
 import { shallowRef } from 'vue'
 import { useActivityStore } from '~/components/modules/activity/store'
-import { useQuery, useOverlay, Button } from '@trevio/ui'
+import { usePageQuery, useOverlay, Button } from '@trevio/ui'
 import { useRoute } from '#imports'
 
 const overlay = useOverlay()
@@ -93,7 +93,7 @@ const activityStore = useActivityStore()
 const user = shallowRef()
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query($id: ID!) {
         user(id: $id) {

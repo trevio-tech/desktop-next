@@ -10,14 +10,14 @@
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
 import { PLACE } from '~/components/modules/places/graphql'
 import { useRoute } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 const route = useRoute()
 
 let review = []
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query($id: ID!) {
         review(id: $id) {

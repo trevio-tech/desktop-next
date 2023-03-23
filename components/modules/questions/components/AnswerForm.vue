@@ -26,7 +26,7 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { CREATE_ANSWER, UPDATE_ANSWER } from '~/components/modules/questions/graphql'
 import { Image } from 'lucide-vue-next'
-import { Upload, useQuery, Button } from '@trevio/ui'
+import { Upload, usePageQuery, Button } from '@trevio/ui'
 
 
 const emit = defineEmits(['created', 'updated'])
@@ -80,7 +80,7 @@ const onSubmit = handleSubmit(async () => {
   }
 
   try {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: isEdit ? UPDATE_ANSWER : CREATE_ANSWER,
       variables
     })

@@ -49,7 +49,7 @@ const getData = async () => {
 
     loading.value = true
 
-    const { data: { travelContent } } = await useQuery({
+    const { data: { travelContent } } = await usePageQuery({
       query: NESTED_CONTENT_LIST,
       variables: {
         travel_id: useRoute().params.travelId,

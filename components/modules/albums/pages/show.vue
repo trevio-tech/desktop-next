@@ -19,12 +19,12 @@
 import { useRoute } from '#imports'
 import { ALBUM } from '~/components/modules/albums/graphql'
 import { ref } from 'vue'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 const album = ref()
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query getAlbum($id: ID!) {
         album(id: $id) {

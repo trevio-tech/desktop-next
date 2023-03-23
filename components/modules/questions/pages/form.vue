@@ -37,7 +37,7 @@ import { InputCustomTags } from '~/components/wrappers'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate';
 import { definePageMeta, useRoute, useRouter, useNuxtApp } from '#imports'
-import { TipTap, useQuery, SearchPlace } from '@trevio/ui'
+import { TipTap, usePageQuery, SearchPlace } from '@trevio/ui'
 
 definePageMeta({
   middleware: 'auth'
@@ -66,7 +66,7 @@ const loading = ref(false)
 
 const { $auth } = useNuxtApp()
 
-const { data } = await useQuery({
+const { data } = await usePageQuery({
   query: `
     query(${isEdit ? '$id: ID!, ' : ''}$user_id: ID) {
       ${isEdit ? `question(id: $id) { ${QUESTION_FORM} }` : ''}
@@ -109,7 +109,7 @@ const onSubmit = handleSubmit(async () => {
   input.tags = input.tags.map(tag => parseInt(tag.id))
 
   try {
-    const { data: { questionForm }} = await useQuery({
+    const { data: { questionForm }} = await usePageQuery({
       query: isEdit ? UPDATE_QUESTION : CREATE_QUESTION,
       variables: {
         input,

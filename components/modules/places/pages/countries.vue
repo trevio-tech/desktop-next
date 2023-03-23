@@ -15,11 +15,11 @@
 
 <script setup>
 
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 let alphabet = {}
 let memory = null
 
-const { data } = await useQuery({
+const { data } = await usePageQuery({
   query: `{
     countries {
       id

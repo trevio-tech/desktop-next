@@ -39,7 +39,7 @@ import { useRoute } from '#imports'
 import { useActivityStore } from '~/components/modules/activity/store'
 import { useShotsStore } from '~/components/modules/shots/store'
 import { useIntersectionObserver } from '@vueuse/core'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 const store = useActivityStore()
 const route = useRoute()
@@ -48,7 +48,7 @@ const moreIsEmpty = ref(false)
 const shotsStore = useShotsStore()
 
 const fetchFeed = async () => {
-  const { data: { activity } } = await useQuery({
+  const { data: { activity } } = await usePageQuery({
     query: `
       query getActivity($page: Int, $is_timeline: Boolean) {
         activity (page: $page, is_timeline: $is_timeline) {

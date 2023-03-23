@@ -42,14 +42,14 @@ import { NOTE } from '../graphql'
 import { Pencil, Trash } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useHead, useRoute } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 
 const route = useRoute()
 const note = ref()
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query($id: ID!) {
         ${NOTE}

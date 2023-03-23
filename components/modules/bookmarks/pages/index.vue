@@ -18,7 +18,7 @@ import { NOTE_CARD_RECTANGLE } from '~/components/modules/notes/graphql'
 import { TRAVEL_CARD_RECTANGLE } from '~/components/modules/travels/graphql'
 import { useBookmarksStore } from '../store'
 import { useRoute } from '#imports'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 
 const params = useRoute().params
@@ -53,7 +53,7 @@ const query = `
 `
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query,
     variables: {
       user_id: params.userId,

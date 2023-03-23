@@ -45,7 +45,7 @@ import { HelpCircle } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { defineAsyncComponent, useNuxtApp } from '#imports'
-import { useQuery, useOverlay, Button } from '@trevio/ui'
+import { usePageQuery, useOverlay, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 
@@ -68,7 +68,7 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   try {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: `
         mutation ($input: RegisterUserInput!) {
           registerUser(input: $input) {

@@ -53,7 +53,7 @@
 
 <script setup>
 import { MoreHorizontal, Check, Pencil, Trash } from 'lucide-vue-next'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 import { DELETE_ANSWER } from '~/components/modules/questions/graphql'
 import { useOverlay, DropdownItem, Dropdown, IsLoggedIn } from '@trevio/ui'
 
@@ -87,7 +87,7 @@ const onEdit = () => {
 
 const onPin = async () => {
   try {
-    const { data: { pinUnpinAnswer }} = await useQuery({
+    const { data: { pinUnpinAnswer }} = await usePageQuery({
       query: `
         mutation ($id: ID!) {
           pinUnpinAnswer(id: $id)
@@ -108,7 +108,7 @@ const onPin = async () => {
 
 const onDelete = async () => {
   try {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: DELETE_ANSWER,
       variables: {
         id: props.entry.id

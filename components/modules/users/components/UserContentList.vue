@@ -24,7 +24,7 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue'
 import { NESTED_USER_CONTENT } from '~/components/modules/users/graphql'
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 
 const props = defineProps({
   userId: {
@@ -46,7 +46,7 @@ const getData = async (isNew = false) => {
 
     loading.value = true
 
-    const { data: { userContent } } = await useQuery({
+    const { data: { userContent } } = await usePageQuery({
       query: NESTED_USER_CONTENT,
       variables: {
         user_id: props.userId,

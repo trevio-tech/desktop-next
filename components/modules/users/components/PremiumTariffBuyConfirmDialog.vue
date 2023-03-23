@@ -17,7 +17,7 @@
 
 <script setup>
 import Dialog from '~/components/base/Dialog.vue'
-import { useQuery, Button } from '@trevio/ui'
+import { usePageQuery, Button } from '@trevio/ui'
 import { toast } from 'vue3-toastify'
 import { shallowRef } from 'vue'
 
@@ -40,7 +40,7 @@ const onSubmit = async () => {
   isLoading.value = true
 
   try {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: `
         mutation buyPremium($tariff_id: ID!) {
           buyPremium(tariff_id: $tariff_id)

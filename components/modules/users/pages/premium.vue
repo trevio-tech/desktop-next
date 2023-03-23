@@ -19,14 +19,14 @@
 </template>
 
 <script setup>
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 import { Alert } from '@trevio/ui'
 import PremiumTariffCard from '~/components/modules/users/components/PremiumTariffCard.vue'
 
 let tariffs = []
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query premiumTariffs {
         premiumTariffs {

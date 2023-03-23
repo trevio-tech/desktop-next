@@ -22,7 +22,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useQuery, Button } from '@trevio/ui'
+import { usePageQuery, Button } from '@trevio/ui'
 
 const { handleSubmit, setErrors } = useForm()
 const loading = ref(false)
@@ -38,7 +38,7 @@ const onSubmit = handleSubmit(async () => {
   loading.value = true
 
   try {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: `
         query ($email: String!) {
           sendResetLink(email: $email)

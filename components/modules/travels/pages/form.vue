@@ -78,7 +78,7 @@ import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql'
 import { format, parseISO, isValid } from 'date-fns'
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
-import { useQuery, SearchPlace, DropdownItem, Dropdown } from '@trevio/ui'
+import { usePageQuery, SearchPlace, DropdownItem, Dropdown } from '@trevio/ui'
 import { useRoute, useRouter, definePageMeta } from '#imports'
 
 definePageMeta({
@@ -111,7 +111,7 @@ const loading = ref(false)
 const currencies = ref([])
 
 if (isEdit) {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query($travel_id: ID!) {
         travel(id: $travel_id) {
@@ -140,7 +140,7 @@ if (isEdit) {
     form.value.date_end = parseISO(form.value.date_end)
   }
 } else {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query {
         currencies {
@@ -183,7 +183,7 @@ const onSubmit = async (isDraft) => {
   input.images = [form.value.cover.id]
 
   try {
-    const {data: { travelForm }} = await useQuery({
+    const {data: { travelForm }} = await usePageQuery({
       query: isEdit ? UPDATE_TRAVEL : CREATE_TRAVEL,
       variables: {
         input,

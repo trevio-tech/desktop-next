@@ -15,7 +15,7 @@ import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBa
 import { PLACE } from '~/components/modules/places/graphql'
 import { REVIEW_CARD } from '~/components/modules/reviews/graphql'
 import { useRoute } from '#imports'
-import { useQuery, usePlaceSeo } from '@trevio/ui'
+import { usePageQuery, usePlaceSeo } from '@trevio/ui'
 
 const route = useRoute()
 
@@ -45,7 +45,7 @@ try {
     `)
   }
 
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query(
         $place_id: Int!

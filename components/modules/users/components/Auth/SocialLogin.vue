@@ -22,7 +22,7 @@
 
 <script setup>
 import { useNuxtApp } from '#imports'
-import { useQuery, usePopup, useOverlay } from '@trevio/ui'
+import { usePageQuery, usePopup, useOverlay } from '@trevio/ui'
 import { onMounted } from 'vue'
 
 const { $auth } = useNuxtApp()
@@ -37,7 +37,7 @@ onMounted(() => {
 })
 
 const onSocial = async (provider) => {
-  const { data: { socialiteProvider } } = await useQuery({
+  const { data: { socialiteProvider } } = await usePageQuery({
     query: `
       query ($provider: String!) {
         socialiteProvider (provider: $provider)

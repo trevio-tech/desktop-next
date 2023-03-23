@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { useQuery } from '@trevio/ui'
+import { usePageQuery } from '@trevio/ui'
 import { ref } from 'vue'
 import { Button } from '@trevio/ui'
 import { UPDATE_USER } from '../graphql'
@@ -65,7 +65,7 @@ const form = ref({
 const userId = parseInt(useRoute().params.userId)
 
 try {
-  const { data: { user } } = await useQuery({
+  const { data: { user } } = await usePageQuery({
     query: `
       query($id: ID!) {
         user(id: $id) {
@@ -96,7 +96,7 @@ const onSubmit = async () => {
     delete input.__typename
     delete input.place
 
-    const { data: { updateUser } } = await useQuery({
+    const { data: { updateUser } } = await usePageQuery({
       query: `
         ${UPDATE_USER}
       `,

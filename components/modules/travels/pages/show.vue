@@ -49,7 +49,7 @@
 import Content from '~/components/Content.vue'
 import { ContentCardRectangle } from '~/components'
 import { TRAVEL } from '../graphql'
-import { useQuery, ContentList, Button } from '@trevio/ui'
+import { usePageQuery, ContentList, Button } from '@trevio/ui'
 import { useRoute } from '#imports'
 import { NESTED_CONTENT_LIST } from '../graphql'
 import { ref } from 'vue'
@@ -59,7 +59,7 @@ const route = useRoute()
 const travel = ref({})
 
 try {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: /* GraphQL */`
       query($id: ID!) {
         travel(id: $id) {

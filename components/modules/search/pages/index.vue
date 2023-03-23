@@ -58,7 +58,7 @@ const groupNames = {
 }
 
 const onFetch = async (searchBy = undefined) => {
-  const { data } = await useQuery({
+  const { data } = await usePageQuery({
     query: `
       query ($query: String!, $searchBy: String) {
         search(query: $query, searchBy: $searchBy) {

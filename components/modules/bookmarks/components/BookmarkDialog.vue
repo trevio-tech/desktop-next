@@ -27,7 +27,7 @@ import { ref } from 'vue'
 import { useBookmarksStore } from '~/components/modules/bookmarks/store'
 import Dialog from '~/components/base/Dialog.vue'
 import { Pencil } from 'lucide-vue-next'
-import { useOverlay, useQuery, Button } from '@trevio/ui'
+import { useOverlay, usePageQuery, Button } from '@trevio/ui'
 
 const overlay = useOverlay()
 
@@ -69,7 +69,7 @@ const onSubmit = async () => {
   loading.value = true
 
   try {
-    const { data } = await useQuery({
+    const { data } = await usePageQuery({
       query: `
         mutation ($model_type: String!, $model_id: ID!, $categories: [ID!]!) {
           createDeleteBookmark(model_type: $model_type, model_id: $model_id, categories: $categories) {
