@@ -49,9 +49,8 @@
 </template>
 
 <script setup>
-import { usePageQuery } from '@trevio/ui'
+import { usePageQuery, SearchPlace, Button } from '@trevio/ui'
 import { ref } from 'vue'
-import { Button } from '@trevio/ui'
 import { UPDATE_USER } from '../graphql'
 import { PLACE_WITH_PARENTS_FIELDS } from '~/components/modules/places/graphql'
 

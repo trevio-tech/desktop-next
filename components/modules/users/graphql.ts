@@ -1,5 +1,8 @@
+import {PLACE_WITH_PARENTS_FIELDS} from '~/components/modules/places/graphql';
+
 export const USER = `
   id
+  place_id
   name
   avatar
   banner
@@ -11,24 +14,7 @@ export const USER = `
   travels_count
   created_at(format: "relative")
   place {
-    id
-    parent_id
-    full_name
-    parent {
-      id
-      parent_id
-      name
-      parent {
-        id
-        parent_id
-        name
-        parent {
-          id
-          parent_id
-          name
-        }
-      }
-    }
+    ${PLACE_WITH_PARENTS_FIELDS}
   }
   interests {
     id
@@ -36,25 +22,7 @@ export const USER = `
   }
   selectedPlaces {
     id
-    parent_id
     name
-    full_name
-    parent_names
-    parent {
-      id
-      parent_id
-      name
-      parent {
-        id
-        parent_id
-        name
-        parent {
-          id
-          parent_id
-          name
-        }
-      }
-    }
   }
   friends {
     id
