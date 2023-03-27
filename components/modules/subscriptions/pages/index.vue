@@ -4,10 +4,6 @@
       1
     </template>
 
-<!--    <ul class="flex items-center space-x-4">
-      <li v-for="(name, key) in subscriptionTypes" :key="key" @click="fetchSubscriptions(key)">{{ name }}</li>
-    </ul>-->
-
     <Dropdown class="mb-4">
       <template v-slot:default="{ isActive }">
         <Button :loading="isLoading" variant="secondary">
@@ -18,7 +14,7 @@
         </Button>
       </template>
       <template v-slot:popper="{ hide }">
-        <DropdownItem v-for="(name, key) in subscriptionTypes" :key="key" @click="onChangeFilter(key); hide()">
+        <DropdownItem v-for="(name, key) in subscriptionTypes" :key="key" @click="onChangeSubscriptionType(key); hide()">
           {{ name }}
         </DropdownItem>
       </template>
@@ -43,6 +39,7 @@ import { useAuth } from '#auth/runtime/composables'
 import { usePageQuery, Dropdown, DropdownItem, Button } from '@trevio/ui'
 
 const auth = useAuth()
+const isLoading = shallowRef(false)
 const subscriptions = shallowRef([])
 const subscriptionTypes = {
   all: 'Все подписки',
@@ -52,9 +49,8 @@ const subscriptionTypes = {
   places: 'Направления'
 }
 const activeSubscriptionType= shallowRef('all')
-const isLoading = shallowRef(false)
 
-const onChangeFilter = async (type) => {
+const onChangeSubscriptionType = async (type) => {
   activeSubscriptionType.value = type
   await fetchSubscriptions()
 }
