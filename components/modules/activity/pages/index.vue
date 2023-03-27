@@ -34,7 +34,7 @@ import UsersBelt from '~/components/modules/users/components/UsersBelt.vue'
 import ShotsHorizontalList from '~/components/modules/shots/components/ShotsHorizontalList.vue'
 import PromoLoadingContainer from '~/components/modules/promo/components/PromoLoadingContainer.vue'
 import { FEED } from '~/components/modules/activity/graphql'
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRoute } from '#imports'
 import { useActivityStore } from '~/components/modules/activity/store'
 import { useShotsStore } from '~/components/modules/shots/store'
@@ -48,40 +48,51 @@ const moreIsEmpty = ref(false)
 const shotsStore = useShotsStore()
 
 const fetchFeed = async () => {
-  const { data: { activity } } = await usePageQuery({
-    query: `
+  let result = []
+
+  try {
+    const { data: { activity } } = await usePageQuery({
+      query: `
       query getActivity($page: Int, $is_timeline: Boolean) {
         activity (page: $page, is_timeline: $is_timeline) {
           ${FEED}
         }
       }
     `,
-    variables: {
-      page: store.page,
-      is_timeline: route.name === 'activity.new'
-    }
-  })
+      variables: {
+        page: store.page,
+        is_timeline: route.name === 'activity.new'
+      }
+    })
 
-  return activity
+    result = activity
+  } catch (errors) {
+    console.log(errors)
+  }
+
+  return result
 }
 
-// При переключение между главной и new, нужно сбросить записи.
+
+// При переключении между главной и new, нужно сбросить записи.
 if (route.name !== store.previousRouteName) {
   store.$patch({
     previousRouteName: route.name
   })
 
-  await store.resetPage()
-  await store.setItems(await fetchFeed())
+  const items = await fetchFeed()
+  store.resetPage()
+  store.setItems(items)
 } else if (store.items.length === 0) {
   // Чтобы по возвращению в ленту, она повторно не грузилась.
-  await store.addItems(await fetchFeed())
+  const items = await fetchFeed()
+  store.addItems(items)
 }
 
 useIntersectionObserver(
   more,
   async ([{ isIntersecting }]) => {
-    if (isIntersecting && moreIsEmpty.value === false) {
+    if (isIntersecting) {
       await store.incrementPage()
       const items = await fetchFeed()
 

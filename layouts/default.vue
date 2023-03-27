@@ -5,7 +5,7 @@
     <div class="flex justify-center gap-10 h-full">
       <TheNavigation class="w-[180px]" />
 
-      <main class="flex flex-col">
+      <main class="flex flex-col w-[800px]">
 <!--        <h1 v-if="heading" class="text-xl font-bold mb-4">{{ heading }}</h1>-->
 
         <!-- HERO -->
@@ -15,7 +15,7 @@
         <!-- / HERO -->
 
         <!-- CONTENT, CONTENT-SIDEBAR -->
-        <div class="flex-auto flex max-w-[800px]" :class="{'flex-row-reverse': isReverse, 'gap-10': hasSidebar}">
+        <div class="flex" :class="{'flex-row-reverse': isReverse, 'gap-10': hasSidebar}">
           <div :class="{'w-[560px]': hasSidebar}">
             <slot />
           </div>
