@@ -3,30 +3,72 @@
     <template #sidebar>
       1
     </template>
-    <div class="divide-y">
+
+<!--    <ul class="flex items-center space-x-4">
+      <li v-for="(name, key) in subscriptionTypes" :key="key" @click="fetchSubscriptions(key)">{{ name }}</li>
+    </ul>-->
+
+    <Dropdown class="mb-4">
+      <template v-slot:default="{ isActive }">
+        <Button :loading="isLoading" variant="secondary">
+          <template #prepend>
+            <Filter class="w-4 h-4" />
+          </template>
+          {{ subscriptionTypes[activeSubscriptionType] }}
+        </Button>
+      </template>
+      <template v-slot:popper="{ hide }">
+        <DropdownItem v-for="(name, key) in subscriptionTypes" :key="key" @click="onChangeFilter(key); hide()">
+          {{ name }}
+        </DropdownItem>
+      </template>
+    </Dropdown>
+
+    <div v-if="subscriptions.length" class="divide-y">
       <SubscriptionCard
         v-for="subscription in subscriptions"
         :key="subscription.model_type + subscription.model_id"
         :subscription="subscription.model"
       />
     </div>
+    <div v-else>Подписок не найдено.</div>
   </NuxtLayout>
 </template>
 
 <script setup>
 import SubscriptionCard from '~/components/modules/subscriptions/components/SubscriptionCard.vue'
+import { Filter } from 'lucide-vue-next'
+import { shallowRef } from 'vue'
 import { useAuth } from '#auth/runtime/composables'
-import { usePageQuery } from '@trevio/ui'
+import { usePageQuery, Dropdown, DropdownItem, Button } from '@trevio/ui'
 
 const auth = useAuth()
+const subscriptions = shallowRef([])
+const subscriptionTypes = {
+  all: 'Все подписки',
+  users: 'Пользователи',
+  travels: 'Путешествия',
+  tags: 'Интересы',
+  places: 'Направления'
+}
+const activeSubscriptionType= shallowRef('all')
+const isLoading = shallowRef(false)
 
-let subscriptions = []
+const onChangeFilter = async (type) => {
+  activeSubscriptionType.value = type
+  await fetchSubscriptions()
+}
 
-try {
-  const { data } = await usePageQuery({
-    query: `
-      query ($user_id: ID!) {
-        subscriptions (user_id: $user_id) {
+const fetchSubscriptions = async () => {
+  if (isLoading.value) return
+
+  isLoading.value = true
+
+  try {
+    const { data } = await usePageQuery({
+      query: `
+      query ($user_id: ID!, $model_type: String) {
+        subscriptions (user_id: $user_id, model_type: $model_type) {
           model_type
           model_id
           model {
@@ -45,11 +87,18 @@ try {
         }
       }
     `,
-    variables: {
-      user_id: auth.user.id
-    }
-  })
+      variables: {
+        user_id: auth.user.id,
+        model_type: activeSubscriptionType.value === 'all' ? undefined : activeSubscriptionType.value
+      }
+    })
 
-  subscriptions = data.subscriptions
-} catch (errors) {}
+    subscriptions.value = data.subscriptions
+  } catch (errors) {}
+  finally {
+    isLoading.value = false
+  }
+}
+
+await fetchSubscriptions()
 </script>

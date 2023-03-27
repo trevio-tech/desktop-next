@@ -11,6 +11,9 @@
       <UserHero v-if="user" :user="user" />
     </template>
 
+    <template #sidebar>
+      тут сайдбар
+    </template>
 
     <ContentList :userId="route.params.userId" :fields="NESTED_USER_CONTENT" order-by="date">
       <template v-slot="{ items, isMore, isLoading, onFetch }">
