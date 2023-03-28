@@ -23,7 +23,7 @@
           <span class="font-medium">Топ</span>
         </NuxtLink>
       </li>
-      <li>
+      <li v-if="$auth.loggedIn">
         <NuxtLink to="/subscriptions" class="px-3 py-2 hover:bg-slate-100 rounded-lg flex items-center space-x-3">
           <Users class="w-5 h-5 text-slate-500" />
           <span class="font-medium">Подписки</span>

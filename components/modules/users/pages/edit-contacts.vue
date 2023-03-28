@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout heading="Редактирование профиля">
+  <NuxtLayout heading="Редактирование контактов">
     <template #sidebar>
       <ul>
         <li><NuxtLink :to="{name: 'users.edit', params: {userId}}">Основные настройки</NuxtLink></li>
@@ -7,92 +7,93 @@
         <li><NuxtLink :to="{name: 'users.edit.contacts', params: {userId}}">Контакты</NuxtLink></li>
       </ul>
     </template>
-    <form @submit.prevent="onSubmit" class="min-h-full flex flex-col justify-between bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
-      <div class="space-y-4">
-        <FormField
-          name="input.name"
-          label="Отображаемое имя"
-          required
-          v-slot="{ hasError }">
-          <Input v-model="form.name" placeholder="Ваш ник, имя и/или фамилия или название компании" />
+
+    <div class="bg-white rounded-lg p-6">
+      <form @submit.prevent="onSubmit">
+        <h3 class="text-xl font-semibold mb-4">Контактные ссылки</h3>
+        <FormField class="mb-2" name="url" v-slot="{ hasError }">
+          <Input v-model="url" type="url" placeholder="Вставьте ссылку" :has-error="hasError" />
         </FormField>
 
-        <FormField name="input.description" label="Описание">
-          <Textarea v-model="form.description" rows="3" placeholder="Пара слов о себе" />
-        </FormField>
+        <Button :loading="isParsing" type="submit">Добавить</Button>
+      </form>
 
-        <FormField name="input.gender" label="Пол">
-          <Select v-model="form.gender"
-                  is-primitive
-                  :items="[{id: null, name: 'Другой'}, {id: 'male', name: 'Мужской'}, {id: 'female', name: 'Женский'}]">
-          </Select>
-          {{ form.gender }}
-        </FormField>
-
-        <FormField name="input.birthday" label="День рождения">
-          <Input v-model="form.birthday" type="date" />
-          {{ form.birthday }}
-        </FormField>
-      </div>
-      <footer class="mt-8">
-        <hr class="mb-4 -mx-4 border-gray-200">
-
-        <div class="flex space-x-2">
-          <Button type="submit">Сохранить</Button>
+      <div v-if="links.length" class="mt-6">
+        <hr class="mb-6">
+        <div class="space-y-4">
+          <ContactLinkCard v-for="link in links" :key="link.id" :link="link" />
         </div>
-      </footer>
-    </form>
+      </div>
+    </div>
   </NuxtLayout>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { UPDATE_USER } from '../graphql'
-import { Button } from '@trevio/ui'
+import ContactLinkCard from '~/components/modules/users/components/ContactLinkCard.vue'
+import { Button, useQuery, usePageQuery } from '@trevio/ui'
+import { shallowRef } from 'vue'
+import { useRoute } from '#imports'
+import { useForm } from 'vee-validate'
 
-const form = ref({
-  name: '',
-  description: '',
-  birthday: null,
-})
+const route = useRoute()
+const { handleSubmit, setErrors } = useForm()
+const userId = route.params.userId
+const url = shallowRef('')
+const isParsing = shallowRef(false)
+const links = shallowRef([])
 
-const userId = parseInt(useRoute().params.userId)
+const LINK_FIELDS = `
+  id
+  title
+  url
+  host
+`
 
 try {
   const { data } = await usePageQuery({
     query: `
-      query($id: Int!) {
-        user(id: $id) {
-          id
-          name
-          description
-          birthday
-          gender
+      query getContactLinks($user_id: ID!) {
+        contactLinks(user_id: $user_id) {
+          ${LINK_FIELDS}
         }
       }
     `,
     variables: {
-      id: userId
+      user_id: userId
     }
   })
 
-  form.value = data.value.user
-} catch (error) {}
+  links.value = data.contactLinks
+} catch (errors) {}
 
-const onSubmit = async () => {
+const onSubmit = handleSubmit(async () => {
+  if (isParsing.value) return
+
+  isParsing.value = true
+
   try {
-    const input = form.value
-
-    delete input.id
-    delete input.__typename
-
-    const { data } = await usePageQuery({
-      query: UPDATE_USER,
+    const { data } = await useQuery({
+      query: `
+        mutation createContactLink($url: String) {
+          link: createContactLink(url: $url) {
+            ${LINK_FIELDS}
+          }
+        }
+      `,
       variables: {
-        id: userId,
-        input
+        url: url.value
       }
     })
-  } catch (error) {}
-}
+
+    links.value.unshift(data.link)
+
+    url.value = ''
+  } catch (errors) {
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
+    }
+  } finally {
+    isParsing.value = false
+  }
+})
 </script>
