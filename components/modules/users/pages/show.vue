@@ -30,17 +30,15 @@
 import UserHero from '~/components/modules/users/components/UserHero.vue'
 import { ContentCardRectangle } from '~/components'
 import { ContentList } from '@trevio/ui'
+import { LINK } from '~/components/modules/links/graphql'
 import { NESTED_USER_CONTENT } from '~/components/modules/users/graphql'
 import { USER } from '../graphql'
 import { shallowRef } from 'vue'
-import { useActivityStore } from '~/components/modules/activity/store'
 import { usePageQuery, useOverlay, Button } from '@trevio/ui'
 import { useRoute } from '#imports'
 
 const overlay = useOverlay()
 const route = useRoute()
-
-const activityStore = useActivityStore()
 const user = shallowRef()
 
 try {
@@ -49,6 +47,9 @@ try {
       query($id: ID!) {
         user(id: $id) {
           ${USER}
+        }
+        contactLinks(user_id: $id) {
+          ${LINK}
         }
       }
     `,
@@ -60,44 +61,5 @@ try {
   user.value = data.user
 } catch (errors) {
   console.log(errors)
-}
-
-const onEditInterests = () => {
-  overlay.show(InterestsForm, {
-    props: {
-      modelValue: user.interests
-    },
-    on: {
-      async 'update:modelValue'(interests) {
-        user.interests = interests
-      }
-    }
-  })
-}
-const onEditFriends = () => {
-  overlay.show(FriendsForm, {
-    props: {
-      modelValue: user.friends,
-    },
-    on: {
-      async 'update:modelValue'(friends) {
-        user.friends = friends
-        // Сбрасываем ленту, если лента пустая она будет загружена снова.
-        await activityStore.refreshMyFeed()
-      }
-    }
-  })
-}
-const onEditSelectedPlaces = () => {
-  overlay.show(SelectedPlacesForm, {
-    props: {
-      modelValue: user.selectedPlaces
-    },
-    on: {
-      async 'update:modelValue'(selectedPlaces) {
-        user.selectedPlaces.push(selectedPlaces)
-      }
-    }
-  })
 }
 </script>

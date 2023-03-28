@@ -21,7 +21,11 @@
       <div v-if="links.length" class="mt-6">
         <hr class="mb-6">
         <div class="space-y-4">
-          <ContactLinkCard v-for="link in links" :key="link.id" :link="link" />
+          <ContactLinkCard
+              v-for="(link, index) in links"
+              :key="link.id"
+              :link="link"
+              @deleted="links.splice(index, 1)" />
         </div>
       </div>
     </div>
@@ -31,9 +35,10 @@
 <script setup>
 import ContactLinkCard from '~/components/modules/users/components/ContactLinkCard.vue'
 import { Button, useQuery, usePageQuery } from '@trevio/ui'
+import { LINK } from '~/components/modules/links/graphql'
 import { shallowRef } from 'vue'
-import { useRoute } from '#imports'
 import { useForm } from 'vee-validate'
+import { useRoute } from '#imports'
 
 const route = useRoute()
 const { handleSubmit, setErrors } = useForm()
@@ -42,19 +47,12 @@ const url = shallowRef('')
 const isParsing = shallowRef(false)
 const links = shallowRef([])
 
-const LINK_FIELDS = `
-  id
-  title
-  url
-  host
-`
-
 try {
   const { data } = await usePageQuery({
     query: `
       query getContactLinks($user_id: ID!) {
         contactLinks(user_id: $user_id) {
-          ${LINK_FIELDS}
+          ${LINK}
         }
       }
     `,
@@ -76,7 +74,7 @@ const onSubmit = handleSubmit(async () => {
       query: `
         mutation createContactLink($url: String) {
           link: createContactLink(url: $url) {
-            ${LINK_FIELDS}
+            ${LINK}
           }
         }
       `,
