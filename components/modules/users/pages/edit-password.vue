@@ -31,10 +31,16 @@
 
 <script setup>
 import Card from '~/components/Card'
-import { Button } from '@trevio/ui'
-import { UPDATE_USER_PASSWORD } from '../graphql'
+import { Button, useQuery } from '@trevio/ui'
+import { UPDATE_PASSWORD } from '../graphql'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
+import { useRoute } from '#imports'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+
+const route = useRoute()
+const userId = route.params.userId
 
 const formInitialState = {
   password_old: '',
@@ -48,17 +54,23 @@ const { handleSubmit, setErrors } = useForm()
 
 const onSubmit = handleSubmit(async () => {
   try {
-    const { data } = await usePageQuery({
-      query: UPDATE_USER_PASSWORD,
-      variables: {...form.value}
+    const { data } = await useQuery({
+      query: UPDATE_PASSWORD,
+      variables: {
+        input: {...form.value}
+      }
     })
 
-    if (data.updateUserPassword) {
+    if (data.updatePassword) {
       form.value = {...formInitialState}
+
+      toast.success('Пароль изменен!', {
+        position: 'top-center'
+      })
     }
-  } catch (error) {
-    if (error.message === 'validation') {
-      setErrors(error['extensions']['validation'])
+  } catch (errors) {
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
     }
   }
 })

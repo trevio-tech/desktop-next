@@ -89,8 +89,8 @@ export const UPDATE_USER = `
     updateUser(id: $id, input: $input)
   }
 `
-export const UPDATE_USER_PASSWORD = `
-  mutation updateUserPassword ($password_old: String!, $password: String!, $password_confirmation: String!) {
-    updateUserPassword(password_old: $password_old, password: $password, password_confirmation: $password_confirmation)
+export const UPDATE_PASSWORD = `
+  mutation updatePassword($input: UpdatePasswordInput!) {
+    updatePassword(input: $input)
   }
 `
