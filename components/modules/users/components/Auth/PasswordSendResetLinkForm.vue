@@ -4,7 +4,7 @@
       Ссылка для восстановления пароля отправлена на ваш адрес электронной почты.
     </div>
     <div v-else>
-      <FormField label="Электронная почта" name="email" v-slot="{ hasError }">
+      <FormField label="Электронная почта" name="email" v-slot="{ hasError }" required>
         <Input
             v-model="form.email"
             :variant="hasError ? 'danger' : undefined"
@@ -40,7 +40,7 @@ const onSubmit = handleSubmit(async () => {
   try {
     const { data } = await usePageQuery({
       query: `
-        query ($email: String!) {
+        query ($email: String) {
           sendResetLink(email: $email)
         }
       `,
@@ -50,9 +50,9 @@ const onSubmit = handleSubmit(async () => {
     })
 
     isSend.value = data.sendResetLink
-  } catch (error) {
-    if (error.message === 'validation') {
-      setErrors(error.extensions.validation)
+  } catch (errors) {
+    if (errors[0]?.extensions?.validation) {
+      setErrors(errors[0].extensions.validation)
     }
   } finally {
     loading.value = false
