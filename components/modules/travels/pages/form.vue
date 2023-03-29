@@ -1,63 +1,58 @@
 <template>
   <NuxtLayout :heading="`${isEdit ? 'Редактирование' : 'Создание'} путешествия`">
+    <template #sidebar>
+      1
+    </template>
     <TheForm @submit="onSubmit" :is-edit="isEdit">
-      <div class="grid grid-cols-2 gap-6">
-        <FormField name="input.images" label="Обложка">
-          <TravelUpload v-model="form.cover" />
+      <FormField name="input.images">
+        <TravelUpload v-model="form.cover" />
+      </FormField>
+
+      <div class="space-y-4">
+        <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
+          <Input v-model="form.title" placeholder="Введите заголовок" :has-error="hasError" />
         </FormField>
 
-        <div class="space-y-6">
-          <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
-            <Input v-model="form.title" placeholder="Введите заголовок" :has-error="hasError" />
+        <FormField name="input.place_id" label="Страна" required v-slot="{ hasError }">
+          <SearchPlace v-model="form.place" :search-by="searchBy" :has-error="hasError" @update:modelValue="form.place_id = $event.id" />
+        </FormField>
+
+        <FormField name="input.text" label="Анонс" v-slot="{ hasError }">
+          <Textarea v-model="form.text" rows="3" placeholder="Краткое описание" :has-error="hasError" />
+        </FormField>
+
+        <FormField name="input.tags" label="Теги" id="tags" v-slot="{ hasError }">
+          <InputCustomTags v-model="form.tags" />
+        </FormField>
+
+        <FormField name="input.date_start" label="Дата начала и завершения" id="date" v-slot="{ hasError }">
+          <Datepicker
+            :model-value="[form.date_start, form.date_end]"
+            :enable-time-picker="false"
+            range
+            multi-calendars
+            multi-calendars-solo
+            position="right"
+            auto-apply
+            @update:modelValue="onDateChange"
+          >
+            <template #trigger>
+              <Input :model-value="readableDateStartDateEnd" placeholder="Дата начала и завершения" :has-error="hasError" />
+            </template>
+          </Datepicker>
+        </FormField>
+
+        <div class="gap-4">
+          <FormField name="input.budget" label="Бюджет путешествия" id="budget">
+            <Input v-model="form.budget" type="number" id="budget" placeholder="Бюджет путешествия" />
           </FormField>
 
-          <FormField name="input.place_id" label="Страна" required v-slot="{ hasError }">
-            <SearchPlace v-model="form.place" :search-by="searchBy" :has-error="hasError" @update:modelValue="form.place_id = $event.id" />
-          </FormField>
-
-          <FormField name="input.text" label="Анонс" v-slot="{ hasError }">
-            <Textarea v-model="form.text" rows="3" placeholder="Краткое описание" :has-error="hasError" />
-          </FormField>
-
-          <FormField name="input.tags" label="Теги" id="tags" v-slot="{ hasError }">
-            <InputCustomTags v-model="form.tags" />
-          </FormField>
-
-          <FormField name="input.date_start" label="Дата начала и завершения" id="date" v-slot="{ hasError }">
-            <Datepicker
-              :model-value="[form.date_start, form.date_end]"
-              :enable-time-picker="false"
-              range
-              multi-calendars
-              multi-calendars-solo
-              position="right"
-              auto-apply
-              @update:modelValue="onDateChange"
-            >
-              <template #trigger>
-                <Input :model-value="readableDateStartDateEnd" placeholder="Дата начала и завершения" :has-error="hasError" />
-              </template>
-            </Datepicker>
-          </FormField>
-
-          <div class="flex items-center gap-4">
-            <div class="flex items-center gap-4 flex-auto">
-              <FormField name="input.budget" label="Бюджет путешествия" id="budget" class="flex-auto">
-                <Input v-model="form.budget" type="number" id="budget" placeholder="Бюджет путешествия" />
-              </FormField>
-              <Dropdown class="mt-6">
-                <Button>
-                  <div class="truncate w-[100px]">{{ getCurrency }}</div>
-                  <template #append>
-                    <ChevronDown class="w-5 h-5 text-white" />
-                  </template>
-                </Button>
-                <template v-slot:popper="{ hide }">
-                  <DropdownItem v-for="currency in currencies" :key="currency.id" :value="currency.id" @click="form.currency_id = currency.id; hide()">
-                    {{ currency.name }}
-                  </DropdownItem>
-                </template>
-              </Dropdown>
+          <div class="space-y-1 mt-2">
+            <div v-for="currency in currencies" :key="currency.id">
+              <label :for="`currency-${currency.id}`" class="flex items-center space-x-1">
+                <input v-model="form.currency_id" :value="currency.id" type="radio" name="currency" :id="`currency-${currency.id}`" />
+                <span class="text-sm">{{ currency.name }}</span>
+              </label>
             </div>
           </div>
         </div>
@@ -72,13 +67,12 @@ import Datepicker from '@vuepic/vue-datepicker';
 import TheForm from '~/components/TheForm'
 import TravelUpload from '../components/TravelUpload'
 import pick from 'lodash.pick'
-import { ChevronDown } from 'lucide-vue-next'
 import { InputCustomTags } from '~/components/wrappers'
 import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql'
 import { format, parseISO, isValid } from 'date-fns'
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
-import { usePageQuery, SearchPlace, DropdownItem, Dropdown } from '@trevio/ui'
+import { usePageQuery, SearchPlace } from '@trevio/ui'
 import { useRoute, useRouter, definePageMeta } from '#imports'
 
 definePageMeta({
@@ -108,7 +102,11 @@ const isEdit = route.params.travelId > 0
 const searchBy = ['countries']
 const danger = ref(false)
 const loading = ref(false)
-const currencies = ref([])
+
+const currencies = ref([{
+  id: null,
+  name: 'Другая валюта',
+}])
 
 if (isEdit) {
   const { data } = await usePageQuery({
@@ -128,15 +126,17 @@ if (isEdit) {
     }
   })
 
-  currencies.value = data.currencies
+  data.currencies.forEach((currency) => {
+    currencies.value.push(currency)
+  })
 
   Object.assign(form.value, data.travel)
 
-  if (isValid(form.value.date_start)) {
+  if (!isValid(form.value.date_start)) {
     form.value.date_start = parseISO(form.value.date_start)
   }
 
-  if (isValid(form.value.date_end)) {
+  if (!isValid(form.value.date_end)) {
     form.value.date_end = parseISO(form.value.date_end)
   }
 } else {
@@ -150,7 +150,10 @@ if (isEdit) {
       }
     `
   })
-  currencies.value = data.currencies
+
+  data.currencies.forEach((currency) => {
+    currencies.value.push(currency)
+  })
 }
 
 const onDateChange = (dates) => {
@@ -202,14 +205,6 @@ const onSubmit = async (isDraft) => {
     loading.value = false
   }
 }
-
-const getCurrency = computed(() => {
-  if (form.value.currency_id > 0) {
-    return currencies.value.filter((currency) => currency.id === form.value.currency_id)[0].name
-  }
-
-  return [] || currencies.value[0].name
-})
 
 const readableDateStartDateEnd = computed(() => {
   let date = ''

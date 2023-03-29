@@ -5,7 +5,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { InputTags } from '@trevio/ui'
+import { InputTags, useQuery } from '@trevio/ui'
 
 
 const emit = defineEmits(['update:modelValue'])
@@ -26,7 +26,7 @@ const props = defineProps({
 const tags = ref(props.modelValue)
 
 const onSelect = async ({ name }) => {
-  const { data: { createTag }} = await usePageQuery({
+  const { data: { createTag }} = await useQuery({
     query: `
       mutation($name: String!) {
         createTag(name: $name) {

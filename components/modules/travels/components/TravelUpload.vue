@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden flex items-center justify-center h-[366px] relative border-2 border-gray-300 border-dashed rounded-md appearance-none hover:border-gray-400 focus:outline-none aspect-square">
+  <div class="overflow-hidden flex items-center justify-center relative border-2 border-gray-300 border-dashed rounded-md appearance-none hover:border-gray-400 focus:outline-none aspect-video">
     <Upload
       :fields="fields"
       :input="{model_type: 'travels'}"
@@ -18,6 +18,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { Upload } from '@trevio/ui'
 
 const props = defineProps({
   modelValue: {

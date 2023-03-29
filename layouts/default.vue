@@ -16,7 +16,7 @@
 
         <!-- CONTENT, CONTENT-SIDEBAR -->
         <div class="flex" :class="{'flex-row-reverse': isReverse, 'gap-10': hasSidebar}">
-          <div :class="{'w-[560px]': hasSidebar}">
+          <div class="flex-auto" :class="{'w-[560px]': hasSidebar}">
             <slot />
           </div>
           <div v-if="hasSidebar" class="flex-shrink-0 w-[240px]">
