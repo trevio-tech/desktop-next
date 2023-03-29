@@ -132,7 +132,7 @@ if (isEdit) {
 
   Object.assign(form.value, data.travel)
 
-  if (!isValid(form.value.date_start)) {
+  if (! isValid(form.value.date_start)) {
     form.value.date_start = parseISO(form.value.date_start)
   }
 

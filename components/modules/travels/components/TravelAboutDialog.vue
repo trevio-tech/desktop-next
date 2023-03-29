@@ -7,7 +7,10 @@
         </h2>
         <p>{{ travel.text }}</p>
         <p v-if="travel.place_id">Страна: {{ travel.country?.name }}</p>
-        <NuxtLink :to="{name: 'travels.show', params: {travelId: travel.id}}" class="underline">Перейти в путешествие</NuxtLink>
+
+        <div class="mt-4">
+          <NuxtLink :to="{name: 'travels.show', params: {travelId: travel.id}}" class="underline">Перейти в путешествие</NuxtLink>
+        </div>
       </div>
       <Loader v-else />
     </div>
@@ -17,7 +20,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Dialog from '~/components/base/Dialog'
-import { usePageQuery } from '@trevio/ui'
+import { useQuery, Loader } from '@trevio/ui'
 
 const travel = ref(null)
 
@@ -30,7 +33,7 @@ const props = defineProps({
 
 onMounted(async () => {
   try {
-    const { data } = await usePageQuery({
+    const { data } = await useQuery({
       query: /* GraphQL */`
         query ($id: ID!) {
           travel(id: $id) {

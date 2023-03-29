@@ -5,8 +5,8 @@ export default `
   budget
   title
   text
-  date_start
-  date_end
+  date_start(format: "iso")
+  date_end(format: "iso")
   is_draft
   tags {
     id
