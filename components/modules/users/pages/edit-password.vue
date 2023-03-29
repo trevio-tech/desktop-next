@@ -31,7 +31,7 @@
 
 <script setup>
 import Card from '~/components/Card'
-import { Button, useQuery } from '@trevio/ui'
+import { Button, useQuery, Input } from '@trevio/ui'
 import { UPDATE_PASSWORD } from '../graphql'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'

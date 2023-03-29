@@ -26,7 +26,7 @@
 import { useNuxtApp } from '#imports'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { Button } from '@trevio/ui'
+import { Button, Input } from '@trevio/ui'
 
 const emit = defineEmits(['login', 'register'])
 const { $auth } = useNuxtApp()
