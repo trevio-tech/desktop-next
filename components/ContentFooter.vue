@@ -9,16 +9,14 @@
       />
     </IsLoggedIn>
 
-<!--
     <ChatButton
         class="ml-1"
-      @click="overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
+      @click="$overlay.show(defineAsyncComponent(() => import('~/components/modules/chats/components/ChatDialog.vue')), {
       props: {
         chatId: `${entry.system_name}-${entry.id}`,
         title: entry.title
       }
       })" :messages-count="entry.messages_count" />
--->
 
     <BookmarkButton
       class="ml-auto"

@@ -75,7 +75,7 @@ import { ImagePlus } from 'lucide-vue-next'
 import { useNuxtApp } from '#imports'
 import { gql } from 'graphql-tag'
 import { onBeforeUnmount } from 'vue'
-import { Upload, useChat, useOverlay } from '@trevio/ui'
+import { Upload, useChat, useOverlay, Button, ChatForm } from '@trevio/ui'
 
 const overlay = useOverlay()
 
@@ -85,8 +85,6 @@ const props = defineProps({
   }
 })
 
-const { $echo } = useNuxtApp()
-
 const { stacks, getMessages, addMessage, activeChatId, setMessageFields } = useChat()
 
 const uploadFields = ['id', 'url(presets: "default@width:120,height:120")']
@@ -95,7 +93,11 @@ const store = useChatStore()
 
 setMessageFields(CHAT_MESSAGE)
 
-const subscriber = $echo
+await getMessages(props.chatId)
+
+const { $websockets } = useNuxtApp()
+
+const subscriber = $websockets
   .subscribe({
     query: gql`
       subscription {
@@ -106,8 +108,6 @@ const subscriber = $echo
     `,
   })
   .subscribe(({ data }) => addMessage(data.chatMessageCreated))
-
-await getMessages(props.chatId)
 
 onBeforeUnmount(() => subscriber.unsubscribe())
 </script>
