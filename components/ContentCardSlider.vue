@@ -17,6 +17,7 @@ import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref, shallowRef } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
+import { useQuery } from '@trevio/ui'
 
 const props = defineProps({
   notIn: {
@@ -55,7 +56,7 @@ setTimeout(() => {
 }, 1000)
 
 const load = async () => {
-  const { data } = await usePageQuery({
+  const { data } = await useQuery({
     query: `
       query getSimilarNotes ($tags: [Int], $notIn: [Int], $limit: Int){
         notes (tags: $tags, notIn: $notIn, limit: $limit) {

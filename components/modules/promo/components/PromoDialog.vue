@@ -45,7 +45,7 @@ import PromoFindContentDialog from '~/components/modules/promo/components/PromoF
 import { ref } from 'vue'
 import { X } from 'lucide-vue-next'
 import { usePromoStore } from '~/components/modules/promo/store'
-import { useOverlay, Button } from '@trevio/ui'
+import { useOverlay, Button, useQuery } from '@trevio/ui'
 
 const overlay = useOverlay()
 
@@ -64,7 +64,7 @@ if (props.entry?.system_name) {
 }
 
 try {
-  const { data: { promoTariffs }} = await usePageQuery({
+  const { data: { promoTariffs }} = await useQuery({
     query: `
       query {
         promoTariffs {

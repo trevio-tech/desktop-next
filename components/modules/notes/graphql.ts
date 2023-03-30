@@ -69,14 +69,15 @@ export const NOTE = `
     user_id
     place_id
     title
+    short_text: text(words: 20)
     text
     can
     system_name
     likes_count
     published_at(format: "relative")
-    images {
-        id
-        url
+    cover {
+      id
+      url(presets: "default@resize:fill:560:320")
     }
     tags {
       id

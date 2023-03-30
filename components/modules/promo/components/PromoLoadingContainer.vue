@@ -8,13 +8,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useIntersectionObserver } from '@vueuse/core'
 import { ALBUM_CARD } from '~/components/modules/albums/graphql'
 import { NOTE_CARD } from '~/components/modules/notes/graphql'
 import { QUESTION_CARD } from '~/components/modules/questions/graphql'
 import { REVIEW_CARD } from '~/components/modules/reviews/graphql'
 import { TRAVEL_CARD } from '~/components/modules/travels/graphql'
+import { ref } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
+import { useQuery } from '@trevio/ui'
 
 
 const root = ref()
@@ -25,7 +26,7 @@ useIntersectionObserver(
   root,
   async ([{ isIntersecting }]) => {
     if (isIntersecting && isLoaded.value === false) {
-      const { data } = await usePageQuery({
+      const { data } = await useQuery({
         query: `{
           promo {
             id
