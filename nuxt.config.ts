@@ -34,9 +34,9 @@ const config = {
 if (process.env.ENV !== 'development') {
   config.css.push(resolve('./node_modules/@trevio/ui/src/assets/style.css'))
 } else {
-  config.css.push(resolve('../ui-3/src/assets/style.css'))
+  config.css.push(resolve('../ui/src/assets/style.css'))
   config.alias = {
-    "@trevio/ui": resolve('../ui-3/src/index.ts'),
+    "@trevio/ui": resolve('../ui/src/index.ts'),
   }
   config.vite = {
     server: {
