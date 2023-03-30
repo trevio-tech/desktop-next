@@ -19,7 +19,7 @@
                 :key="tariff.id"
                 @click="store.selectedTariff = tariff"
                 :class="{'outline outline-green-400': store.selectedTariff?.id === tariff.id}"
-                class="flex-auto p-4 rounded cursor-pointer hover:outline outline-stone-100">
+                class="flex-auto p-4 rounded cursor-pointer hover:outline hover:outline-stone-100">
               <h4 class="text-xl font-semibold">{{ tariff.period_value }} {{ tariff.period_text }}</h4>
               <div class="text-sm">{{ tariff.total_price }} монет</div>
             </li>
