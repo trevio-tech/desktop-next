@@ -85,15 +85,17 @@ const onSubmit = async () => {
 
     const { data: { createPromo }} = await useQuery({
       query: `
-      mutation ($tariff_id: Int!, $input: PromoInput!) {
-        createPromo(tariff_id: $tariff_id, input: $input)
-      }
-    `,
+        mutation ($tariff_id: ID!, $input: PromoInput!) {
+          createPromo(tariff_id: $tariff_id, input: $input)
+        }
+      `,
       variables
     })
 
     if (createPromo) {
       store.$reset()
+      overlay.hide()
+      alert('Теперь ваша запись продвигается!')
     }
   } catch (error) {}
   finally {
