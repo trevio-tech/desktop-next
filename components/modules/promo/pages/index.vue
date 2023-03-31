@@ -1,7 +1,11 @@
 <template>
   <NuxtLayout heading="Продвигаемые записи">
-    <div v-for="item in items" :key="item.id">
-      {{ item.model.title }} - {{ item.ends_at }}
+    <div class="space-y-2">
+      <div v-for="item in items" :key="item.id" class="bg-white shadow-sm rounded-lg border border-slate-200 p-4 rounded-lg">
+        <h3 class="text-lg font-semibold">{{ item.model.title }}</h3>
+        <div class="text-sm"><span class="text-slate-400">продвигается до:</span> {{ item.ends_at }}</div>
+        <div class="text-sm"><span class="text-slate-400">количество показов:</span> {{ item.views_count }}</div>
+      </div>
     </div>
   </NuxtLayout>
 </template>
@@ -19,19 +23,22 @@ const items = ref([])
 
 try {
   const { data } = await usePageQuery({
-    query: /* GraphQL */ `
+    query: /* GraphQL */`
       query {
-        promo {
+        myPromo {
           id
           ends_at
+          views_count
           model {
             ...on Note {
               id
               title
+              system_name
             }
             ...on Travel {
               id
               title
+              system_name
             }
           }
         }
@@ -39,6 +46,6 @@ try {
     `,
   })
 
-  items.value = data.promo
+  items.value = data.myPromo
 } catch (error) {}
 </script>
