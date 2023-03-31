@@ -95,9 +95,9 @@ setMessageFields(CHAT_MESSAGE)
 
 await getMessages(props.chatId)
 
-const { $websockets } = useNuxtApp()
+const { $echo } = useNuxtApp()
 
-const subscriber = $websockets
+const subscriber = $echo
   .subscribe({
     query: gql`
       subscription {

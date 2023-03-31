@@ -19,6 +19,7 @@ const config = {
   runtimeConfig: {
     public: {
       GRAPHQL_URL: process.env.GRAPHQL_URL,
+      WEBSOCKETS_APP_KEY: process.env.WEBSOCKETS_APP_KEY,
       WEBSOCKETS_HOST: process.env.WEBSOCKETS_HOST,
     }
   },

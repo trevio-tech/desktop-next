@@ -4,7 +4,7 @@ import { websockets } from '@trevio/ui'
 export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
-      websockets: websockets(nuxtApp),
+      echo: websockets(nuxtApp),
     }
   }
 })
