@@ -1,11 +1,9 @@
 <template>
   <article class="bg-white overflow-hidden ring-1 ring-slate-200 rounded-lg">
-    <div class="relative overflow-hidden">
-      <NuxtLink v-if="entry.cover" :to="to" class="block">
-        <img :src="entry.cover?.url?.default" :alt="entry.title" class="object-cover w-full h-full" loading="lazy">
-      </NuxtLink>
-    </div>
-
+    <NuxtLink v-if="entry.cover" :to="to" class="block">
+      <img :src="entry.cover?.url?.default" :alt="entry.title" class="object-cover w-full h-full" loading="lazy">
+    </NuxtLink>
+    
     <div class="m-4 flex items-center justify-between">
       <Profile :user="entry.user"></Profile>
       <button
