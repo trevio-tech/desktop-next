@@ -3,7 +3,7 @@
     <template #sidebar>
       1
     </template>
-    <TheForm @submit="onSubmit" :is-edit="isEdit">
+    <TheForm @submit="onSubmit(); form.is_draft = $event"  :is-edit="isEdit">
       <FormField name="input.images">
         <TravelUpload v-model="form.cover" />
       </FormField>
@@ -161,7 +161,7 @@ const onDateChange = (dates) => {
   form.value.date_end = dates[1]
 }
 
-const onSubmit = async (isDraft) => {
+const onSubmit = async (isDraft = false) => {
   form.value.is_draft = isDraft
 
   if (loading.value) {

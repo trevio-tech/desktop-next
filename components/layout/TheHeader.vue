@@ -26,6 +26,7 @@
           <DropdownItem :to="{name: 'users.show', params: {userId: $auth.user.id}}" @click="hide">Мой профиль</DropdownItem>
           <DropdownItem :to="{name: 'users.edit', params: {userId: $auth.user.id}}" @click="hide">Настройки</DropdownItem>
           <DropdownItem :to="{name: 'bookmarks', params: {userId: $auth.user.id}}" @click="hide">Закладки</DropdownItem>
+          <DropdownItem :to="{name: 'drafts'}" @click="hide">Черновики</DropdownItem>
           <DropdownItem :to="{name: 'promo'}" @click="hide">Продвижение</DropdownItem>
           <DropdownItem :to="{name: 'users.premium'}" @click="hide">Премиум</DropdownItem>
           <DropdownItem @click="$auth.logout()">Выход</DropdownItem>

@@ -3,7 +3,7 @@
     <template #sidebar>
       123
     </template>
-    <TheForm @submit="onSubmit" @draft="form.is_draft = true" :is-edit="isEdit">
+    <TheForm @submit="onSubmit" :is-edit="isEdit">
       <FormField name="input.title" label="Заголовок" required v-slot="{ hasError }">
         <Input v-model="form.title" placeholder="Введите заголовок" :variant="hasError ? 'danger' : undefined" />
       </FormField>
@@ -103,12 +103,14 @@ try {
   console.log(error)
 }
 
-const onSubmit = handleSubmit(async () => {
+const onSubmit = async (isDraft = false) => {
   if (loading.value) {
     return
   }
 
   loading.value = true
+
+  form.value.is_draft = isDraft
 
   const input = pick(form.value, [
     'cover_id',
@@ -142,5 +144,5 @@ const onSubmit = handleSubmit(async () => {
   } finally {
     loading.value = false
   }
-})
+}
 </script>
