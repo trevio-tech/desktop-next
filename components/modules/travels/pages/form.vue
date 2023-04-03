@@ -162,13 +162,13 @@ const onDateChange = (dates) => {
 }
 
 const onSubmit = async (isDraft = false) => {
-  form.value.is_draft = isDraft
-
   if (loading.value) {
     return
   }
 
   loading.value = true
+
+  form.value.is_draft = isDraft
 
   const input = pick(form.value, [
     'title',

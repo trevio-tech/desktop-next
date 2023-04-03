@@ -20,7 +20,7 @@
       </template>
     </Dropdown>
 
-    <div v-if="subscriptions.length" class="divide-y">
+    <div v-if="subscriptions.length" class="divide-y overflow-hidden rounded-lg">
       <SubscriptionCard
         v-for="subscription in subscriptions"
         :key="subscription.model_type + subscription.model_id"

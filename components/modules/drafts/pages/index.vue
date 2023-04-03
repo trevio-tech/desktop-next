@@ -3,7 +3,7 @@
     <template #sidebar>
       123
     </template>
-    <div v-if="drafts.length > 0" class="space-y-4">
+    <div v-if="drafts.length > 0" class="rounded-lg overflow-hidden divide-y">
       <DraftCard v-for="draft in drafts" :key="draft.id" :content="draft" />
     </div>
     <div v-else>У вас нет черновиков.</div>
