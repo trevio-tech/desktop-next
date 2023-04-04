@@ -8,7 +8,7 @@
     </Html>
 
     <template #sidebar>
-      <NuxtLink :to="{name: 'travels.edit', params: {travelId: travel.id}}">Редактировать</NuxtLink>
+      1
     </template>
 
     <Content :entry="travel" />

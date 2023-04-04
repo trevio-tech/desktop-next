@@ -12,7 +12,7 @@
           <Button>Войти</Button>
         </li>
       </ul>
-      <Dropdown v-else placement="bottom-end" class="ml-auto h-full flex items-center">
+      <DropdownMenu v-else placement="bottom-end" class="ml-auto h-full flex items-center">
         <template
           v-slot:default="{ isActive }"
         >
@@ -23,15 +23,15 @@
           </div>
         </template>
         <template v-slot:popper="{ hide }">
-          <DropdownItem :to="{name: 'users.show', params: {userId: $auth.user.id}}" @click="hide">Мой профиль</DropdownItem>
-          <DropdownItem :to="{name: 'users.edit', params: {userId: $auth.user.id}}" @click="hide">Настройки</DropdownItem>
-          <DropdownItem :to="{name: 'bookmarks', params: {userId: $auth.user.id}}" @click="hide">Закладки</DropdownItem>
-          <DropdownItem :to="{name: 'drafts'}" @click="hide">Черновики</DropdownItem>
-          <DropdownItem :to="{name: 'promo'}" @click="hide">Продвижение</DropdownItem>
-          <DropdownItem :to="{name: 'users.premium'}" @click="hide">Премиум</DropdownItem>
-          <DropdownItem @click="$auth.logout()">Выход</DropdownItem>
+          <DropdownMenuItem :to="{name: 'users.show', params: {userId: $auth.user.id}}" @click="hide">Мой профиль</DropdownMenuItem>
+          <DropdownMenuItem :to="{name: 'users.edit', params: {userId: $auth.user.id}}" @click="hide">Настройки</DropdownMenuItem>
+          <DropdownMenuItem :to="{name: 'bookmarks', params: {userId: $auth.user.id}}" @click="hide">Закладки</DropdownMenuItem>
+          <DropdownMenuItem :to="{name: 'drafts'}" @click="hide">Черновики</DropdownMenuItem>
+          <DropdownMenuItem :to="{name: 'promo'}" @click="hide">Продвижение</DropdownMenuItem>
+          <DropdownMenuItem :to="{name: 'users.premium'}" @click="hide">Премиум</DropdownMenuItem>
+          <DropdownMenuItem @click="$auth.logout()">Выход</DropdownMenuItem>
         </template>
-      </Dropdown>
+      </DropdownMenu>
     </div>
   </header>
 </template>
@@ -39,7 +39,7 @@
 <script setup>
 import { defineAsyncComponent } from '#imports'
 import { ChevronDown } from 'lucide-vue-next'
-import { useOverlay, Button, SearchBar, DropdownItem, Dropdown } from '@trevio/ui'
+import { useOverlay, Button, SearchBar, DropdownMenuItem, DropdownMenu } from '@trevio/ui'
 
 const overlay = useOverlay()
 

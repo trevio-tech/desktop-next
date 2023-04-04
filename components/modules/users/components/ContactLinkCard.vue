@@ -7,25 +7,25 @@
         <div class="text-xs text-gray-500">{{ link.host }}</div>
       </div>
     </NuxtLink>
-    <Dropdown class="flex-shrink-0 ml-auto" placement="bottom-end">
+    <DropdownMenu class="flex-shrink-0 ml-auto" placement="bottom-end">
       <button class="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 cursor-pointer">
         <MoreHorizontal />
       </button>
       <template #popper>
-        <DropdownItem @click="isEdit = !isEdit">
+        <DropdownMenuItem @click="isEdit = !isEdit">
           <template #prepend>
             <Pencil class="w-5 h-5" />
           </template>
           Редактировать
-        </DropdownItem>
-        <DropdownItem @click="onDelete" :busy="isDeleting">
+        </DropdownMenuItem>
+        <DropdownMenuItem @click="onDelete" :busy="isDeleting">
           <template #prepend>
             <Trash class="w-5 h-5 text-red-500" />
           </template>
           Удалить
-        </DropdownItem>
+        </DropdownMenuItem>
       </template>
-    </Dropdown>
+    </DropdownMenu>
   </div>
   <form v-else @submit.prevent="onSubmit">
     <FormField class="mb-2" name="title" v-slot="{ hasError }">
@@ -38,7 +38,7 @@
 
 <script setup>
 import { MoreHorizontal, Trash, Pencil } from 'lucide-vue-next'
-import { Dropdown, DropdownItem, useQuery, Button, Input } from '@trevio/ui'
+import { DropdownMenu, DropdownMenuItem, useQuery, Button, Input } from '@trevio/ui'
 import { shallowRef } from 'vue'
 import { useForm } from 'vee-validate'
 

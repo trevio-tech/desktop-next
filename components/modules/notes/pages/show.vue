@@ -3,18 +3,6 @@
     <template #sidebar>
       <Menu>
         <MenuList>
-          <MenuListItem>
-            <template #icon>
-              <Pencil class="w-5 h-5" />
-            </template>
-            <NuxtLink :to="`/notes/${note.id}/edit`">Редактировать</NuxtLink>
-          </MenuListItem>
-          <MenuListItem variant="negative">
-            <template #icon>
-              <Trash class="w-5 h-5" />
-            </template>
-            <NuxtLink :to="`/notes/${note.id}/edit`">Удалить</NuxtLink>
-          </MenuListItem>
           <MenuListItem variant="negative">
             <template #icon>
               <Trash class="w-5 h-5" />

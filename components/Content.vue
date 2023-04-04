@@ -12,10 +12,17 @@
           <div class="text-slate-400">{{ entry.published_at }}</div>
         </div>
       </div>
+
+      <ContentOwnerDropdownMenu
+        v-if="parseInt(entry.user_id) === parseInt($auth.user?.id)"
+        :model-type="entry.system_name"
+        :model-id="entry.id"
+      />
       <SubscriptionButton
-          v-slot="{ onSubmit, isSubscribed, isLoading }"
-          model-type="users"
-          :model-id="entry.user_id"
+        v-else
+        v-slot="{ onSubmit, isSubscribed, isLoading }"
+        model-type="users"
+        :model-id="entry.user_id"
       >
         <Button :loading="isLoading" @click="onSubmit('users', entry.user_id)" type="button">
           {{ isSubscribed ? 'Отписаться' : 'Подписаться' }}
@@ -40,6 +47,7 @@
 
 <script setup>
 import ContentFooter from '~/components/ContentFooter.vue'
+import ContentOwnerDropdownMenu from './ContentOwnerDropdownMenu.vue'
 import { Button, SubscriptionButton, useSubscriptionsStore, ImageViewer } from '@trevio/ui'
 
 const store = useSubscriptionsStore()

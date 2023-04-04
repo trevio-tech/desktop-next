@@ -10,25 +10,25 @@
             <NuxtLink class="font-medium" :to="{name: 'users.show', params: {userId: entry.user_id}}">{{ entry.user.name }}</NuxtLink>
             <div class="text-slate-500">{{ entry.created_at }}</div>
           </div>
-          <Dropdown placement="bottom-end" class="ml-auto">
+          <DropdownMenu placement="bottom-end" class="ml-auto">
             <button type="button" class="p-1 bg-slate-200 rounded-lg">
               <MoreHorizontal class="w-5 h-5 cursor-pointer text-slate-500" />
             </button>
             <template v-slot:popper="{ hide }">
-              <DropdownItem as="div" @click="onPin(); hide()" class="flex items-center space-x-2">
+              <DropdownMenuItem as="div" @click="onPin(); hide()" class="flex items-center space-x-2">
                 <Check class="w-4 h-4" />
                 <span>{{ entry.is_pinned ? 'Отменить решение' : 'Выбрать решением' }}</span>
-              </DropdownItem>
-              <DropdownItem as="div" @click="onEdit" class="flex items-center space-x-2">
+              </DropdownMenuItem>
+              <DropdownMenuItem as="div" @click="onEdit" class="flex items-center space-x-2">
                 <Pencil class="w-4 h-4" />
                 <span>Редактировать</span>
-              </DropdownItem>
-              <DropdownItem as="div" @click="onDelete" class="flex items-center space-x-2">
+              </DropdownMenuItem>
+              <DropdownMenuItem as="div" @click="onDelete" class="flex items-center space-x-2">
                 <Trash class="w-4 h-4" />
                 <span>Удалить</span>
-              </DropdownItem>
+              </DropdownMenuItem>
             </template>
-          </Dropdown>
+          </DropdownMenu>
         </div>
 
         <div class="text-sm">{{ entry.text }}</div>
@@ -55,7 +55,7 @@
 import { MoreHorizontal, Check, Pencil, Trash } from 'lucide-vue-next'
 import { usePageQuery } from '@trevio/ui'
 import { DELETE_ANSWER } from '~/components/modules/questions/graphql'
-import { useOverlay, DropdownItem, Dropdown, IsLoggedIn } from '@trevio/ui'
+import { useOverlay, DropdownMenuItem, DropdownMenu, IsLoggedIn } from '@trevio/ui'
 
 const overlay = useOverlay()
 

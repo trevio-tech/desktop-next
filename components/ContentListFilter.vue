@@ -1,17 +1,17 @@
 <template>
-  <Dropdown>
+  <DropdownMenu>
     <Button>Фильтр</Button>
     <template #popper>
-      <DropdownItem v-for="(item, key) in list" :key="key" :value="key" :as="Checkbox" v-model="content" @update:modelValue="$emit('update:modelValue', $event)">
+      <DropdownMenuItem v-for="(item, key) in list" :key="key" :value="key" :as="Checkbox" v-model="content" @update:modelValue="$emit('update:modelValue', $event)">
         {{ item }}
-      </DropdownItem>
+      </DropdownMenuItem>
     </template>
-  </Dropdown>
+  </DropdownMenu>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { Button, DropdownItem, Dropdown } from '@trevio/ui'
+import { Button, DropdownMenuItem, DropdownMenu } from '@trevio/ui'
 
 defineEmits(['update:modelValue'])
 const props = defineProps({

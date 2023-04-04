@@ -5,7 +5,7 @@
       <div id="banner" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
       <div :style="styles" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
 
-      <Dropdown placement="bottom-end" class="absolute right-0 top-0 p-4">
+      <DropdownMenu placement="bottom-end" class="absolute right-0 top-0 p-4">
         <template v-slot:default="{ isActive }">
           <Button variant="secondary" class="text-white bg-white/10">
             Изменить обложку
@@ -15,20 +15,20 @@
           </Button>
         </template>
         <template v-slot:popper="{ hide }">
-          <DropdownItem @click="onUpload(hide)">
+          <DropdownMenuItem @click="onUpload(hide)">
             <template #prepend>
               <Image class="w-5 h-5 text-blue-500" />
             </template>
             Загрузить
-          </DropdownItem>
-          <DropdownItem v-if="user.banner !== null" @click="onDelete(hide)">
+          </DropdownMenuItem>
+          <DropdownMenuItem v-if="user.banner !== null" @click="onDelete(hide)">
             <template #prepend>
               <Trash class="w-5 h-5 text-red-500" />
             </template>
             Удалить
-          </DropdownItem>
+          </DropdownMenuItem>
         </template>
-      </Dropdown>
+      </DropdownMenu>
     </div>
 
     <div class="bg-white shadow border-b border-gray-200/50 p-4 rounded-lg h-[120px] -mt-[60px] flex items-center relative">
@@ -58,7 +58,7 @@
 import ColorThief from 'colorthief/dist/color-thief'
 import UserAboutDialog from '~/components/modules/users/components/UserAboutDialog.vue'
 import { Pencil, Image, Trash } from 'lucide-vue-next'
-import { Upload, shadeColor, usePageQuery, Button, Avatar, DropdownItem, Dropdown, useOverlay } from '@trevio/ui'
+import { Upload, shadeColor, usePageQuery, Button, Avatar, DropdownMenuItem, DropdownMenu, useOverlay } from '@trevio/ui'
 import { computed } from 'vue'
 import { useAuth } from '#auth/runtime/composables'
 

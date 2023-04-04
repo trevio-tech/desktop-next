@@ -4,7 +4,7 @@
       1
     </template>
 
-    <Dropdown class="mb-4">
+    <DropdownMenu class="mb-4">
       <template v-slot:default="{ isActive }">
         <Button :loading="isLoading" variant="secondary">
           <template #prepend>
@@ -14,11 +14,11 @@
         </Button>
       </template>
       <template v-slot:popper="{ hide }">
-        <DropdownItem v-for="(name, key) in subscriptionTypes" :key="key" @click="onChangeSubscriptionType(key); hide()">
+        <DropdownMenuItem v-for="(name, key) in subscriptionTypes" :key="key" @click="onChangeSubscriptionType(key); hide()">
           {{ name }}
-        </DropdownItem>
+        </DropdownMenuItem>
       </template>
-    </Dropdown>
+    </DropdownMenu>
 
     <div v-if="subscriptions.length" class="divide-y overflow-hidden rounded-lg">
       <SubscriptionCard
@@ -36,7 +36,7 @@ import SubscriptionCard from '~/components/modules/subscriptions/components/Subs
 import { Filter } from 'lucide-vue-next'
 import { shallowRef } from 'vue'
 import { useAuth } from '#auth/runtime/composables'
-import { usePageQuery, Dropdown, DropdownItem, Button } from '@trevio/ui'
+import { usePageQuery, DropdownMenu, DropdownMenuItem, Button } from '@trevio/ui'
 
 const auth = useAuth()
 const isLoading = shallowRef(false)
