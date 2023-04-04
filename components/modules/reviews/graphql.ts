@@ -61,7 +61,7 @@ export const UPDATE_REVIEW = `
 `
 
 export const DELETE_REVIEW = `
-  mutation ($id: Int!) {
+  mutation ($id: ID!) {
     deleteContent: deleteReview(id: $id)
   }
 `

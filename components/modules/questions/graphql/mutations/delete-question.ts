@@ -1,5 +1,5 @@
 export default `
-  mutation ($id: Int!) {
+  mutation ($id: ID!) {
     deleteContent: deleteQuestion(id: $id)
   }
 `

@@ -7,3 +7,4 @@ export { default as TRAVEL_FORM } from './queries/form.ts'
 
 export { default as CREATE_TRAVEL } from './mutations/create.ts'
 export { default as UPDATE_TRAVEL } from './mutations/update.ts'
+export { default as DELETE_TRAVEL } from './mutations/delete.ts'

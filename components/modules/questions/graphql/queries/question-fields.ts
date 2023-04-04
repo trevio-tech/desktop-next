@@ -4,6 +4,7 @@ export default `
   place_id
   title
   text
+  system_name
   user {
     id
     name

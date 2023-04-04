@@ -6,7 +6,7 @@
       </button>
     </template>
     <template v-slot:popper="{ hide }">
-      <DropdownMenuItem :to="to" @click="hide">
+      <DropdownMenuItem :to="editLink" @click="hide">
         <template #prepend>
           <Pencil class="w-5 h-5" />
         </template>
@@ -16,7 +16,7 @@
         <template #prepend>
           <Trash class="w-5 h-5 text-red-500" />
         </template>
-        <DeletionConfirmationButton keyword="заметка" :mutation="DELETE_NOTE" mutation-name="deleteNote" :variables="{id: modelId}">
+        <DeletionConfirmationButton keyword="заметка" :mutation="mutation" :mutation-name="mutationName" :variables="{id: modelId}">
           Удалить
         </DeletionConfirmationButton>
       </DropdownMenuItem>
@@ -26,7 +26,11 @@
 
 <script setup>
 import DeletionConfirmationButton from '~/components/common/dialogs/DeletionConfirmationButton.vue'
+import { DELETE_ALBUM } from '~/components/modules/albums/graphql'
 import { DELETE_NOTE } from '~/components/modules/notes/graphql'
+import { DELETE_QUESTION } from '~/components/modules/questions/graphql'
+import { DELETE_REVIEW } from '~/components/modules/reviews/graphql'
+import { DELETE_TRAVEL } from '~/components/modules/travels/graphql'
 import { DropdownMenu, DropdownMenuItem } from '@trevio/ui'
 import { MoreHorizontal, Pencil, Trash } from 'lucide-vue-next'
 
@@ -44,7 +48,23 @@ const { modelType, modelId } = defineProps({
   }
 })
 
-const to = {
+const mutation = {
+  albums: DELETE_ALBUM,
+  notes: DELETE_NOTE,
+  questions: DELETE_QUESTION,
+  reviews: DELETE_REVIEW,
+  travels: DELETE_TRAVEL,
+}[modelType]
+
+const mutationName = {
+  albums: 'deleteAlbum',
+  notes: 'deleteNote',
+  questions: 'deleteQuestion',
+  reviews: 'deleteReview',
+  travels: 'deleteTravel',
+}[modelType]
+
+const editLink = {
   albums: {name: 'albums.edit', params: {albumId: modelId}},
   notes: {name: 'notes.edit', params: {noteId: modelId}},
   questions: {name: 'questions.edit', params: {questionId: modelId}},

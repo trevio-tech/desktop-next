@@ -24,6 +24,7 @@ try {
           id
           user_id
           place_id
+          system_name
           title
           text
           can

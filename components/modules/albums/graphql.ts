@@ -73,6 +73,7 @@ export const ALBUM = `
   text
   is_draft
   image_order
+  system_name
   travel {
     id
     title
@@ -129,7 +130,7 @@ export const UPDATE_ALBUM = `
 `
 
 export const DELETE_ALBUM = `
-  mutation ($id: Int!) {
+  mutation ($id: ID!) {
     deleteContent: deleteAlbum(id: $id)
   }
 `
