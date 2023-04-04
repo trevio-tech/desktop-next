@@ -149,7 +149,7 @@ export const UPDATE_NOTE = `
 `
 
 export const DELETE_NOTE = `
-  mutation ($id: ID!) {
-    deleteContent: deleteNote(id: $id)
+  mutation deleteNote($id: ID!) {
+    deleteNote(id: $id)
   }
 `
