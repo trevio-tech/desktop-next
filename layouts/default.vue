@@ -3,7 +3,7 @@
     <TheHeader class="flex-shrink-0" />
 
     <div class="flex justify-center gap-10 h-full">
-      <TheNavigation class="w-[180px]" />
+      <TheNavigation class="w-[180px] sticky top-[80px] h-fit" />
 
       <main class="flex flex-col w-[800px]">
 <!--        <h1 v-if="heading" class="text-xl font-bold mb-4">{{ heading }}</h1>-->
