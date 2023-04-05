@@ -48,9 +48,6 @@ try {
         user(id: $id) {
           ${USER}
         }
-        contactLinks(user_id: $id) {
-          ${LINK}
-        }
       }
     `,
     variables: {

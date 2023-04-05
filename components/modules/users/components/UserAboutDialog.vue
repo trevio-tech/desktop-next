@@ -17,6 +17,15 @@
       <hr class="my-4">
       <div class="font-medium mb-2">Описание:</div>
       {{ user.description }}
+      <div v-if="user.links.length > 0" class="mt-4">
+        <hr class="mb-4">
+        <div class="font-medium mb-2">Контактные ссылки:</div>
+        <ul class="space-y-1 list-inside list-disc text-blue-500">
+          <li v-for="link in user.links" :key="link.id" class="truncate">
+            <a :href="link.url" target="_blank" class="hover:underline" :title="link.title">{{ link.title }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </Dialog>
 </template>

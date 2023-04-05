@@ -3,7 +3,7 @@
     <NuxtLink :href="link.url" target="_blank" class="flex">
       <div class="w-10 h-10 bg-slate-100 rounded-lg flex-shrink-0 mr-2 self-start"></div>
       <div class="mr-2">
-        <div class="text-sm font-semibold mb-1">{{ link.title || 'Без заголовка' }}</div>
+        <div class="text-sm font-semibold mb-1">{{ link.title }}</div>
         <div class="text-xs text-gray-500">{{ link.host }}</div>
       </div>
     </NuxtLink>

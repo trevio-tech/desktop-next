@@ -1,4 +1,5 @@
-import {PLACE_WITH_PARENTS_FIELDS} from '~/components/modules/places/graphql';
+import { PLACE_WITH_PARENTS_FIELDS } from '~/components/modules/places/graphql'
+import { LINK } from '~/components/modules/links/graphql'
 
 export const USER = `
   id
@@ -16,18 +17,8 @@ export const USER = `
   place {
     ${PLACE_WITH_PARENTS_FIELDS}
   }
-  interests {
-    id
-    name
-  }
-  selectedPlaces {
-    id
-    name
-  }
-  friends {
-    id
-    name
-    avatar
+  links {
+    ${LINK}
   }
 `
 
