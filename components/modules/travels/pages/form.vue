@@ -84,8 +84,8 @@ const form = ref({
   currency_id: null,
   title: '',
   budget: 0,
-  date_start: '',
-  date_end: '',
+  date_start: null,
+  date_end: null,
   is_draft: false,
   place: {
     id: null,
@@ -132,11 +132,15 @@ if (isEdit) {
 
   Object.assign(form.value, data.travel)
 
-  if (! isValid(form.value.date_start)) {
+  if (! isValid(parseISO(form.value.date_start))) {
+    form.value.date_start = null
+  } else {
     form.value.date_start = parseISO(form.value.date_start)
   }
 
-  if (!isValid(form.value.date_end)) {
+  if (! isValid(parseISO(form.value.date_end))) {
+    form.value.date_end = null
+  } else {
     form.value.date_end = parseISO(form.value.date_end)
   }
 } else {
