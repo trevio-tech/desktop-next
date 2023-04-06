@@ -9,12 +9,11 @@
 </template>
 
 <script setup>
-import { QUESTION_CARD } from '../graphql';
-
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
-import { useHead } from '#imports'
-import { usePageQuery } from '@trevio/ui'
+import { QUESTION_CARD } from '../graphql'
 import { shallowRef } from 'vue'
+import { useHead } from '#imports'
+import { usePageQuery, Button } from '@trevio/ui'
 
 useHead({
   title: 'Вопросы и ответы'
