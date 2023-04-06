@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout heading="Путешествия">
     <template #sidebar>1</template>
-    <div v-if="travels.length" class="space-y-4">
+    <div class="space-y-4">
       <ContentCard v-for="travel in travels" :entry="travel" :key="travel.id"/>
     </div>
     <Button :loading="isFetching" @click="fetchTravels" variant="secondary" class="w-full my-4">Показать еще</Button>
