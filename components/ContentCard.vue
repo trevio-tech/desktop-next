@@ -45,10 +45,10 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import ContentFooter from '~/components/ContentFooter.vue'
 import Profile from '~/components/modules/users/components/Profile'
 import useContentCard from '~/components/ContentCard/useContentCard'
-import ContentFooter from '~/components/ContentFooter.vue'
+import { defineAsyncComponent } from 'vue'
 import { useOverlay } from '@trevio/ui'
 
 const overlay = useOverlay()

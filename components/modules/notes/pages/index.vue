@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :heading="title">
+  <NuxtLayout heading="Заметки">
     <template #sidebar>1</template>
     <div class="space-y-4">
       <ContentCard v-for="note in notes" :entry="note" :key="note.id"/>
@@ -19,9 +19,9 @@ useHead({
   title: 'Заметки'
 })
 
-const notes = ref([])
-const page = shallowRef(0)
 const isFetching = shallowRef(false)
+const page = shallowRef(0)
+const notes = ref([])
 
 const fetchNotes = async () => {
   if (isFetching.value) return
