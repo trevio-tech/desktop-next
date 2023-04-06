@@ -11,12 +11,12 @@
 <script setup>
 import ContentCard from '~/components/ContentCard'
 import { TRAVEL_CARD } from '../graphql'
-import { ref, shallowRef } from 'vue'
+import { shallowRef } from 'vue'
 import { usePageQuery, Button } from '@trevio/ui'
 
 const isFetching = shallowRef(false)
 const page = shallowRef(0)
-const travels = ref([])
+const travels = shallowRef([])
 
 const fetchTravels = async () => {
   if (isFetching.value) return

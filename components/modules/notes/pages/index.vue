@@ -11,7 +11,7 @@
 <script setup>
 import ContentCard from '~/components/ContentCard'
 import { NOTE_CARD } from '../graphql'
-import { ref, shallowRef } from 'vue'
+import { shallowRef } from 'vue'
 import { useHead } from '#imports'
 import { usePageQuery, Button } from '@trevio/ui'
 
@@ -21,7 +21,7 @@ useHead({
 
 const isFetching = shallowRef(false)
 const page = shallowRef(0)
-const notes = ref([])
+const notes = shallowRef([])
 
 const fetchNotes = async () => {
   if (isFetching.value) return
