@@ -76,6 +76,7 @@ try {
           amount
           confirmed_at(format: "iso")
           type
+          message
         }
       }
     `
