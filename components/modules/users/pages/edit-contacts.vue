@@ -34,7 +34,7 @@
 
 <script setup>
 import ContactLinkCard from '~/components/modules/users/components/ContactLinkCard.vue'
-import { Button, useQuery, usePageQuery, Input } from '@trevio/ui'
+import { Button, useQuery, usePageQuery, Input, FormField } from '@trevio/ui'
 import { LINK } from '~/components/modules/links/graphql'
 import { shallowRef } from 'vue'
 import { useForm } from 'vee-validate'

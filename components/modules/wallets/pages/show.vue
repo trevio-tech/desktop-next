@@ -6,7 +6,7 @@
     <article class="bg-white p-8 rounded-lg">
       <h3 class="text-lg font-semibold mb-4">Пополнение</h3>
 
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="createPayment">
         <fieldset class="mb-4">
           <FormField name="amount" label="Введите сумму в рублях">
             <Input v-model="form.amount" />
@@ -23,7 +23,7 @@
             {{ name }}
           </button>
         </fieldset>
-        <Button type="submit">Пополнить</Button>
+        <Button :loading="isLoading" type="submit">Пополнить</Button>
       </form>
 
       <hr class="-mx-8 my-8">
@@ -33,25 +33,65 @@
   </NuxtLayout>
 </template>
 
-<script setup>
-import { Button, Input, FormField } from '@trevio/ui'
-import { ref } from 'vue'
+<script lang="ts" setup>
+import { Button, Input, FormField, useQuery } from '@trevio/ui'
+import { CREATE_PAYMENT } from '~/components/modules/wallets/graphql/mutations'
+import { ref, shallowRef } from 'vue'
 import { useForm } from 'vee-validate'
+import { useRoute } from '#imports'
 
+const route = useRoute()
 const { setErrors } = useForm()
 
 const form = ref({
-  amount: 0,
+  amount: 100,
   type: 'bank_card'
 })
+
+const isLoading = shallowRef(false)
 
 const types = {
   bank_card: 'Банковская карта',
   qiwi: 'QIWI кошелек',
-  yandex_money: 'Ю.Money'
+  yandex_money: 'Ю.Money',
 }
 
-const onSubmit = async () => {
-  alert(form.value.type + '-------' + form.value.amount)
+if (route.query.operation_id > 0) {
+  await confirmPayment()
+}
+
+const createPayment = async () => {
+  if (isLoading.value) return
+
+  isLoading.value = true
+
+  try {
+    const { data } = await useQuery({
+      query: CREATE_PAYMENT,
+      variables: {
+        amount: parseInt(form.value.amount),
+        type: form.value.type,
+      }
+    })
+
+    if (data.createPayment) {
+      document.location.href = data.createPayment
+    }
+  } catch (error) {
+    console.log(error)
+  } finally {
+    isLoading.value = false
+  }
+}
+
+/**
+ * Подтверждение платежа.
+ */
+async function confirmPayment(): Promise<void> {
+  try {
+    alert(route.query.operation_id)
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>

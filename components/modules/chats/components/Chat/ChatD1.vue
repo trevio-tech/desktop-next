@@ -75,7 +75,7 @@ import { ImagePlus } from 'lucide-vue-next'
 import { useNuxtApp } from '#imports'
 import { gql } from 'graphql-tag'
 import { onBeforeUnmount } from 'vue'
-import { Upload, useChat, useOverlay, Button, ChatForm } from '@trevio/ui'
+import { Upload, useChat, useOverlay, Button, ChatForm, FormField } from '@trevio/ui'
 
 const overlay = useOverlay()
 

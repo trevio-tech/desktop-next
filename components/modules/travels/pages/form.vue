@@ -72,7 +72,7 @@ import { TRAVEL_FORM, CREATE_TRAVEL, UPDATE_TRAVEL } from '../graphql'
 import { format, parseISO, isValid } from 'date-fns'
 import { ref, computed } from 'vue'
 import { useForm } from 'vee-validate';
-import { usePageQuery, SearchPlace, Input } from '@trevio/ui'
+import { usePageQuery, SearchPlace, Input, FormField } from '@trevio/ui'
 import { useRoute, useRouter, definePageMeta } from '#imports'
 
 definePageMeta({

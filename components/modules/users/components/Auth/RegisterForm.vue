@@ -45,7 +45,7 @@ import { HelpCircle } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { defineAsyncComponent, useNuxtApp } from '#imports'
-import { usePageQuery, useOverlay, Button, Input } from '@trevio/ui'
+import { usePageQuery, useOverlay, Button, Input, FormField } from '@trevio/ui'
 
 const overlay = useOverlay()
 

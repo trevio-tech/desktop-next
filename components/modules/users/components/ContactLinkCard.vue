@@ -38,7 +38,7 @@
 
 <script setup>
 import { MoreHorizontal, Trash, Pencil } from 'lucide-vue-next'
-import { DropdownMenu, DropdownMenuItem, useQuery, Button, Input } from '@trevio/ui'
+import { DropdownMenu, DropdownMenuItem, useQuery, Button, Input, FormField } from '@trevio/ui'
 import { shallowRef } from 'vue'
 import { useForm } from 'vee-validate'
 
