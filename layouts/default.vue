@@ -6,7 +6,7 @@
       <TheNavigation class="w-[180px] sticky top-[80px] h-fit" />
 
       <main class="flex flex-col w-[800px]">
-<!--        <h1 v-if="heading" class="text-xl font-bold mb-4">{{ heading }}</h1>-->
+        <h1 v-if="heading" class="text-xl font-bold mb-4">{{ heading }}</h1>
 
         <!-- HERO -->
         <div v-if="hasHero" class="mb-4">

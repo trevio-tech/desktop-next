@@ -25,6 +25,7 @@
         <template v-slot:popper="{ hide }">
           <DropdownMenuItem :to="{name: 'users.show', params: {userId: $auth.user.id}}" @click="hide">Мой профиль</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'users.edit', params: {userId: $auth.user.id}}" @click="hide">Настройки</DropdownMenuItem>
+          <DropdownMenuItem :to="{name: 'wallets.show'}" @click="hide">Кошелек</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'bookmarks', params: {userId: $auth.user.id}}" @click="hide">Закладки</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'drafts'}" @click="hide">Черновики</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'promo'}" @click="hide">Продвижение</DropdownMenuItem>
