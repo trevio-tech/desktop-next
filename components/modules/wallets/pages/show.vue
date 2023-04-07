@@ -25,20 +25,26 @@
         </fieldset>
         <Button :loading="isLoading" type="submit">Пополнить</Button>
       </form>
-
-      <hr class="-mx-8 my-8">
-
-      <h3 class="text-lg font-semibold mb-4">История операций</h3>
     </article>
+
+    <section class="bg-white rounded-lg mt-8">
+      <h3 class="text-lg font-semibold p-4">История операций</h3>
+      <BalanceOperationList :operations="operations" />
+    </section>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import { Button, Input, FormField, useQuery } from '@trevio/ui'
-import { CREATE_PAYMENT } from '~/components/modules/wallets/graphql/mutations'
+import BalanceOperationList from '~/components/modules/wallets/components/BalanceOperationList.vue'
+import { Button, Input, FormField, useQuery, usePageQuery } from '@trevio/ui'
 import { ref, shallowRef } from 'vue'
 import { useForm } from 'vee-validate'
-import { useRoute } from '#imports'
+import { definePageMeta, useRoute } from '#imports'
+import { CONFIRM_PAYMENT, CREATE_PAYMENT } from '~/components/modules/wallets/graphql/mutations'
+
+definePageMeta({
+  middleware: 'auth'
+})
 
 const route = useRoute()
 const { setErrors } = useForm()
@@ -49,6 +55,7 @@ const form = ref({
 })
 
 const isLoading = shallowRef(false)
+const operations = shallowRef([])
 
 const types = {
   bank_card: 'Банковская карта',
@@ -58,6 +65,25 @@ const types = {
 
 if (route.query.operation_id > 0) {
   await confirmPayment()
+}
+
+try {
+  const { data } = await usePageQuery({
+    query: `
+      query getBalanceOperations {
+        balanceOperations {
+          id
+          amount
+          confirmed_at(format: "iso")
+          type
+        }
+      }
+    `
+  })
+
+  operations.value = data.balanceOperations
+} catch (error) {
+  console.log(error)
 }
 
 const createPayment = async () => {
@@ -88,10 +114,23 @@ const createPayment = async () => {
  * Подтверждение платежа.
  */
 async function confirmPayment(): Promise<void> {
+  if (isLoading.value) return
+
+  isLoading.value = true
+
   try {
-    alert(route.query.operation_id)
+    const { data } = await useQuery({
+      query: CONFIRM_PAYMENT,
+      variables: {
+        operation_id: parseInt(route.query.operation_id),
+      }
+    })
+
+    console.log(data)
   } catch (error) {
     console.log(error)
+  } finally {
+    isLoading.value = false
   }
 }
 </script>
