@@ -15,13 +15,15 @@
         <!-- / HERO -->
 
         <!-- CONTENT, CONTENT-SIDEBAR -->
-        <div class="flex" :class="{'flex-row-reverse': isReverse, 'gap-10': hasSidebar}">
+        <div class="flex gap-10" :class="{'flex-row-reverse': isReverse}">
           <div class="flex-auto" :class="{'w-[560px]': hasSidebar}">
             <slot />
           </div>
-          <div v-if="hasSidebar" class="flex-shrink-0 w-[240px]">
+          <div class="flex-shrink-0 w-[240px]">
             <slot name="sidebar-before" />
-            <slot name="sidebar" />
+            <slot name="sidebar">
+              <TheSidebarWidgets />
+            </slot>
             <slot name="sidebar-after" />
           </div>
         </div>
@@ -35,6 +37,7 @@
 import TheHeader from '~/components/layout/TheHeader'
 import TheFooter from '~/components/layout/TheFooter'
 import TheNavigation from '~/components/layout/TheNavigation'
+import TheSidebarWidgets from '~/components/layout/TheSidebarWidgets.vue'
 import { computed, useSlots } from 'vue'
 import { useHead } from '#head'
 

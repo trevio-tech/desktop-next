@@ -1,9 +1,5 @@
 <template>
   <NuxtLayout>
-    <template #sidebar>
-      <div class="bg-emerald-100 w-full h-full"></div>
-    </template>
-
     <ShotsHorizontalList :is-story="true" :items="shotsStore.stories" class="mb-2" />
 
     <div class="space-y-4">
