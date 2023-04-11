@@ -1,15 +1,17 @@
 <template>
   <NuxtLayout>
-    <ShotsHorizontalList :is-story="true" :items="shotsStore.stories" class="mb-2" />
+    <ShotsHorizontalList v-show="shotsStore.stories.length" :is-story="true" :items="shotsStore.stories" class="mb-2" />
 
     <div class="space-y-4">
       <div v-for="(item, index) in store.items" :key="item.id">
         <Component :is="item.system_name === 'questions' ? QuestionCard : ContentCard" :entry="item" />
-        <UsersBelt
+<!--        <UsersBelt
           v-if="index === 1"
           :items="store.getBelt(index)"
           @loaded="store.addBelt(index, $event)"
-          class="mt-4" />
+          class="mt-4" />-->
+
+        <RandomNotes v-if="index === 4" class="my-4" />
 
         <PromoLoadingContainer v-if="index % 4 === 3" class="mt-4">
           <template v-slot:default="{ item }">
@@ -29,8 +31,9 @@ import QuestionCard from '~/components/modules/questions/components/QuestionCard
 import UsersBelt from '~/components/modules/users/components/UsersBelt.vue'
 import ShotsHorizontalList from '~/components/modules/shots/components/ShotsHorizontalList.vue'
 import PromoLoadingContainer from '~/components/modules/promo/components/PromoLoadingContainer.vue'
+import RandomNotes from '~/components/modules/activity/components/belts/RandomNotes.vue'
 import { FEED } from '~/components/modules/activity/graphql'
-import { ref, nextTick } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from '#imports'
 import { useActivityStore } from '~/components/modules/activity/store'
 import { useShotsStore } from '~/components/modules/shots/store'
@@ -49,12 +52,12 @@ const fetchFeed = async () => {
   try {
     const { data: { activity } } = await usePageQuery({
       query: `
-      query getActivity($page: Int, $is_timeline: Boolean) {
-        activity (page: $page, is_timeline: $is_timeline) {
-          ${FEED}
+        query getActivity($page: Int, $is_timeline: Boolean) {
+          activity (page: $page, is_timeline: $is_timeline) {
+            ${FEED}
+          }
         }
-      }
-    `,
+      `,
       variables: {
         page: store.page,
         is_timeline: route.name === 'activity.new'

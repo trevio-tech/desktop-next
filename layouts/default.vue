@@ -20,11 +20,13 @@
             <slot />
           </div>
           <div class="flex-shrink-0 w-[240px]">
-            <slot name="sidebar-before" />
+            <slot name="sidebar-prepend" />
             <slot name="sidebar">
-              <TheSidebarWidgets />
+              <div class="flex items-center justify-center bg-gray-200/50 h-[480px]">
+                Реклама
+              </div>
             </slot>
-            <slot name="sidebar-after" />
+            <slot name="sidebar-append" />
           </div>
         </div>
         <!-- / CONTENT, CONTENT-SIDEBAR -->
@@ -37,7 +39,6 @@
 import TheHeader from '~/components/layout/TheHeader'
 import TheFooter from '~/components/layout/TheFooter'
 import TheNavigation from '~/components/layout/TheNavigation'
-import TheSidebarWidgets from '~/components/layout/TheSidebarWidgets.vue'
 import { computed, useSlots } from 'vue'
 import { useHead } from '#head'
 
