@@ -1,6 +1,6 @@
 <template>
   <section ref="target" class="bg-orange-100 p-6 rounded-lg">
-    <h3 class="font-medium mb-4 text-lg">Читайте также</h3>
+    <h3 class="font-medium mb-4 text-lg">Продвигаемые записи</h3>
     <ul class="space-y-4">
       <li v-for="item in items" :key="item.id" class="text-sm">
         <NuxtLink :to="{
@@ -28,7 +28,7 @@ const items = ref([])
 const fields = `
   id
   title
-  text(words: 5)
+  text(words: 10)
   system_name
 `
 const routes = {

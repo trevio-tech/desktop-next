@@ -5,13 +5,9 @@
     <div class="space-y-4">
       <div v-for="(item, index) in store.items" :key="item.id">
         <Component :is="item.system_name === 'questions' ? QuestionCard : ContentCard" :entry="item" />
-<!--        <UsersBelt
-          v-if="index === 1"
-          :items="store.getBelt(index)"
-          @loaded="store.addBelt(index, $event)"
-          class="mt-4" />-->
 
-        <PromotedEntries v-if="index === 4" class="my-4" />
+        <PromotedEntries v-if="index === 4" class="my-8" />
+        <RandomNotes v-if="index === 8" class="my-8" />
       </div>
     </div>
 
@@ -22,9 +18,9 @@
 <script setup>
 import ContentCard from '~/components/ContentCard'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
-import UsersBelt from '~/components/modules/users/components/UsersBelt.vue'
 import ShotsHorizontalList from '~/components/modules/shots/components/ShotsHorizontalList.vue'
 import PromotedEntries from '~/components/modules/activity/components/belts/PromotedEntries.vue'
+import RandomNotes from '~/components/modules/activity/components/belts/RandomNotes.vue'
 import { FEED } from '~/components/modules/activity/graphql'
 import { ref } from 'vue'
 import { useRoute } from '#imports'
