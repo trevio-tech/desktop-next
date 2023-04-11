@@ -1,9 +1,9 @@
 <template>
-  <section ref="target" class="p-6 bg-gray-50 border border-gray-200 rounded-lg">
+  <section ref="target" class="p-6 bg-indigo-50">
     <h3 class="font-medium mb-4 text-lg">Читайте также</h3>
     <Swiper :slidesPerView="'auto'" :spaceBetween="24" class="swiper-random-notes" :grabCursor="true">
       <SwiperSlide v-for="item in items" :key="item.id" style="width: 70%; height: 200px;" class="flex">
-        <article class="p-4 bg-white rounded-lg border border-slate-100 flex h-full">
+        <article class="p-4 bg-white rounded-lg border border-indigo-100 flex h-full">
           <div>
             <NuxtLink to="/" class="flex items-center space-x-2 mb-3">
               <img :src="item.user.avatar" :alt="item.user.name" class="flex-shrink-0 w-4 h-4 rounded">
