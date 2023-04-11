@@ -1,5 +1,5 @@
 <template>
-  <section ref="target" class="p-6 bg-indigo-50">
+  <section ref="target" class="p-6 bg-indigo-50 rounded-lg">
     <h3 class="font-medium mb-4 text-lg">Читайте также</h3>
     <Swiper :slidesPerView="'auto'" :spaceBetween="24" class="swiper-random-notes" :grabCursor="true">
       <SwiperSlide v-for="item in items" :key="item.id" style="width: 70%; height: 200px;" class="flex">
