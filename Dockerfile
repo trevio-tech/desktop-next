@@ -1,24 +1,21 @@
-FROM node:lts-stretch-slim
+FROM node:18-alpine AS base
 
-WORKDIR /application
+ARG DOT_ENV
 
-ARG ENV_FILE
+FROM base AS dependencies
 
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN apk add git \
+    && yarn install --production \
+    && yarn upgrade @trevio/ui
+
+FROM base AS build
+
+WORKDIR /app
 COPY . .
+COPY --from=dependencies /app/node_modules ./node_modules
+RUN echo $DOT_ENV | base64 -d > .env \
+    && yarn build
 
-RUN apt update && apt upgrade -y  \
-    && apt install git        -y  \
-    && npm install --force --legacy-peer-deps            \
-    && touch .env \
-    && echo $ENV_FILE | base64 -d > .env \
-    && npm run build                 \
-    && apt remove git  -y             \
-    && apt autoclean  -y          \
-    && apt autoremove -y \
-    && npm cache clean -f
-
-USER nobody
-
-EXPOSE 3000
-
-CMD ["yarn", "preview"]
+CMD [ "yarn", "preview" ]
