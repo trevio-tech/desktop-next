@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <NuxtLoadingIndicator />
-    <NuxtPage />
-    <Overlay />
-  </div>
+  <NuxtLoadingIndicator />
+  <NuxtPage />
+  <Overlay />
 </template>
 
 <script setup>

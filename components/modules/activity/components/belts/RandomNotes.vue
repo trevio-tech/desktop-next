@@ -2,20 +2,18 @@
   <section ref="target" class="p-6 bg-indigo-50 rounded-lg">
     <h3 class="font-medium mb-4 text-lg">Читайте также</h3>
     <Swiper :slidesPerView="'auto'" :spaceBetween="24" class="swiper-random-notes" :grabCursor="true">
-      <SwiperSlide v-for="item in items" :key="item.id" style="width: 80%; height: 200px;" class="flex">
-        <article class="p-4 bg-white rounded-lg border border-indigo-100 flex h-full">
-          <div class="user-select-none">
-            <NuxtLink :to="{name: 'users.show', params: {userId: item.user.id}}" class="flex items-center space-x-2 mb-3">
-              <img :src="item.user.avatar" :alt="item.user.name" class="flex-shrink-0 w-4 h-4 rounded-full">
-              <span class="text-sm">{{ item.user.name }}</span>
-            </NuxtLink>
-            <h2 class="font-medium">
-              <NuxtLink :to="{name: 'notes.show', params: {noteId: item.id}}" class=" hover:underline">{{ item.title }}</NuxtLink>
-            </h2>
-            <p v-if="item.text" class="mt-2">
-              <NuxtLink :to="{name: 'notes.show', params: {noteId: item.id}}">{{ item.text }}</NuxtLink>
-            </p>
-          </div>
+      <SwiperSlide v-for="item in items" :key="item.id" style="width: 75%; height: 200px;" class="flex">
+        <article class="p-4 bg-white rounded-lg border border-indigo-100 h-full">
+          <NuxtLink :to="{name: 'users.show', params: {userId: item.user.id}}" class="flex items-center space-x-2 mb-3">
+            <img :src="item.user.avatar" :alt="item.user.name" class="flex-shrink-0 w-4 h-4 rounded-full">
+            <span class="text-sm">{{ item.user.name }}</span>
+          </NuxtLink>
+          <h2 class="font-medium">
+            <NuxtLink :to="{name: 'notes.show', params: {noteId: item.id}}" class=" hover:underline">{{ item.title }}</NuxtLink>
+          </h2>
+          <p v-if="item.text" class="mt-2">
+            <NuxtLink :to="{name: 'notes.show', params: {noteId: item.id}}">{{ item.text }}</NuxtLink>
+          </p>
         </article>
       </SwiperSlide>
     </Swiper>

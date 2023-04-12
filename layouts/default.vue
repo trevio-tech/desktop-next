@@ -40,7 +40,7 @@ import TheHeader from '~/components/layout/TheHeader'
 import TheFooter from '~/components/layout/TheFooter'
 import TheNavigation from '~/components/layout/TheNavigation'
 import { computed, useSlots } from 'vue'
-import { useHead } from '#head'
+import { useHead } from '#imports'
 
 const props = defineProps({
   heading: {

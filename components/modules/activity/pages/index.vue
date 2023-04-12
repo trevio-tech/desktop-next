@@ -6,8 +6,9 @@
       <div v-for="(item, index) in store.items" :key="item.id">
         <Component :is="item.system_name === 'questions' ? QuestionCard : ContentCard" :entry="item" />
 
-        <PromotedEntries v-if="index === 4" class="my-8" />
-        <RandomNotes v-if="index === 8" class="my-8" />
+        <PromotedEntries v-if="[4,28,52].includes(index)" class="my-8" />
+        <RandomNotes v-if="[12,36,60].includes(index)" class="my-8" />
+        <Travels v-if="[20,44,68].includes(index)" class="my-8" />
       </div>
     </div>
 
@@ -19,8 +20,11 @@
 import ContentCard from '~/components/ContentCard'
 import QuestionCard from '~/components/modules/questions/components/QuestionCard.vue'
 import ShotsHorizontalList from '~/components/modules/shots/components/ShotsHorizontalList.vue'
+// Belts
 import PromotedEntries from '~/components/modules/activity/components/belts/PromotedEntries.vue'
 import RandomNotes from '~/components/modules/activity/components/belts/RandomNotes.vue'
+import Travels from '~/components/modules/activity/components/belts/Travels.vue'
+
 import { FEED } from '~/components/modules/activity/graphql'
 import { ref } from 'vue'
 import { useRoute } from '#imports'
