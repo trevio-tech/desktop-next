@@ -89,9 +89,9 @@ const onSubmit = handleSubmit(async () => {
 
       emit('login')
     }
-  } catch (errors) {
-    if (errors[0]?.extensions?.validation) {
-      setErrors(errors[0].extensions.validation)
+  } catch (error) {
+    if (error[0]?.extensions?.validation) {
+      setErrors(error[0].extensions.validation)
     }
   } finally {
     loading.value = false

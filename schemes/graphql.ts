@@ -15,7 +15,7 @@ export default class GraphQLScheme extends LocalScheme {
     try {
       const { data: { token } } = await useQuery({
         query: `
-          query getJwtToken($email: String!, $password: String!) {
+          query getJwtToken($email: String, $password: String) {
             token: login(email: $email, password: $password)
           }
         `,

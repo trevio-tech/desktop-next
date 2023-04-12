@@ -1,8 +1,5 @@
 <template>
   <NuxtLayout heading="Авторизация">
-    <template #sidebar>
-      Сайдбар
-    </template>
     <LoginForm @login="navigateTo('/')" />
   </NuxtLayout>
 </template>
