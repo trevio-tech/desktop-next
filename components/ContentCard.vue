@@ -1,6 +1,6 @@
 <template>
   <article class="bg-white overflow-hidden ring-1 ring-slate-100 rounded-lg">
-    <NuxtLink v-if="entry.cover" :to="to" class="block">
+    <NuxtLink v-if="entry.cover" :to="to" class="block h-[280px]">
       <img :src="entry.cover?.url?.default" :alt="entry.title" class="object-cover w-full h-full" loading="lazy">
     </NuxtLink>
 

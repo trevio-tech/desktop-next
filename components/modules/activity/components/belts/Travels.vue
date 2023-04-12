@@ -8,9 +8,9 @@
         <div class="absolute top-0 right-0 bottom-0 left-0 p-4 bg-black/50">
           <NuxtLink :to="{name: 'users.show', params: {userId: item.user.id}}" class="flex items-center space-x-2 mb-3">
             <img :src="item.user.avatar" :alt="item.user.name" class="flex-shrink-0 w-4 h-4 rounded-full">
-            <span class="text-sm">{{ item.user.name }}</span>
+            <span class="text-sm text-white">{{ item.user.name }}</span>
           </NuxtLink>
-          <h2 class="font-medium text-xl">
+          <h2 class="font-medium text-xl text-white">
             <NuxtLink :to="{name: 'travels.show', params: {travelId: item.id}}" class=" hover:underline">{{ item.title }}</NuxtLink>
           </h2>
           <p v-if="item.text" class="mt-2">

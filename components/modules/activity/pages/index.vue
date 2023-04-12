@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div ref="more"></div>
+    <div ref="more" class="h-10"></div>
   </NuxtLayout>
 </template>
 
