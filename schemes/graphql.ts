@@ -52,6 +52,10 @@ export default class GraphQLScheme extends LocalScheme {
               wallet {
                 balance
               }
+              premium {
+                color
+                ends_at(format: "d.m.Y")
+              }
             }
           }
         `,

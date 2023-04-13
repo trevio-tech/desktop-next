@@ -38,7 +38,9 @@
               </NuxtLink>
               <NuxtLink :to="{name: 'users.premium'}" class="flex-auto flex-shrink-0 p-4 bg-gray-100 rounded-br-lg ml-1">
                 <div class="text-xs text-gray-400">Премиум</div>
-                <div class="text-sm font-medium truncate">Не активирован</div>
+                <div class="text-sm font-medium truncate">
+                  {{ $auth.user.premium?.ends_at ? `До ${$auth.user.premium.ends_at}` : 'Не активирован' }}
+                </div>
               </NuxtLink>
             </div>
           </div>
