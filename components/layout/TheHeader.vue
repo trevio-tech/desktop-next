@@ -23,13 +23,29 @@
           </div>
         </template>
         <template v-slot:popper="{ hide }">
-          <DropdownMenuItem :to="{name: 'users.show', params: {userId: $auth.user.id}}" @click="hide">Мой профиль</DropdownMenuItem>
+          <div class="w-[280px] mb-1">
+            <NuxtLink :to="{name: 'users.show', params: {userId: $auth.user.id}}" class="p-4 bg-sky-50 flex items-center rounded-t-lg hover:bg-sky-100">
+              <img :src="$auth.user.avatar" :alt="$auth.user.name" class="w-11 h-11 rounded-full" />
+              <div class="ml-2 overflow-hidden">
+                <div class="text-xs text-gray-400">Перейти в профиль</div>
+                <div class="text-sm font-medium truncate">{{ $auth.user.name }}</div>
+              </div>
+            </NuxtLink>
+            <div class="flex items-center mt-1">
+              <NuxtLink :to="{name: 'wallets.show'}" class="flex-shrink-0 p-4 bg-gray-100 rounded-bl-lg">
+                <div class="text-xs text-gray-400">Мой кошелек</div>
+                <div class="text-sm font-medium truncate">{{ $auth.user.wallet?.balance || 0 }} монет</div>
+              </NuxtLink>
+              <NuxtLink :to="{name: 'users.premium'}" class="flex-auto flex-shrink-0 p-4 bg-gray-100 rounded-br-lg ml-1">
+                <div class="text-xs text-gray-400">Премиум</div>
+                <div class="text-sm font-medium truncate">Не активирован</div>
+              </NuxtLink>
+            </div>
+          </div>
           <DropdownMenuItem :to="{name: 'users.edit', params: {userId: $auth.user.id}}" @click="hide">Настройки</DropdownMenuItem>
-          <DropdownMenuItem :to="{name: 'wallets.show'}" @click="hide">Кошелек</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'bookmarks', params: {userId: $auth.user.id}}" @click="hide">Закладки</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'drafts'}" @click="hide">Черновики</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'promo'}" @click="hide">Продвижение</DropdownMenuItem>
-          <DropdownMenuItem :to="{name: 'users.premium'}" @click="hide">Премиум</DropdownMenuItem>
           <DropdownMenuItem @click="$auth.logout()">Выход</DropdownMenuItem>
         </template>
       </DropdownMenu>

@@ -27,10 +27,10 @@
         </FormField>
 
         <FormField name="input.gender" label="Пол">
-          <Select v-model="form.gender"
-                  is-primitive
-                  :items="[{id: null, name: 'Другой'}, {id: 'male', name: 'Мужской'}, {id: 'female', name: 'Женский'}]">
-          </Select>
+          <select v-model="form.gender" class="input">
+            <option disabled value="">Ничего не выбрано</option>
+            <option v-for="gender in genders" :key="gender.id" :value="gender.id">{{ gender.name }}</option>
+          </select>
         </FormField>
 
         <FormField name="input.birthday" label="День рождения">
@@ -59,7 +59,10 @@ const form = ref({
   name: '',
   description: '',
   birthday: null,
+  gender: null
 })
+
+const genders = [{id: null, name: 'Другой'}, {id: 'male', name: 'Мужской'}, {id: 'female', name: 'Женский'}]
 
 const userId = parseInt(useRoute().params.userId)
 
@@ -84,7 +87,7 @@ try {
     }
   })
 
-  form.value = user
+  Object.assign(form.value, user)
 } catch (error) {}
 
 const onSubmit = async () => {

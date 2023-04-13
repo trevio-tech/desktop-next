@@ -1,31 +1,29 @@
 <template>
   <NuxtLayout heading="Мои подписки">
-    <template #sidebar>
-      1
-    </template>
+    <div v-if="subscriptions.length">
+      <DropdownMenu class="mb-4">
+        <template v-slot:default="{ isActive }">
+          <Button :loading="isLoading" variant="secondary">
+            <template #prepend>
+              <Filter class="w-4 h-4" />
+            </template>
+            {{ subscriptionTypes[activeSubscriptionType] }}
+          </Button>
+        </template>
+        <template v-slot:popper="{ hide }">
+          <DropdownMenuItem v-for="(name, key) in subscriptionTypes" :key="key" @click="onChangeSubscriptionType(key); hide()">
+            {{ name }}
+          </DropdownMenuItem>
+        </template>
+      </DropdownMenu>
 
-    <DropdownMenu class="mb-4">
-      <template v-slot:default="{ isActive }">
-        <Button :loading="isLoading" variant="secondary">
-          <template #prepend>
-            <Filter class="w-4 h-4" />
-          </template>
-          {{ subscriptionTypes[activeSubscriptionType] }}
-        </Button>
-      </template>
-      <template v-slot:popper="{ hide }">
-        <DropdownMenuItem v-for="(name, key) in subscriptionTypes" :key="key" @click="onChangeSubscriptionType(key); hide()">
-          {{ name }}
-        </DropdownMenuItem>
-      </template>
-    </DropdownMenu>
-
-    <div v-if="subscriptions.length" class="divide-y overflow-hidden rounded-lg">
-      <SubscriptionCard
-        v-for="subscription in subscriptions"
-        :key="subscription.model_type + subscription.model_id"
-        :subscription="subscription.model"
-      />
+      <div class="divide-y overflow-hidden rounded-lg">
+        <SubscriptionCard
+            v-for="subscription in subscriptions"
+            :key="subscription.model_type + subscription.model_id"
+            :subscription="subscription.model"
+        />
+      </div>
     </div>
     <div v-else>Подписок не найдено.</div>
   </NuxtLayout>
