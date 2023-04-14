@@ -2,9 +2,9 @@
   <NuxtLayout heading="Смена пароля">
     <template #sidebar>
       <ul>
-        <li><NuxtLink :to="{name: 'users.edit', params: {userId}}">Основные настройки</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.password', params: {userId}}">Смена пароля</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.contacts', params: {userId}}">Контакты</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit'}">Основные настройки</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.password'}">Смена пароля</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.contacts'}">Контакты</NuxtLink></li>
       </ul>
     </template>
     <Card>
@@ -35,12 +35,16 @@ import { Button, useQuery, Input, FormField } from '@trevio/ui'
 import { UPDATE_PASSWORD } from '../graphql'
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useRoute } from '#imports'
+import { definePageMeta } from '#imports'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
+import { useAuth } from '#auth/runtime/composables'
 
-const route = useRoute()
-const userId = route.params.userId
+definePageMeta({
+  middleware: 'auth'
+})
+
+const userId = useAuth().user.id
 
 const formInitialState = {
   password_old: '',

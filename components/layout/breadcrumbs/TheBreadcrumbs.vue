@@ -34,7 +34,7 @@ export default {
       }
     })
 
-    const route = $route.name.split('.');
+    const route = $route.nausers.split('.');
 
     if (route.length > 0) {
       if (router.hasRoute(route[0]) && items.hasOwnProperty(route[0])) {

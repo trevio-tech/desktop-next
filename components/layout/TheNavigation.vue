@@ -52,7 +52,6 @@ const items = [
   { name: 'Отзывы', href: '/reviews' },
   { name: 'Фотоальбомы', href: '/albums' },
   { name: 'Вопросы и ответы', href: '/questions' },
-  { name: 'Чаты', href: '/chats' }
 ]
 </script>
 

@@ -4,7 +4,7 @@
     <div class="space-y-4">
       <ContentCard v-for="note in notes" :entry="note" :key="note.id"/>
     </div>
-    <Button :loading="isFetching" @click="fetchNotes" variant="secondary" class="w-full my-4">Показать еще</Button>
+    <Button v-if="notes.length" :loading="isFetching" @click="fetchNotes" variant="secondary" class="w-full my-4">Показать еще</Button>
   </NuxtLayout>
 </template>
 

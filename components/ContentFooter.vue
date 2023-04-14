@@ -18,19 +18,20 @@
       }
       })" :messages-count="entry.messages_count" />-->
 
-    <BookmarkButton
-      class="ml-auto"
-      v-model="bookmarks"
-      :model-type="entry.system_name"
-      :model-id="entry.id"
-    />
+    <IsLoggedIn class="ml-auto">
+      <BookmarkButton
+        v-model="bookmarks"
+        :model-type="entry.system_name"
+        :model-id="entry.id"
+      />
+    </IsLoggedIn>
   </footer>
 </template>
 
 <script setup>
 import BookmarkButton from '~/components/modules/bookmarks/components/BookmarkButton'
 import useContentCard from '~/components/ContentCard/useContentCard'
-import { IsLoggedIn } from '@trevio/ui'
+import { IsLoggedIn, Like } from '@trevio/ui'
 
 const props = defineProps({
   entry: {

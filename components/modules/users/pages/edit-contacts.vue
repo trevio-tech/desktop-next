@@ -2,9 +2,9 @@
   <NuxtLayout heading="Редактирование контактов">
     <template #sidebar>
       <ul>
-        <li><NuxtLink :to="{name: 'users.edit', params: {userId}}">Основные настройки</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.password', params: {userId}}">Смена пароля</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.contacts', params: {userId}}">Контакты</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit'}">Основные настройки</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.password'}">Смена пароля</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.contacts'}">Контакты</NuxtLink></li>
       </ul>
     </template>
 
@@ -38,11 +38,15 @@ import { Button, useQuery, usePageQuery, Input, FormField } from '@trevio/ui'
 import { LINK } from '~/components/modules/links/graphql'
 import { shallowRef } from 'vue'
 import { useForm } from 'vee-validate'
-import { useRoute } from '#imports'
+import { definePageMeta } from '#imports'
+import { useAuth } from '#auth/runtime/composables'
 
-const route = useRoute()
+definePageMeta({
+  middleware: 'auth'
+})
+
 const { handleSubmit, setErrors } = useForm()
-const userId = route.params.userId
+const userId = useAuth().user.id
 const url = shallowRef('')
 const isParsing = shallowRef(false)
 const links = shallowRef([])

@@ -46,7 +46,7 @@
             }
           })" class="underline text-sm font-medium text-blue-400 cursor-pointer">Подробнее...</div>
         </div>
-        <Button @click="$router.push({name: 'users.edit', params: {userId: user.id}})">Редактировать</Button>
+        <Button @click="$router.push({name: 'users.edit'})">Редактировать</Button>
       </div>
     </div>
 

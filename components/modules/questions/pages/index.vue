@@ -4,7 +4,7 @@
     <div class="space-y-4">
       <QuestionCard v-for="question in questions" :key="question.id" :entry="question "/>
     </div>
-    <Button :loading="isFetching" @click="fetchQuestions" variant="secondary" class="w-full my-4">Показать еще</Button>
+    <Button v-if="questions.length" :loading="isFetching" @click="fetchQuestions" variant="secondary" class="w-full my-4">Показать еще</Button>
   </NuxtLayout>
 </template>
 

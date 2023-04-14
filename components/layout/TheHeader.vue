@@ -44,7 +44,7 @@
               </NuxtLink>
             </div>
           </div>
-          <DropdownMenuItem :to="{name: 'users.edit', params: {userId: $auth.user.id}}" @click="hide">Настройки</DropdownMenuItem>
+          <DropdownMenuItem :to="{name: 'users.edit'}" @click="hide">Настройки</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'bookmarks', params: {userId: $auth.user.id}}" @click="hide">Закладки</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'drafts'}" @click="hide">Черновики</DropdownMenuItem>
           <DropdownMenuItem :to="{name: 'promo'}" @click="hide">Продвижение</DropdownMenuItem>

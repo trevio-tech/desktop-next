@@ -4,7 +4,7 @@
     <div class="space-y-4">
       <ContentCard v-for="album in albums" :key="album.id" :entry="album" />
     </div>
-    <Button :loading="isFetching" @click="fetchAlbums" variant="secondary" class="w-full my-4">Показать еще</Button>
+    <Button v-if="albums.length" :loading="isFetching" @click="fetchAlbums" variant="secondary" class="w-full my-4">Показать еще</Button>
   </NuxtLayout>
 </template>
 

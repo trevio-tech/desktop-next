@@ -2,9 +2,9 @@
   <NuxtLayout heading="Редактирование профиля">
     <template #sidebar>
       <ul>
-        <li><NuxtLink :to="{name: 'users.edit', params: {userId}}">Основные настройки</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.password', params: {userId}}">Смена пароля</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'users.edit.contacts', params: {userId}}">Контакты</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit'}">Основные настройки</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.password'}">Смена пароля</NuxtLink></li>
+        <li><NuxtLink :to="{name: 'users.edit.contacts'}">Контакты</NuxtLink></li>
       </ul>
     </template>
     <form @submit.prevent="onSubmit" class="min-h-full flex flex-col justify-between bg-white p-4 rounded-md shadow ring-1 ring-slate-200">
@@ -53,6 +53,12 @@ import { usePageQuery, SearchPlace, Button, Input, FormField } from '@trevio/ui'
 import { ref } from 'vue'
 import { UPDATE_USER } from '../graphql'
 import { PLACE_WITH_PARENTS_FIELDS } from '~/components/modules/places/graphql'
+import { useAuth } from '#auth/runtime/composables'
+import { definePageMeta } from '#imports'
+
+definePageMeta({
+  middleware: 'auth'
+})
 
 const form = ref({
   place_id: null,
@@ -64,7 +70,7 @@ const form = ref({
 
 const genders = [{id: null, name: 'Другой'}, {id: 'male', name: 'Мужской'}, {id: 'female', name: 'Женский'}]
 
-const userId = parseInt(useRoute().params.userId)
+const userId = parseInt(useAuth().user.id)
 
 try {
   const { data: { user } } = await usePageQuery({

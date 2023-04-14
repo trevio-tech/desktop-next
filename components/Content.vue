@@ -17,6 +17,7 @@
         v-if="parseInt(entry.user_id) === parseInt($auth.user?.id)"
         :model-type="entry.system_name"
         :model-id="entry.id"
+        :entry="entry"
       />
       <SubscriptionButton
         v-else

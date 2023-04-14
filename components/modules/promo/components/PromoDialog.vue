@@ -11,7 +11,7 @@
                 <X class="w-5 h-5" />
               </button>
             </div>
-            <div @click="onClickMore(key)" class="cursor-pointer underline mb-4 text-sm text-blue-400">Добавить {{ section.name.toLowerCase() }}</div>
+            <div @click="onClickMore(key)" class="cursor-pointer underline mb-4 text-sm text-blue-400">Добавить {{ section.nausers.toLowerCase() }}</div>
           </li>
         </ul>
       </div>
