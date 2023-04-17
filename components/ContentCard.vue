@@ -36,7 +36,7 @@
           class="hover:text-slate-600"
           v-for="tag in entry.tags"
           :key="tag.id"
-          :to="{name: 'tags.tag.content', params: {tag: tag.name.trim(), content: entry.system_name}}">#{{ tag.name }}
+          :to="{name: 'tags.tag', params: {tag: tag.name}}">#{{ tag.name }}
       </NuxtLink>
     </div>
 
