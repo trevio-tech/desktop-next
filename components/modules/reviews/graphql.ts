@@ -48,6 +48,29 @@ export const REVIEW_FORM = `
   }
 `
 
+export const REVIEW = /* GraphQL */`
+  id
+  user_id
+  place_id
+  system_name
+  title
+  text
+  can
+  stars
+  user {
+    id
+    name
+    avatar
+  }
+  tags {
+    id
+    name
+  }
+  place {
+    ${PLACE_WITH_PARENTS_FIELDS}
+  }
+`
+
 export const CREATE_REVIEW = `
   mutation ($input: ReviewInput!) {
     reviewForm: createReview(input: $input)

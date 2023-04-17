@@ -1,6 +1,6 @@
 export { default as ANSWER_CARD } from './queries/answer-card'
 export { default as QUESTION_CARD } from './queries/question-card'
-export { default as QUESTION_FIELDS } from './queries/question-fields'
+export { default as QUESTION } from './queries/question'
 export { default as QUESTION_FORM } from './queries/question-form'
 
 export { default as CREATE_ANSWER } from './mutations/create-answer'

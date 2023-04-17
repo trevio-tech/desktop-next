@@ -40,7 +40,7 @@ import AnswerCard from '~/components/modules/questions/components/AnswerCard.vue
 import AnswerForm from '~/components/modules/questions/components/AnswerForm.vue'
 
 import { Check } from 'lucide-vue-next'
-import { QUESTION_FIELDS, ANSWER_CARD } from '../graphql';
+import { QUESTION, ANSWER_CARD } from '../graphql';
 import { useRoute, useHead } from '#imports'
 import { shallowRef } from 'vue'
 import { usePageQuery } from '@trevio/ui'
@@ -57,7 +57,7 @@ const onFetch = async (tab = 'new', skipQuestion = false) => {
   if (skipQuestion === false) {
     query.push(`
       question(id: $id) {
-        ${QUESTION_FIELDS}
+        ${QUESTION}
       }
     `)
   }

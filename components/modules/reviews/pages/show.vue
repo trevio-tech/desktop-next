@@ -1,16 +1,16 @@
 <template>
   <NuxtLayout>
     <template #sidebar>1</template>
-    <Content :entry="review" />
     <PlaceRatingBar v-if="review.place" :place="review.place" :user-rating="review.stars" class="mb-4" />
+    <Content :entry="review" />
   </NuxtLayout>
 </template>
 
 <script setup>
 import PlaceRatingBar from '~/components/modules/places/components/PlaceRatingBar.vue'
-import { PLACE } from '~/components/modules/places/graphql'
 import { useRoute } from '#imports'
 import { usePageQuery } from '@trevio/ui'
+import { REVIEW } from '~/components/modules/reviews/graphql'
 
 const route = useRoute()
 
@@ -21,22 +21,7 @@ try {
     query: `
       query($id: ID!) {
         review(id: $id) {
-          id
-          user_id
-          place_id
-          system_name
-          title
-          text
-          can
-          stars
-          user {
-            id
-            name
-            avatar
-          }
-          place {
-            ${PLACE}
-          }
+          ${REVIEW}
         }
       }
     `,

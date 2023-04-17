@@ -41,7 +41,17 @@
           <div v-html="entry.text" class="prose"></div>
         </slot>
       </ImageViewer>
+
+      <div v-if="entry.tags.length" class="space-x-2 mt-4 text-slate-400 text-sm">
+        <NuxtLink
+            class="hover:text-slate-600"
+            v-for="tag in entry.tags"
+            :key="tag.id"
+            :to="{name: 'tags.tag', params: {tag: tag.name}}">#{{ tag.name }}
+        </NuxtLink>
+      </div>
     </div>
+
     <ContentFooter :entry="entry" />
   </article>
 </template>
