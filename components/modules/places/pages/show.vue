@@ -48,14 +48,14 @@ try {
   const { data } = await usePageQuery({
     query: `
       query(
-        $place_id: Int!
+        $place_id: ID!
         ${route.params.stars ? '$filter_by_stars: Int' : ''}
       ) {
         ${query.join('\n')}
       }
     `,
     variables: {
-      place_id:        parseInt(route.params.placeId),
+      place_id:        route.params.placeId,
       filter_by_stars: parseInt(route.params.stars)
     }
   })
